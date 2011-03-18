@@ -1,0 +1,18 @@
+/*input默认样式*/
+.key_normal{border:1px solid #8298aF; height:18px; width:500px;}
+/*下拉框出现时 input样式*/
+.key_abnormal{border:1px solid #8298aF;border-bottom:1px solid white;}
+/*下拉框.外框架 默认样式*/
+.search_suggest{margin:0;padding:0;border:1px solid black;background-color:#fff;position:absolute;top:20px;left:0px; clear:both}
+/*下拉框.外框架  隐藏*/
+.suggest_hidden{display:none;clear:both}
+/*模拟下拉框.选项 默认样式*/
+.item_normal{width:100%;overflow-x:hidden;padding-top:2px;}
+/*模拟下拉框.选项 高亮样式 */
+.item_high{width:100%;padding-top:2px;background-color:#326BC5;color:white;}
+/*取消按钮*/
+.cancel{cursor:default;text-align:right;width:100%}
+/*下拉箭头*/
+.suggest_button{border:0;background-image:url(../../images/sel.gif); width:54px; height:22px; position:absolute;clip:rect(0px 18px 22px 0px);top:0px !important; *top:1px !important;}
+.suggest_left{float:left}
+.suggest_right{float:right;}

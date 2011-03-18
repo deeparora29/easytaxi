@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>弹出回传参数层</title>
+	<link type="text/css" href="../css/theme/base/ui.all.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../css/theme/tab_main.css" type="text/css" media="screen">
+	<script type="text/javascript" src="../js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.core.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.draggable.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.resizable.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.dialog.js"></script>
+	<script type="text/javascript" src="../js/jquery/jquery.decorateIframe.js"></script>
+	<script type="text/javascript" src="../js/newDialogOpen.js"></script>
+
+</head>
+<body>
+<h1 align="center">弹出回传参数</h1>
+<table class="table_input" align="center">
+	<tr>
+		<td class="lable">输入：</td>
+		<td><input type="text" size="24" id="textId"/>&nbsp;<input type="text" size="24" id="textContext"/></td>
+		<td><input type="button" id="button" value="选择" class="button"/></td>
+	</tr>
+</table>
+
+<div id="paramDialog" title="请选择">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#dee3ed" class="table_border1px" align="center">
+            <tr>
+            <td height="29" background="../images/theme/bg_bar_04.jpg">选择</td>
+            <td background="../images/theme/bg_bar_04.jpg">名称</td>
+            </tr>
+            <tr>
+                <td height="29"><input type="radio" name="test" class="text ui-corner-all" value="0~测试数据1"/></td>
+                <td>测试数据1</td>
+            </tr>
+            <tr>
+                <td height="29"><input type="radio" name="test" class="text ui-corner-all" value="1~测试数据2"/></td>
+                <td>测试数据2</td>
+            </tr>
+             <tr>
+                <td height="29"><input type="radio" name="test" class="text ui-corner-all" value="2~测试数据3"/></td>
+                <td>测试数据3</td>
+            </tr>
+    </table>
+</div>
+<!-- parameters List demo -->
+
+
+</body>
+</html>

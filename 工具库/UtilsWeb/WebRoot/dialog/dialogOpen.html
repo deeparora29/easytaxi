@@ -1,0 +1,43 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<!--Jquery JS  -->
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/dialog.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/dialogOpen.css" type="text/css" media="screen">
+
+<script type="text/javascript" src="../js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery/ui/ui.core.js"></script>
+<script type="text/javascript" src="../js/jquery/ui/ui.draggable.js"></script>
+<script type="text/javascript" src="../js/jquery/ui/ui.dialog.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.decorateIframe.js"></script>
+
+</head>
+<body>
+<div id="dialogBtnGroup" class="btnComplaint" style="display: none;">
+<button id="btnSubmit" class="btnNormal2">确定</button>
+<button id="btnCancel" class="btnNormal2">关闭</button>
+</div>
+
+<table id="acceptForm">
+	<tbody>
+		<tr class="bgColor1">
+			<td><label class="required"><font class="fontTest">*选择参数</font></label>
+			</td>
+			<td>返回ID:<input type="text" name="paramId" readonly="true" id="paramId"/><br>
+				返回参数:<input type="text" name="paramName" readonly="true" id="paramName"/>
+			<button id="btnSelect" class="btnNormal2">选择</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!--设置弹出框-->
+<div id="paramDialog">
+	<div class="dialogDiv">
+	</div>
+</div>
+<script language="JavaScript" src="../js/dialogOpen.js"></script>
+</body>
+</html>

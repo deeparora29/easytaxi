@@ -1,0 +1,97 @@
+/**
+ * xyTree树的样式表，需要直接加到用户的网页中
+ * @版本：4.1
+ * @作者：xieye
+ * @时间：2007/06/16
+ */
+body{
+	background-position:left;
+	background-repeat:repeat-y;
+	margin:5px 0px 0px 5px;
+}
+.treeyangshi{
+/*树的样式*/
+  font:12px normal 宋体
+  margin:0;
+  padding:0;
+}
+.treeyangshi div{ 
+/*树的div样式*/
+/*  height:16px;*/
+  border:0px solid red;
+	white-space: nowrap;
+}
+.treeyangshi img{ 
+/*树的div样式*/
+ 
+/*  display:block;*/
+}
+
+
+.treeyangshiImg{
+/*  这里可能用户自己需要修改，自定义图片的样式由这条指定*/
+  width:15px;
+  height:15px;
+}
+
+.treeyangshi a{
+/*未访问*/
+	color: #00397a;
+	text-decoration:none;
+  	font:normal 12px Verdana, Arial, Helvetica, sans-serif,"宋体";
+  	margin-left:0px;
+  
+  	cursor:pointer;
+}
+
+.treeyangshi a:visited{
+/*访问过*/
+	color:#00397a;
+	text-decoration:none;
+}
+
+.treeyangshi a:hover{
+/*指针移动到上面的样式，蓝色加下划线*/
+  color:blue;
+/*	text-decoration:underline;*/
+  
+    cursor:pointer;
+}
+
+.treeyangshi a:active{
+/*被点击下*/
+}
+
+/**右键菜单**/
+.div_RightMenu
+{
+    z-index:0;
+    text-align:left;    
+    cursor: default;
+    position: absolute;
+    background-color:#FAFFF8;
+    width:80px;
+    height:auto;
+    border: 1px solid #333333;
+    display:none;
+
+    filter:progid:DXImageTransform.Microsoft.Shadow(Color=#333333,Direction=120,strength=5);    
+}
+
+.divMenuItem
+{
+    height:12px;
+    color:Black;
+    font-family:宋体;
+    vertical-align:middle;
+    font-size:10pt;
+    margin-bottom:3px;
+    cursor:hand;
+    padding-left:10px;
+    padding-top:2px; 
+}
+
+
+
+
+

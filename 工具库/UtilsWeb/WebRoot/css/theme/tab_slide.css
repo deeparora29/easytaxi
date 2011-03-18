@@ -1,0 +1,109 @@
+@charset "utf-8";
+	#dhtmlgoodies_tabView1{
+	background: url(../../images/theme/bg_frame_01_body.jpg) repeat-y;
+	width: 980px;
+	margin: 0px auto 0px auto;
+	padding: 0px 13px 0px 8px;
+	clear: both;
+	float: left;
+	overflow:hidden;
+	}
+	.scroll_box{
+		line-height:34px;
+		width:35px;
+		height:34px;
+		border:0px;
+		float:right;
+		padding:5px 3px 0px 5px;
+		background:url(../../images/theme/bg_frame_01_head.jpg)  no-repeat -40px -105px;
+	}
+	.arrow_left{
+	background:url(../../images/icon_arrow_left_02.png)  no-repeat;
+	height:13px;
+	width:13px;
+	border:0px;
+	cursor:pointer;
+	float: left;
+	}
+	.arrow_right{
+		background:url(../../images/icon_arrow_right_02.png)  no-repeat;
+		height:13px;
+		width:13px;
+		border:0px;
+		cursor:pointer;
+	}
+	.dhtmlgoodies_tabSpanPane{
+		float:left;
+		border:0px;
+		display:block;
+		width:937px;
+		overflow:hidden;
+		background:url(../../images/theme/bg_frame_01_head.jpg)  no-repeat -8px -105px;
+		position:relative;
+	}
+	.dhtmlgoodies_tabPane{
+		padding-left:5px;
+		height:34px;	/* Height of tabs */
+		width:2000px;
+		position:relative;
+	}
+	.dhtmlgoodies_aTab{
+		clear:both;
+		float:left;
+		width:970px;
+		min-height:60px;
+		font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+		padding:5px;		
+		
+		
+	}
+	.dhtmlgoodies_tabPane DIV{
+		float:left;
+		height:29px;	/* Height of tabs */
+		padding-left:10px;
+		padding-right:3px;
+		vertical-align:middle;
+		background-repeat:no-repeat;
+		background-position:bottom left;
+		cursor:pointer;
+		color:#000000;
+	}
+	.dhtmlgoodies_tabPane .tabActive{
+		border:1px solid #9dbedf;
+		background-color:#FFFFFF;
+		border-bottom:0px;
+		position:relative;
+		bottom:-4px;
+	}
+	.dhtmlgoodies_tabPane .tabInactive{
+		border:1px solid transparent;
+		_border:0px;
+		position:relative;
+		bottom:-3px;
+		background:url('../../images/theme/typo_line_01.jpg') no-repeat left -4px;
+	}
+
+	.dhtmlgoodies_tabPane .inactiveTabOver{
+		border:1px solid #9dbedf;
+		border-bottom:0px;
+		background-color:#e8f5ff;
+		position:relative;
+		bottom:-3px;
+	}
+	.dhtmlgoodies_tabPane span{
+		font-family:arial;
+		vertical-align:top;
+		padding-left:3px;
+		padding-right:3px;		
+		line-height:29px;
+		float:left;
+		font-size:12px;
+	}
+	.dhtmlgoodies_tabPane .tabActive span{
+		padding-bottom:1px;
+		line-height:20px;
+	}
+	
+	.dhtmlgoodies_tabPane img{
+		float:left;
+	}

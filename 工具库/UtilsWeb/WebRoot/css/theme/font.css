@@ -1,0 +1,96 @@
+@charset "utf-8";
+/* CSS Document */
+
+BODY {
+	FONT-WEIGHT: normal;
+	COLOR: #000000;
+	FONT-STYLE: normal;
+	FONT-FAMILY: 微软雅黑,Tahoma, 新宋体, Arial;
+	TEXT-DECORATION: none;
+	display:block;
+	font-size: 12px;
+}
+P {
+	FONT-WEIGHT: normal;
+	COLOR: #000000;
+	FONT-STYLE: normal;
+	FONT-FAMILY: Verdana, Arial;
+	TEXT-DECORATION: none;
+	line-height: 2em;
+}
+
+
+A {
+	FONT-WEIGHT: normal;  COLOR: #3e5b8a; FONT-STYLE: normal; FONT-FAMILY: 微软雅黑，Verdana, Arial; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #fe5f08;TEXT-DECORATION: underline
+}
+A.title_01  {
+	FONT-SIZE: 14px;
+	COLOR: #770D6F;
+	FONT-FAMILY: Georgia, 微软雅黑, 新宋体, Arial;
+	TEXT-DECORATION: none;
+	font-style: italic;
+	font-weight: bold;
+}
+A.title_01:hover {
+	TEXT-DECORATION: underline;
+}
+
+H1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 22px; MARGIN: 0px; COLOR: #1b8592; FONT-STYLE: normal; FONT-FAMILY: "微软雅黑", "新宋体", Verdana, Arial
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 18px; MARGIN: 0px; COLOR: #1b8592; FONT-STYLE: normal; FONT-FAMILY: "微软雅黑", "新宋体", Verdana, Arial
+}
+H3 {
+
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; MARGIN: 0px; COLOR: #1b8592; FONT-STYLE: normal; FONT-FAMILY: "微软雅黑", "新宋体", Verdana, Arial
+}
+.highlight_01 {
+	FONT-WEIGHT: bold; FONT-SIZE: 1.0em; COLOR: #124072; FONT-FAMILY: Tahoma, 新宋体, Arial
+}
+.highlight_02 {
+	FONT-WEIGHT: bold; FONT-SIZE: 1.0em; COLOR: #ff7800; FONT-FAMILY: Tahoma, 新宋体, Arial
+}
+
+
+.promotionBox {
+	padding:2px;
+	background:#f3f6fa;
+	color:#7f95b9;
+	FONT-WEIGHT: bold;
+	FONT-FAMILY: Tahoma, 微软雅黑, 新宋体, Arial;
+	clear: both;
+}
+
+
+.copyright {
+	float:right;
+	padding-RIGHT: 50px;
+	FONT-SIZE: 12px;
+	COLOR: #353c55;
+	FONT-FAMILY: 微软雅黑, 新宋体, Arial;
+	background-image: url(../../images/logo_bt_01.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	text-align: right;
+}
+.kulelist { font-family: "微软雅黑", "新宋体";  line-height: 2em}
+.kule000 { font-family: "微软雅黑", "新宋体"; color: #F70063}
+.kule001 { font-family: "微软雅黑", "新宋体"; color: #a044a6}
+.kule005 { font-family: "微软雅黑", "新宋体"; color: #49a644}
+.kule006 { font-family: "微软雅黑", "新宋体"; color: #FF9C00}
+.kule007 { font-family: "微软雅黑", "新宋体"; color: #ff5a00}
+.kule008 { font-family: "微软雅黑", "新宋体"; color: #3961AD}
+.kule009 { font-family: "微软雅黑", "新宋体"; color: #6c758c}
+.kule010 { font-family: "微软雅黑", "新宋体"; color: #1b2a57}
+.kule029 { font-family: "微软雅黑", "新宋体"; color: #FFFFFF}
+
+.size12 {font-size: 12px;}
+.size14 {font-size: 14px;}
+.size16 {font-size: 16px;}
+.size18 {font-size: 18px;}
+.size20 {font-size: 20px;}
+.size24 {font-size: 24px;}

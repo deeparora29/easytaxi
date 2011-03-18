@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>
+	UtilsWeb</display-name>
+	
+	<!--struts2 configuration -->
+	 <filter>
+        <filter-name>struts-cleanup</filter-name>
+        <filter-class>
+            org.apache.struts2.dispatcher.ActionContextCleanUp
+        </filter-class>
+    </filter>  
+    <filter-mapping>
+        <filter-name>struts-cleanup</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.FilterDispatcher
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- extremeComponents config -->
+	<filter>
+		<filter-name>eXtremeExport</filter-name>
+		<filter-class>
+			org.tdeccn.table.filter.TDExportFilter
+		</filter-class>
+		<init-param>
+			<param-name>responseHeadersSetBeforeDoFilter</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>eXtremeExport</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<context-param>
+		<param-name>extremecomponentsPreferencesLocation</param-name>
+		<param-value>/extremetable.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>extremecomponentsMessagesLocation</param-name>
+		<param-value>/extremetableResourceBundle</param-value>
+	</context-param>
+	
+	<!--ajax hint-->
+	<!--servlet>
+		<description>
+		</description>
+		<display-name>
+		InitParamServlet</display-name>
+		<servlet-name>InitParamServlet</servlet-name>
+		<servlet-class>
+		com.btit.common.utils.ajax.test.InitParamServlet</servlet-class>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InitParamServlet</servlet-name>
+		<url-pattern>/InitParamServlet</url-pattern>
+	</servlet-mapping-->
+	<!--editable ecTable -->
+	<servlet>
+		<description>
+		</description>
+		<display-name>
+		UpdateTableDataServlet</display-name>
+		<servlet-name>UpdateTableDataServlet</servlet-name>
+		<servlet-class>
+		com.btit.utilsweb.test.table.servlet.UpdateTableDataServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>
+		DeleteTableDataServlet</display-name>
+		<servlet-name>DeleteTableDataServlet</servlet-name>
+		<servlet-class>
+		com.btit.utilsweb.test.table.servlet.DeleteTableDataServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>                    
+		<display-name>
+		AddTableDataServlet</display-name>
+		<servlet-name>AddTableDataServlet</servlet-name>
+		<servlet-class>
+		com.btit.utilsweb.test.table.servlet.AddTableDataServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateTableDataServlet</servlet-name>
+		<url-pattern>/UpdateTableDataServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>                   
+		<servlet-name>DeleteTableDataServlet</servlet-name>
+		<url-pattern>/DeleteTableDataServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddTableDataServlet</servlet-name>
+		<url-pattern>/AddTableDataServlet</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!--replication-->
+	<servlet>
+    <description></description>
+    <display-name></display-name>
+    <servlet-name>VaildateName</servlet-name>
+    <servlet-class>com.btit.utilsweb.test.repeat.VaildateName</servlet-class>
+  </servlet>                                       
+
+  <servlet-mapping>
+    <servlet-name>VaildateName</servlet-name>
+    <url-pattern>/VaildateName</url-pattern>
+  </servlet-mapping>
+	<!-- jasper文件+connection方式 -->
+	<servlet>
+		<servlet-name>JasperJconDemoServlet</servlet-name>
+		<servlet-class>
+			com.btit.common.jasperreport.test.JasperJconDemoServlet
+		</servlet-class>
+	</servlet>
+	<!-- 子报表　jasper文件+connection方式 -->
+	<servlet>
+		<servlet-name>SubreportJconDemoServlet</servlet-name>
+		<servlet-class>
+			com.btit.common.jasperreport.test.SubreportJconDemoServlet
+		</servlet-class>
+	</servlet>
+	<!-- jasper文件+collection方式 -->
+	<servlet>
+		<servlet-name>JasperCollectionDemoServlet</servlet-name>
+		<servlet-class>
+			com.btit.common.jasperreport.test.JasperCollectionDemoServlet
+		</servlet-class>
+	</servlet>
+	<!-- jasperdesign+connection方式 -->
+	<servlet>
+		<servlet-name>JdesignJconDemoServlet</servlet-name>
+		<servlet-class>
+			com.btit.common.jasperreport.test.JdesignJconDemoServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>
+		PageResultServlet</display-name>
+		<servlet-name>PageResultServlet</servlet-name>
+		<servlet-class>
+		com.btit.utilsweb.test.table.servlet.PageResultServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>
+		QueryStaffInfoServlet</display-name>
+		<servlet-name>QueryStaffInfoServlet</servlet-name>
+		<servlet-class>
+		com.btit.utilsweb.test.table.servlet.QueryStaffInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JasperJconDemoServlet</servlet-name>
+		<url-pattern>/jasperjcondemo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SubreportJconDemoServlet</servlet-name>
+		<url-pattern>/subreportjcondemo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>JasperCollectionDemoServlet</servlet-name>
+		<url-pattern>/jaspercolldemo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>JdesignJconDemoServlet</servlet-name>
+		<url-pattern>/jdesignjcondemo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PageResultServlet</servlet-name>
+		<url-pattern>/PageResultServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QueryStaffInfoServlet</servlet-name>
+		<url-pattern>/QueryStaffInfoServlet</url-pattern>
+	</servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+	
+	
+</web-app>

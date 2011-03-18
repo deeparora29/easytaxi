@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>主页面</title>
+<script type="text/javascript">
+	function selmenu(menuId){
+	    document.fm.menuId.value = menuId;//把参数值赋值给表单元素
+	    document.fm.target = "right";
+	    document.fm.action = "right" + menuId + ".html";
+		document.fm.submit();
+	}
+</script>
+<style>
+body{background:#CCCCCC}
+div{ position:relative; left:auto; right:auto; top:50px}
+</style>
+</head>
+
+<body>
+<form action="errorpage.html" method="post" target="right" name="fm">
+<input type="hidden" name="menuId" id="menuId"/>
+</form>
+</form><div>
+<table border="1" align="center">
+  <tr>
+    <td><iframe name="left" src="left.html" width="208"   height="458px"/></td>
+    <td><iframe name="right" src="#" width="544"   height="458px"/></td>
+  </tr>
+</table></div>
+</body>
+</html>

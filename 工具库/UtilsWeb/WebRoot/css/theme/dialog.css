@@ -1,0 +1,200 @@
+/*
+ * ----------------------------------------------------------------
+ * author         renmian
+ * 修改记录           
+ * 文件名称	       dialog.css
+ * 文件描述           弹出对话框的样式定义，包括help以及参数对话框
+ * 其他
+ *
+ * ----------------------------------------------------------------
+ */
+/********This file skins dialog ********/
+/**rank skins dialog **/
+
+.rankDialog {
+	background: url(../../images/rank-dialog-bg.gif) no-repeat;
+	width:500px;
+	height:370px;
+}
+.rankDialog .ui-dialog-container{
+	
+}
+.rankDialog .ui-dialog .ui-dialog-titlebar,
+.rankDialog .ui-dialog-titlebar{
+	background: url(../../images/rank-dialog-title.jpg) no-repeat;
+	height:31px;
+}
+
+
+.rankDialog .ui-draggable-disabled .ui-dialog-titlebar,
+.rankDialog.ui-draggable-disabled .ui-dialog-titlebar {
+	cursor: default;
+}
+
+.rankDialog .ui-dialog .ui-dialog-titlebar-close,
+.rankDialog .ui-dialog-titlebar-close{
+	width: 19px;
+	height: 24px;
+	background: url(../../images/rank-dialog-close.jpg) no-repeat 0 5px;
+	position:absolute;
+	top: 0;
+	right:20px;
+	cursor: default;
+}
+
+.rankDialog .ui-dialog .ui-dialog-titlebar-close span,
+.rankDialog .ui-dialog-titlebar-close span{
+	display: none;
+}
+
+.rankDialog .ui-dialog .ui-dialog-titlebar-close-hover,
+.rankDialog .ui-dialog-titlebar-close-hover{
+	background: url(../../images/rank-dialog-close.jpg) no-repeat 1px 6px;
+}
+
+.rankDialog .ui-dialog .ui-dialog-title,
+.rankDialog .ui-dialog-title{
+	margin-left: 5px;
+	color: white;
+	font-weight: bold;
+	position: relative;
+	top: 7px;
+	left: 4px;
+}
+
+.rankDialog .ui-dialog .ui-dialog-content,
+.rankDialog .ui-dialog-content{
+	margin:10px 0 0 15px;
+	*margin-left:5px;
+}
+
+
+
+
+/**help skins dialog **/
+
+.helpDialog {
+	background: url(../../images/help-dialog-bg.gif) no-repeat;
+	width:500px;
+	height:370px;
+}
+.helpDialog .ui-dialog-container{
+	
+}
+.helpDialog .ui-dialog .ui-dialog-titlebar,
+.helpDialog .ui-dialog-titlebar{
+	background: url(../../images/help-dialog-title.jpg) no-repeat;
+	height:31px;
+}
+
+
+.helpDialog .ui-draggable-disabled .ui-dialog-titlebar,
+.helpDialog.ui-draggable-disabled .ui-dialog-titlebar {
+	cursor: default;
+}
+
+.helpDialog .ui-dialog .ui-dialog-titlebar-close,
+.helpDialog .ui-dialog-titlebar-close{
+	width: 19px;
+	height: 28px;
+	background: url(../../images/help-dialog-close.jpg) no-repeat 0 13px;
+	position:absolute;
+	top: 0;
+	right:20px;
+	cursor: default;
+}
+
+.helpDialog .ui-dialog .ui-dialog-titlebar-close span,
+.helpDialog .ui-dialog-titlebar-close span{
+	display: none;
+}
+
+.helpDialog .ui-dialog .ui-dialog-titlebar-close-hover,
+.helpDialog .ui-dialog-titlebar-close-hover{
+	background: url(../../images/help-dialog-close.jpg) no-repeat 1px 14px;
+}
+
+.helpDialog .ui-dialog .ui-dialog-title,
+.helpDialog .ui-dialog-title{
+	margin-left: 5px;
+	color: white;
+	font-weight: bold;
+	position: relative;
+	top: 7px;
+	left: 4px;
+}
+
+.helpDialog .ui-dialog .ui-dialog-content,
+.helpDialog .ui-dialog-content{
+	margin:4px 0 0 13px;
+	*margin-left:-6px;
+
+}
+
+
+/**param skins dialog **/
+.dialogDiv{
+	width:800px;
+}
+.paramDialog .ui-dialog,
+.paramDialog {
+	background: url(../../images/help-dialog-bg.gif) no-repeat;
+	width:500px;
+	height:370px;
+}
+.paramDialog .ui-dialog-container{
+	
+}
+.paramDialog .ui-dialog .ui-dialog-titlebar,
+.paramDialog .ui-dialog-titlebar{
+	background: url(../../images/help-dialog-title.jpg) no-repeat;
+	height:31px;
+}
+
+
+.paramDialog .ui-draggable-disabled .ui-dialog-titlebar,
+.paramDialog.ui-draggable-disabled .ui-dialog-titlebar{
+	cursor: default;
+}
+
+.paramDialog .ui-dialog .ui-dialog-titlebar-close,
+.paramDialog .ui-dialog-titlebar-close{
+	width: 19px;
+	height: 28px;
+	background: url(../../images/help-dialog-close.jpg) no-repeat 0 13px;
+	position:absolute;
+	top: 0;
+	right:20px;
+	*right:25px;
+	*top:2px;
+	cursor: default;
+}
+
+.paramDialog .ui-dialog .ui-dialog-titlebar-close span,
+.paramDialog .ui-dialog-titlebar-close span{
+	display: none;
+}
+
+.paramDialog .ui-dialog .ui-dialog-titlebar-close-hover,
+.paramDialog .ui-dialog-titlebar-close-hover{
+	background: url(../../images/help-dialog-close.jpg) no-repeat 1px 14px;
+}
+
+.paramDialog .ui-dialog .ui-dialog-title,
+.paramDialog .ui-dialog-title{
+	margin-left: 5px;
+	color: white;
+	font-weight: bold;
+	position: relative;
+	top: 7px;
+	left: 4px;
+}
+
+.paramDialog .ui-dialog .ui-dialog-content,
+.paramDialog .ui-dialog-content{
+	margin:3px 0 0 13px;
+
+}
+
+
+

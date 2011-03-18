@@ -1,0 +1,153 @@
+/*
+ * ----------------------------------------------------------------
+ * author         renmian
+ * 修改记录           
+ * 文件名称	      tab.css
+ * 文件描述          用于显示Tab标签页的页面样式定义
+ * 其他
+ *
+ * ----------------------------------------------------------------
+ */
+/***** Reset *****/
+html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td,
+del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+    vertical-align: baseline;
+    font-family: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body {
+    font-size: 12px;
+    color: #333333;
+}
+
+.ui-tabs-hide{
+	display:none;
+}
+
+#content .box {
+    float: left;
+		background: url(../images/tab-bg.jpg) repeat-x 0 1px;
+    border: 1px solid #4589c4;
+		text-align: left;
+		padding-bottom: 5px;
+}
+
+#wrapper #content {
+    float: left;   
+	padding-top: 2px;
+	
+}
+
+/*******Tab Component***************/
+    
+#show{
+    width:99%;
+	display: inline;
+	float: left;
+	margin: 7px 0px 5px 5px;
+	border: 1px solid #458ac4;
+}
+
+/**class definition**/
+#ccwTabList {
+    background:url(../images/tab-bg.jpg) repeat-x 0 1px;
+    width: 100%;
+    height: 26px;
+    list-style: none;
+    padding: 0;
+    margin: 0;	    
+}
+
+#ccwTabList li {
+    float: left;
+}
+
+#ccwTabList li a {
+    background:#fff url(../images/tab-bg.jpg) repeat-x 0 1px;
+    width: 100px;
+	height: 19px;
+	*height: 26px;
+    display: block;    
+    border-right: 1px solid #458ac4;
+	text-decoration: none;
+    color: #333333;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 6px;
+}
+
+#ccwTabList li a:hover{
+    text-decoration: none;
+	color:#333;
+}
+
+#ccwTabList li.ccwtab_active a {
+    padding-top:7px;    
+    background: #fff;
+		color: #333;
+}
+
+
+/**********Tab Content*************/
+#contentTab{
+	background: url(../images/tab-content-bg.jpg)  repeat-x;
+	border:1px solid #e7e7e7;
+	border-bottom:1px solid #90b0df;
+	height:24px;
+	padding-left:10px;
+}
+#contentTab li{	
+	float:left;
+	height:24px;
+	position: relative;
+	top:1px;
+	margin:0 2px;
+}
+#contentTab li a{
+	display:block;
+	*display: inline-block;
+	height:24px;
+	background: url(../images/tab-content.jpg) no-repeat left top;
+	padding-left:25px;
+	color:#333;
+}
+
+#contentTab li a span{
+	display:block;
+	*display: inline-block;
+	background: url(../images/tab-content.jpg) no-repeat right top;
+	cursor:pointer;
+	padding-right:25px;
+	height:16px;
+	*height:24px;
+	padding-top:8px;
+
+}
+
+#contentTab li.contentTabSelected a{
+	background: url(../images/tab-content.jpg) no-repeat left -24px;
+}
+#contentTab li.contentTabSelected a span{
+	background: url(../images/tab-content.jpg) no-repeat right -24px;
+}
+
+#accpectContent{
+	border:1px solid #95cbdd;
+}
+#contentTabArea{
+	padding:5px;}
+	
+#accpectContent .blueBg{
+	background:#dfecfd;
+	border-bottom:1px solid #95cbdd;
+	height:2px;
+	font-size:0;}

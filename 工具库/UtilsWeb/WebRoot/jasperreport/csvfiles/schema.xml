@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema>
+<table name="ROLLUP_ENTERPRISE_COMMBARCODE.txt">
+<column name="COMM_BARCODE" type="VARCHAR"/>
+<column name="NAME" type="VARCHAR"/>
+<column name="AREA_CODE" type="VARCHAR"/>
+<column name="COMM_SORT" type="VARCHAR"/>
+<column name="SALE_TIME" type="VARCHAR"/>
+<column name="UNIT" type="VARCHAR"/>
+<column name="AMOUNT" type="VARCHAR"/>
+<column name="PRICE" type="VARCHAR"/>
+<column name="SUM_PRICE" type="VARCHAR"/>
+</table>
+<table name="T_SYM_APPLICATION_HEADER.txt">
+<column name="APPLICATION_ID" type="BIGINT"/>
+<column name="APPLICATION_NAME" type="VARCHAR"/>
+</table>
+<table name="T_SYM_APPLICATION_LINE.txt">
+<column name="APPLICATION_LINE_ID" type="BIGINT"/>
+<column name="APPLICATION_ID" type="BIGINT"/>
+<column name="SYS_FUNCTION_ID" type="BIGINT"/>
+<column name="SYS_FUNCTION_CODE" type="VARCHAR"/>
+<column name="SYS_FUNCTION_DESC" type="VARCHAR"/>
+</table>
+</schema>

@@ -1,0 +1,54 @@
+img,form,ul,div,html,body,dt,dd{margin:0px;padding:0px;}
+img,form,ul,div,html,table,dt,dd{
+	text-align:left;
+}
+img{border:0px;}
+input.unborder{border:0px}
+ul{
+	list-style-type:none;
+	clear: both;
+}
+.img_middle {vertical-align:middle;}
+.left{
+	text-align:left
+}
+.center{
+	text-align:center
+}
+.right{
+	text-align:right
+}
+.cursorhand{
+	cursor:pointer;
+}
+.cursormove{
+	cursor:move;
+}
+.clear_left {clear:left;}
+.clear_both {clear:both;}
+.clear_both_empty {clear:both;font-size:0px;height:0px;overflow:hidden;}
+.width_full{width:100%;}
+
+.bug1px{
+	position:relative;
+	top:1px;
+}
+.float_left {
+	display:block;
+	float:left;
+}
+.float_right {
+	display:block;
+	float:right;
+}
+.bottom1px01 {overflow:hidden;
+	height:1px;
+}
+.border1px{
+	border: 1px solid #000000;
+}
+.padding5px {padding:5px;}
+.margin5px {margin:5px;}
+.margin_top5px {margin-top:5px}
+.margin_bottom5px {margin-top:-5px}
+.margin-top3px {margin-top:3px;}
