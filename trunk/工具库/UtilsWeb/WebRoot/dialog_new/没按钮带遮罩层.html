@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>没按钮的弹出窗口</title>
+	<link type="text/css" href="../css/themes/base/ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="../js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.core.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.draggable.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.resizable.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.dialog.js"></script>
+	<script type="text/javascript" src="../../external/bgiframe/jquery.bgiframe.js"></script>
+	<link type="text/css" href="../css/demos.css" rel="stylesheet" />
+	<script type="text/javascript">
+	$(function() {
+		$("#dialog").dialog({
+			bgiframe: true,
+			autoOpen: false,
+			height: 140,
+			modal: true
+		});
+		
+		$("#button").click(function(){
+			$("#dialog").dialog('open');
+		});
+	});
+	</script>
+</head>
+<body>
+
+
+<div class="demo">
+
+<div id="dialog" title="自定义">
+	<p>这里展示了不带确认的弹出窗口</p>
+</div>
+</div><!-- End demo -->
+
+<div class="demo-description">
+<p>这里展示了不带确认的弹出窗口</p>
+
+  <input class="ui-state-default ui-corner-all ui-state-focus" type="submit" id="button" value="点击">
+
+</div><!-- End demo-description -->
+
+
+</body>
+</html>

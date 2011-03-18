@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../css/theme/tab_main.css" type="text/css" media="screen">
+<title></title>
+
+<script language="JavaScript" src="../js/countPageRefresh.js"></script>
+
+</head>
+<body>
+<form name="theForm" method="POST" action="countPageRefresh.html">
+<input type="hidden" name="AutoFlash" id="AutoFlash" value=1>
+<!--刷新倒计时图//-->
+<table border="0" cellpadding="3" cellspacing="0" width="100%">
+  <tr valign="middle">
+    <td align="right" valign="middle">
+      <input type=checkbox name="chkFlash" checked onClick="contral1(this.checked)">
+      刷新倒计时
+</td>
+    <td align="right" nowrap width="4%">
+      <img src="./images/cb.gif" name="a" border=0><img src="./images/cb.gif" name="b" border=0><img src="./images/cb.gif" name="c" border=0>
+    </td>
+  </tr>
+</table>
+<h1>这里是自动刷新页面！采用form表单POST提交方式进行页面的刷新。设置页面刷新时间为30s。</h1>
+
+<input type="button" value="手动刷新" onclick="document.forms[0].submit();" class="button" > 
+
+
+</form>
+<script>
+//todo:这里试着刷新时间
+var Counter = 30;
+showCnt();
+</script>
+</body>
+</html>

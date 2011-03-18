@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../css/theme/tab_main.css" type="text/css" media="screen">
+		<title>校验demo</title>
+
+		<script type="text/javascript" src="../js/public.js"></script>
+		<script type="text/javascript" src="../js/calendar.js"></script>
+		<script type="text/JavaScript">
+			/**
+			* 清除提示信息
+			*/
+			function clearContext(){
+				var x=document.getElementsByTagName("span");
+				for(i in x){
+				x[i].innerHTML = '&nbsp;';
+				}
+				return true;
+			}
+			/**
+			* 清除表单信息
+			*/
+			function clearFormText(){
+				var x=document.getElementsByTagName("input");
+				for(i in x){
+				x[i].value = '';
+				}
+				return true;
+			}
+			/**
+			* 重置页面
+			*/
+			function reset(){
+			if(clearContext()&&clearFormText()){
+			alert("重置成功！");}
+			}
+			/**
+			* 验证代码
+			*/
+			function validation(){
+				clearContext();//在验证之前，先清空原来的提升信息
+				var flag = true;
+				var number =trim(document.getElementById("number").value);
+				var phone =trim(document.getElementById("phone").value);
+				var email = trim(document.getElementById("email").value);
+				var web = trim(document.getElementById("web").value);
+				var float = trim(document.getElementById("float").value);
+				var chinese = trim(document.getElementById("chinese").value);
+				var english = trim(document.getElementById("english").value);
+				var date = trim(document.getElementById("date").value);
+				var idcard = trim(document.getElementById("idcard").value);
+				var telephone = trim(document.getElementById("telephone").value);
+				var isnull = trim(document.getElementById("isnull").value);
+				var phone = trim(document.getElementById("phone").value);
+				var longcheck = trim(document.getElementById("longcheck").value);
+				var begindate = trim(document.getElementById("begindate").value);
+				var enddate = trim(document.getElementById("enddate").value);
+				//数字
+				if((!isNumber(number))||number==''){
+					document.getElementById("number_error").innerHTML = "请输入整数！";
+				}
+				//固定电话
+				if(!isPhone(phone)){
+					document.getElementById("phone_error").innerHTML = "请按格式输入：028-854682106！";
+					flag = false;
+				}
+				//邮箱
+				if((!isEmail(email))||email==''){
+					document.getElementById("email_error").innerHTML = "请按格式输入btit@163.com！";
+					flag = false;
+				}
+				//网址
+				if((!isWebAddress(web))||web==''){
+					document.getElementById("web_error").innerHTML = "请按格式输http://www.sina.com！";
+					flag = false;
+				}
+				//浮点数
+				var n=isFloat(float);
+				if(n==1){
+					document.getElementById("float_error").innerHTML = "不能为空！";
+					flag = false;
+				}else if(n==2){
+					document.getElementById("float_error").innerHTML = "最后一位不能是小数点！";
+					flag = false;
+				}else if(n==3){
+					document.getElementById("float_error").innerHTML = "第一位不能是小数点！";
+					flag = false;
+				}else if(n==4){
+					document.getElementById("float_error").innerHTML = "小数点个数有误！";
+					flag = false;
+				}else if(n==5){
+					document.getElementById("float_error").innerHTML = "只能是整数或小数！";
+					flag = false;
+				}
+				//中文	
+				if((!isChinese(chinese))||chinese==''){
+					document.getElementById("chinese_error").innerHTML = "请输中文！";
+					flag = false;
+				}
+				//英文
+				if((!isEnglish(english))||english==''){
+					document.getElementById("english_error").innerHTML = "请输英文！";
+					flag = false;
+				}
+				//身份证
+				if(!checkCard(idcard)){
+					document.getElementById("idcard_error").innerHTML = "请输入15位或18位身份证号码！";
+					flag = false;
+				}
+				//手机 新加入3G手机号码
+				if(!ismobile(telephone)){
+					document.getElementById("telephone_error").innerHTML = "手机号码错误！";
+					flag = false;
+				}
+				//非空
+				if(isNotNull('isnull','不能为空！','isnull_error',flag)){};
+				//日期
+				ValidData(date,'日期格式错误！','date_error');
+				//长度 其中的 其中的 5 10 分别是允许的最短长度和最大长度
+				if(validateLength(longcheck,5,10)){
+					document.getElementById("longcheck_error").innerHTML = "长度超出限制！";
+					flag = false;
+				}
+				//日期比较
+				if(begindate==""){document.getElementById("conparedate_error").innerHTML = '开始日期不能为空！'}
+				else compareDate(begindate,enddate,'开始日期不能大于结束日期！','conparedate_error');
+				
+				return flag;
+			}
+		</script>
+
+</head>
+	<body>
+<h1 align="center">表单验证</h1>
+	<div id="table">
+	<table class="table_input" align="center">
+      <tr>
+        <td class="lable" colspan="2">数字验证：</td>
+        <td><input type="text" id="number"/></td>
+        <td width="150" align="left"><span id="number_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">电话号码验证(固定号码不以“1”开头)：</td>
+        <td><input type="text" id="phone"/></td>
+        <td align="left"><span id="phone_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">邮箱格式验证：</td>
+        <td><input type="text" id="email"/></td>
+        <td align="left"><span id="email_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">WEB地址验证：</td>
+        <td><input type="text" id="web"/></td>
+        <td align="left"><span id="web_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">浮点数字验证：</td>
+        <td><input type="text" id="float"/></td>
+        <td align="left"><span id="float_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">中文验证：</td>
+        <td><input type="text" id="chinese"/></td>
+        <td align="left"><span id="chinese_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">英文验证：</td>
+        <td><input type="text" id="english"/></td>
+        <td align="left"><span id="english_error" class="kule000"> &nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">日期验证：</td>
+        <td><input type="text" id="date" onclick="ShowCalendar(this);" readonly="true"/></td>
+        <td align="left"><span id="date_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">身份证验证：</td>
+        <td><input type="text" id="idcard"/></td>
+        <td align="left"><span id="idcard_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">手机号码验证：</td>
+        <td><input type="text" id="telephone"/></td>
+        <td align="left"><span id="telephone_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">非空验证：</td>
+        <td><input type="text" id="isnull"/></td>
+        <td align="left"><span id="isnull_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable" colspan="2">长度验证（设定长度最短为5位，最长为10位）：</td>
+        <td><input type="text" id="longcheck"/></td>
+        <td align="left"><span id="longcheck_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td rowspan="2" class="lable">时间先后验证：</td>
+        <td class="lable">开始时间：</td>
+        <td><input type="text" id="begindate" onclick="ShowCalendar(this);" readonly="true"/></td>
+        <td rowspan="2" align="left"><span id="conparedate_error" class="kule000">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td class="lable">结束时间：</td>
+        <td><input name="text" type="text" id="enddate" onclick="ShowCalendar(this);" readonly="true"/></td>
+      </tr>
+	  <tr>
+        <td class="lable" colspan="2"><button id="ok" onclick="validation()" type="submit" class="button">检查</button></td>
+        <td align="center"><button id="refresh" onclick="reset()" class="button">重置</button></td>
+        <td align="left"><button id="close" onclick="window.close()" class="button">关闭</button></td>
+      </tr>
+    </table>
+	</div>
+	</body>
+</html>

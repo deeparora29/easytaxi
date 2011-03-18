@@ -1,0 +1,121 @@
+@charset "utf-8";
+@import url(../comm.css); 
+@import url(font.css); 
+@import url(tab_slide.css); 
+#pgheader {
+	width: 1000px;
+	margin: 17px auto 0px auto;
+	color: #000000;
+	font-size: 12px;
+	background-image: url(../../images/theme/bg_frame_01_head.jpg);
+	background-repeat: no-repeat;
+	position:relative;
+
+}
+
+.username {
+	background:url(../../images/icon_02_man.gif) no-repeat left center;
+	padding-left:20px;
+	font-size:12px;
+}
+.help {
+	background:url(../../images/icon_01_help.png) no-repeat left center;
+	padding-left:20px;
+	font-size:12px;
+}
+.notice {
+	background:url(../../images/icon_01_notice.png) no-repeat left center;
+	padding-left:20px;
+	font-size:12px;
+}
+#pgfooter {
+	line-height: 22px;
+	background: url(../../images/theme/bg_frame_01_footer.jpg) no-repeat;
+	width: 1000px;
+	_width: 1001px;
+	margin: 0px auto 0px auto;
+	padding-top: 20px;
+	clear: both;
+}
+#pgfooter a{
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #42597f; TEXT-DECORATION: none;margin:0px 5px;	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;TEXT-DECORATION:none;
+
+}
+#pgfooter a:hover {
+	COLOR: #FFF;
+	TEXT-DECORATION: underline;
+}
+
+#logininfo {
+	padding: 8px;
+	position:absolute;
+	right:10px;
+	top:80px;
+}
+
+#logininfo a{font-size:12px;}
+
+
+#main_menu {
+	margin: 0px 5px 0px 20px;
+}
+#main_menu a {
+	margin-top:10px;
+	display:block;
+	float:left;
+	height: 25px;
+	line-height:25px;
+	width: 62px;
+	text-align: center;
+	font-size: 14px;
+	color: #000000;
+}
+#main_menu a.select {
+	background-image:url(../../images/theme/tab_01.png);
+}
+#toolbar {
+	margin: 0px 5px 0px 20px;
+	clear:both;
+	height: 70px;
+}
+#toolbar a{
+	position:relative;
+	display:block;
+	float:left;
+	height: 70px;
+	width: 48px;
+	text-align: center;
+	font-size: 12px;
+	background:transparent;
+}
+#toolbar a:hover{
+	background:url(../../images/theme/bg_button_01.jpg)  no-repeat left bottom;
+	TEXT-DECORATION: none;
+}
+#toolbar img{
+	margin:7px;
+}
+#toolbar a span,#toolbar a:hover span{
+	width:100px;
+	padding:3px;
+	border:1px solid #9dbedf;
+	background-color:#FFFFFF;
+	POSITION: absolute;
+	display:block;
+	filter: Alpha(opacity=90);
+    -moz-opacity:.9;   
+	opacity:0.9;
+}
+#toolbar a span{
+	LEFT: -9000px;TOP: -9000px;
+}
+
+#toolbar a:hover span{
+	left:0px;
+	top:-20px;
+}
+#sheet {
+	margin: 0px 5px 0px 20px;
+	clear: both;
+}
+

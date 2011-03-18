@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+   
+     
+   <package name="file" extends="struts-default" namespace="/file">
+       <action name="fileup" class="com.btit.utilsweb.fileoperate.action.FileUpLoadAction"  method="upload">
+           <param name="savePath">/file/upload</param>    
+           <result name="success">/file/upload.jsp</result>
+           <interceptor-ref name="fileUpload">
+                <param name="maximumSize">409600</param>
+                
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+       </action>
+       
+       <action name="download" class="com.btit.utilsweb.fileoperate.action.FileDownLoadAction"> 
+          <param name="savePath">/file/upload</param>  
+      	<result name="success" type="stream"> 
+      	  <param name="contentType">application/x-msdownload</param>
+          <param name="bufferSize">1024</param>              
+          <param name="contentDisposition">attachment;filename="${fileName}"</param>  
+          <param name="inputName">downloadFile</param>
+      </result> 
+   </action>
+   <action name="import" class="com.btit.utilsweb.fileoperate.action.ExcelImportAction"> 
+         <param name="savePath">/file/upload/excel</param>
+         <result name="success">/file/excelimport.jsp</result>
+         <result name="input">/file/excelimport.jsp</result>
+         <interceptor-ref name="fileUpload">
+             <param name="maximumSize">409600</param>
+ 		 </interceptor-ref>
+         <interceptor-ref name="defaultStack"></interceptor-ref>
+   </action>
+   </package>
+</struts>

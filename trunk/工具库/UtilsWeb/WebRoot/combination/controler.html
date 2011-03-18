@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title> </title>
+<style type="text/css">
+<!--
+body {
+	margin:0px;
+	background:url(../images/controler_bg.gif);
+}
+.controltd{
+	
+	width:11px;
+	text-align:left;
+}
+-->
+</style>
+<script language="javascript">
+	function setControler()
+	{
+		document.all.controlTD.style.height = document.body.clientHeight;
+	}
+	var expandFlag = true;
+	function controlMenu()
+	{
+		if(expandFlag)
+		{	
+			window.parent.content.cols = "0,7,*";
+			controler.src="../images/menu_controler_expand.gif"
+			expandFlag = false;
+		}
+		else
+		{
+			window.parent.content.cols = "180,7,*";
+			controler.src="../images/menu_controler.gif"
+			expandFlag = true;
+		}
+	}
+
+var mouseInit,menuLeft,dragFlag = false;
+function slideMenu()
+{
+	dragFlag = true;
+	var leftWidth=0;
+	
+	var distance = parseInt(event.x) -parseInt(mouseInit);
+	if(parseInt(menuLeft)+parseInt(distance)>0)	{
+		leftWidth=parseInt(menuLeft)+parseInt(distance);
+	}
+	//alert(menuLeft+"----"+distance+"---"+leftWidth);
+	window.parent.content.cols=leftWidth+",7,*";
+}
+</script>
+<script for="controler" event="onmousedown">
+  setCapture();
+  mouseInit = event.x;
+  var width = window.parent.content.cols.split(",")
+  menuLeft = width[0];
+ // alert(menuLeft);
+</script>
+<script for="controler" event="onmousemove">
+  if (event.button)
+    slideMenu();
+</script>
+<script for="controler" event="onmouseup">
+  releaseCapture();
+</script>
+
+</head>
+
+<body onLoad="setControler();">
+<div>
+<table border="0" cellpadding="0" cellspacing="0" width="7">
+<tr><td valign="middle" id="controlTD" class="controltd"><img src="../images/menu_controler.gif" style="cursor:hand;" name="controler"
+	onclick="controlMenu()"/></td>
+</tr></table>
+</div>
+</body>
+</html>

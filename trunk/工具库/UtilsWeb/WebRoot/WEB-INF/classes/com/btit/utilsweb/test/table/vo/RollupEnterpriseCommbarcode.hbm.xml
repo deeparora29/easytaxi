@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.btit.utilsweb.test.table.vo.RollupEnterpriseCommbarcode" table="ROLLUP_ENTERPRISE_COMMBARCODE">
+    <id name="commBarcode" type="java.lang.String">
+      <column name="COMM_BARCODE" length="15" />
+    </id>
+    <property name="name" type="java.lang.String">
+      <column name="NAME" length="80" />
+    </property>
+    <property name="areaCode" type="java.lang.String">
+      <column name="AREA_CODE" length="80" />
+    </property>
+	<property name="commSort" type="java.lang.String">
+      <column name="COMM_SORT" length="80" />
+    </property>
+	<property name="saleTime" type="java.lang.String">
+      <column name="SALE_TIME" length="80" />
+    </property>
+	<property name="unit" type="java.lang.String">
+      <column name="UNIT" length="80" />
+    </property>
+	<property name="amount" type="java.lang.String">
+      <column name="AMOUNT" length="80" />
+    </property>
+	<property name="price" type="java.lang.String">
+      <column name="PRICE" length="80" />
+    </property>
+	<property name="sumPrice" type="java.lang.String">
+      <column name="SUM_PRICE" length="80" />
+    </property>
+  </class>
+</hibernate-mapping>

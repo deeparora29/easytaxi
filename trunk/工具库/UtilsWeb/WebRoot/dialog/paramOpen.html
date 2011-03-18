@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>弹出参数</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language="JavaScript" src="../js/layoutJSFunc.js"></script>
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<body>
+<table class="table1" cellpadding="0" cellspacing="0">
+	<tr><th width="20">&nbsp;</th><th>参数</th><th>参数说明</th></tr>
+	<tr onclick="clientSelectRow(this);"><!-- 调用layoutJSFunc.js中的clientSelectRow方法 --><td><input type="radio" name="paramId" value="0~参数一" ></td>
+		<td>参数一</td>
+	<td>返回参数一</td></tr>
+	<tr onclick="clientSelectRow(this);"><td><input type="radio" name="paramId" value="1~参数二"></td>
+		<td>参数二</td>
+	<td>返回参数二</td></tr>
+	<tr onclick="clientSelectRow(this);"><td><input type="radio" name="paramId" value="2~参数三"></td>
+		<td>参数三</td>
+	<td>返回参数三</td></tr>
+</table>
+<script type="text/javascript">
+function getParam(){
+		var objId = window.parent.document.getElementById("paramId");		//获取父页面元素
+		var objName = window.parent.document.getElementById("paramName");	//获取父页面元素
+		var radioObjArr = document.getElementsByName("paramId");			//获取本页面元素
+		for(i = 0; i < radioObjArr.length; i++){
+			if(radioObjArr[i].checked){										//使用循环来获取选中的元素
+				var s = radioObjArr[i].value;                     		
+			if(s != ""){                       			
+				var arr = s.split("~");	                        			//将元素按~规则分开并分别放在arr数组元素里面
+				objId.value = arr[0];										//向父页面赋值
+				objName.value = arr[1];										//向父页面赋值
+				}
+				break;
+			}
+		}
+}
+</script>
+</body>
+</html>

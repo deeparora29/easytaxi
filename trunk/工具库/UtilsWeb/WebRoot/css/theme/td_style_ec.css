@@ -1,0 +1,402 @@
+body {
+    margin:0px;
+    padding:0px;
+    text-align: center;
+	color: #00397a;
+	background:#ffffff;	
+	font:normal 12px Verdana, Arial, Helvetica, sans-serif,"新宋体";
+	FONT-WEIGHT: normal;
+	COLOR: #000000;
+	FONT-STYLE: normal;
+	FONT-FAMILY: 微软雅黑,Tahoma, 新宋体, Arial;
+	TEXT-DECORATION: none;
+	display:block;
+	font-size: 12px;
+}
+div {
+	font-size: 12px;
+}
+td {
+	font-size: 12px;
+}
+
+form {
+padding:0px;
+margin:0px;
+
+}
+.eXtremeTable {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.eXtremeTable select {
+	
+	border: solid 1px #EEE;
+	width: 75px;
+}
+
+.eXtremeTable button{
+background-color:transparent;
+background-image:url(../../images/button1.gif);
+background-repeat: repeat-x;
+border: outset 1px  #bbbbbb;
+border-collapse:  separate;
+vertical-align: bottom;
+color:#333333;
+cursor:pointer;
+height:22px;
+width:80px;
+margin:3px 4px 3px 4px;
+padding: 3px 3px 0px 3px;
+}
+
+.eXtremeTable .customColumnBar {
+	border: 0px solid #95cbdd;
+	padding: 5px;
+	padding-right:5px;
+	margin-top: 0px;
+	border-collapse: collapse;
+}
+.eXtremeTable .customColumnBar td {
+	border: 0px solid #95cbdd;
+}
+
+
+.eXtremeTable .tableBox {
+border:0;
+padding:0;
+margin:0;
+}
+
+.eXtremeTable .tableBox td {
+	background-color:#ffffff;
+
+}
+.eXtremeTable .tableBody{
+padding:0;
+margin:0;
+}
+.eXtremeTable .tableRegion {
+    border:0px solid #95cbdd;
+	border-collapse:collapse;
+	border:0px solid #dee3ed; 
+	border-width:1px 1 1 1px; 
+	padding: 5px 0 0 0;
+    margin:0px;
+    width:100%;
+/*border-collapse: collapse;*/
+}
+
+.eXtremeTable .tableRegion td {
+    color:#00397a;
+	border:0px solid #95cbdd;
+	border-collapse:collapse;
+	border:0px solid #dee3ed; 
+	border-width:1px 1 1 1px; 
+	padding: 5px 0 0 0;
+	height:24px;
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+
+}
+
+
+
+.eXtremeTable .tableRegion .tableHeader {
+    /*background-color: #C6E2EC;*/
+    background: url(../../images/table/bg_bar_04.jpg);
+    letter-spacing: 0px;
+	border-collapse:collapse;
+	/*border:0px solid #95cbdd;*/ 
+	border-width:1px 1 1 1px; 
+	padding: 5px 0 0 0;
+    ;color: #00397a;
+    color: #000000;
+    height:24px;
+    text-align:center;
+    vertical-align:middle;
+    white-space:nowrap;word-break:keep-all;word-wrap:normal;
+    font-weight: bold;
+}
+
+.eXtremeTable .tableRegion .tableHeaderSort {
+/*background-color: #3a95c2;*/
+background: url(../../images/table/bg_bar_04_01.jpg);
+letter-spacing: 1px;
+color: black;
+font-weight : bolder;
+height:24px;
+padding:3px 0px 1px 2px;
+text-align:center;
+vertical-align:middle;
+white-space:nowrap;word-break:keep-all;word-wrap:normal;
+}
+
+.eXtremeTable .odd a, .even a {
+	color: Black;
+}
+
+.eXtremeTable .odd td{
+	background-color: #FFFFFF;
+}
+
+.eXtremeTable .even td{
+  	/*background-color: #EFFBFF;*/
+  	background-color: #f8fbff;
+}
+
+.eXtremeTable .highlight td {
+	/*background-color: #CCFFFF;*/
+	background-color: #f0f6fb;
+	
+}
+
+.eXtremeTable .highlight a, .highlight a {
+	color: black;
+
+}
+
+.eXtremeTable .odd DIV , .eXtremeTable .even DIV , .eXtremeTable .highlight DIV  {
+	text-align:left;
+	overflow: hidden; 
+	white-space: nowrap; 
+	text-overflow: ellipsis; 
+	color:#3a3a3a;
+	width: 100%; 
+}
+
+.eXtremeTable .calcRow td{
+  	background-color: #f6f6f6;
+}
+.eXtremeTable .calcRow .calcResult {
+  	background-color: #f6f6f6;
+}
+.eXtremeTable .calcRow .calcTitle {
+  	background-color: #eeeeee;
+  	text-align:center;
+	letter-spacing: 1px;
+font-weight : bolder;
+}
+
+
+
+.eXtremeTable .filter {
+	background-color: #ffffff;
+}
+.eXtremeTable .filter td {
+	background-color: #ffffff;
+}
+.eXtremeTable .filter input {
+	font-family: Verdana;
+	
+	width: 100%;
+}
+
+.eXtremeTable .filter select {
+	font-family: Verdana;
+	border: solid 1px #EEE;
+	width: 100%;
+}
+
+
+
+
+
+.eXtremeTable .tableRegionToolbar {
+	border: 0px solid #95cbdd;
+	padding: 2px;
+	margin-top: 0px;
+	border-collapse: collapse;
+	background: url(../../images/table/box1-bg.gif) repeat-x;
+	border-top: 0px;
+}
+
+.eXtremeTable .tableRegionToolbar td {
+	border:0px #95CBDD solid;
+	
+
+}
+
+.eXtremeTable .tableRegionToolbar .toolbar {
+	text-align:right;
+	width:100%;
+	height:100%
+	padding:5px 4px 4px 4px;
+	margin:5px 5px 0 5px;
+	border:0px solid #95cbdd;
+}
+
+.eXtremeTable .toolbar select {
+	width:50px;
+	font-size:11px;
+	font-family: Verdana;
+	padding:5px 4px 4px 4px;
+	background: url(../../images/table/box1-bg.gif) repeat-x;
+	margin:5px 5px 0 5px;
+	border:1px solid #95cbdd;
+}
+
+
+.eXtremeTable .separator {
+	width: 1px;
+	height:12px;
+
+}
+
+.eXtremeTable .statusBar {
+	
+	text-align:left;
+	vertical-align: middle ;
+	padding: 1px 3px 2px 3px;
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+}
+.eXtremeTable .statusBar img {
+vertical-align: top ;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+}
+
+
+.eXtremeTable .filterButtons {
+	background-color: #efefef;
+	text-align: right;
+}
+
+.eXtremeTable .titleRow {
+	color: #444444;
+	font-weight: bold;
+	font-size: 12px;
+	vertical-align: middle;
+
+}
+
+.eXtremeTable span.title {
+	color: #333333;
+	font-weight: bold;
+	font-size: 14px;
+	vertical-align: middle;
+		text-align:center;
+	width:100%;
+
+}
+
+.eXtremeTable .titleRow span {
+	width:100%;
+	text-align:center;
+}
+
+.eXtremeTable .formButtons {
+	display: block;
+	margin-top: 11px;
+	margin-left: 5px;
+}
+
+.eXtremeTable .formButton {
+	cursor: pointer;
+	
+	font-size:11px;
+	font-weight: bold;
+	background-color: #308dbb;
+	color: white;
+	margin-top: 5px;
+	border: outset 1px #333;
+	vertical-align: middle;
+}
+
+.eXtremeTable .tableTotal {
+	background-color: #FFFFFF;
+	border-top: solid 1px #95cbdd;	
+}
+
+.eXtremeTable .tableTotalEmpty {
+	background-color: #FFFFFF;	
+}
+
+.eXtremeTable INPUT.radio {
+font-size:12px;
+width: auto;
+}
+
+.eXtremeTable INPUT.checkbox {
+font-size:12px;
+width: auto;
+}
+
+.eXtremeTable .breakLine {
+white-space:normal;word-break:normal;word-wrap:normal;
+}
+
+.eXtremeTable .breakLine TD {
+white-space:normal;word-break:normal;word-wrap:normal;
+}
+
+.eXtremeTable .rowsdisplayed {
+
+}
+
+.eXtremeTable .rowsdisplayed select {
+	width:50px;
+}
+
+.eXtremeTable .jumpPageInput {
+	height:19px;
+	width:30px;
+	/* border:1px solid #aaaaaa; */
+}
+
+
+
+
+.eXtremeTable .pageNav {
+	background-color:transparent;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: 0px  #dddddd solid;
+	width:40px;
+	height:20px;
+	cursor:pointer;
+}
+
+.eXtremeTable .jumpPage {
+background-image:url(../../images/table/gotoPage.gif);
+}
+.eXtremeTable .firstPage {
+background-image:url(../../images/table/firstPage.gif);
+}
+
+.eXtremeTable .prevPage {
+background-image:url(../../images/table/prevPage.gif);
+}
+
+.eXtremeTable .nextPage {
+background-image:url(../../images/table/nextPage.gif);
+}
+
+.eXtremeTable .lastPage {
+background-image:url(../../images/table/lastPage.gif);
+}
+
+
+
+
+.eXtremeTable .firstPageD {
+background-image:url(../../images/table/firstPageDisabled.gif);
+}
+
+.eXtremeTable .prevPageD {
+background-image:url(../../images/table/prevPageDisabled.gif);
+}
+
+.eXtremeTable .nextPageD {
+background-image:url(../../images/table/nextPageDisabled.gif);
+}
+
+.eXtremeTable .lastPageD {
+background-image:url(../../images/table/lastPageDisabled.gif);
+}
+
+a:link { text-decoration: none; font-size: 9pt; color: #000000}
+a:visited{ text-decoration: none; font-size: 9pt; color: #000000}
+a:hover {font-size: 9pt;color: red}
+

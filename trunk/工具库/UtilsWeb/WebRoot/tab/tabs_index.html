@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>用Ajax的方式载入tab</title>
+	<link type="text/css" href="../css/theme/base/ui.all.css" rel="stylesheet" />
+	<link type="text/css" href="../css/tab_main.css" rel="stylesheet" />
+	<script type="text/javascript" src="../js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.core.js"></script>
+	<script type="text/javascript" src="../js/jquery/ui/ui.tabs.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs();
+	});
+	</script>
+</head>
+<body>
+
+<div class="demo">
+
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">jQuery入门指南</a></li>
+		<li><a href="ajax/content1.html">一.安装</a></li>
+		<li><a href="ajax/content2.html">二.Hello jQuery</a></li>
+	</ul>
+	<div id="tabs-1">
+		<p>这个指南是一个对jQuery库的说明，要求读者了解DOM的一些常识。它包括了一个简单的Hello World的例子，选择器和事件基础，AJAX、FX的用法，以及如何制作jQuery的插件。</p>
+		<p>这个指南包括了很多代码，你可以copy它们，并试着修改它们，看看产生的效果。</p>
+	</div>
+</div>
+
+</div><!-- End demo -->
+
+
+</body>
+</html>

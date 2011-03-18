@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<title>打印</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style>
+		body, td, th {vnd.ms-excel.numberformat:@; font-family: "Arial" ,"宋体" ,  "Helvetica" , "sans-serif"; font-size: 12px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; margin-top: 0px; SCROLLBAR-HIGHLIGHT-COLOR: #F5F9FF; SCROLLBAR-SHADOW-COLOR: #828282; SCROLLBAR-3DLIGHT-COLOR: #828282; SCROLLBAR-ARROW-COLOR: #797979; SCROLLBAR-TRACK-COLOR: #ECECEC; SCROLLBAR-DARKSHADOW-COLOR: #ffffff; }
+		.printTitle { font-size: 24px; font-weight:bold; }
+		.printTitle2 { font-size: 18px; font-weight:normal; }
+		.printTitle3 { font-size: 18px; font-weight:bold; }
+		.printTitle4 { font-size: 18px; font-weight:bold;font-style: italic }
+		
+		.printEntryTable { border:#000000 solid 1px; border-collapse:collapse; }
+		.printEntryTable tr { height:20px;}
+		.printEntryTable th { font-weight: normal; border:#000000 solid 1px;}
+		.printEntryTable td { border:#000000 solid 1px;}
+		.PageNext{page-break-after:always;}
+		input{border:0;width:125px; size:23; maxlength:50; align:center;text-align:center}
+	</style>
+</head>
+<body>
+<form name="form1" method="post" action="printtest.html" id="form1">
+<script language="javascript" type="text/javascript" src='../js/pageprint.js'></script>
+<script language="javascript" type="text/javascript" src='../js/jquery/jquery.js'></script>
+<script language="javascript" type="text/javascript">var strQuery="";var billType="t_TranctionRecord";</script>
+<object id="wb" style="display:none" height="0" width="0" classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" VIEWASTEXT></object>
+<table width="100%" cellpadding="0px" cellspacing="0px" border="0px" style="position:relative ;top:expression(this.offsetParent.scrollTop);">
+<tr style="background-color:#dcdcdc">
+<td style=" font-size:14px"><b></b><input id="hidExportTag" type="hidden" /></td>
+<td align="right" id="tdUCToolBar">
+<span id="rpt_spanPageSet">
+
+<input id="btnPrintSetting" type="button" onclick="javascript:ExecWB(8);" value="页面设置" />
+<input id="btnPrintView" type="button" onclick="javascript:ExecWB(7);" value="打印预览" /></span>
+<input id="printButton" type="button" onclick="javascript:hideOutputButton();window.print();hideOutputButton();" value="打印" />
+<input id="closButton" type="button" onclick="javascript:try{document.all.wb.ExecWB(45,1);}catch(ex){window.close();}" value="关闭" />
+</td>
+</tr>
+</table>
+<table width="50%" border="0" cellpadding="0" cellspacing="0" bordercolor="#dee3ed" class="table_border1px" align="center">
+
+	<tr>
+		<td colspan="2"><table border="0">
+			<tr>
+				<td rowspan="4" style="width:120px"></td><td class="printTitle3" colspan="3"></td>
+			</tr><tr>
+				<td colspan="3"></td>
+			</tr><tr>
+				<td class="printTitle3" colspan="3">&nbsp;</td>
+			</tr><tr>
+				<td colspan="3"></td>
+			</tr>
+		</table></td>
+	</tr><tr>
+		<td colspan="2"><table class="Title" border="0" style="width:100%">
+			<tr>
+				<td class="printTitle" style="text-align:center">单据列表</td>
+			</tr>
+		</table></td>
+	</tr><tr>
+		<td colspan="2"></td>
+	</tr><tr>
+		<td colspan="2">
+                  <table class='printEntryTable' width="50%" border="1" cellpadding="0" cellspacing="0" bordercolor="#dee3ed"  align="center">
+                    <tr align='center'>
+                      <td>序号</td><td>编号</td><td>名称</td><td>数量</td><td>金额</td>
+                    </tr>
+                    <tr>
+                      <td align='center'>
+					  <div id='id1'>1</div></td>
+					  <td  align='center'> <input id='No' name='No'></td>
+					  <td  align='center'><input id='name' name='name'></td>
+					  <td  align='center'><input id='num' name='num' onKeyUp="setamount()"></td><td  align='center'>
+					  <input id='Amount' name='Amount' onKeyUp="setamount()"></td>
+                    </tr>
+                    <tr>
+                      <td align='center'>
+					  <div id='id1'>2</div></td>
+					  <td  align='center'> <input id='No' name='No'></td>
+					  <td  align='center'><input id='name' name='name'></td>
+					  <td  align='center'><input id='num2' name='num2' onKeyUp="setamount()"></td><td  align='center'>
+					  <input id='Amount2' name='Amount2' onKeyUp="setamount()"></td>
+                    </tr>
+                    <tr>
+                      <td align='center'>
+					  <div id='id1'>3</div></td>
+					  <td  align='center'> <input id='No' name='No'></td>
+					  <td  align='center'><input id='name' name='name'></td>
+					  <td  align='center'><input id='num3' name='num3' onKeyUp="setamount()"></td><td  align='center'>
+					  <input id='Amount3' name='Amount3' onKeyUp="setamount()"></td>
+                    </tr>
+                    <tr>
+                      <td align='center'>
+					  <div id='id1'>4</div></td>
+					  <td  align='center'> <input id='No' name='No'></td>
+					  <td  align='center'><input id='name' name='name'></td>
+					  <td  align='center'><input id='num4' name='num4' onKeyUp="setamount()"></td><td  align='center'>
+					  <input id='Amount4' name='Amount4' onKeyUp="setamount()"></td>
+                    </tr>
+                    <tr>
+                      <td colspan='3' align='right'>合计：</td><td  align='right'><input id='total_num' name='total_num'  style='width:35px'></td><td  align='right'>
+					  <input id='total_amonut'  sty"C:/Documents and Settings/Administrator/Application Data/Microsoft/Internet Explorer/Quick Launch/显示桌面.scf"le='width:55px'></td>
+                    </tr>
+                  </table>
+                </td>
+	</tr><tr>
+		<td align="right" colspan="2"><table border="0">
+			<tr>
+				<td>优惠金额：</td><td>0.00</td><td style="padding-left:30px">优惠后金额：</td><td><input id='total_amonuts' style='width:55px'></td>
+			</tr>
+		</table></td>
+	</tr><tr>
+		<td colspan="2"><table border="0">
+			<tr>
+				<td>大写金额：</td><td><div id='Upmount'></div></td>
+			</tr>
+		</table></td>
+	</tr>
+</table>
+<div style="height:10px;">
+
+</div>
+</form>
+</body>
+</html>

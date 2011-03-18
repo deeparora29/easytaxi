@@ -1,0 +1,47 @@
+/*
+ * ----------------------------------------------------------------
+ * author         renmian
+ * 修改记录           
+ * 文件名称	      dialogOpen.css
+ * 文件描述          用于dialogOpen.html页面样式定义
+ * 其他
+ *
+ * ----------------------------------------------------------------
+ */
+#acceptForm{
+	width: 100%;
+	margin-bottom: 10px;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+#acceptForm label{
+	display: block;
+	text-align: right;}
+#acceptForm input{
+	width: 70%;
+	border: 1px solid #7f9db9;
+	height: 18px;
+	*height: 21px;
+}
+#acceptForm select{
+	border: 1px solid #7f9db9;
+	height: 18px;
+
+}
+.focus{
+	background: #fff88c;
+	border: 1px solid #ccc;
+	
+}
+
+#acceptForm{
+	border-left: 1px solid #95cbdd;
+	border-bottom: 1px solid #95cbdd;
+	border-collapse:c ollapse;
+}
+
+#acceptForm td{
+	padding: 4px;
+	border-right: 1px solid #95cbdd;
+	border-top: 1px solid #95cbdd;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.btit.utilsweb.test.table.vo.StaffInfo" table="STAFF_INFO">
+    <id name="staffId" type="java.lang.String">
+      <column name="STAFF_ID" length="15" />
+    </id>
+    <property name="staffName" type="java.lang.String">
+      <column name="STAFF_NAME" length="80" />
+    </property>
+    <property name="departName" type="java.lang.String">
+      <column name="DEPART_NAME" length="80" />
+    </property>
+  </class>
+</hibernate-mapping>
