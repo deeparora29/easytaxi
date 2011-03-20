@@ -1,0 +1,57 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+<import resource="applicationContext.xml"/>
+
+  <!--
+     To include additional bean definitions for Spring in the generated
+     application context file, add a file to your XDoclet merge directory
+     called spring-daos.xml that contains the <bean></bean> markup.
+  -->
+
+<!-- generate dao start -->
+
+  <bean
+      id="moduleMenuDao"
+      class="com.easytaxi.login.dao.impl.ModuleMenuDao">
+     <property name="sqlMapClient">
+       <ref bean="sqlMapClient"/>
+     </property>
+  </bean>
+
+  <bean
+      id="staffInfoDao"
+      class="com.easytaxi.login.dao.impl.StaffInfoDao">
+     <property name="sqlMapClient">
+       <ref bean="sqlMapClient"/>
+     </property>
+  </bean>
+
+<!-- generate dao end -->
+
+  <!--
+     To include additional bean definitions for Spring in the generated
+     application context file, add a file to your XDoclet merge directory
+     called spring-services.xml that contains the <bean></bean> markup.
+  -->
+
+<!-- generate servcie start -->
+
+  <bean
+      id="moduleMenuService"
+      class="com.easytaxi.login.service.impl.ModuleMenuService">
+     <property name="moduleMenuDao">
+       <ref bean="moduleMenuDao"/>
+     </property>
+  </bean>
+
+  <bean
+      id="staffInfoService"
+      class="com.easytaxi.login.service.impl.StaffInfoService">
+     <property name="staffInfoDao">
+       <ref bean="staffInfoDao"/>
+     </property>
+  </bean>
+
+<!-- generate servcie end -->
+
+</beans>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+	<!-- Configurer that replaces ${...} placeholders with values from properties files -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= DATAACCESS DEFINITIONS ========================= -->
+	<!-- bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean -->
+	<!--bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/cscqmDB</value>
+		</property>
+	</bean-->
+	
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/cscqmDB"/>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- ibatis sqlmap -->
+	<bean id="sqlMapClient"
+		class="com.easytaxi.common.util.IncludesSqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:/conf/SqlMapConfig.xml" />
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+	</bean>
+	
+	<!--绿网数据源 -->
+	<bean id="cscwfSqlMapClient"
+		class="com.easytaxi.common.util.IncludesSqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:/conf/CscwfSqlMapConfig.xml" />
+	</bean>
+	
+	<!-- spring jdbc -->
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+	</bean>
+	<!--System log record-->
+	<bean id="qualityOrderLogDao" class="com.easytaxi.commonlog.dao.impl.QualityOrderLogDao">
+     <property name="sqlMapClient">
+       <ref bean="sqlMapClient"/>
+     </property>
+  	</bean>
+	<bean id="qualityOrderLogService" class="com.easytaxi.commonlog.service.impl.QualityOrderLogService">
+     <property name="qualityOrderLogDao">
+       <ref bean="qualityOrderLogDao"/>
+     </property>
+  	</bean>
+
+	<!-- ========================= ASPECT CONFIGURATION ======================== -->
+
+	<aop:config>
+		<!--
+			This definition creates auto-proxy infrastructure based on the given pointcut,
+			expressed in AspectJ pointcut language.
+		-->
+		<aop:advisor
+			pointcut="execution(* com.easytaxi.*.service.*.*(..))"
+			advice-ref="txAdvice" />
+
+	</aop:config>
+
+	<!--
+		Transaction advice definition, based on method name patterns.
+		Defaults to PROPAGATION_REQUIRED for all methods whose name starts with
+		"insert", "update", "delete", "do", and to PROPAGATION_REQUIRED with read-only hint
+		for all other methods.
+	-->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+</beans>
