@@ -76,9 +76,18 @@
 	-->
 	<context:mbean-export/>
 
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 	<constructor-arg>
 		<ref bean="dataSource" />
 	</constructor-arg>
 	</bean>
+	
+	<!-- bean id="baseService" class="com.easytaxi.common.service.BaseService">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean -->
+	
+	<bean id="testSqliteService" class="com.easytaxi.common.test.TestSqliteService">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
 </beans>
