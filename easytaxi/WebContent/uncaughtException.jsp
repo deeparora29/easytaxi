@@ -1,6 +1,6 @@
 <%@ include file="/includes.jsp" %>
 
-<h2/>Internal error</h2>
+<h2/>EasyTaxi Internal error</h2>
 <p/>
 
 <% 
