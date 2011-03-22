@@ -17,11 +17,11 @@
 
 	<!-- Configurer that replaces ${...} placeholders with values from a properties file-->
 	<!-- (in this case, JDBC-related settings for the dataSource definition below)-->
-	<!-- context:property-placeholder location="classpath:jdbc.properties"/ -->
-	<bean
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	<property name="locations" value="/WEB-INF/jdbc.properties" />
-	</bean>  
+	</bean-->  
 
 	<!--
 		Uses Apache Commons DBCP for connection pooling. See Commons DBCP documentation
