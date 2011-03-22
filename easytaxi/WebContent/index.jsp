@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Refresh" content="5; url=test.jsp" /> 
+<meta http-equiv="Refresh" content="10; url=test.jsp" /> 
 <title>Index page</title>
 </head>
 <body>
+<h3>
 Welcome to <a href="http://ditu.google.cn/maps?hl=zh-cn&tab=wl">Google Map</a>!<br/>
-5 seconds later, the index page will forward to error page!
+Test Memory SQLite! Click <a href="<%=request.getContextPath() %>/TestSqliteServlet">here</a> To query the data from the sqlite(test.db)
+10 seconds later, the index page will forward to error page!
+</h3>
 </body>
 </html>

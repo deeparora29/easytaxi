@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="WebApp_ID" version="2.5">
-	<display-name>easytaxi</display-name>
-
-	
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml</param-value>
-	</context-param>
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<welcome-file-list>
-		<!-- Redirects to "welcome.htm" for dispatcher handling -->
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<!-- Displays a stack trace -->
-		<location>/uncaughtException.jsp</location>
-	</error-page>
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>easytaxi</display-name>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/uncaughtException.jsp</location>
+  </error-page>
+  
+  <servlet>
+    <servlet-name>BeanFactoryUtil</servlet-name>
+    <servlet-class>com.easytaxi.common.utils.BeanFactoryUtil</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BeanFactoryUtil</servlet-name>
+    <url-pattern>/BeanFactoryUtil</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>TestSqliteServlet</display-name>
+    <servlet-name>TestSqliteServlet</servlet-name>
+    <servlet-class>com.easytaxi.common.test.TestSqliteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestSqliteServlet</servlet-name>
+    <url-pattern>/TestSqliteServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
