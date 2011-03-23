@@ -1,0 +1,68 @@
+
+#taxi base info
+create table taxi (
+car_id
+car_plate_number
+company
+car_model
+charge_model
+contact_email
+contact_person0
+contact_phone0
+contact_person1
+contact_phone1
+taxi_status               #0:empty;1:hired;2:unknown
+);
+
+#passenger base info
+create table passenger (
+userid
+username
+nickname
+email
+phone
+gender
+picid
+);
+
+#pictures info
+create table pictures (
+picid
+picname
+size
+);
+
+#request info
+create table requestinfo (
+requestno
+userid
+request_time
+start_longtitude
+start_latitude
+end_longtitude
+end_latitude
+number
+luggage_number
+comments
+);
+
+#request result
+create table responseinfo(
+requestno
+carid
+status      #0:no confirm; 1:confirm; 2:cancel
+response_time
+comments
+);
+
+#dynamic location infomation
+create table locationinfo (
+id
+type              #0:taxi, 1: passenger
+longtitude
+lantitude
+);
+
+
+
+
