@@ -1,67 +1,93 @@
 
 #taxi base info
-create table taxi (
-car_id
-car_plate_number
-company
-car_model
-charge_model
-contact_email
-contact_person0
-contact_phone0
-contact_person1
-contact_phone1
-taxi_status               #0:empty;1:hired;2:unknown
+DROP TABLE IF EXISTS `taxi`;
+
+CREATE TABLE `taxi` (
+  `carid` int(11) NOT NULL,
+  `plate_number` varchar(7) DEFAULT NULL,
+  `company` varchar(256) DEFAULT NULL,
+  `car_model` int(11) DEFAULT NULL,
+  `charge_model` int(11) DEFAULT NULL,
+  `email` varchar(128) DEFAULT NULL,
+  `contact_person0` varchar(32) DEFAULT NULL,
+  `contact_phone0` varchar(14) DEFAULT NULL,
+  `contact_person1` varchar(32) DEFAULT NULL,
+  `contact_phone1` varchar(14) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '0:empty;1:hired',
+  `descrs` varchar(256) DEFAULT NULL,
+  `credit` int(11) DEFAULT '0',
+  PRIMARY KEY (`carid`)
 );
 
 #passenger base info
-create table passenger (
-userid
-username
-nickname
-email
-phone
-gender
-picid
+DROP TABLE IF EXISTS `passenger`;
+
+CREATE TABLE `passenger` (
+  `passenerid` int(20) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `nickname` varchar(64) DEFAULT NULL,
+  `phone` varchar(14) DEFAULT NULL,
+  `email` varchar(64) DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL COMMENT '0:femail;1:mail',
+  `picid` int(11) DEFAULT NULL,
+  `credit` int(11) DEFAULT '0',
+  PRIMARY KEY (`passenerid`)
 );
 
-#pictures info
-create table pictures (
-picid
-picname
-size
+DROP TABLE IF EXISTS `pictures`;
+
+CREATE TABLE `pictures` (
+  `picid` int(11) NOT NULL AUTO_INCREMENT,
+  `picname` varchar(16) DEFAULT NULL,
+  `size` int(11) DEFAULT NULL,
+  PRIMARY KEY (`picid`)
 );
 
 #request info
-create table requestinfo (
-requestno
-userid
-request_time
-start_longtitude
-start_latitude
-end_longtitude
-end_latitude
-number
-luggage_number
-comments
+DROP TABLE IF EXISTS `requestinfo`;
+
+CREATE TABLE `requestinfo` (
+  `requestid` varchar(12) NOT NULL COMMENT 'yyyymmddhh**',
+  `passenerid` int(11) DEFAULT NULL,
+  `request_time` date DEFAULT NULL,
+  `start_long` float DEFAULT NULL,
+  `start_lat` float DEFAULT NULL,
+  `end_long` float DEFAULT NULL,
+  `end_lat` float DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `luggage_number` int(11) DEFAULT NULL,
+  `comments` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`requestid`)
 );
 
 #request result
-create table responseinfo(
-requestno
-carid
-status      #0:no confirm; 1:confirm; 2:cancel
-response_time
-comments
-);
+DROP TABLE IF EXISTS `responserecord`;
+
+CREATE TABLE `responserecord` (
+  `requestid` varchar(12) NOT NULL,
+  `carid` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '0:no confirmed; 1: confirmed; 2: canceled',
+  `response_time` date DEFAULT NULL,
+  `comments` varchar(256) DEFAULT NULL,
+  `credit` int(11) DEFAULT NULL,
+  `credit_time` date DEFAULT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ;
 
 #dynamic location infomation
-create table locationinfo (
-id
-type              #0:taxi, 1: passenger
-longtitude
-lantitude
+DROP TABLE IF EXISTS `locationinfo`;
+
+CREATE TABLE `locationinfo` (
+  `id` int(11) NOT NULL,
+  `type` int(11) DEFAULT NULL COMMENT '0:taxi;1:passenger',
+  `longtitude` float DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
+  `location` varchar(256) DEFAULT NULL,
+  `requestid` varchar(12) DEFAULT NULL
 );
+
+
 
 
 
