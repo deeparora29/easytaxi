@@ -22,10 +22,10 @@ DROP TABLE IF EXISTS `locationinfo`;
 CREATE TABLE `locationinfo` (
   `id` int(11) NOT NULL,
   `type` int(11) DEFAULT NULL COMMENT '0:taxi;1:passenger',
-  `longtitude` float DEFAULT NULL,
-  `latitude` float DEFAULT NULL,
+  `longtitude` double DEFAULT '0',
+  `latitude` double DEFAULT '0',
   `location` varchar(256) DEFAULT NULL,
-  `requestid` varchar(12) DEFAULT NULL
+  `routenumber` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `locationinfo` */
@@ -35,7 +35,7 @@ CREATE TABLE `locationinfo` (
 DROP TABLE IF EXISTS `passenger`;
 
 CREATE TABLE `passenger` (
-  `passenerid` int(20) NOT NULL,
+  `passenerid` int(11) NOT NULL,
   `name` varchar(32) DEFAULT NULL,
   `nickname` varchar(64) DEFAULT NULL,
   `phone` varchar(14) DEFAULT NULL,
@@ -68,11 +68,11 @@ DROP TABLE IF EXISTS `requestinfo`;
 CREATE TABLE `requestinfo` (
   `requestid` varchar(12) NOT NULL COMMENT 'yyyymmddhh**',
   `passenerid` int(11) DEFAULT NULL,
-  `request_time` date DEFAULT NULL,
-  `start_long` float DEFAULT NULL,
-  `start_lat` float DEFAULT NULL,
-  `end_long` float DEFAULT NULL,
-  `end_lat` float DEFAULT NULL,
+  `request_time` datetime DEFAULT NULL,
+  `start_long` double DEFAULT '0',
+  `start_lat` double DEFAULT '0',
+  `end_long` double DEFAULT '0',
+  `end_lat` double DEFAULT '0',
   `number` int(11) DEFAULT NULL,
   `luggage_number` int(11) DEFAULT NULL,
   `comments` varchar(128) DEFAULT NULL,
@@ -89,15 +89,34 @@ CREATE TABLE `responserecord` (
   `requestid` varchar(12) NOT NULL,
   `carid` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL COMMENT '0:no confirmed; 1: confirmed; 2: canceled',
-  `response_time` date DEFAULT NULL,
+  `response_time` datetime DEFAULT NULL,
   `comments` varchar(256) DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
-  `credit_time` date DEFAULT NULL,
+  `credit_time` datetime DEFAULT NULL,
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `responserecord` */
+
+/*Table structure for table `routes` */
+
+DROP TABLE IF EXISTS `routes`;
+
+CREATE TABLE `routes` (
+  `routenumber` int(11) NOT NULL,
+  `routename` varchar(50) DEFAULT NULL,
+  `markercolor` varchar(10) DEFAULT NULL COMMENT 'rgb',
+  `routecolor` varchar(10) DEFAULT NULL COMMENT 'rgb',
+  `routenote` varchar(256) DEFAULT NULL COMMENT 'rgb',
+  `requestid` varchar(12) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `begintime` datetime DEFAULT NULL,
+  `endtime` datetime DEFAULT NULL,
+  PRIMARY KEY (`routenumber`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `routes` */
 
 /*Table structure for table `taxi` */
 
