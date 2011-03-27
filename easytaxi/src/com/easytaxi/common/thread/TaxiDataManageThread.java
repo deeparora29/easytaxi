@@ -1,10 +1,8 @@
 package com.easytaxi.common.thread;
 
 import java.util.concurrent.BlockingQueue;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.service.TaxiDataService;
 
