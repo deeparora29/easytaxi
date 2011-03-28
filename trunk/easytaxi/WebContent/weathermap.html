@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<!//注意此处：xmlns:v="urn:schemas-microsoft-com:vml" 如果不加，那么其地点标示与折线都显示不出来，还有下面的字符集，设置成为GB2312>
+<!--
+此版本为FIREFOX与IE都支持
+-->
+  <head>
+      <style type='text/css'>
+<!--
+.style1 {font-size: small}
+-->
+</style>
+    <meta http-equiv="content-type" content="text/html; charset=GB2312"/>
+    <title>Google Maps JavaScript API Example</title>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAJeqwJZH0QPpNkLuHzBo8RBRfn8B5SQkBuwTVutTjsDdD1kuwehQjeM1Zcgj3hXxqNP_k1Y_twXp43Q"
+      type="text/javascript">
+      </script>
+      <script type="text/javascript">
+    //<![CDATA[
+//主函数  调用google map api 显示地图
+function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap(document.getElementById("map"));
+        //map.setMapType(G_SATELLITE_TYPE);
+        //map.addControl(new GSmallMapControl());
+        map.addControl(new GLargeMapControl());
+        map.addControl(new GMapTypeControl());
+        map.centerAndZoom(new GPoint(116.279998,39.930000), 13);
+        ///
+        var request = false;
+        request = createRequest();
+        //创建城市标注，标注的过程中将天气进行标注
+        markCity(map,request);
+       
+      }
+    }
+ 
+/*
+**通过point信息对地图上面进行标注，显示相应点上的天气信息
+*/
+function createMarker(point, map, myName, request) {
+  var marker = new GMarker(point);
+  var html0="<table width='229' height='133' border='1' bordercolor='#0099CC' bgcolor='#FFFFFF'><tr><td width='60' class='style1'><b>"+myName+"</b>";
+  var html;
+  GEvent.addListener(marker, "click", function() {
+      //在标注的地点中的过程中，标注出天气信息
+      html=html0+createMarkerWeather(point, request);;
+    marker.openInfoWindowHtml(html);
+     
+  });
+  map.addOverlay(marker);
+ 
+}
+ 
+/*
+**依据于point通过XMLHttpRequest 对象从google weather 获得相应地点天气信息，并形成格式字符串返回
+*/
+function createMarkerWeather(point,request){
+    var str="hello,world";
+    var html1="</td><td colspan='2' class='style1'>";
+    //Date
+    var html2="</td><td width='59' class='style1'>";
+    //cloudy
+    var html3="</td></tr><tr><td class='style1'>平均温度</td><td width='19' class='style1'>";
+    //31
+  var html4="</td><td width='63' class='style1'>最高温度</td><td class='style1'>";
+    //32
+    var html5="</td></tr><tr><td class='style1'>最低温度</td><td class='style1'>";
+    //23
+    var html6="</td><td colspan='2' align='left' class='style1'>&nbsp";
+    //Humidity
+    var html7="</td></tr><tr><td height='22' class='style1'>";
+    //NextD0
+    var html70="</td><td colspan='3' class='style1'>";
+    //next0;
+    var html8="</td></tr><tr><td height='22' class='style1'>";
+    //NextD1
+    var html80="</td><td colspan='3' class='style1'>";
+    //next1;
+    var html9="</td></tr><tr><td height='22' class='style1'>";
+    //NextD
+    var html90="</td><td colspan='3' class='style1'>";
+    //next2;
+    var html10="</td></tr></table>";
+   
+  //调用 google weather api ，返回一个当地天气列表的 xml文件
+   var strURL="http://www.google.com/ig/api?hl=zh-cn&weather=,,,"+point.y*1000000+","+point.x*1000000;
+   var xmlString = null;
+   var myXD = null;
+   var l = 0;
+   var informationNodes = null;
+   if(window.DOMParser){  //FireFox 内核
+        try {  
+            netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");  
+        }  
+        catch (e) {  
+            alert("Permission UniversalBrowserRead denied.");  
+        }
+        request.open("GET",strURL,false);
+        request.send(null);
+        xmlString = request.responseText;
+        var parser = new DOMParser();
+        myXD= parser.parseFromString(xmlString, "application/xml");
+        
+        informationNodes = myXD.getElementsByTagName("xml_api_reply");
+        informationNodes = informationNodes[0].childNodes;
+        informationNodes = informationNodes[0].childNodes;
+        l = informationNodes.length;
+   }
+   else if( window.ActiveXObject ){ //IE内核
+        request.open("GET",strURL,false);
+        request.send(null);
+        xmlString = request.responseText;
+        myXD = new ActiveXObject("MSXML2.DOMDocument");
+        myXD.loadXML(request.responseText);
+        informationNodes = myXD.getElementsByTagName("xml_api_reply/weather")[0].childNodes;
+ 
+   }
+ 
+  //var myXD = new ActiveXObject("MSXML2.DOMDocument");
+  //myXD.loadXML(request.responseText);
+   
+  //日期
+  var myDate;
+  //天气状况
+  var myCondition;
+  //平均温度
+  var myTemp;
+  //湿度
+  var myHumidity;
+  //最高温度
+  var myHigh;
+  //最低温度
+  var myLow;
+  //明天星期与天气状况
+  var myDay0;
+  var myNext0;
+  //后天星期与天气状况
+  var myDay1;
+  var myNext1;
+  //大后天星期与天气状况
+  var myDay2;
+  var myNext2;
+   
+   
+ // alert("the length of the weather is "+l);
+  //取出天气信息
+  var strNodes = informationNodes[0].childNodes;
+  myDate = strNodes[4].getAttribute("data");
+   
+  strNodes = informationNodes[1].childNodes;
+  myCondition = strNodes[0].getAttribute("data");
+  myTemp = strNodes[2].getAttribute("data");
+   
+  myHumidity = strNodes[3].getAttribute("data");
+   
+  strNodes = informationNodes[2].childNodes;
+  myLow = strNodes[1].getAttribute("data");
+  myHigh = strNodes[2].getAttribute("data");
+   
+  strNodes = informationNodes[3].childNodes;
+  myDay0 = strNodes[0].getAttribute("data");
+  myNext0 = strNodes[4].getAttribute("data");
+   
+  strNodes = informationNodes[4].childNodes;
+  myDay1 = strNodes[0].getAttribute("data");
+  myNext1 = strNodes[4].getAttribute("data");
+ 
+  strNodes = informationNodes[5].childNodes;
+  myDay2 = strNodes[0].getAttribute("data");
+  myNext2 = strNodes[4].getAttribute("data");
+  //构造天气信息显示的字符串
+  str=html1+myDate+html2+myCondition+html3+myTemp+html4+myHigh+html5+myLow+html6+myHumidity;
+  str+=html7+myDay0+html70+myNext0+html8+myDay1+html80+myNext1+html9+myDay2+html90+myNext2+html10;
+ 
+  return  str;
+}
+ 
+/*
+** 依据地点信息文件cities.xml，对地图进行标注
+*/
+function markCity(map,request){
+     //var request = false;
+   //request = createRequest();
+   //读取cities.xml文件，进行地名的解析
+   //采取这种方式，保证了最大程度上的扩展性，如果有更新的城市地名表，那么只需要将下面的网址进行修改即可
+   //如果需要增多城市，只需要在xml文件中增加新的城市信息即可
+   var xmlString = null;
+   var myXD = null;
+   var myNodes = null;//存放城市信息
+   var l = 0;
+   if(window.DOMParser){//firefox内核的浏览器
+　   try {  
+            netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");  
+        }  
+        catch (e) {  
+            alert("Permission UniversalBrowserRead denied.");  
+        }
+        request.open("GET","http://www.google.com/ig/cities?output=xml&hl=zh-cn&country=cn",false);
+        request.send(null);
+        xmlString = request.responseText;
+　    var parser = new DOMParser();
+        myXD= parser.parseFromString(xmlString, "application/xml");
+        
+        //总共有三层，在FIREFOX下面，需要取三次，由于其分析器不一样
+        myNodes = myXD.getElementsByTagName("xml_api_reply");
+        myNodes = myNodes[0].childNodes;
+        myNodes = myNodes[0].childNodes;
+        l = myNodes.length;
+   }
+    else if( window.ActiveXObject ){ //ie内核的浏览器
+        request.open("GET","http://www.google.com/ig/cities?output=xml&hl=zh-cn&country=cn",false);
+        request.send(null);
+        xmlString = request.responseText;
+        myXD = new ActiveXObject("MSXML2.DOMDocument");
+        myXD.loadXML(request.responseText);
+        myNodes = myXD.getElementsByTagName("xml_api_reply/cities")[0].childNodes;
+        l = myNodes.length;
+    }
+   
+   //取出城市的信息  
+ 
+   //城市名称  
+   var myName;
+   //经度
+   var myX;
+   //纬度
+   var myY;
+   //标注点
+   var point;
+   //城市结点
+   var strNodes;
+       for(var i=0; i<l; i++)
+      {
+          //从xml中取出一个城市的数据结点
+          strNodes = myNodes[i].childNodes;
+          //取出城市名与经纬度
+          myName = strNodes[0].getAttribute("data");
+          myX = strNodes[2].getAttribute("data");
+          myY = strNodes[1].getAttribute("data");
+          //构造标注点进行标注
+          point = new GPoint(myX/1000000, myY/1000000);
+          createMarker(point, map, myName,request);
+        }
+ 
+ 
+}
+/*
+** 返回一个XMLHttpRequest 对象
+*/
+function createRequest() {
+    var request;
+  try {
+    request = new XMLHttpRequest();
+  } catch (trymicrosoft) {
+    try {
+      request = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (othermicrosoft) {
+      try {
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+      } catch (failed) {
+        request = false;
+      }
+    }
+  }
+  if (!request)
+    alert("Error initializing XMLHttpRequest!");
+  return request;
+}
+ 
+    //]]>
+    </script>
+    
+  </head>
+  <body onload="load();" >
+  <table width="800" height="600" border="1" align="center">
+    <tr>
+      <td align="center"><div id="map" style="width: 800px; height: 600px"></div></td>
+    </tr>
+  </table>
+   
+    <div id="message"></div>
+  </body>
+</html>
+
