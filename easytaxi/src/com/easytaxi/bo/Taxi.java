@@ -25,6 +25,15 @@ public class Taxi {
 	//联系电话
 	private String phone0 ;
 	
+	//联系人2
+	private String driver1 ;
+	
+	//联系电话2
+	private String phone1 ;
+	
+	//说明
+	private String descr ;
+	
 	public String getPlateNumber() {
 		return plateNumber;
 	}
@@ -113,11 +122,5 @@ public class Taxi {
 		this.descr = descr;
 	}
 
-	//联系人2
-	private String driver1 ;
 	
-	//联系电话2
-	private String phone1 ;
-	
-	private String descr ;
 }
