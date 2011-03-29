@@ -23,31 +23,31 @@ public class SystemPara {
 	public static final String PARA_ERROR_CODE ="1000";
 	
 	//乘车注册
-	public static final String P_REGISTER = "2001";
+	public static final String P_REGISTER = "P001";
 	
 	//乘客登录
-	public static final String P_LOGIN = "2002";
+	public static final String P_LOGIN = "P002";
 	
 	//发布用车请求
-	public static final String P_REQUESTTAXI = "2003";
+	public static final String P_REQUESTTAXI = "P003";
 	
 	//获取出租车响应
-	public static final String P_GETCONFIRM = "2004";
+	public static final String P_GETCONFIRM = "P004";
 	
 	//取消用车请求
-	public static final String P_ANCELREQUEST = "2005";
+	public static final String P_ANCELREQUEST = "P005";
 	
 	//信用评价
-	public static final String P_CREDITRATING = "2006";
+	public static final String P_CREDITRATING = "P006";
 	
 	//查询Taxi信誉度
-	public static final String P_QUERYCREDIT = "2007";
+	public static final String P_QUERYCREDIT = "P007";
 	
 	//查询Taxi GPS
-	public static final String P_QUERYTAXIGPS = "2008";
+	public static final String P_QUERYTAXIGPS = "P008";
 	
 	//上传GPS数据或经过路线
-	public static final String P_uploadGPS_TRACK = "2009";
+	public static final String P_uploadGPS_TRACK = "P009";
 	
 	
 	
