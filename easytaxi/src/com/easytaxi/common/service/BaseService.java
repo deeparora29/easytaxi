@@ -1,15 +1,11 @@
 package com.easytaxi.common.service;
 
-import java.util.List;
 
 import net.sf.json.JSONObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.easytaxi.common.SystemPara;
-import com.easytaxi.common.utils.JsonUtil;
 
 public class BaseService {
 
