@@ -23,13 +23,33 @@
             com.easytaxi.servlet.ProvideInitMapData
         </servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>PassengerDataManager</display-name>
+    	<servlet-name>PassengerDataManager</servlet-name>
+    	<servlet-class>
+    	com.easytaxi.servlet.PassengerDataManager</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>TaxiDataManager</display-name>
+    	<servlet-name>TaxiDataManager</servlet-name>
+    	<servlet-class>
+    	com.easytaxi.servlet.TaxiDataManager</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>
-            ProvideInitMapData
-        </servlet-name>
-        <url-pattern>
-            /ProvideInitMapData
-        </url-pattern>
+        <servlet-name>ProvideInitMapData</servlet-name>
+        <url-pattern>/ProvideInitMapData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>PassengerDataManager</servlet-name>
+    	<url-pattern>/PassengerDataManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>TaxiDataManager</servlet-name>
+    	<url-pattern>/TaxiDataManager</url-pattern>
     </servlet-mapping>
     
     <welcome-file-list>
