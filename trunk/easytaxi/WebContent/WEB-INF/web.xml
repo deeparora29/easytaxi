@@ -45,11 +45,11 @@
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>PassengerDataManager</servlet-name>
-    	<url-pattern>/PassengerDataManager</url-pattern>
+    	<url-pattern>/passenger</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>TaxiDataManager</servlet-name>
-    	<url-pattern>/TaxiDataManager</url-pattern>
+    	<url-pattern>/taxi</url-pattern>
     </servlet-mapping>
     
     <welcome-file-list>

@@ -22,6 +22,9 @@ public class SystemPara {
 	//客户端参数请求错误代码
 	public static final String PARA_ERROR_CODE ="1000";
 	
+	//交易编码无效
+	public static final String TRANS_CODE_ERROR ="1001";
+	
 	//乘车注册
 	public static final String P_REGISTER = "P001";
 	
@@ -47,9 +50,10 @@ public class SystemPara {
 	public static final String P_QUERYTAXIGPS = "P008";
 	
 	//上传GPS数据或经过路线
-	public static final String P_uploadGPS_TRACK = "P009";
+	public static final String P_UPLOADGPS_TRACK = "P009";
 	
-	
+	//查询出租车详细信息
+	public static final String P_QUERYTAXIDETAILINFO = "P010";
 	
 	
 	
