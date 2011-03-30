@@ -5,8 +5,9 @@ import java.util.concurrent.BlockingQueue;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.Taxi;
-import com.easytaxi.service.TaxiDataService;
+import com.easytaxi.service.PassengerDataService;
 
 /**
  * 
@@ -23,21 +24,21 @@ import com.easytaxi.service.TaxiDataService;
  * @date 2011-3-27 下午10:27:34
  *
  */
-public class TaxiDataManageThread implements Runnable{
+public class PassengerDataManageThread implements Runnable{
 
-	private Log log = LogFactory.getLog(TaxiDataManageThread.class);
+	private Log log = LogFactory.getLog(PassengerDataManageThread.class);
 	
 	
 	@Override
 	public void run() {
 		try {
 			while( true ){
-				TaxiDataService service = TaxiDataService.getInstance();
-				BlockingQueue<Taxi> queue = service.getTaxiWorkQueue() ;
+				PassengerDataService service = PassengerDataService.getInstance();
+				BlockingQueue<Passenger> queue = service.getPassengerWorkQueue() ;
 				if( !queue.isEmpty() ){
 					//取出一个taxi信息进行处理
-					Taxi taxi = queue.poll();
-					//TODO 处理相关业务
+					Passenger passenger = queue.poll();
+					
 				}else{
 					Thread.sleep( 1000 );
 				}

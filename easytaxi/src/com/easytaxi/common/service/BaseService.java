@@ -73,8 +73,26 @@ public class BaseService {
 
 	public String getReturnMessage(String transCode) {
 		StringBuffer jsonString = new StringBuffer("{");
-		//乘车注册
-		if( transCode.equals(SystemPara.P_REGISTER) ){
+		
+		if( transCode.equals(SystemPara.P_REGISTER) ){//乘车注册
+			
+		}else if( transCode.equals(SystemPara.P_LOGIN) ){//乘客登录
+			
+		}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
+			
+		}else if( transCode.equals(SystemPara.P_GETCONFIRM) ){//获取出租车响应
+			
+		}else if( transCode.equals(SystemPara.P_ANCELREQUEST) ){//取消用车请求
+			
+		}else if( transCode.equals(SystemPara.P_CREDITRATING) ){//信用评价
+			
+		}else if( transCode.equals(SystemPara.P_QUERYCREDIT) ){//查询Taxi信誉度
+			
+		}else if( transCode.equals(SystemPara.P_QUERYTAXIGPS) ){//查询Taxi GPS
+			
+		}else if( transCode.equals(SystemPara.P_UPLOADGPS_TRACK) ){//上传GPS数据或经过路线
+			
+		}else if( transCode.equals(SystemPara.P_QUERYTAXIDETAILINFO) ){//查询出租车详细信息
 			
 		}
 		
