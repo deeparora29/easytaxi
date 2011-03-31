@@ -4,13 +4,18 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.easytaxi.bo.DestLocation;
 import com.easytaxi.bo.Passenger;
-import com.easytaxi.bo.Taxi;
+import com.easytaxi.bo.StartLocation;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
+import com.easytaxi.common.utils.JsonUtil;
 
 public class PassengerDataService extends BaseService{
 	
@@ -23,6 +28,9 @@ public class PassengerDataService extends BaseService{
 	
 	//存放乘客信息
 	private static ConcurrentMap<String , Passenger> passengerInfoMap = new ConcurrentHashMap<String, Passenger>();
+	
+	//存放乘客广播打车消息
+	private static ConcurrentMap<String , Passenger> broadcastCallTaxiMap = new ConcurrentHashMap<String, Passenger>();
 	
 	private PassengerDataService(){
 		
@@ -59,6 +67,21 @@ public class PassengerDataService extends BaseService{
 				String descr = jsonObject.getString("descr");
 				Passenger p = new Passenger(transCode ,firstname, lastname, password, phone, email, nickName, gender, descr);
 				passengerWorkQueue.offer( p );
+			}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
+				String Id = jsonObject.getString("Id");
+				String phone = jsonObject.getString("phone");
+				String userGPS = jsonObject.getString("userGPS");
+				String dstGPS = jsonObject.getString("dstGPS");
+				int number = jsonObject.getInt("number");
+				int luggage = jsonObject.getInt("luggage");
+				String otherinfos = jsonObject.getString("otherinfo");
+				String share = jsonObject.getString("share");
+				StartLocation startLocation = (StartLocation)JsonUtil.getObjectByJsonString(userGPS, StartLocation.class);
+				DestLocation destLocation = (DestLocation)JsonUtil.getObjectByJsonString(dstGPS, DestLocation.class);
+				Passenger p = new Passenger(transCode ,phone, startLocation, destLocation, number, luggage, otherinfos , share);
+				passengerWorkQueue.offer( p );
+			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价
+				
 			}
 			
 			
