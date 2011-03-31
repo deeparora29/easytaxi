@@ -2,9 +2,11 @@ package com.easytaxi.common.service;
 
 
 import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import com.easytaxi.common.SystemPara;
 
 public class BaseService {
@@ -82,7 +84,7 @@ public class BaseService {
 			
 		}else if( transCode.equals(SystemPara.P_GETCONFIRM) ){//获取出租车响应
 			
-		}else if( transCode.equals(SystemPara.P_ANCELREQUEST) ){//取消用车请求
+        } else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
 			
 		}else if( transCode.equals(SystemPara.P_CREDITRATING) ){//信用评价
 			
