@@ -38,7 +38,7 @@ public class SystemPara {
 	public static final String P_GETCONFIRM = "P004";
 	
 	//取消用车请求
-	public static final String P_ANCELREQUEST = "P005";
+    public static final String P_CANCELREQUEST = "P005";
 	
 	//信用评价
 	public static final String P_CREDITRATING = "P006";
