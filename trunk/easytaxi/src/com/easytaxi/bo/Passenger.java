@@ -1,8 +1,8 @@
 package com.easytaxi.bo;
 
 public class Passenger {
-	private String transCode ;
-	
+	private String transCode;
+
 	private String phone;
 
 	private String email;
@@ -19,9 +19,9 @@ public class Passenger {
 
 	private String descr;
 
-	private String startLocation;
+	private StartLocation startLocation;
 
-	private String endLocation;
+	private DestLocation destLocation;
 
 	private int number;
 
@@ -29,21 +29,41 @@ public class Passenger {
 
 	private String otherInfos;
 
-	private int userid;
-
+	private String userid;
 	
-	//乘客注册
-	public Passenger(String transCode , String firstname, String lastname, String password,
-			String phone, String email, String nickName, String gender,
-			String descr) {
-		this.firstname = firstname ;
-		this.lastname = lastname ;
-		this.password = password ;
-		this.phone = phone ;
-		this.email = email ;
-		this.nickName = nickName ;
-		this.gender = gender ;
-		this.descr = descr ;
+	private String share ;
+
+	/*** 乘客注册*/
+	public Passenger(String transCode, String firstname, String lastname,
+			String password, String phone, String email, String nickName,
+			String gender, String descr) {
+		this.transCode =  transCode;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.password = password;
+		this.phone = phone;
+		this.email = email;
+		this.nickName = nickName;
+		this.gender = gender;
+		this.descr = descr;
+	}
+
+	/*** 发布用车请求*/
+	public Passenger(String transCode, String phone, StartLocation startLocation, DestLocation destLocation,
+			int number, int luggage, String otherInfos,String share) {
+		this.transCode =  transCode;
+		this.phone = phone;
+		this.startLocation = startLocation;
+		this.destLocation = destLocation;
+		this.number = number;
+		this.luggage = luggage;
+		this.otherInfos = otherInfos;
+		this.share = share ;
+	}
+	
+	/*** 信用评价*/
+	public Passenger(String transCode, String phone,String plateNumber){
+		this.transCode =  transCode;
 	}
 
 	public String getTransCode() {
@@ -53,7 +73,7 @@ public class Passenger {
 	public void setTransCode(String transCode) {
 		this.transCode = transCode;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -118,20 +138,21 @@ public class Passenger {
 		this.descr = descr;
 	}
 
-	public String getStartLocation() {
+
+	public StartLocation getStartLocation() {
 		return startLocation;
 	}
 
-	public void setStartLocation(String startLocation) {
+	public void setStartLocation(StartLocation startLocation) {
 		this.startLocation = startLocation;
 	}
 
-	public String getEndLocation() {
-		return endLocation;
+	public DestLocation getDestLocation() {
+		return destLocation;
 	}
 
-	public void setEndLocation(String endLocation) {
-		this.endLocation = endLocation;
+	public void setDestLocation(DestLocation destLocation) {
+		this.destLocation = destLocation;
 	}
 
 	public int getNumber() {
@@ -158,12 +179,20 @@ public class Passenger {
 		this.otherInfos = otherInfos;
 	}
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+
+	public String getShare() {
+		return share;
+	}
+
+	public void setShare(String share) {
+		this.share = share;
 	}
 
 }
