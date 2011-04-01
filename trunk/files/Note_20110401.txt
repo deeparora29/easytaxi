@@ -1,0 +1,24 @@
+﻿
+DB：
+Tables:
+passenger
+taxi
+loginrecord
+requestinfo
+creditrecord
+trackhistory
+
+Todo DB:
+userid:varchar（6）：是否考虑用procedure生成
+requestNo:varchar(12):yyyymmddhh**
+trackid:varchar(12):yyyymmdd****
+
+parameter to model, and then save the data to DB
+
+File:
+locationrecord
+Using the log4j method to record the GPS data
+
+
+Todo:
+ErrorCode define
