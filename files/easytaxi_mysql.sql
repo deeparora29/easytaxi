@@ -80,6 +80,7 @@ CREATE TABLE `passenger` (
   `agreement` varchar(3) DEFAULT 'yes',
   `register_time` datetime DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
+  `descr` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -163,7 +164,7 @@ CREATE TABLE `taxi` (
   `contact_person1` varchar(32) DEFAULT NULL,
   `contact_phone1` varchar(14) DEFAULT NULL,
   `status` int(1) DEFAULT '0' COMMENT '0:empty;1:hired;2:share',
-  `descrs` varchar(256) DEFAULT NULL,
+  `descr` varchar(256) DEFAULT NULL,
   `credit` float DEFAULT '3',
   `register_time` datetime DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
