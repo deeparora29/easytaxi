@@ -7,18 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.easytaxi.common.utils.BeanFactoryUtil;
+import com.easytaxi.usermgr.service.LoginService;
+
 /**
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+    private LoginService loginService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        loginService = (LoginService) BeanFactoryUtil.getBean("loginService");
     }
 
 	/**
@@ -32,8 +37,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // todo: check the users' acount
-        boolean isSuccess = true;
+        String type = request.getParameter("type");
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        boolean isSuccess = loginService.isValidUser(type, account, password);
         if (isSuccess) {
             response.sendRedirect("welcome.jsp");
         } else {

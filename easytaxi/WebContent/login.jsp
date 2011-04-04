@@ -35,12 +35,18 @@ function login() {
 <form method="post" id='logonForm' name="logonForm" action="LoginServlet">
         <div class="login">
             <div class="container">
-                <div class="top">
+                <div class="top">Easy Taxi
                 </div>
                 <div class="center">
-                    <div><label for="account">Account:</label><input type="text" name="account" id="account" /></div>
-                    <div><label for="password">Password:</label><input type="password" name="password" id="password" /></div>
-                    <div><button class="btnNormal2 btnLogin">Log&nbsp;in</button></div>
+                	<div><label for="type">Type:</label>
+						<input type="radio" id="type0" value="taxi" checked="checked" name="type" />Taxi Account&nbsp
+						<input type="radio" id ="type1" value="passenger" name="type" />Passenger Account
+					</div>
+                    <div><label for="account">Account:</label><input type="text" name="account" id="account" class="loginInput"/></div>
+                    <div><label for="password">Password:</label><input type="password" name="password" id="password" class="loginInput"/></div>
+                    <div>
+                    <a href="register.jsp">Create an account</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btnNormal2 btnLogin">Log&nbsp;in</button></div>
                     
                 </div>
                 <div class="bottom">

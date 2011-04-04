@@ -1,7 +1,9 @@
+
 package com.easytaxi.usermgr.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -35,15 +37,28 @@ public class PassengerDao extends BaseJdbcDao {
         }
     }
 
+    /**
+     * according to email get Passenger
+     * 
+     * @param email
+     * @return
+     */
     public Passenger getPassengerByEmail(String email) {
-        // todo
-        return null;
+        List<Passenger> list = getJdbcTemplate().query(QUERY_PASSENGER_EMAIL, new Object[] { email },
+            new PassengerRowMapper());
+        return (Passenger) getObjectFromList(list);
     }
 
+    /**
+     * according to phone get Passenger
+     * 
+     * @param phone
+     * @return
+     */
     public Passenger getPassengerByPhone(String phone) {
-        // todo
-        return null;
+        List<Passenger> list = getJdbcTemplate().query(QUERY_PASSENGER_PHONE, new Object[] { phone },
+            new PassengerRowMapper());
+        return (Passenger) getObjectFromList(list);
     }
-
 
 }

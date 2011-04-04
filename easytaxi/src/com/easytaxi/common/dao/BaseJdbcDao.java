@@ -127,4 +127,7 @@ public class BaseJdbcDao extends JdbcDaoSupport {
 		return error.toString();
 	}
 
+    protected Object getObjectFromList(List list) {
+        return (list == null || list.size() == 0) ? null : list.get(0);
+    }
 }
