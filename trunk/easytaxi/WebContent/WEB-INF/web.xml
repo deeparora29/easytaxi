@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    <display-name>
-        easytaxi
-    </display-name>
-    
-    
+    <display-name>easytaxi</display-name>
     
     <listener>
         <listener-class>com.easytaxi.common.SystemListener</listener-class>
     </listener>
     
     <servlet>
-        <description>
-        </description>
-        <display-name>
-            ProvideInitMapData
-        </display-name>
-        <servlet-name>
-            ProvideInitMapData
-        </servlet-name>
+        <description></description>
+        <display-name>LocationSeviceServlet</display-name>
+        <servlet-name>LocationSeviceServlet</servlet-name>
         <servlet-class>
-            com.easytaxi.servlet.ProvideInitMapData
+            com.easytaxi.servlet.LocationSeviceServlet
         </servlet-class>
     </servlet>
     <servlet>
@@ -28,20 +19,17 @@
     	</description>
     	<display-name>PassengerDataManager</display-name>
     	<servlet-name>PassengerDataManager</servlet-name>
-    	<servlet-class>
-    	com.easytaxi.servlet.PassengerDataManager</servlet-class>
+    	<servlet-class>com.easytaxi.servlet.PassengerDataManager</servlet-class>
     </servlet>
     <servlet>
-    	<description>
-    	</description>
+    	<description></description>
     	<display-name>TaxiDataManager</display-name>
     	<servlet-name>TaxiDataManager</servlet-name>
-    	<servlet-class>
-    	com.easytaxi.servlet.TaxiDataManager</servlet-class>
+    	<servlet-class>com.easytaxi.servlet.TaxiDataManager</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProvideInitMapData</servlet-name>
-        <url-pattern>/ProvideInitMapData</url-pattern>
+        <servlet-name>LocationSeviceServlet</servlet-name>
+        <url-pattern>/LocationSeviceServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>PassengerDataManager</servlet-name>
@@ -53,23 +41,12 @@
     </servlet-mapping>
     
     <welcome-file-list>
-        <welcome-file>
-            index.html
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp
         </welcome-file>
-        <welcome-file>
-            index.htm
-        </welcome-file>
-        <welcome-file>
-            index.jsp
-        </welcome-file>
-        <welcome-file>
-            default.html
-        </welcome-file>
-        <welcome-file>
-            default.htm
-        </welcome-file>
-        <welcome-file>
-            default.jsp
-        </welcome-file>
+        <welcome-file> default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
