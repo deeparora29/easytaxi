@@ -1,10 +1,18 @@
 package com.easytaxi.common.service;
 
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
+
 import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.CallableStatementCallback;
+import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.easytaxi.common.SystemPara;
@@ -23,6 +31,44 @@ public class BaseService {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	/**
+	* @Description: 获取流水号
+	* @param serialType 流水号类型 
+	* @param len  流水号长度
+	* @param showDate 流水号是否带日期
+	* @return SerialNum ， 流水号生成失败返回 -1
+	* <p><blockquote>
+	*  e.g.  getSerialNum( "taxi_no" , 13 , "true");
+	*  		 其中：taxi_no与et_sys_var表中field_name对应，若无此记录则不能获取正确的流水号
+	*       13 为流水号长度
+	*       true表示需要添加日期
+	*        return 2011040401056     
+	* </blockquote>
+	* <p>	
+	*/
+	public  String getSerialNum(final String serialType , final int len , final String showDate ) {
+		String serialNum = (String) jdbcTemplate.execute(
+			new CallableStatementCreator() {
+				public CallableStatement createCallableStatement(Connection con) throws SQLException {
+					String storedProc = "{call get_serial_num(?,?,?,?)}";
+					CallableStatement cs = con.prepareCall(storedProc);
+					cs.setString(1, serialType );
+					cs.setInt(2, len);
+					cs.setString(3, showDate );
+					//cs.setInt(4, 15);
+					cs.registerOutParameter(4, Types.VARCHAR);
+					return cs;
+				}
+			}, new CallableStatementCallback() {
+				public Object doInCallableStatement(CallableStatement cs)throws SQLException, DataAccessException {
+					cs.execute();
+					return cs.getString("s_value");
+				}
+		});
+
+		return serialNum;
+	}
+	
 	/**
 	 * 生成异常描述信息
 	 * 
