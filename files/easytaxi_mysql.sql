@@ -200,4 +200,9 @@ CREATE TABLE `et_sys_var` (
   `comments` varchar(100) default NULL,
   `seri_num` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=lati4',n1;
+INSERT INTO `et_sys_var` (`id`, `field_name`, `field_value`, `field_date`, `comments`, `seri_num`) VALUES (1,'taxi_no','1','20110404','test',1059);
+INSERT INTO `et_sys_var` (`id`, `field_name`, `field_value`, `field_date`, `comments`, `seri_num`) VALUES (2,'t_user_id','1','20110404','taxi no',26);
+INSERT INTO `et_sys_var` (`id`, `field_name`, `field_value`, `field_date`, `comments`, `seri_num`) VALUES (3,'request_no','1','20110404','request no',3);
+INSERT INTO `et_sys_var` (`id`, `field_name`, `field_value`, `field_date`, `comments`, `seri_num`) VALUES (4,'p_user_id','1','20110404','passenger no',2);
+INSERT INTO `et_sys_var` (`id`, `field_name`, `field_value`, `field_date`, `comments`, `seri_num`) VALUES (5,'track_id','1','2011040'track id',14);
