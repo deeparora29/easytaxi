@@ -61,5 +61,12 @@ public class SystemPara {
     public static String getTaxiStatus(int status) {
         return (status >= 0 && status < 3) ? TAXI_STATUS[status] : "Unknown";
     }
+
+    // User type
+    private final static String[] USER_TYPE = { "taxi", "passenger" };
+
+    public static String getUserType(int type) {
+        return (type >= 0 && type < 2) ? USER_TYPE[type] : "Unknown";
+    }
 	
 }
