@@ -45,13 +45,13 @@
         <description>
         </description>
         <display-name>
-            ProvideInitMapData
+            LocationSeviceServlet
         </display-name>
         <servlet-name>
-            ProvideInitMapData
+            LocationSeviceServlet
         </servlet-name>
         <servlet-class>
-            com.easytaxi.servlet.ProvideInitMapData
+            com.easytaxi.servlet.LocationSeviceServlet
         </servlet-class>
     </servlet>
     <servlet>
