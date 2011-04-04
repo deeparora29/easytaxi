@@ -1,4 +1,4 @@
-<%@ include file="/includes.jsp" %>
+<%@ include file="/include.jsp" %>
 
 <h2/>EasyTaxi Internal error</h2>
 <p/>

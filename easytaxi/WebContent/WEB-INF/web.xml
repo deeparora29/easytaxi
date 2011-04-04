@@ -1,17 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    <display-name>easytaxi</display-name>
+      <display-name>easytaxi</display-name>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/uncaughtException.jsp</location>
+  </error-page>
+  
+  <servlet>
+    <servlet-name>BeanFactoryUtil</servlet-name>
+    <servlet-class>com.easytaxi.common.utils.BeanFactoryUtil</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BeanFactoryUtil</servlet-name>
+    <url-pattern>/BeanFactoryUtil</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>TestSqliteServlet</display-name>
+    <servlet-name>TestSqliteServlet</servlet-name>
+    <servlet-class>com.easytaxi.common.test.TestSqliteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestSqliteServlet</servlet-name>
+    <url-pattern>/TestSqliteServlet</url-pattern>
+  </servlet-mapping>
     
     <listener>
         <listener-class>com.easytaxi.common.SystemListener</listener-class>
     </listener>
     
     <servlet>
-        <description></description>
-        <display-name>LocationSeviceServlet</display-name>
-        <servlet-name>LocationSeviceServlet</servlet-name>
+        <description>
+        </description>
+        <display-name>
+            ProvideInitMapData
+        </display-name>
+        <servlet-name>
+            ProvideInitMapData
+        </servlet-name>
         <servlet-class>
-            com.easytaxi.servlet.LocationSeviceServlet
+            com.easytaxi.servlet.ProvideInitMapData
         </servlet-class>
     </servlet>
     <servlet>
@@ -19,17 +59,28 @@
     	</description>
     	<display-name>PassengerDataManager</display-name>
     	<servlet-name>PassengerDataManager</servlet-name>
-    	<servlet-class>com.easytaxi.servlet.PassengerDataManager</servlet-class>
+    	<servlet-class>
+    	com.easytaxi.servlet.PassengerDataManager</servlet-class>
     </servlet>
     <servlet>
-    	<description></description>
+    	<description>
+    	</description>
     	<display-name>TaxiDataManager</display-name>
     	<servlet-name>TaxiDataManager</servlet-name>
-    	<servlet-class>com.easytaxi.servlet.TaxiDataManager</servlet-class>
+    	<servlet-class>
+    	com.easytaxi.servlet.TaxiDataManager</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>LoginServlet</display-name>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<servlet-class>
+    	com.easytaxi.usermgr.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LocationSeviceServlet</servlet-name>
-        <url-pattern>/LocationSeviceServlet</url-pattern>
+        <servlet-name>ProvideInitMapData</servlet-name>
+        <url-pattern>/ProvideInitMapData</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>PassengerDataManager</servlet-name>
@@ -39,14 +90,9 @@
     	<servlet-name>TaxiDataManager</servlet-name>
     	<url-pattern>/taxi</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
     
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index.htm</welcome-file>
-        <welcome-file>index.jsp
-        </welcome-file>
-        <welcome-file> default.html</welcome-file>
-        <welcome-file>default.htm</welcome-file>
-        <welcome-file>default.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>

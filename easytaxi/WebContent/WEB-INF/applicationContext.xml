@@ -85,9 +85,21 @@
 	<!-- bean id="baseService" class="com.easytaxi.common.service.BaseService">
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean -->
-	
+	<!--begin to service -->
 	<bean id="testSqliteService" class="com.easytaxi.common.test.TestSqliteService">
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
+	<!-- User Management -->
+	<bean id="taxiDao" class="com.easytaxi.usermgr.dao.TaxiDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
 	
+	<bean id="passengerDao" class="com.easytaxi.usermgr.dao.PassengerDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="loginService" class="com.easytaxi.usermgr.service.LoginService">
+		<property name="taxiDao" ref="taxiDao"/>
+		<property name="passengerDao" ref="passengerDao"/>
+	</bean>
 </beans>

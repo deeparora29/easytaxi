@@ -1,8 +1,13 @@
 package com.easytaxi.bo;
 
+/**
+ * @table "passenger"
+ * @modified by renmian 2011-04-04
+ */
 public class Passenger {
 	private String transCode;
 
+    // 电话
 	private String phone;
 
 	private String email;
