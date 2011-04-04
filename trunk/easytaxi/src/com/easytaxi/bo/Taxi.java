@@ -1,6 +1,14 @@
 package com.easytaxi.bo;
 
+import java.util.Date;
+
+/**
+ * @table "taxi"
+ * @modified by renmian 2011-04-04
+ */
 public class Taxi {
+
+    private String userid;
 	//出租车牌号
 	private String plateNumber ;
 	
@@ -32,9 +40,32 @@ public class Taxi {
 	private String phone1 ;
 	
 	//说明
-	private String descr ;
+    private String descrs;
+
+    // license
+    private String license;
+
+    // 出租车状态
+    private int status;
+
+    // 信用度
+    private float credit;
+
+    // 注册时间 DateTime
+    private Date registerTime;
+    // 修改时间
+    private Date modifiedTime;
+
 	
-	public String getPlateNumber() {
+	public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public String getPlateNumber() {
 		return plateNumber;
 	}
 
@@ -114,12 +145,52 @@ public class Taxi {
 		this.phone1 = phone1;
 	}
 
-	public String getDescr() {
-		return descr;
+    public String getDescrs() {
+        return descrs;
 	}
 
-	public void setDescr(String descr) {
-		this.descr = descr;
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public float getCredit() {
+        return credit;
+    }
+
+    public void setCredit(float credit) {
+        this.credit = credit;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public Date getModifiedTime() {
+        return modifiedTime;
+    }
+
+    public void setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
+    public void setDescrs(String descrs) {
+        this.descrs = descrs;
 	}
 
 	

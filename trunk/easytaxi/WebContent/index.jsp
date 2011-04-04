@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Refresh" content="5; url=test.jsp" /> 
 <title>Index page</title>
-<%@ include file="/includes.jsp" %>
+<%@ include file="/include.jsp" %>
 </head>
 <body>
 <h3>

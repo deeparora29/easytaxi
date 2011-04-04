@@ -8,7 +8,7 @@
 <style>
   span { color:red; }
   </style>
-<%@ include file="/includes.jsp" %>
+<%@ include file="/include.jsp" %>
 
 </head>
 <body>
