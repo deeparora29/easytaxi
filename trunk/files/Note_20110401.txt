@@ -22,3 +22,9 @@ Using the log4j method to record the GPS data
 
 Todo:
 ErrorCode define
+
+
+web端开发
+1.User management
+2.Location Service;
+3.History Query
