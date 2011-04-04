@@ -40,7 +40,7 @@ public class Taxi {
 	private String phone1 ;
 	
 	//说明
-    private String descrs;
+    private String descr;
 
     // license
     private String license;
@@ -145,8 +145,8 @@ public class Taxi {
 		this.phone1 = phone1;
 	}
 
-    public String getDescrs() {
-        return descrs;
+    public String getDescr() {
+        return descr;
 	}
 
     public String getLicense() {
@@ -189,8 +189,8 @@ public class Taxi {
         this.modifiedTime = modifiedTime;
     }
 
-    public void setDescrs(String descrs) {
-        this.descrs = descrs;
+    public void setDescr(String descr) {
+        this.descr = descr;
 	}
 
 	

@@ -38,6 +38,10 @@ public class Passenger {
 	
 	private String share ;
 
+    // 是否同意协议
+    // value:yes/no
+    private String agreement;
+
 	/*** 乘客注册*/
 	public Passenger(String transCode, String firstname, String lastname,
 			String password, String phone, String email, String nickName,
@@ -70,6 +74,9 @@ public class Passenger {
 	public Passenger(String transCode, String phone,String plateNumber){
 		this.transCode =  transCode;
 	}
+
+    public Passenger() {
+    }
 
 	public String getTransCode() {
 		return transCode;
@@ -199,5 +206,13 @@ public class Passenger {
 	public void setShare(String share) {
 		this.share = share;
 	}
+
+    public void setAgreement(String agreement) {
+        this.agreement = agreement;
+    }
+
+    public String getAgreement() {
+        return agreement;
+    }
 
 }
