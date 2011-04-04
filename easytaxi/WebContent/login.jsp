@@ -23,7 +23,7 @@ function login() {
     	document.logonForm.submit();
     
     }
-</scirpt>
+</script>
 <script language="javascript" for="document" event="onkeydown">
     if (event.keyCode == 13)
     {
