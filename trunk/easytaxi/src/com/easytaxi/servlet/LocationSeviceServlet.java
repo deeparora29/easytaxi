@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ProvideInitMapData
  */
-public class ProvideInitMapData extends HttpServlet {
+public class LocationSeviceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProvideInitMapData() {
+    public LocationSeviceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

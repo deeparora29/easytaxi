@@ -43,7 +43,7 @@ public class TaxiDataManageThread implements Runnable{
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("出租车数据后台处理线程运行失败：", e);
 		}
 		
 	}
