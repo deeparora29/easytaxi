@@ -2,8 +2,7 @@
 SQLyog Community Edition- MySQL GUI v8.04 
 MySQL - 5.1.48-community : Database - easytaxi
 *********************************************************************
-*/
-
+*/
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -191,3 +190,13 @@ CREATE TABLE `trackhistory` (
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+
+CREATE TABLE `et_sys_var` (
+  `id` int(11) NOT NULL auto_increment,
+  `field_name` varchar(40) NOT NULL,
+  `field_value` varchar(80) NOT NULL,
+  `field_date` varchar(8) default NULL,
+  `comments` varchar(100) default NULL,
+  `seri_num` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
