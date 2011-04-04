@@ -1126,13 +1126,13 @@ span .btn{
 }
 
 .login .container .top{
-    background: url(../image/login-top-bg.jpg);
+    #background: url(../image/login-top-bg.jpg);
 	width: 546px;
 	height: 80px;	
 }
 
 .login .container .center{
-    background: url(../image/login-center-bg.jpg) repeat-x 0 bottom;
+    #background: url(../image/login-center-bg.jpg) repeat-x 0 bottom;
 	width: 546px;
 	height: 280px;
 	text-align: left;
@@ -1149,7 +1149,7 @@ span .btn{
     margin-left: 176px;
 }
 
-.login input{
+.loginInput{
     background: url(../image/login-input-bg.jpg) no-repeat;
 	height: 22px;
 	width: 190px;

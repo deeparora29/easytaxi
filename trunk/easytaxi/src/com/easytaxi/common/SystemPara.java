@@ -55,6 +55,11 @@ public class SystemPara {
 	//查询出租车详细信息
 	public static final String P_QUERYTAXIDETAILINFO = "P010";
 	
-	
+    // taxi status
+    private final static String[] TAXI_STATUS = { "Empty", "Hired", "Sharing" };
+
+    public static String getTaxiStatus(int status) {
+        return (status >= 0 && status < 3) ? TAXI_STATUS[status] : "Unknown";
+    }
 	
 }
