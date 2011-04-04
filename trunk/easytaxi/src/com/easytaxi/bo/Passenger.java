@@ -1,5 +1,7 @@
 package com.easytaxi.bo;
 
+import java.util.Date;
+
 /**
  * @table "passenger"
  * @modified by renmian 2011-04-04
@@ -19,8 +21,8 @@ public class Passenger {
 	private String lastname;
 
 	private String nickName;
-
-	private String gender;
+    // value:female/male
+    private String gender;
 
 	private String descr;
 
@@ -41,6 +43,9 @@ public class Passenger {
     // 是否同意协议
     // value:yes/no
     private String agreement;
+
+    private Date registerTime;
+    private Date modifiedTime;
 
 	/*** 乘客注册*/
 	public Passenger(String transCode, String firstname, String lastname,
@@ -213,6 +218,22 @@ public class Passenger {
 
     public String getAgreement() {
         return agreement;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
+    public Date getModifiedTime() {
+        return modifiedTime;
     }
 
 }
