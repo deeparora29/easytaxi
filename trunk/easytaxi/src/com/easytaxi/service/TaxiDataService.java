@@ -17,7 +17,7 @@ public class TaxiDataService extends BaseService{
 	//存放出租车信息
 	private static ConcurrentMap<String , Taxi> taxiInfoMap = new ConcurrentHashMap<String, Taxi>();
 	
-	private TaxiDataService(){
+	public TaxiDataService(){
 		
 	}
 	
@@ -33,6 +33,19 @@ public class TaxiDataService extends BaseService{
 	public BlockingQueue<Taxi> getTaxiWorkQueue(){
 		return taxiWorkQueue ;
 	}
+	
+	
+	public ConcurrentMap<String , Taxi> getTaxiInfoMap(){
+		return taxiInfoMap ;
+	}
+	
+	public void updateTaxiInfo(Taxi taxi){
+		taxiInfoMap.put(taxi.getPlateNumber(), taxi);
+	}
+	
+	
+	
+	
 	
 	public static void main(String[] args) {
 		System.out.println(taxiWorkQueue.isEmpty());

@@ -33,13 +33,13 @@ public class BaseService {
 
 	/**
 	* @Description: 获取流水号
-	* @param serialType 流水号类型 
+	* @param serialType 流水号类型 t_user_id:出租车id , p_user_id:乘客id ,request_no : 请求编号 ,track_id:行迹编号  
 	* @param len  流水号长度
 	* @param showDate 流水号是否带日期
 	* @return SerialNum ， 流水号生成失败返回 -1
 	* <p><blockquote>
-	*  e.g.  getSerialNum( "taxi_no" , 13 , "true");
-	*  		 其中：taxi_no与et_sys_var表中field_name对应，若无此记录则不能获取正确的流水号
+	*  e.g.  getSerialNum( "t_user_id" , 13 , "true");
+	*  		 其中：t_user_id与et_sys_var表中field_name对应，若无此记录则不能获取正确的流水号
 	*       13 为流水号长度
 	*       true表示需要添加日期
 	*        return 2011040401056     

@@ -74,7 +74,6 @@
 	  var _latlng = obj.latLng ;
 	  latlng = new google.maps.LatLng(_latlng.lat,_latlng.lng);
 	  map.setZoom(13);
-	  alert()
 	  var image = 'image/taxi_icon_cn_32.png';
 	  //注意：需要使用数组的形式才能够实现，点击某个marker显示某个marker的信息
 	  markers[i] = new google.maps.Marker({
@@ -92,8 +91,8 @@
 						'<b>Taxi Status  :</b>' + obj.taxiStatus +'<br/>' + 
 						'<b>Taxi Address :</b>' + obj.taxiAddress ;
 		  
-		  infowindow.setContent( _html );
-		  infowindow.open(map, markers[i]);
+	   infowindow.setContent( _html );
+	   infowindow.open(map, markers[i]);
 	  });
 	} 
 
