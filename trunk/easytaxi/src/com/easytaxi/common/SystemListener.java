@@ -2,9 +2,11 @@ package com.easytaxi.common;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.easytaxi.common.thread.PassengerDataManageThread;
 import com.easytaxi.common.thread.TaxiDataManageThread;
 import com.easytaxi.common.thread.ThreadPoolManager;
 
@@ -44,8 +46,12 @@ public class SystemListener implements ServletContextListener {
 		
 		//启动出租车数据后台线程
 		new Thread( new TaxiDataManageThread() ).start();
-		log.info("出租车数据后台线程处理成功");
+		log.info("出租车数据后台处理线程启动  ** OK...................");
 		
+		
+		//加载乘客数据后台处理线程
+		new Thread( new PassengerDataManageThread() ).start();
+		log.info("乘客数据后台处理线程启动 ** OK...................");
 		
 	}
 
