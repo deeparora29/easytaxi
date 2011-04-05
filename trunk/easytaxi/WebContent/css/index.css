@@ -1,0 +1,650 @@
+/*
+ *	用于index页面呈现
+ *     内容列表
+ *     - Reset
+ *     - General
+ *     - Layout
+ *     - Header
+ *     - Content
+ *     - Footer
+ *     - Login
+ * ----------------------------------------------------------------
+ */
+
+
+/***** Reset *****/
+
+html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td,
+del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+    vertical-align: baseline;
+    font-family: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+:focus {
+    outline: 0;
+}
+
+body {
+    background: white;
+    line-height: 1;
+    color: black;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    font-weight: normal;
+    text-align: left;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: "";
+}
+
+blockquote, q {
+    quotes: "" "";
+}
+
+/***** General *****/
+
+body {
+	text-align: center;
+	color: #000;
+	background:#eee;	
+	font:normal 12px  Verdana, Arial, Helvetica, sans-serif,"宋体";	
+}
+
+
+body strong {
+	font-weight: bold;
+}
+
+a {
+	text-decoration: none;
+	color: #288ee4;
+}
+
+a:hover {
+    text-decoration: underline;
+	color: #ff3300;	
+}
+
+label, button {
+cursor: pointer
+}
+
+.error {
+	color: Red;
+}
+
+.hidden {
+	display: none;
+}
+
+.zh-CN, .zh-HK {
+	font-family: 微软雅黑;
+}
+
+/***** Layout *****/
+
+#wrapper {
+    margin: 0 auto;
+	background: #fff url(../image/body-bg.jpg) repeat-x 0 68px;
+	border: 1px solid #92b8da;
+	width: 100%;
+		
+}
+
+#wrapper #header {
+    height: 67px;
+	background:url(../image/header-bg.jpg) 340px 0;
+}
+
+#wrapper #content {
+    float: left;   
+	padding-top: 0px;
+	
+}
+
+#wrapper #footer {
+	clear: both;	
+	height: 21px;
+	padding-top:10px;
+	*height:31px;
+	background:url(../image/footer-bg.jpg) repeat-x;
+	
+}
+
+
+/***** Header *****/
+
+#header h1#logo{
+    float: left;
+    *background: url(../image/logo.jpg) no-repeat;
+	width:340px;
+	*width: 340px;
+	height: 67px;
+	overflow: hidden;
+}
+
+#header h1#logo a{
+    display: block;
+	padding-top: 100px;
+}
+
+#header ul#menu{
+    float: right;
+	width: 480px;
+	height: 67px;
+	overflow: hidden;
+}
+
+#header ul#menu li{
+   float: left;   
+}
+
+#header ul#menu li a{
+    float: left;
+    background: url(../image/menu.jpg) no-repeat;
+    width: 80px;
+	height: 67px;
+	padding-top: 100px; 		
+}
+
+#header ul#menu li#menu1 a{background-position: 0 0;}
+#header ul#menu li#menu2 a{ background-position: -80px 0;}
+#header ul#menu li#menu3 a{ background-position: -160px 0;}
+#header ul#menu li#menu4 a{ background-position: -240px 0;}
+#header ul#menu li#menu5 a{ background-position: -320px 0;}
+#header ul#menu li#menu6 a{ background-position: -400px 0;}
+/**over states**/
+#header ul#menu li#menu1 a:hover{ background-position: 0 -67px;}
+#header ul#menu li#menu2 a:hover{ background-position: -80px -67px;}
+#header ul#menu li#menu3 a:hover{ background-position: -160px -67px;}
+#header ul#menu li#menu4 a:hover{ background-position: -240px -67px;}
+#header ul#menu li#menu5 a:hover{ background-position: -320px -67px;}
+#header ul#menu li#menu6 a:hover{ background-position: -400px -67px;}
+
+
+/**current states***/
+#header.page1 ul#menu li#menu1 a{ background-position: 0 -67px;}
+#header.page2 ul#menu li#menu2 a{ background-position: -80px -67px;}
+#header.page3 ul#menu li#menu3 a{ background-position: -160px -67px;}
+#header.page4 ul#menu li#menu4 a{ background-position: -240px -67px;}
+#header.page5 ul#menu li#menu5 a{ background-position: -320 -67px;}
+#header.page6 ul#menu li#menu6 a{ background-position: -400px -67px;}
+
+
+/***** Content *****/
+
+#content{
+    float: left;
+}
+#content .box {
+    float: left;
+	background: url(../image/tab-bg.jpg) repeat-x 0 1px;
+    border: 1px solid #4589c4;
+	text-align: left;
+	padding-bottom: 5px;
+}
+
+#content .box .title {
+    background: #fff url(../image/tab-right.gif) no-repeat right 0;
+    float: left;
+	padding: 7px 8px 5px 8px;
+	font-weight: bolder; 	 
+}
+
+#content .box .content {
+    clear: both;
+	margin: 10px;	     	  
+}
+
+#content .box .page3,#content .box  .page5{
+    margin: 0;
+}
+
+#content .box .txt {
+    display: inline;
+    float: left;
+	margin: 5px 0 0 10px;
+	width: 94%;
+    height: 20px;
+}
+
+#content .box .txt span.alert {
+    font-weight: normal;
+	float: left;	
+}
+
+#content .box .txt span.alert a {
+    text-decoration: underline;
+	font-weight: normal;
+	color: #ff3300;
+	font-size: 14px;
+	padding-left: 2px;
+}
+
+#content .box .txt span.alert input {
+	display: none;
+    width: 30px;
+	padding-left: 2px;
+}
+
+#content .box .txt span.alert button {
+	display: none;
+}
+#content .box .txt .checkDetail {
+    float: right;
+	margin-top: 0px;  
+}
+
+#content .box .txt .checkDetail a {
+   text-decoration: underline;
+}
+
+/*********page5 show**********/
+#showRank{
+	margin-top:-21px;
+}
+
+
+/***** Footer *****/
+
+
+/******Input********/
+.inputText{
+    width: 145px;
+    border: 1px solid #bbb;
+	cursor: text;
+	padding: 2px;
+	margin-left: 5px;
+}
+
+/******Table********/
+.table1{
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.table1 td{
+    width: 100px;
+	height: 24px;
+} 
+
+.table2{
+    margin-top: 20px;
+    border-collapse: collapse;
+} 
+
+.table2 td{
+    padding-right: 10px;
+	height: 26px;
+} 
+
+.table3{
+    width: 988px;		
+}
+.table3 tr:hover{
+    background: #cddbdd}
+
+.table3 th{
+    background: url(../image/table3-th-bg.gif) repeat-x;	
+	height: 24px;	
+	border: 1px solid #92b8da;
+	border-left: 1px solid #fff;
+	border-top: none;
+	padding: 5px 2px 0 2px;
+	text-align: center;
+
+}
+
+.table3 td{
+    text-align: center;
+	border-right: 1px solid #eaf2f3;
+	padding: 2px 2px 4px 2px;
+	*padding-top: 2px;
+
+}
+
+.table3 .calling{
+     background: #e48701;
+}
+
+.table3 .wait{
+     background: #1b95d9;
+}
+
+.table3 .busy{
+     background: #a5bc4e;
+}
+
+.table3 .colBlue{
+     background: #eaf2f3;
+}
+.table4{
+    width: 970px;
+	margin: 10px 0;
+	margin-left:10px;
+}
+.table4 th{
+    height: 18px;
+ 
+	}
+.table4 td{
+    text-align: left;
+	height: 18px;
+	*height: 20px;
+}
+.table4 td a{
+    position: relative;
+	top:4px;
+}
+
+/******Button*******/
+.btnNormal2,
+.btnNormal3,
+.btnNormal4,
+.btnNormal5,
+.btnNormal6{
+    background: url(../image/btn-normal-2.gif) no-repeat;
+	border: none;
+	width :60px;
+	height: 25px;
+	font:  normal 12px Verdana, Arial, Helvetica, sans-serif,"宋体";
+	cursor: pointer;
+}
+
+.btnNormal3{
+    background: url(../image/btn-normal-3.gif) no-repeat;
+	width:70px;
+}
+.btnNormal4{
+    background: url(../image/btn-normal-4.gif) no-repeat;
+	width: 80px;
+}
+
+.btnNormal5{
+    background: url(../image/btn-normal-5.gif) no-repeat;
+	width: 90px;
+}
+.btnNormal6{
+    background: url(../image/btn-normal-6.gif) no-repeat;
+	width: 100px;
+}
+.btn_sub,.btn_add{
+    background: url(../image/btn-sub.gif) no-repeat;
+	width: 16px;
+	height: 16px;
+	border: none;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.btn_add{
+    margin-left: 5px;
+    background: url(../image/btn-add.gif) no-repeat
+}
+
+
+/********Rank Component************/
+.rank {
+    float: right;
+	width: 200px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.rank span {
+    position: relative;
+    top: -3px;
+}
+
+.rank .star {
+    display: inline;
+    margin-left: 2px;
+}
+
+.rank .star img {
+    margin: 0 1px;
+}
+
+.rank b{
+    color: #ff3300;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+    margin-left: 5px;
+    position: relative;
+    top: -2px;
+}
+
+.rank a{
+    font-weight: bolder;
+ }
+ 
+.rank a:hover{
+    text-decoration: none;
+}
+
+/***********Tip Component**********/
+.tip{
+    position: absolute;
+    background: #fffbb5;
+	border: 1px solid #ccc;
+	width: 140px;
+	height:140px;
+	display: none;
+}
+
+.tip ul{
+	margin: 15px 10px;
+	text-align: left;
+}
+
+.tip ul li{
+    margin-top: 5px;
+}
+
+/********rankWindow Component**********/
+
+.rankWindow,.moreTerm{
+    width: 340px;
+	height: 240px;
+    display: none;
+	background: #ccc;
+	position: relative;
+	top: 5px;
+	left: 5px;
+}
+.moreTerm{
+	width: 530px;
+	height: 280px;
+	display: block;
+}
+
+.rankWindow .windowShadow,
+.moreTerm .windowShadow{	
+    position: absolute;
+	left:-5px;
+	top:-5px;
+	width: 340px;
+	height: 240px;
+	background: #fff;
+	border: 1px solid #528fc4;
+	text-align: left;	
+}
+
+.moreTerm .windowShadow{
+	width: 530px;
+	height: 280px;
+}
+
+.moreTerm .windowShadow .content{
+	padding: 10px;
+	line-height: 120%;
+	*line-height: 100%;
+}
+
+.moreTerm .windowShadow .content strong{
+	width: 66px;
+	display: block;
+	float: left;
+	text-align: right;
+	margin-top: 0px;
+	*margin-top: 3px;
+}
+.moreTerm .windowShadow .content input{
+	margin: 0 2px;
+}
+
+.moreTerm .windowShadow .content .btn{
+	margin-top: 20px;
+	margin-left: 100px;
+}
+
+.moreTerm .windowShadow .content .btn button{
+	margin-left: 10px;
+}
+
+#techTeam7{
+	margin-left:71px;
+}
+
+.windowBar{
+    background: url(../image/tab-bg.jpg) repeat-x 0 1px;
+    width: 100%;
+	height: 26px;
+    float: left
+}
+.windowBar .title{
+    margin: 5px;
+	font-weight: bolder;
+}
+
+.windowShadow .content{
+    padding: 20px 0 0 19px;
+	float: left;	
+}
+
+.windowShadow .content b{
+    float: left;
+	width: 74px;
+	height: 16px;
+    border: 2px solid #ff9600;
+	padding: 5px 0px;
+	text-align: center;
+	color: #ff9600;
+	background: #fff5e6;
+	font-size: 14px;	
+}  
+
+.windowShadow .content .rankBox{
+    float: left;
+	width: 230px;
+	margin: 5px 0 0 10px;
+}
+
+.windowShadow .content .rankBox .bigstar{
+    float: left;
+}
+
+.windowShadow .content .rankBox .grade{
+    float:left;
+    color:#ff3300;
+	margin-top:-20px;
+	font:bolder 40px Verdana, Arial, Helvetica, sans-serif;
+	font-style:italic;
+    position: relative;
+    left: 10px;
+}
+
+.windowShadow .content .rankBox .bigstar img{
+   margin: 0px 2px;
+}
+
+.windowShadow .content textarea{
+    border: 1px solid #528fc4;
+	width: 290px;
+	height: 90px;
+	*width: 298px;
+	*height: 100px;
+	font-size: 12px;
+	line-height: 150%;
+	background: #fafafa;
+	padding: 5px;
+    margin-top: 8px;
+    overflow: auto;
+}
+
+.windowShadow .content .submit{
+    margin:8px 0 0 80px;
+}
+
+.windowShadow .content .submit button{
+    margin-right: 20px;
+}
+
+/*******Tab Component***************/
+    
+#show{
+    width:99%;
+	display: inline;
+	float: left;
+	margin: 7px 0px 5px 5px;
+	border: 1px solid #458ac4;
+}
+/**class definition**/
+#ccwTabList {
+    background:url(../image/tab-bg.jpg) repeat-x 0 1px;
+    width: 100%;
+    height: 26px;
+    list-style: none;
+    padding: 0;
+    margin: 0;	    
+}
+
+#ccwTabList li {
+    float: left;
+}
+
+#ccwTabList li a {
+    background:#fff url(../image/tab-bg.jpg) repeat-x 0 1px;
+    width: 100px;
+	height: 19px;
+	*height: 26px;
+    display: block;    
+    border-right: 1px solid #458ac4;
+	text-decoration: none;
+    color: #333333;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 6px;
+}
+
+#ccwTabList li a:hover{
+    text-decoration: none;
+	color:#333;
+}
+
+#ccwTabList li.ccwtab_active a {
+    padding-top:7px;    
+    background: #fff;
+	color: #333;
+}
+

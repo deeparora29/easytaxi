@@ -149,7 +149,7 @@ cursor: pointer
 
 #header h1#logo{
     float: left;
-    background: url(../image/logo.jpg) no-repeat;
+    *background: url(../image/logo.jpg) no-repeat;
 	width:340px;
 	*width: 340px;
 	height: 67px;
