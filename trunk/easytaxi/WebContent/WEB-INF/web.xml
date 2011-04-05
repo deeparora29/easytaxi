@@ -79,8 +79,8 @@
     	com.easytaxi.usermgr.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProvideInitMapData</servlet-name>
-        <url-pattern>/ProvideInitMapData</url-pattern>
+        <servlet-name>LocationSeviceServlet</servlet-name>
+        <url-pattern>/LocationSeviceServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>PassengerDataManager</servlet-name>
