@@ -4,4 +4,4 @@
 	String rootCtx = request.getContextPath();
 %>
 <link rel="stylesheet" href="<%=rootCtx %>/css/main.css" type="text/css" media="screen" />
-<script type="text/javascript" language="javascript" src="<%=rootCtx %>/js/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="<%=rootCtx %>/js/jquery-1.3.2.js"></script>
