@@ -45,7 +45,7 @@ public class Taxi {
     // license
     private String license;
 
-    // 出租车状态
+    // 出租车状态1:负载，2：空车  3：其它
     private int status;
 
     // 信用度
@@ -56,6 +56,12 @@ public class Taxi {
     // 修改时间
     private Date modifiedTime;
 
+    private double lat ;
+    
+    private double lng ;
+    
+    private String taxiLocation ;
+    
 	
 	public void setUserid(String userid) {
         this.userid = userid;
@@ -193,5 +199,28 @@ public class Taxi {
         this.descr = descr;
 	}
 
+    public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public double getLng() {
+		return lng;
+	}
+
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+
+	public String getTaxiLocation() {
+		return taxiLocation;
+	}
+
+	public void setTaxiLocation(String taxiLocation) {
+		this.taxiLocation = taxiLocation;
+	}
 	
 }
