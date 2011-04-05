@@ -71,42 +71,31 @@
 
 	var markers = new Array();
 	function initTaxiInfo( obj , i ){
-		var _latlng = obj.latLng ;
-		latlng = new google.maps.LatLng(_latlng.lat,_latlng.lng);
-		geocoder.geocode({'latLng': latlng}, function(results, status) {
-			  if (status == google.maps.GeocoderStatus.OK) {
-				if (results[0]) {
-				  map.setZoom(13);
-				  alert()
-				  var image = 'image/taxi_icon_cn_32.png';
-				  //注意：需要使用数组的形式才能够实现，点击某个marker显示某个marker的信息
-				  markers[i] = new google.maps.Marker({
-					  position: latlng, 
-					  map: map ,
-					  icon: image
-				  }); 
-				  alert();
-				  //只创建一个infowindow，否则点击第二个的时候第一个infowindow不会消失
-				  infowindow = new google.maps.InfoWindow();
-				  //增加一个监听，当点击taxi图标时显示出租车信息
-				  google.maps.event.addListener(markers[i], 'click', function(event) {
-					  //定义显示
-					  var _html  = 	'<b>taxiNo       :</b>' + obj.taxiNo +  '<br/>' +
-									'<b>driverNo     :</b>' + obj.driverNo + '<br/>' +
-									'<b>Taxi Status  :</b>' + obj.taxiStatus +'<br/>' + 
-									'<b>Taxi Address :</b>' + results[0].formatted_address ;
-					  
-					  infowindow.setContent( _html );
-					  infowindow.open(map, markers[i]);
-				  });
-				} else {
-				  alert("No results found");
-				}
-			  } else {
-				alert("Geocoder failed due to: " + status);
-			  }
-			});
-	}
+	  var _latlng = obj.latLng ;
+	  latlng = new google.maps.LatLng(_latlng.lat,_latlng.lng);
+	  map.setZoom(13);
+	  alert()
+	  var image = 'image/taxi_icon_cn_32.png';
+	  //注意：需要使用数组的形式才能够实现，点击某个marker显示某个marker的信息
+	  markers[i] = new google.maps.Marker({
+		  position: latlng, 
+		  map: map ,
+		  icon: image
+	  }); 
+	  //只创建一个infowindow，否则点击第二个的时候第一个infowindow不会消失
+	  infowindow = new google.maps.InfoWindow();
+	  //增加一个监听，当点击taxi图标时显示出租车信息
+	  google.maps.event.addListener(markers[i], 'click', function(event) {
+		  //定义显示
+		  var _html  = 	'<b>taxiNo       :</b>' + obj.taxiNo +  '<br/>' +
+						'<b>driverNo     :</b>' + obj.driverNo + '<br/>' +
+						'<b>Taxi Status  :</b>' + obj.taxiStatus +'<br/>' + 
+						'<b>Taxi Address :</b>' + obj.taxiAddress ;
+		  
+		  infowindow.setContent( _html );
+		  infowindow.open(map, markers[i]);
+	  });
+	} 
 
 </script>
 </head>

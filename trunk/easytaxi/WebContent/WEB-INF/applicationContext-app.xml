@@ -1,0 +1,20 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<import resource="applicationContext.xml" />
+
+
+
+
+	<bean id="googleMapGeocode" 
+		class="com.easytaxi.common.utils.google.map.parser.GoogleMapGeocode">
+	</bean>
+
+	<bean id="locationService" class="com.easytaxi.service.LocationService">
+		<property name="googleMapGeocode">
+			<ref bean="googleMapGeocode"/>
+		</property>
+	</bean>
+	
+
+
+</beans>
