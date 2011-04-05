@@ -54,7 +54,7 @@ public class ThreadPoolManager {
 	 */
 	public void initThreadPool( int poolSize ){
 		executor = Executors.newFixedThreadPool( poolSize * SIZE  );  
-		log.info("线程池初始化成功,线程数为："+(poolSize * SIZE)+".............");
+		log.info("线程池初始化成功,线程数为 "+(poolSize * SIZE)+".............");
 	}
 	
 	

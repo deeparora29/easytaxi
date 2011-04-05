@@ -44,7 +44,7 @@ public class PassengerDataManageThread implements Runnable{
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("乘客数据后台处理线程运行失败：", e);
 		}
 		
 	}
