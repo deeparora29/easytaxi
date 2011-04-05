@@ -19,12 +19,6 @@ package com.easytaxi.common;
  */
 public class SystemPara {
 	
-	//客户端参数请求错误代码
-	public static final String PARA_ERROR_CODE ="1000";
-	
-	//交易编码无效
-	public static final String TRANS_CODE_ERROR ="1001";
-	
 	//乘车注册
 	public static final String P_REGISTER = "P001";
 	

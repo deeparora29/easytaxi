@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import com.easytaxi.bo.DestLocation;
 import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.StartLocation;
+import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.JsonUtil;
@@ -50,11 +51,11 @@ public class PassengerDataService extends BaseService{
 		JSONObject jsonObject = parserRequest( requestString );
 		String jsonString = "{}";
 		if(jsonObject == null){
-			jsonString = getReturnErrorMessage(SystemPara.PARA_ERROR_CODE);
+			jsonString = getReturnErrorMessage(ErrorCode.PARA_ERROR_CODE);
 		}else{
 			String transCode = jsonObject.getString("TransCode");
 			if(transCode==null||transCode.length()<4){
-				jsonString = getReturnErrorMessage(SystemPara.TRANS_CODE_ERROR);
+				jsonString = getReturnErrorMessage(ErrorCode.TRANS_CODE_ERROR);
 				return jsonString ;
 			}else if(transCode.equals(SystemPara.P_REGISTER)){//乘车注册
 				String firstname = jsonObject.getString("firstname");
