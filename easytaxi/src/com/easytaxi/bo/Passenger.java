@@ -20,7 +20,7 @@ public class Passenger {
 
 	private String lastname;
 
-	private String nickName;
+    private String nickname;
     // value:female/male
     private String gender;
 
@@ -35,7 +35,7 @@ public class Passenger {
 	private int luggage;
 
 	private String otherInfos;
-
+    // 用户primary key
 	private String userid;
 	
 	private String share ;
@@ -46,12 +46,11 @@ public class Passenger {
 
     private Date registerTime;
     private Date modifiedTime;
+    private String province;
+    private String city;
     
     //图片
     private int picid ;
-
-    
-	
 
 	/*** 乘客注册*/
 	public Passenger(String transCode, String firstname, String lastname,
@@ -63,7 +62,7 @@ public class Passenger {
 		this.password = password;
 		this.phone = phone;
 		this.email = email;
-		this.nickName = nickName;
+        this.nickname = nickName;
 		this.gender = gender;
 		this.descr = descr;
 	}
@@ -137,12 +136,12 @@ public class Passenger {
 		this.lastname = lastname;
 	}
 
-	public String getNickName() {
-		return nickName;
+    public String getNickname() {
+        return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
 	}
 
 	public String getGender() {
@@ -242,12 +241,28 @@ public class Passenger {
         return modifiedTime;
     }
 
-    public int getPicid() {
-		return picid;
-	}
+    public void setProvince(String province) {
+        this.province = province;
+    }
 
-	public void setPicid(int picid) {
-		this.picid = picid;
-	}
+    public String getProvince() {
+        return province;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
     
+    public int getPicid() {
+        return picid;
+    }
+
+    public void setPicid(int picid) {
+        this.picid = picid;
+    }
+
 }
