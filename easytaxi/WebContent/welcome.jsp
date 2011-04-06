@@ -20,9 +20,9 @@
             <div id="content" >
                 <div id="show" class="box">
                     <ul id="ccwTabList">
-                    	<li><a href="locationService.jsp"><span>Location</span></a></li>
-                    	<li><a href="#"><span>Track History</span></a></li>
-                    	<li><a href="#"><span>Account</span></a></li>
+                    	<li><a href="demo_v3.html"><span>Location</span></a></li>
+                    	<li><a href="test.jsp"><span>Track History</span></a></li>
+                    	<li><a href="index.jsp"><span>Account</span></a></li>
                     </ul>
                 </div>
                  

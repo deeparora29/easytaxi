@@ -29,7 +29,7 @@ public class PassengerDao extends BaseJdbcDao {
             passenger.setFirstname(rs.getString("firstname"));
             passenger.setLastname(rs.getString("lastname"));
             passenger.setGender(rs.getString("gender"));
-            passenger.setNickName(rs.getString("nickname"));
+            passenger.setNickname(rs.getString("nickname"));
             passenger.setPassword(rs.getString("password"));
             passenger.setPhone(rs.getString("phone"));
             passenger.setShare(rs.getString("share"));
@@ -78,7 +78,7 @@ public class PassengerDao extends BaseJdbcDao {
     	String userid = StringUtils.trimToEmpty(passenger.getUserid());
     	String firstname = StringUtils.trimToEmpty(passenger.getFirstname());
     	String lastname = StringUtils.trimToEmpty(passenger.getLastname());
-    	String nickname= StringUtils.trimToEmpty(passenger.getNickName());
+        String nickname = StringUtils.trimToEmpty(passenger.getNickname());
     	String phone = StringUtils.trimToEmpty(passenger.getPhone());
     	String email= StringUtils.trimToEmpty(passenger.getEmail());
     	String gender = StringUtils.trimToEmpty(passenger.getGender());
@@ -92,4 +92,5 @@ public class PassengerDao extends BaseJdbcDao {
     	//org.apache.commons.lang.StringUtils.trimToEmpty(str)
     	getJdbcTemplate().update(sql, new Object[]{});
     }
+
 }
