@@ -10,7 +10,7 @@ public class Taxi {
 
     private String userid;
 	//出租车牌号
-	private String plateNumber ;
+    private String cab;
 	
 	//密码
 	private String password ;
@@ -71,12 +71,12 @@ public class Taxi {
         return userid;
     }
 
-    public String getPlateNumber() {
-		return plateNumber;
+    public String getCab() {
+        return cab;
 	}
 
-	public void setPlateNumber(String plateNumber) {
-		this.plateNumber = plateNumber;
+    public void setCab(String plateNumber) {
+        this.cab = plateNumber;
 	}
 
 	public String getPassword() {
