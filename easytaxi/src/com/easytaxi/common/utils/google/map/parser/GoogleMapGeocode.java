@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import com.easytaxi.common.SystemPara;
 import net.sf.json.JSONObject;
 
 public class GoogleMapGeocode {
@@ -25,7 +26,7 @@ public class GoogleMapGeocode {
 		String latLng = "";
 		BufferedReader in= null;
 		try {
-			URL url = new URL("http://maps.google.com/maps/api/geocode/json?address="+URLEncoder.encode(address,"UTF-8")+"&language=zh-CN&sensor=true");
+			URL url = new URL(SystemPara.GOOLGE_MAP_GECODE_JSON + "?address="+URLEncoder.encode(address,"UTF-8")+"&language=zh-CN&sensor=true");
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();   
 			httpConn.setDoInput(true);   
 			in = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));   
@@ -38,7 +39,7 @@ public class GoogleMapGeocode {
 		    JSONObject jsonObject = JSONObject.fromObject( result );
 		    GoogleMapJSONBean bean = (GoogleMapJSONBean) JSONObject.toBean( jsonObject, GoogleMapJSONBean.class );
 		    latLng = bean.getResults()[0].getGeometry().getLocation().lat+","+bean.getResults()[0].getGeometry().getLocation().lng;
-		    System.out.println(latLng);
+		    //System.out.println(latLng);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -64,7 +65,7 @@ public class GoogleMapGeocode {
 		String address = "";
 		BufferedReader in= null;
 		try {
-			URL url = new URL("http://maps.google.com/maps/api/geocode/json?latlng="+latLng+"&language=zh-CN&sensor=true");
+			URL url = new URL(SystemPara.GOOLGE_MAP_GECODE_JSON+"?latlng="+latLng+"&language=zh-CN&sensor=true");
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 			httpConn.setDoInput(true);   
 			in = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));   
@@ -78,7 +79,7 @@ public class GoogleMapGeocode {
 		    GoogleMapJSONBean bean = (GoogleMapJSONBean) JSONObject.toBean( jsonObject, GoogleMapJSONBean.class );
 		    address = bean.getResults()[0].formatted_address;
 		    //System.out.println("address="+new String(address.getBytes("GBK"),"UTF-8"));
-		    System.out.println("address="+address);
+		    //System.out.println("address="+address);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {

@@ -40,7 +40,7 @@ public class TaxiDataService extends BaseService{
 	}
 	
 	public void updateTaxiInfo(Taxi taxi){
-		taxiInfoMap.put(taxi.getPlateNumber(), taxi);
+		//taxiInfoMap.put(taxi.getPlateNumber(), taxi);
 	}
 	
 	

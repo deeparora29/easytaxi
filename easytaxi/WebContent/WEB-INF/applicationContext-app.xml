@@ -26,9 +26,14 @@
 	
 	<bean id="passengerDataService" 
 		class="com.easytaxi.service.PassengerDataService">
+		<property name="passengerDao">
+			<ref bean="passengerDao"/>
+		</property>	
 	</bean>
 	
-	
+	<bean id="passengerDao" 
+		class="com.easytaxi.usermgr.dao.PassengerDao">
+	</bean>
 	
 
 </beans>

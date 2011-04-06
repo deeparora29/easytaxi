@@ -22,8 +22,10 @@ public class ErrorCode {
 	//登录失败
 	public static final String LOGIN_ERROR ="2000";
 	
-	//注册失败
+	//注册失败，用户已存在
 	public static final String REGISTER_ERROR ="2001";
+	
+	
 	
 	//操作错误（如乘客发布用车消息后司机确定后取消用车等）
 	public static final String OPERATE_ERROR ="3000";

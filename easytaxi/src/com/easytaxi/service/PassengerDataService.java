@@ -17,6 +17,7 @@ import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.JsonUtil;
+import com.easytaxi.usermgr.dao.PassengerDao;
 
 public class PassengerDataService extends BaseService{
 	
@@ -33,6 +34,9 @@ public class PassengerDataService extends BaseService{
 	//存放乘客广播打车消息
 	private static ConcurrentMap<String , Passenger> broadcastCallTaxiMap = new ConcurrentHashMap<String, Passenger>();
 	
+	private PassengerDao passengerDao ;
+	
+
 	private PassengerDataService(){
 		
 	}
@@ -58,6 +62,7 @@ public class PassengerDataService extends BaseService{
 				jsonString = getReturnErrorMessage(ErrorCode.TRANS_CODE_ERROR);
 				return jsonString ;
 			}else if(transCode.equals(SystemPara.P_REGISTER)){//乘车注册
+				//获取用户信息
 				String firstname = jsonObject.getString("firstname");
 				String lastname = jsonObject.getString("lastname");
 				String password = jsonObject.getString("password");
@@ -66,8 +71,18 @@ public class PassengerDataService extends BaseService{
 				String nickName = jsonObject.getString("nickName");
 				String gender = jsonObject.getString("gender");
 				String descr = jsonObject.getString("descr");
-				Passenger p = new Passenger(transCode ,firstname, lastname, password, phone, email, nickName, gender, descr);
-				passengerWorkQueue.offer( p );
+				//没有重复的用户，email和phone都可以作为账号
+				if( !passengerInfoMap.containsKey(phone) && !passengerInfoMap.containsKey(email) ){
+					Passenger p = new Passenger(transCode ,firstname, lastname, password, phone, email, nickName, gender, descr);
+					//由于需要立即返回userid，则不能异步处理
+					//passengerWorkQueue.offer( p );
+					String userId = updateData( p );
+					return getReturnMessage( transCode , userId );
+				}else{
+					//账号重复
+					jsonString = getReturnErrorMessage(ErrorCode.REGISTER_ERROR);
+					return jsonString ;
+				}
 			}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
 				String Id = jsonObject.getString("Id");
 				String phone = jsonObject.getString("phone");
@@ -87,7 +102,6 @@ public class PassengerDataService extends BaseService{
 			
 			
 			
-			
 			//根据交易编号获取返回信息
 			jsonString = getReturnMessage(transCode);
 		}
@@ -97,8 +111,31 @@ public class PassengerDataService extends BaseService{
 	}
 	
 	
-	
 	public BlockingQueue<Passenger> getPassengerWorkQueue(){
 		return passengerWorkQueue ;
+	}
+	
+	/**
+	 * 更新数据
+	 * @param passenger
+	 */
+	public String updateData( Passenger passenger ){
+		String TransCode = passenger.getTransCode() ;
+		String res = null ;
+		if( TransCode.equals(SystemPara.P_REGISTER) ){
+			res = getSerialNum("p_user_id", 5, "false");
+			passenger.setUserid(res);
+			passengerDao.register( passenger );
+		}
+		return res ;
+	}
+	
+	
+	public PassengerDao getPassengerDao() {
+		return passengerDao;
+	}
+
+	public void setPassengerDao(PassengerDao passengerDao) {
+		this.passengerDao = passengerDao;
 	}
 }

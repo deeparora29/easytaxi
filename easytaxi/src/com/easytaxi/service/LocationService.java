@@ -6,6 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.concurrent.ConcurrentMap;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
@@ -13,13 +17,15 @@ import com.easytaxi.common.utils.google.map.parser.GoogleMapGeocode;
 
 public class LocationService extends BaseService{
 
+	Log log = LogFactory.getLog(LocationService.class);
+	
 	private GoogleMapGeocode googleMapGeocode;
 	
 	private TaxiDataService taxiDataService ;
 	
 	private PassengerDataService passengerDataService ;
 	
-
+	
 	public String initLocationData(){
 		ConcurrentMap<String , Taxi> taxiMap = taxiDataService.getTaxiInfoMap();
 		StringBuffer data = new StringBuffer("[\n");
@@ -34,8 +40,8 @@ public class LocationService extends BaseService{
 			}
 			data.append("{")
 			.append("latLng : {lat : "+taxi.getLat()+", lng : "+taxi.getLng()+"},")
-			.append("taxiNo : '"+taxi.getPlateNumber()+"',")
-			.append("driverNo : '100001',")
+			//.append("taxiNo : '"+taxi.getPlateNumber()+"',")
+			//.append("driverNo : '"+taxi.getDriverNo()+"',")
 			.append("taxiStatus : '"+status+"',")
 			.append("taxiAddress : '"+taxiLocation+"' ");
 			

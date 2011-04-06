@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.easytaxi.bo.Passenger;
@@ -63,8 +64,32 @@ public class PassengerDao extends BaseJdbcDao {
         return (Passenger) getObjectFromList(list);
     }
 
-    public void doSavePassenger(Passenger passenger) {
+   /* public void doSavePassenger(Passenger passenger) {
         getJdbcTemplate().update(INSERT_PASSENGER, new Object[] {...});
+    }*/
+    
+    
+    
+    /**
+     * passenger register 
+     * @param passenger
+     */
+    public void register(Passenger passenger){
+    	String userid = StringUtils.trimToEmpty(passenger.getUserid());
+    	String firstname = StringUtils.trimToEmpty(passenger.getFirstname());
+    	String lastname = StringUtils.trimToEmpty(passenger.getLastname());
+    	String nickname= StringUtils.trimToEmpty(passenger.getNickName());
+    	String phone = StringUtils.trimToEmpty(passenger.getPhone());
+    	String email= StringUtils.trimToEmpty(passenger.getEmail());
+    	String gender = StringUtils.trimToEmpty(passenger.getGender());
+    	int male = 1 ;
+    	if(gender.length()>0 && gender.endsWith("femail")){
+    		male = 0 ;
+    	}
+    	int picid = passenger.getPicid();
+    	String sql = "insert into passenger (userid,firstname,lastname,nickname,phone,email,gender,picid,credit,agreement,register_time,modified_time,descr)" +
+    			" values(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+    	//org.apache.commons.lang.StringUtils.trimToEmpty(str)
+    	getJdbcTemplate().update(sql, new Object[]{});
     }
-
 }

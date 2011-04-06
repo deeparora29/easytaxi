@@ -37,7 +37,7 @@ public class TaxiDao extends BaseJdbcDao {
             taxi.setEmail(rs.getString("email"));
             taxi.setLicense(rs.getString("license"));
             taxi.setPassword(rs.getString("password"));
-            taxi.setPlateNumber(rs.getString("plate_number"));
+            //taxi.setPlateNumber(rs.getString("plate_number"));
             taxi.setStatus(rs.getInt("status"));
             taxi.setUserid(rs.getString("userid"));
             taxi.setModifiedTime(rs.getDate("modified_time"));
@@ -70,8 +70,8 @@ public class TaxiDao extends BaseJdbcDao {
         return (Taxi) getObjectFromList(list);
     }
 
-    public void doSaveTaxi(Taxi taxi) {
+    /*public void doSaveTaxi(Taxi taxi) {
         getJdbcTemplate().update(INSERT_TAXI, new Object[]{...});
-    }
+    }*/
 
 }
