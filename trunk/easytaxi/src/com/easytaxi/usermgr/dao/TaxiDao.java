@@ -16,6 +16,8 @@ import com.easytaxi.common.dao.BaseJdbcDao;
 public class TaxiDao extends BaseJdbcDao {
     final static String QUERY_TAXI_EMAIL = "select * from taxi where email=?";
     final static String QUERY_TAXI_PLATENUMBER = "select * from taxi where plate_number=?";
+    // todo: register save the taxi info.
+    final static String INSERT_TAXI = "insert into (...) values (?,?,?)";
 
     class TaxiRowMapper
         implements RowMapper {
@@ -66,6 +68,10 @@ public class TaxiDao extends BaseJdbcDao {
         List<Taxi> list = getJdbcTemplate().query(QUERY_TAXI_PLATENUMBER, new Object[] { plateNumber },
             new TaxiRowMapper());
         return (Taxi) getObjectFromList(list);
+    }
+
+    public void doSaveTaxi(Taxi taxi) {
+        getJdbcTemplate().update(INSERT_TAXI, new Object[]{...});
     }
 
 }

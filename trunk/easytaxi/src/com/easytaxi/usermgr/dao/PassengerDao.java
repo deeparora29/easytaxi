@@ -13,6 +13,8 @@ import com.easytaxi.common.dao.BaseJdbcDao;
 public class PassengerDao extends BaseJdbcDao {
     final static String QUERY_PASSENGER_EMAIL = "select * from passenger where email=?";
     final static String QUERY_PASSENGER_PHONE = "select * from passenger where phone=?";
+    // todo : register to save the passenger data
+    final static String INSERT_PASSENGER = "insert into passenger (...) values (?,?,?)";
 
     class PassengerRowMapper
         implements RowMapper {
@@ -59,6 +61,10 @@ public class PassengerDao extends BaseJdbcDao {
         List<Passenger> list = getJdbcTemplate().query(QUERY_PASSENGER_PHONE, new Object[] { phone },
             new PassengerRowMapper());
         return (Passenger) getObjectFromList(list);
+    }
+
+    public void doSavePassenger(Passenger passenger) {
+        getJdbcTemplate().update(INSERT_PASSENGER, new Object[] {...});
     }
 
 }
