@@ -63,4 +63,6 @@ public class SystemPara {
         return (type >= 0 && type < 2) ? USER_TYPE[type] : "Unknown";
     }
 	
+    public static final String GOOLGE_MAP_GECODE_JSON = "http://maps.google.com/maps/api/geocode/json";
+    
 }

@@ -5,9 +5,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
-
 import net.sf.json.JSONObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -15,6 +13,7 @@ import org.springframework.jdbc.core.CallableStatementCallback;
 import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 
 public class BaseService {
@@ -119,11 +118,12 @@ public class BaseService {
 		return jsonString;
 	}
 
-	public String getReturnMessage(String transCode) {
+	public String getReturnMessage( String ... args ) {
+		String transCode = args[0];
 		StringBuffer jsonString = new StringBuffer("{");
-		
 		if( transCode.equals(SystemPara.P_REGISTER) ){//乘车注册
-			
+			String userId = args[1];
+			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"");
 		}else if( transCode.equals(SystemPara.P_LOGIN) ){//乘客登录
 			
 		}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
@@ -144,7 +144,12 @@ public class BaseService {
 			
 		}
 		
-		jsonString.append("");
+		jsonString.append("}");
 		return jsonString.toString();
 	}
+	
+	protected String convertNullToEmpty(String s){
+		return s == null ? "" : s ;
+	}
+	
 }
