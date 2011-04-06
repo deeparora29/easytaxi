@@ -14,14 +14,8 @@
  *     - Login
  * ----------------------------------------------------------------
  */
-
-
 /***** Reset *****/
-
-html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td,
-del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
     vertical-align: baseline;
     font-family: inherit;
     font-weight: inherit;
@@ -31,9 +25,7 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
     padding: 0;
     margin: 0;
     border: 0;
-}
-
-:focus {
+}:focus {
     outline: 0;
 }
 
@@ -55,7 +47,7 @@ table {
 caption, th, td {
     font-weight: normal;
     text-align: left;
-    vertical-align:middle;
+    vertical-align: middle;
 }
 
 blockquote:before, blockquote:after, q:before, q:after {
@@ -67,444 +59,488 @@ blockquote, q {
 }
 
 /***** General *****/
-
 body {
-	text-align: center;
-	color: #000;
-	background:#eee;	
-	font:normal 12px  Verdana, Arial, Helvetica, sans-serif,"宋体";	
+    text-align: center;
+    color: #000;
+    background: #eee;
+    font: normal 12px Verdana, Arial, Helvetica, sans-serif, "宋体";
 }
 
-
 body strong {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 a {
-	text-decoration: none;
-	color: #288ee4;
+    text-decoration: none;
+    color: #288ee4;
 }
 
 a:hover {
     text-decoration: underline;
-	color: #ff3300;	
+    color: #ff3300;
 }
 
 label, button {
-cursor: pointer
+    cursor: pointer
 }
 
 .error {
-	color: Red;
+    color: Red;
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 .zh-CN, .zh-HK {
-	font-family: 微软雅黑;
+    font-family: 微软雅黑;
 }
 
 /***** Layout *****/
-
 #wrapper {
     margin: 0 auto;
-	background: #fff url(../image/body-bg.jpg) repeat-x 0 68px;
-	border: 1px solid #92b8da;
-	width: 1002px;
+    background: #fff url(../image/body-bg.jpg) repeat-x 0 68px;
+    border: 1px solid #92b8da;
+    width: 1002px;
 }
 
 #wrapper #header {
     height: 67px;
-	background:url(../image/header-bg.jpg) 340px 0;
+    background: url(../image/header-bg.jpg) 340px 0;
 }
 
 #wrapper #content {
-    float: left;   
-	padding-top: -2px;
+    float: left;
+    padding-top: -2px;
 }
 
 #wrapper #footer {
-	clear: both;	
-	height: 21px;
-	padding-top:10px;
-	*height:31px;
-	background:url(../image/footer-bg.jpg) repeat-x;
-	margin-left: 0px;
+    clear: both;
+    height: 21px;
+    padding-top: 10px;
+    *height: 31px;
+    background:
+    url(../image/footer-bg.jpg)repeat-x;
+    margin-left:
+    0px;
 }
 
 #wrapper .starLine {
     float: left;
-	background: url(../image/content-top.jpg) repeat-x 0 1px;
+    background: url(../image/content-top.jpg) repeat-x 0 1px;
     border: 1px solid #4589c4;
-	text-align: left;
-	padding-bottom: 0px;
-	margin-left: 5px;
-	width:980px; 
+    text-align: left;
+    padding-bottom: 0px;
+    margin-left: 5px;
+    width: 980px;
 }
-
 
 /***** Header *****/
-
-#header h1#logo{
+#header h1#logo {
     float: left;
-    *background: url(../image/logo.jpg) no-repeat;
-	width:340px;
-	*width: 340px;
-	height: 67px;
-	overflow: hidden;
+    *background: url(../image/logo.jpg)no-repeat;
+    width:
+    340px;
+    * width: 340px;
+    height:
+    67px;
+    overflow: hidden;
 }
 
-#header h1#logo a{
+#header h1#logo a {
     display: block;
-	padding-top: 100px;
+    padding-top: 100px;
 }
 
-#header ul#menu{
+#header ul#menu {
     float: right;
-	width: 480px;
-	height: 67px;
-	overflow: hidden;
+    width: 480px;
+    height: 67px;
+    overflow: hidden;
 }
 
-#header ul#menu li{
-   float: left;   
+#header ul#menu li {
+    float: left;
 }
 
-#header ul#menu li a{
+#header ul#menu li a {
     float: left;
     background: url(../image/menu.jpg) no-repeat;
     width: 80px;
-	height: 67px;
-	padding-top: 100px; 		
+    height: 67px;
+    padding-top: 100px;
 }
 
-#header ul#menu li#menu1 a{background-position: 0 0;}
-#header ul#menu li#menu2 a{ background-position: -80px 0;}
-#header ul#menu li#menu3 a{ background-position: -160px 0;}
-#header ul#menu li#menu4 a{ background-position: -240px 0;}
-#header ul#menu li#menu5 a{ background-position: -320px 0;}
-#header ul#menu li#menu6 a{ background-position: -400px 0;}
-/**over states**/
-#header ul#menu li#menu1 a:hover{ background-position: 0 -67px;}
-#header ul#menu li#menu2 a:hover{ background-position: -80px -67px;}
-#header ul#menu li#menu3 a:hover{ background-position: -160px -67px;}
-#header ul#menu li#menu4 a:hover{ background-position: -240px -67px;}
-#header ul#menu li#menu5 a:hover{ background-position: -320px -67px;}
-#header ul#menu li#menu6 a:hover{ background-position: -400px -67px;}
+#header ul#menu li#menu1 a {
+    background-position: 0 0;
+}
 
+#header ul#menu li#menu2 a {
+    background-position: -80px 0;
+}
+
+#header ul#menu li#menu3 a {
+    background-position: -160px 0;
+}
+
+#header ul#menu li#menu4 a {
+    background-position: -240px 0;
+}
+
+#header ul#menu li#menu5 a {
+    background-position: -320px 0;
+}
+
+#header ul#menu li#menu6 a {
+    background-position: -400px 0;
+}
+
+/**over states**/
+#header ul#menu li#menu1 a:hover {
+    background-position: 0 -67px;
+}
+
+#header ul#menu li#menu2 a:hover {
+    background-position: -80px -67px;
+}
+
+#header ul#menu li#menu3 a:hover {
+    background-position: -160px -67px;
+}
+
+#header ul#menu li#menu4 a:hover {
+    background-position: -240px -67px;
+}
+
+#header ul#menu li#menu5 a:hover {
+    background-position: -320px -67px;
+}
+
+#header ul#menu li#menu6 a:hover {
+    background-position: -400px -67px;
+}
 
 /**current states***/
-#header.page1 ul#menu li#menu1 a{ background-position: 0 -67px;}
-#header.page2 ul#menu li#menu2 a{ background-position: -80px -67px;}
-#header.page3 ul#menu li#menu3 a{ background-position: -160px -67px;}
-#header.page4 ul#menu li#menu4 a{ background-position: -240px -67px;}
-#header.page5 ul#menu li#menu5 a{ background-position: -320 -67px;}
-#header.page6 ul#menu li#menu6 a{ background-position: -400px -67px;}
+#header.page1 ul#menu li#menu1 a {
+    background-position: 0 -67px;
+}
 
+#header.page2 ul#menu li#menu2 a {
+    background-position: -80px -67px;
+}
+
+#header.page3 ul#menu li#menu3 a {
+    background-position: -160px -67px;
+}
+
+#header.page4 ul#menu li#menu4 a {
+    background-position: -240px -67px;
+}
+
+#header.page5 ul#menu li#menu5 a {
+    background-position: -320 -67px;
+}
+
+#header.page6 ul#menu li#menu6 a {
+    background-position: -400px -67px;
+}
 
 /***** Content *****/
-
-#content{
+#content {
     float: left;
 }
+
 #content .box {
     float: left;
-	background: url(../image/tab-bg.jpg) repeat-x 0 1px;
+    background: url(../image/tab-bg.jpg) repeat-x 0 1px;
     border: 1px solid #4589c4;
-	text-align: left;
-	padding-bottom: 5px;
+    text-align: left;
+    padding-bottom: 5px;
 }
 
 #content .box .title {
     background: #fff url(../image/tab-right.gif) no-repeat right 0;
     float: left;
-	padding: 7px 8px 5px 8px;
-	color: #616266;
-	font-family : "宋体";
-	font-weight: bolder;  
+    padding: 7px 8px 5px 8px;
+    color: #616266;
+    font-family: "宋体";
+    font-weight: bolder;
 }
 
 #content .box .content {
     clear: both;
-	margin: 10px;	     	  
+    margin: 10px;
 }
 
-#content .box .page3,#content .box  .page5{
+#content .box .page3, #content .box .page5 {
     margin: 0;
 }
 
-#staffList{
-	position: relative;
+#staffList {
+    position: relative;
 }
 
 #content .box .txt {
     display: inline;
     float: left;
-	margin: 5px 0 0 10px;
-	width: 94%;
+    margin: 5px 0 0 10px;
+    width: 94%;
     height: 20px;
 }
 
 #content .box .txt span.alert {
     font-weight: normal;
-	float: left;	
-	margin-top: -2px;	
+    float: left;
+    margin-top: -2px;
 }
 
 #content .box .txt span.alert a {
     text-decoration: underline;
-	font-weight: normal;
-	color: #ff3300;
-	font-size: 14px;
-	padding-left: 2px;
+    font-weight: normal;
+    color: #ff3300;
+    font-size: 14px;
+    padding-left: 2px;
 }
 
 #content .box .txt span .alert input {
     display: block;
     width: 30px;
-	padding-left: 2px;
-	float: left;
+    padding-left: 2px;
+    float: left;
 }
 
-.alert input{
-	width: 30px;
-	height:18px;
-	background-color: #FF9900;
-	border: 1px solid #D3E9FF;
-	font-size: 12px;
-	text-align: center;
+.alert input {
+    width: 30px;
+    height: 18px;
+    background-color: #FF9900;
+    border: 1px solid #D3E9FF;
+    font-size: 12px;
+    text-align: center;
 }
 
 #content .box .txt span .alert button {
-	float: left;
-	display: block;
-	border: 1px solid #D3E9FF;
+    float: left;
+    display: block;
+    border: 1px solid #D3E9FF;
 }
 
-span .btn{
-	background:url(../image/btn-normal-2.gif) no-repeat;
-	width:50px;
-	height:20px;
-	border:1px;
-	margin-left:8px;
-	font-size:12px;
-	text-align: center;
-	padding-top: 5px;
+span .btn {
+    background: url(../image/btn-normal-2.gif) no-repeat;
+    width: 50px;
+    height: 20px;
+    border: 1px;
+    margin-left: 8px;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
 }
 
-.exportExcel span .btn{
-	background:url(../image/btn-normal-2.gif) repeat-x;
-	width:70px;
-	height:20px;
-	border:1px;
-	margin-left:8px;
-	font-size:12px;
-	text-align: center;
-	padding-top: 5px;
+.exportExcel span .btn {
+    background: url(../image/btn-normal-2.gif) repeat-x;
+    width: 70px;
+    height: 20px;
+    border: 1px;
+    margin-left: 8px;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
 }
-.selectShowTimeBtn{
-	background:url(../image/btn-normal-2.gif) repeat-x;
-	width:50px;
-	height:20px;
-	border:1px;
-	margin-left:8px;
-	font-size:12px;
-	padding-top: 2px;
+
+.selectShowTimeBtn {
+    background: url(../image/btn-normal-2.gif) repeat-x;
+    width: 50px;
+    height: 20px;
+    border: 1px;
+    margin-left: 8px;
+    font-size: 12px;
+    padding-top: 2px;
 }
 
 #content .box .txt .checkDetail {
     float: right;
-	margin-top: 0px;  
+    margin-top: 0px;
 }
 
 #content .box .txt .checkDetail a {
-   text-decoration: underline;
+    text-decoration: underline;
 }
 
-.area1,
-#queueInfo,
-#teamInfo
-{
-    float:left;
+.area1, #queueInfo, #teamInfo {
+    float: left;
     display: inline;
     margin-left: 5px;
     margin-top: 7px;
     width: 491px;
-
 }
 
-.area2{
-    float:left;
-	display: inline;
+.area2 {
+    float: left;
+    display: inline;
     margin-top: 7px;
-    margin-left: 5px;    
-	width: 492px;	
-
+    margin-left: 5px;
+    width: 492px;
 }
 
-.area3,.area4,#callRate{
+.area3, .area4, #callRate {
     float: left;
     display: inline;
     margin-top: 5px;
-	margin-left: 5px;  
-	width: 979px;  
-	
+    margin-left: 5px;
+    width: 979px;
 }
 
-.box.area3 .exportExcel img{
-	float: right;
-	cursor: pointer;
-	margin-top: 5px;
-	margin-right: 2px;
+.box.area3 .exportExcel img {
+    float: right;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-right: 2px;
 }
 
-.exportExcel .xlsPictuerPostion{
-	float: right;
-	cursor: pointer;
-	_margin-top: -30px;
-	_margin-right: 0px;
+.exportExcel .xlsPictuerPostion {
+    float: right;
+    cursor: pointer;
+    _margin-top: -30px;
+    _margin-right: 0px;
 }
 
-.area5{
-	float:right;
+.area5 {
+    float: right;
     display: inline;
     margin-right: -2px;
     width: 491px;
 }
-.area9{
-	margin-left:5px;
-	text-align:center;
-	margin-top:5px;
-	float:left;
+
+.area9 {
+    margin-left: 5px;
+    text-align: center;
+    margin-top: 5px;
+    float: left;
     display: inline;
-    height:28px;
+    height: 28px;
     width: 99%;
     border: 1px solid #458ac4;
 }
 
-.area11{
-	margin:5px;
-	text-align:center;
-	float:left;
+.area11 {
+    margin: 5px;
+    text-align: center;
+    float: left;
     display: inline;
-    height:28px;
+    height: 28px;
     margin-right: -2px;
     width: 98.8%;
     border: 1px solid #458ac4;
 }
 
-.area6{
-    float:left;
-	display: inline;
-    margin-left: 10px;    
-	width: 492px;	
-	height: 100%;
-	margin-left:1px;
-	width:90%;
+.area6 {
+    float: left;
+    display: inline;
+    margin-left: 10px;
+    width: 492px;
+    height: 100%;
+    margin-left: 1px;
+    width: 90%;
 }
 
-.area10{
-    float:left;
-	display: inline;   
-	height: 100%;
-	margin-left:1px;
-	width: 40%;
-	text-align: left;
+.area10 {
+    float: left;
+    display: inline;
+    height: 100%;
+    margin-left: 1px;
+    width: 40%;
+    text-align: left;
 }
 
-.area7{
+.area7 {
     float: left;
     display: inline;
     margin-top: 1px;
-	margin-left: 5px;  
-	width: 988px;  
-	
+    margin-left: 5px;
+    width: 988px;
 }
 
-.checkDetail{
+.checkDetail {
     float: left;
     margin: 5px 10px;
 }
 
-.chartContainer{
+.chartContainer {
     margin: 5px 0px;
     float: left;
 }
-.chart1{
+
+.chart1 {
     float: left;
     width: 980px;
-	
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
-.chart1 .chartContainer{
+
+.chart1 .chartContainer {
     margin-right: 10px;
-	width: 702px;
+    width: 702px;
 }
-#content .chart1 .txt{
+
+#content .chart1 .txt {
     margin: 5px;
-	width: 400px;
+    width: 400px;
 }
-.chart1 .report,.addReportDetail{
+
+.chart1 .report, .addReportDetail {
     float: left;
-	width: 250px;
-	margin-top: 5px;
-
-
-}
-.addReportDetail{
-	border:1px solid #458ac4;
-	width:238px;
-	height:260px;
-	*width:256px;
-	padding:0 10px;
-
+    width: 250px;
+    margin-top: 5px;
 }
 
-.addReportDetail .kpi,
-.addReportDetail .date{
-	margin:15px 0;
-}
-.addReportDetail textarea{
-	margin-top:5px;
-	width:234px;
-	height:90px;
-}
-.addReportDetail .btn{
-	margin-top:10px;
-	float:right;}
-	
-.addReportDetail .btn button{
-	margin-left:5px;
+.addReportDetail {
+    border: 1px solid #458ac4;
+    width: 238px;
+    height: 260px;
+    *width: 256px;
+    padding:
+    0 10px;
 }
 
-.addReportDetail .highlight  {
-    background:#cbeaee
-}  
-.chart1 .report div{
-    float:left;
-	
+.addReportDetail .kpi, .addReportDetail .date {
+    margin: 15px 0;
 }
 
-.chart1 .report .oldReport,
-.chart1 .report .lastReport{
-    float:right
+.addReportDetail textarea {
+    margin-top: 5px;
+    width: 234px;
+    height: 90px;
 }
 
-.chart1 .report .addReport a,
-.chart1 .report .lastReport a,
-.chart1 .report .oldReport a
-{
+.addReportDetail .btn {
+    margin-top: 10px;
+    float: right;
+}
+
+.addReportDetail .btn button {
+    margin-left: 5px;
+}
+
+.addReportDetail .highlight {
+    background: #cbeaee
+}
+
+.chart1 .report div {
+    float: left;
+}
+
+.chart1 .report .oldReport, .chart1 .report .lastReport {
+    float: right
+}
+
+.chart1 .report .addReport a, .chart1 .report .lastReport a, .chart1 .report .oldReport a {
     background: url(../image/btn-add-report.gif) no-repeat;
-	padding-left: 23px;
-	padding-top: 4px;
-	line-height: 180%;
+    padding-left: 23px;
+    padding-top: 4px;
+    line-height: 180%;
 }
 
-.chart1 .report .lastReport a{
+.chart1 .report .lastReport a {
     background: url(../image/btn-last-report.gif) no-repeat;
-	color:#666666px;
+    color:#666666px;
 }
 
 .chart1 .report .oldReport a.disable{
