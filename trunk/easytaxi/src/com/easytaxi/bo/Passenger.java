@@ -46,6 +46,12 @@ public class Passenger {
 
     private Date registerTime;
     private Date modifiedTime;
+    
+    //图片
+    private int picid ;
+
+    
+	
 
 	/*** 乘客注册*/
 	public Passenger(String transCode, String firstname, String lastname,
@@ -236,4 +242,12 @@ public class Passenger {
         return modifiedTime;
     }
 
+    public int getPicid() {
+		return picid;
+	}
+
+	public void setPicid(int picid) {
+		this.picid = picid;
+	}
+    
 }
