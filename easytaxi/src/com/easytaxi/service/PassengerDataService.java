@@ -85,20 +85,24 @@ public class PassengerDataService extends BaseService{
 				}
 			}else if(transCode.equals(SystemPara.P_REGISTER)){//Login
 				String account = jsonObject.getString("account");
+				String password = jsonObject.getString("password");
 				Passenger p = passengerDao.getPassengerByPhone(account);
-				if(p!=null){
+				if( p == null ){
+					p = passengerDao.getPassengerByEmail(account);
+				}
+				if(p != null ){
 					String userid = p.getUserid();
 					String phone = p.getPhone();
-					jsonString = getReturnMessage( transCode , userid , phone ); 
-				}else{
-					p = passengerDao.getPassengerByEmail(account);
-					if(p==null){
-						jsonString = getReturnErrorMessage(ErrorCode.REGISTER_ERROR);
-					}else{
-						String userid = p.getUserid();
-						String phone = p.getPhone();
+					String db_password = p.getPassword();
+					if(password!=null&&password.equals(db_password)){
 						jsonString = getReturnMessage( transCode , userid , phone ); 
+					}else{
+						jsonString = getReturnErrorMessage(ErrorCode.PASSWORD_NOT_ACCURATE);
 					}
+					//TODO 更新内存中乘客信息
+					
+				}else{
+					jsonString = getReturnErrorMessage(ErrorCode.USER_NOT_FOUND);
 				}
 				return jsonString ;
 			}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
