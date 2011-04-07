@@ -25,7 +25,8 @@ public class ErrorCode {
 	//注册失败，用户已存在
 	public static final String REGISTER_ERROR ="2001";
 	
-	
+	//注册失败，用户不存在
+	public static final String USER_NOT_FOUND = "2002";
 	
 	//操作错误（如乘客发布用车消息后司机确定后取消用车等）
 	public static final String OPERATE_ERROR ="3000";

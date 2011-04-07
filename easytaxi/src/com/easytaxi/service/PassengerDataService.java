@@ -83,6 +83,24 @@ public class PassengerDataService extends BaseService{
 					jsonString = getReturnErrorMessage(ErrorCode.REGISTER_ERROR);
 					return jsonString ;
 				}
+			}else if(transCode.equals(SystemPara.P_REGISTER)){//Login
+				String account = jsonObject.getString("account");
+				Passenger p = passengerDao.getPassengerByPhone(account);
+				if(p!=null){
+					String userid = p.getUserid();
+					String phone = p.getPhone();
+					jsonString = getReturnMessage( transCode , userid , phone ); 
+				}else{
+					p = passengerDao.getPassengerByEmail(account);
+					if(p==null){
+						jsonString = getReturnErrorMessage(ErrorCode.REGISTER_ERROR);
+					}else{
+						String userid = p.getUserid();
+						String phone = p.getPhone();
+						jsonString = getReturnMessage( transCode , userid , phone ); 
+					}
+				}
+				return jsonString ;
 			}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
 				String Id = jsonObject.getString("Id");
 				String phone = jsonObject.getString("phone");
