@@ -93,6 +93,7 @@ CREATE TABLE `passenger` (
   `nickname` varchar(64) DEFAULT NULL,
   `phone` varchar(14) NOT NULL,
   `email` varchar(64) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `gender` varchar(6) DEFAULT 'male' COMMENT 'female/male',
   `picid` int(11) DEFAULT '0',
   `credit` float DEFAULT '3',
@@ -176,6 +177,7 @@ DROP TABLE IF EXISTS `taxi`;
 CREATE TABLE `taxi` (
   `userid` varchar(6) NOT NULL,
   `plate_number` varchar(7) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `license` varchar(12) DEFAULT NULL,
   `company` varchar(256) DEFAULT NULL,
   `car_model` varchar(16) DEFAULT NULL,
