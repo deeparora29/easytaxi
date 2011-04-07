@@ -125,7 +125,9 @@ public class BaseService {
 			String userId = args[1];
 			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"");
 		}else if( transCode.equals(SystemPara.P_LOGIN) ){//乘客登录
-			
+			String userId = args[1];
+			String phone = args[2];
+			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"").append(",phone:"+phone+"");
 		}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
 			
 		}else if( transCode.equals(SystemPara.P_GETCONFIRM) ){//获取出租车响应
