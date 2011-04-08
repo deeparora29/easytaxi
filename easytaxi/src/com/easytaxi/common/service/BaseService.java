@@ -132,7 +132,7 @@ public class BaseService {
 			
 		}else if( transCode.equals(SystemPara.P_GETCONFIRM) ){//获取出租车响应
 			
-        } else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
+        }else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
 			
 		}else if( transCode.equals(SystemPara.P_CREDITRATING) ){//信用评价
 			
