@@ -42,8 +42,7 @@ public class CallTaxiServie extends BaseService {
     public String requestTaxi(RequestInfo requestInfo) {
         String requestNo = "";
         try {
-            // TODO:need to update requesNo
-            requestNo = getSerialNum("p_user_id", , "false");
+            requestNo = getSerialNum("p_user_id", 5 , "false");
             requestInfo.setRequestNo(requestNo);
             getCallTaxiDao().doDeleteRequestInfo(requestNo);
             getCallTaxiDao().doSaveRequestInfo(requestInfo);
