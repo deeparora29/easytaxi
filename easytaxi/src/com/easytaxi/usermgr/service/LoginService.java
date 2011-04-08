@@ -4,12 +4,14 @@ package com.easytaxi.usermgr.service;
 import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.service.BaseService;
+import com.easytaxi.usermgr.dao.LoginRecordDao;
 import com.easytaxi.usermgr.dao.PassengerDao;
 import com.easytaxi.usermgr.dao.TaxiDao;
 
 public class LoginService extends BaseService {
     private PassengerDao passengerDao;
     private TaxiDao taxiDao;
+    private LoginRecordDao loginRecordDao;
 
     public void setPassengerDao(PassengerDao passengerDao) {
         this.passengerDao = passengerDao;
@@ -45,6 +47,14 @@ public class LoginService extends BaseService {
 
     public void recordLogin(String type, String account, String password) {
 
+    }
+
+    public void setLoginRecordDao(LoginRecordDao loginRecordDao) {
+        this.loginRecordDao = loginRecordDao;
+    }
+
+    public LoginRecordDao getLoginRecordDao() {
+        return loginRecordDao;
     }
 
 
