@@ -22,7 +22,7 @@ public class Passenger {
 
     private String nickname;
     // value:female/male
-    private String gender;
+    private String gender = "male";
 
 	private String descr;
 
@@ -42,15 +42,17 @@ public class Passenger {
 
     // 是否同意协议
     // value:yes/no
-    private String agreement;
+    private String agreement = "yes";
 
     private Date registerTime;
     private Date modifiedTime;
     private String province;
     private String city;
+    // 信用度
+    private float credit = 3.0f;
     
     //图片
-    private int picid ;
+    private int picid = 0;
 
 	/*** 乘客注册*/
 	public Passenger(String transCode, String firstname, String lastname,
@@ -263,6 +265,14 @@ public class Passenger {
 
     public void setPicid(int picid) {
         this.picid = picid;
+    }
+
+    public void setCredit(float credit) {
+        this.credit = credit;
+    }
+
+    public float getCredit() {
+        return credit;
     }
 
 }

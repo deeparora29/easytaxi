@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.easytaxi.bo.Passenger;
@@ -14,8 +13,9 @@ import com.easytaxi.common.dao.BaseJdbcDao;
 public class PassengerDao extends BaseJdbcDao {
     final static String QUERY_PASSENGER_EMAIL = "select * from passenger where email=?";
     final static String QUERY_PASSENGER_PHONE = "select * from passenger where phone=?";
-    // todo : register to save the passenger data
-    final static String INSERT_PASSENGER = "insert into passenger (...) values (?,?,?)";
+    final static String INSERT_PASSENGER = "insert into passenger (userid, firstname, lastname,"
+        + " nickname, phone, email, password, gender, picid, credit, agreement, descr, province, city,"
+        + " register_time, modified_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),now());";
 
     class PassengerRowMapper
         implements RowMapper {
@@ -36,6 +36,8 @@ public class PassengerDao extends BaseJdbcDao {
             passenger.setUserid(rs.getString("userid"));
             passenger.setRegisterTime(rs.getDate("register_time"));
             passenger.setModifiedTime(rs.getDate("modified_time"));
+            passenger.setCity(rs.getString("city"));
+            passenger.setProvince(rs.getString("province"));
             return passenger;
         }
     }
@@ -64,33 +66,18 @@ public class PassengerDao extends BaseJdbcDao {
         return (Passenger) getObjectFromList(list);
     }
 
-   /* public void doSavePassenger(Passenger passenger) {
-        getJdbcTemplate().update(INSERT_PASSENGER, new Object[] {...});
-    }*/
-    
-    
-    
     /**
-     * passenger register 
+     * @method: Resigter
+     * @description: insert a passenger
      * @param passenger
      */
-    public void register(Passenger passenger){
-    	String userid = StringUtils.trimToEmpty(passenger.getUserid());
-    	String firstname = StringUtils.trimToEmpty(passenger.getFirstname());
-    	String lastname = StringUtils.trimToEmpty(passenger.getLastname());
-        String nickname = StringUtils.trimToEmpty(passenger.getNickname());
-    	String phone = StringUtils.trimToEmpty(passenger.getPhone());
-    	String email= StringUtils.trimToEmpty(passenger.getEmail());
-    	String gender = StringUtils.trimToEmpty(passenger.getGender());
-    	int male = 1 ;
-    	if(gender.length()>0 && gender.endsWith("femail")){
-    		male = 0 ;
-    	}
-    	int picid = passenger.getPicid();
-    	String sql = "insert into passenger (userid,firstname,lastname,nickname,phone,email,gender,picid,credit,agreement,register_time,modified_time,descr)" +
-    			" values(?,?,?,?,?,?,?,?,?,?,?,?,?);";
-    	//org.apache.commons.lang.StringUtils.trimToEmpty(str)
-    	getJdbcTemplate().update(sql, new Object[]{});
+    public void doSavePassenger(Passenger passenger) {
+        getJdbcTemplate().update(
+            INSERT_PASSENGER,
+            new Object[] { passenger.getUserid(), passenger.getFirstname(), passenger.getLastname(),
+                passenger.getNickname(), passenger.getPhone(), passenger.getEmail(), passenger.getPassword(),
+                passenger.getGender(), passenger.getPicid(), passenger.getCredit(), passenger.getAgreement(),
+                passenger.getDescr(), passenger.getProvince(), passenger.getCity() });
     }
-
+    
 }
