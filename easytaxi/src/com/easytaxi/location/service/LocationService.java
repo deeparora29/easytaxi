@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
@@ -27,11 +28,11 @@ public class LocationService extends BaseService{
 	
 	
 	public String initLocationData(){
-		ConcurrentMap<String , Taxi> taxiMap = taxiDataService.getTaxiInfoMap();
+		ConcurrentMap<String , GPSData> taxiMap = taxiDataService.getTaxiInfoMap();
 		StringBuffer data = new StringBuffer("[\n");
 		int i = 0 ;
-		for (String plateNumber : taxiMap.keySet()) {
-			Taxi taxi = taxiMap.get(plateNumber);
+		for (String userId : taxiMap.keySet()) {
+			GPSData taxi = taxiMap.get(userId);
 			String status = SystemPara.getTaxiStatus(taxi.getStatus()) ;
 			/*String taxiLocation = taxi.getTaxiLocation();
 			if(taxiLocation==null||taxiLocation.trim().length()==0){
@@ -39,7 +40,7 @@ public class LocationService extends BaseService{
 				taxiLocation = googleMapGeocode.getAddressByLatLng(latLng);
 			}*/
 			data.append("{")
-			.append("latLng : {lat : "+taxi.getLat()+", lng : "+taxi.getLng()+"},")
+			.append("latLng : {lat : "+taxi.getDestLocation().getLat()+", lng : "+taxi.getDestLocation().getLng()+"},")
 			.append("taxiStatus : '"+status+"'");
 			//.append("taxiNo : '"+taxi.getPlateNumber()+"',")
 			//.append("driverNo : '"+taxi.getDriverNo()+"',")
