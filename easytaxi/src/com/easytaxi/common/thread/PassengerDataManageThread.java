@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.utils.BeanFactoryUtil;
-import com.easytaxi.service.PassengerDataService;
+import com.easytaxi.location.service.PassengerDataService;
 
 /**
  * 

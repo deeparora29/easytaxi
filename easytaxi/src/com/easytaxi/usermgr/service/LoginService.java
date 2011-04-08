@@ -19,26 +19,32 @@ public class LoginService extends BaseService {
         this.taxiDao = taxiDao;
     }
 
-    public boolean isValidUser(String type, String account, String password) {
-        boolean isValid = false;
+    public String getValidUserid(String type, String account, String password) {
+        String userid = "";
         if (account == null || account.equals(""))
-            return false;
+            return userid;
         try {
             boolean isEmailCheck = account.contains("@");
             if (type.equals("taxi")) {
                 Taxi taxi = null;
                 taxi = isEmailCheck ? taxiDao.getTaxiByEmail(account) : taxiDao.getTaxiByPlateNumber(account);
-                isValid = taxi != null && taxi.getPassword().equals(password);
+                if (taxi != null && taxi.getPassword().equals(password))
+                    userid = taxi.getUserid();
             } else {
                 Passenger passenger = null;
                 passenger = isEmailCheck ? passengerDao.getPassengerByEmail(account) : passengerDao
                     .getPassengerByPhone(account);
-                isValid = passenger != null && passenger.getPassword().equals(password);
+                if (passenger != null && passenger.getPassword().equals(password))
+                    userid = passenger.getUserid();
             }
         } catch (Exception e) {
             logger.error("check valid user error:", e);
         }
-        return isValid;
+        return userid;
+    }
+
+    public void recordLogin(String type, String account, String password) {
+
     }
 
 

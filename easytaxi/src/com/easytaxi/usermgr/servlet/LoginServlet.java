@@ -40,8 +40,9 @@ public class LoginServlet extends HttpServlet {
         String type = request.getParameter("type");
         String account = request.getParameter("account");
         String password = request.getParameter("password");
-        boolean isSuccess = loginService.isValidUser(type, account, password);
-        if (true) {
+        String userid = loginService.getValidUserid(type, account, password);
+
+        if (!userid.equals("") || true) {
             response.sendRedirect("welcome.jsp");
         } else {
             response.sendRedirect("login.jsp");

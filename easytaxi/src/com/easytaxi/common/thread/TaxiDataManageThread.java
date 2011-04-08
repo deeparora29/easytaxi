@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.easytaxi.bo.Taxi;
-import com.easytaxi.service.TaxiDataService;
+import com.easytaxi.location.service.TaxiDataService;
 
 /**
  * 

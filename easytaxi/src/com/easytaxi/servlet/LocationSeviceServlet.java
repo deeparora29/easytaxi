@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.easytaxi.common.utils.BeanFactoryUtil;
-import com.easytaxi.service.LocationService;
+import com.easytaxi.location.service.LocationService;
 
 /**
  * Servlet implementation class ProvideInitMapData
