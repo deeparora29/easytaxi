@@ -33,6 +33,10 @@ public class ErrorCode {
 	
 	//操作错误（如乘客发布用车消息后司机确定后取消用车等）
 	public static final String OPERATE_ERROR ="3000";
+    // 用车请求过期
+    public static final String REQEST_OUTOFDATE = "4001";
+    // 用车请求不存在
+    public static final String REQUEST_NOTEXIST = "4002";
 	
 	
 }

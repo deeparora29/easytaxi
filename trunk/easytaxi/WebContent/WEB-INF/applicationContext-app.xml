@@ -7,7 +7,7 @@
 		class="com.easytaxi.common.utils.google.map.parser.GoogleMapGeocode">
 	</bean>
 
-	<bean id="locationService" class="com.easytaxi.service.LocationService">
+	<bean id="locationService" class="com.easytaxi.location.service.LocationService">
 		<property name="googleMapGeocode">
 			<ref bean="googleMapGeocode"/>
 		</property>
@@ -21,19 +21,26 @@
 	
 	
 	<bean id="taxiDataService" 
-		class="com.easytaxi.service.TaxiDataService">
+		class="com.easytaxi.location.service.TaxiDataService">
 	</bean>
 	
 	<bean id="passengerDataService" 
-		class="com.easytaxi.service.PassengerDataService">
-		<property name="passengerDao">
-			<ref bean="passengerDao"/>
-		</property>	
+		class="com.easytaxi.location.service.PassengerDataService">
+		<property name="passengerDao" ref="passengerDao"/>	
 	</bean>
 	
-	<bean id="passengerDao" 
-		class="com.easytaxi.usermgr.dao.PassengerDao">
+	<!-- location service -->
+	<bean id="callTaxiDao" class="com.easytaxi.request.dao.CallTaxiDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
+	
+	<bean id="callTaxiServie" 
+		class="com.easytaxi.request.service.CallTaxiServie">
+		<property name="callTaxiDao" ref="callTaxiDao"/>	
+		<property name="taxiDao" ref="taxiDao"/>
+		<property name="passengerDao" ref="passengerDao"/>	
+	</bean>
+	<!-- end -->
 	
 
 </beans>

@@ -98,8 +98,14 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	
+	<bean id="loginRecordDao" class="com.easytaxi.usermgr.dao.LoginRecordDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
 	<bean id="loginService" class="com.easytaxi.usermgr.service.LoginService">
 		<property name="taxiDao" ref="taxiDao"/>
 		<property name="passengerDao" ref="passengerDao"/>
+		<property name="loginRecordDao" ref="loginRecordDao"/>
 	</bean>
+
 </beans>
