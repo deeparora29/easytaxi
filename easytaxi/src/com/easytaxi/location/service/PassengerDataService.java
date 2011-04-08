@@ -1,16 +1,16 @@
 package com.easytaxi.location.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
-
 import net.sf.json.JSONObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import com.easytaxi.bo.DestLocation;
+import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.StartLocation;
 import com.easytaxi.common.ErrorCode;
@@ -33,6 +33,9 @@ public class PassengerDataService extends BaseService{
 	
 	//存放乘客广播打车消息
 	private static ConcurrentMap<String , Passenger> broadcastCallTaxiMap = new ConcurrentHashMap<String, Passenger>();
+	
+	//保存乘客上传GPS数据或经过路线
+	private static ConcurrentMap<String , List<GPSData>> passengerTrackingMap = new ConcurrentHashMap<String, List<GPSData> >();
 	
 	private PassengerDao passengerDao ;
 	
@@ -120,6 +123,24 @@ public class PassengerDataService extends BaseService{
 				passengerWorkQueue.offer( p );
 			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价
 				
+				//TODO 
+				
+			}else if(transCode.equals(SystemPara.P_UPLOADGPS_TRACK)){//上传GPS数据或经过路线
+				String userid = jsonObject.getString("userid");
+				String userGPS = jsonObject.getString("userGPS");
+				DestLocation destLocation = (DestLocation)JsonUtil.getObjectByJsonString(userGPS, DestLocation.class);
+				List<GPSData>passengerTrackingList = null;
+				GPSData data = new GPSData();
+				data.setUserId(userid);
+				data.setDestLocation(destLocation);
+				if( passengerTrackingMap.containsKey(userid) ){
+					passengerTrackingList = passengerTrackingMap.get(userid);
+					passengerTrackingList.add( data );
+				}else{
+					passengerTrackingList = new ArrayList<GPSData>();
+					passengerTrackingList.add( data );
+					passengerTrackingMap.put(userid , passengerTrackingList);
+				}
 			}
 			
 			

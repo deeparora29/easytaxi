@@ -33,17 +33,18 @@ public class LocationService extends BaseService{
 		for (String plateNumber : taxiMap.keySet()) {
 			Taxi taxi = taxiMap.get(plateNumber);
 			String status = SystemPara.getTaxiStatus(taxi.getStatus()) ;
-			String taxiLocation = taxi.getTaxiLocation();
+			/*String taxiLocation = taxi.getTaxiLocation();
 			if(taxiLocation==null||taxiLocation.trim().length()==0){
 				String latLng = taxi.getLat() + "," +taxi.getLng();
 				taxiLocation = googleMapGeocode.getAddressByLatLng(latLng);
-			}
+			}*/
 			data.append("{")
 			.append("latLng : {lat : "+taxi.getLat()+", lng : "+taxi.getLng()+"},")
+			.append("taxiStatus : '"+status+"'");
 			//.append("taxiNo : '"+taxi.getPlateNumber()+"',")
 			//.append("driverNo : '"+taxi.getDriverNo()+"',")
-			.append("taxiStatus : '"+status+"',")
-			.append("taxiAddress : '"+taxiLocation+"' ");
+			//.append("taxiStatus : '"+status+"',")
+			//.append("taxiAddress : '"+taxiLocation+"' ");
 			
 			i++ ;
 			if(i != taxiMap.size()-1){

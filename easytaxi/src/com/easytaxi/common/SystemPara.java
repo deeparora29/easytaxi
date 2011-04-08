@@ -49,6 +49,10 @@ public class SystemPara {
 	//查询出租车详细信息
 	public static final String P_QUERYTAXIDETAILINFO = "P010";
 	
+	//上传出租车GPS数据
+	public static final String T_UPLOADGPS = "T003";
+	
+	
     // taxi status
     private final static String[] TAXI_STATUS = { "Empty", "Hired", "Sharing" };
 
