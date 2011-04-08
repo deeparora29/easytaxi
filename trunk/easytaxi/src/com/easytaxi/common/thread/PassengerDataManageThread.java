@@ -34,7 +34,7 @@ public class PassengerDataManageThread implements Runnable{
 	public void run() {
 		try {
 			while( true ){
-				PassengerDataService service = (PassengerDataService)BeanFactoryUtil.getBean("");
+				PassengerDataService service = PassengerDataService.getInstance();
 				BlockingQueue<Passenger> queue = service.getPassengerWorkQueue() ;
 				if( !queue.isEmpty() ){
 					//取出一个taxi信息进行处理
