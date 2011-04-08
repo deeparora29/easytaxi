@@ -16,8 +16,9 @@ import com.easytaxi.common.dao.BaseJdbcDao;
 public class TaxiDao extends BaseJdbcDao {
     final static String QUERY_TAXI_EMAIL = "select * from taxi where email=?";
     final static String QUERY_TAXI_PLATENUMBER = "select * from taxi where plate_number=?";
-    // todo: register save the taxi info.
-    final static String INSERT_TAXI = "insert into (...) values (?,?,?)";
+    final static String INSERT_TAXI = "insert into taxi (userid, plate_number, password, license, company,"
+        + " car_model, charge_model, email, contact_person0, contact_phone0, contact_person1, contact_phone1,"
+        + " status, descr, credit, register_time, modified_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),now())";
 
     class TaxiRowMapper
         implements RowMapper {
@@ -70,8 +71,17 @@ public class TaxiDao extends BaseJdbcDao {
         return (Taxi) getObjectFromList(list);
     }
 
-    /*public void doSaveTaxi(Taxi taxi) {
-        getJdbcTemplate().update(INSERT_TAXI, new Object[]{...});
-    }*/
+    /**
+     * @method: register
+     * @desciption: insert a taxi user
+     * @param taxi
+     */
+    public void doSaveTaxi(Taxi taxi) {
+        getJdbcTemplate().update(
+            INSERT_TAXI,
+            new Object[] { taxi.getUserid(), taxi.getCab(), taxi.getPassword(), taxi.getLicense(), taxi.getCompany(),
+                taxi.getCarModel(), taxi.getChargeModel(), taxi.getEmail(), taxi.getDriver0(), taxi.getPhone0(),
+                taxi.getDriver1(), taxi.getPhone1(), taxi.getStatus(), taxi.getDescr(), taxi.getCredit() });
+    }
 
 }

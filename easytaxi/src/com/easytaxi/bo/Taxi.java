@@ -10,6 +10,7 @@ public class Taxi {
 
     private String userid;
 	//出租车牌号
+    // plate_number
     private String cab;
 	
 	//密码
@@ -45,11 +46,11 @@ public class Taxi {
     // license
     private String license;
 
-    // 出租车状态1:负载，2：空车  3：其它
-    private int status;
+    // 出租车状态0:空车,1:负载，2：其它
+    private int status = 0;
 
     // 信用度
-    private float credit;
+    private float credit = 3.0f;
 
     // 注册时间 DateTime
     private Date registerTime;

@@ -147,7 +147,7 @@ public class PassengerDataService extends BaseService{
 		if( TransCode.equals(SystemPara.P_REGISTER) ){
 			res = getSerialNum("p_user_id", 5, "false");
 			passenger.setUserid(res);
-			passengerDao.register( passenger );
+            passengerDao.doSavePassenger(passenger);
 		}
 		return res ;
 	}
