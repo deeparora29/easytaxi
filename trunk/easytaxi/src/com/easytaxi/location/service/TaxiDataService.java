@@ -1,14 +1,10 @@
 package com.easytaxi.location.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
-
 import net.sf.json.JSONObject;
-
 import com.easytaxi.bo.DestLocation;
 import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Taxi;
@@ -25,11 +21,7 @@ public class TaxiDataService extends BaseService{
 	private static BlockingQueue<Taxi> taxiWorkQueue = new LinkedBlockingQueue<Taxi>();
 	
 	//存放出租车信息
-	private static ConcurrentMap<String , Taxi> taxiInfoMap = new ConcurrentHashMap<String, Taxi>();
-	
-	//保存出租车上传GPS数据
-	private static ConcurrentMap<String , List<GPSData>> taxiGPSDataMap = new ConcurrentHashMap<String, List<GPSData> >();
-	
+	private static ConcurrentMap<String , GPSData> taxiInfoMap = new ConcurrentHashMap<String, GPSData>();
 	
 	
 	public TaxiDataService(){
@@ -55,18 +47,10 @@ public class TaxiDataService extends BaseService{
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
 				DestLocation destLocation = (DestLocation)JsonUtil.getObjectByJsonString(userGPS, DestLocation.class);
-				List<GPSData>passengerTrackingList = null;
 				GPSData data = new GPSData();
 				data.setUserId(userid);
 				data.setDestLocation(destLocation);
-				if( taxiGPSDataMap.containsKey(userid) ){
-					passengerTrackingList = taxiGPSDataMap.get(userid);
-					passengerTrackingList.add( data );
-				}else{
-					passengerTrackingList = new ArrayList<GPSData>();
-					passengerTrackingList.add( data );
-					taxiGPSDataMap.put(userid , passengerTrackingList);
-				}
+				taxiInfoMap.put(userid, data);
 			}
 		}
 		return jsonString ;
@@ -77,17 +61,13 @@ public class TaxiDataService extends BaseService{
 	}
 	
 	
-	public ConcurrentMap<String , Taxi> getTaxiInfoMap(){
+	public ConcurrentMap<String , GPSData> getTaxiInfoMap(){
 		return taxiInfoMap ;
 	}
 	
 	public void updateTaxiInfo(Taxi taxi){
 		//taxiInfoMap.put(taxi.getPlateNumber(), taxi);
 	}
-	
-	
-	
-	
 	
 	public static void main(String[] args) {
 		System.out.println(taxiWorkQueue.isEmpty());
