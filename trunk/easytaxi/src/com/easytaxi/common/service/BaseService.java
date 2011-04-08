@@ -41,7 +41,7 @@ public class BaseService {
 	*  		 其中：t_user_id与et_sys_var表中field_name对应，若无此记录则不能获取正确的流水号
 	*       13 为流水号长度
 	*       true表示需要添加日期
-	*        return 2011040401056     
+	*       return 2011040401056     
 	* </blockquote>
 	* <p>	
 	*/
