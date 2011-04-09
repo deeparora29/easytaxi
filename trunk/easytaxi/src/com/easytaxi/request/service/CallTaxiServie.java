@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.ErrorCode;
@@ -36,7 +38,7 @@ public class CallTaxiServie extends BaseService {
     }
 
     /**
-     * P003 sponsor a call-taxi request
+     * P003 sponsor a call-taxi request requestNo == "" 表示用车请求发起失败
      * 
      * @return
      */
@@ -54,7 +56,7 @@ public class CallTaxiServie extends BaseService {
     }
 
     /**
-     * P004 get confirm info if return null, it means no taxi to confirm if the taxi is not null, shows detail info
+     * P004 get confirm info 这个接口封装已经比较全了，包含了errorCode的信息，errorCode==ErrorCode.SUCCESS可以从中获取Taxi 的详细信息
      * 
      * @param userid
      * @param requestNo
@@ -96,9 +98,10 @@ public class CallTaxiServie extends BaseService {
     }
 
     /**
-     * P005/T005 cancel request
-     * @param userid
-     * @param requestNo
+     * P005/T005 cancel request 取消用车请求
+     * 
+     * @param userid ：操作者
+     * @param requestNo：序列号
      * @param comments
      */
     public void cancelRequest(String userid, String requestNo, String comments) {
@@ -107,17 +110,18 @@ public class CallTaxiServie extends BaseService {
             requestInfo.setStatus(SystemPara.REQUESTINFO_STATUS_CANCELED);
             requestInfo.setOperatorid(userid);
             requestInfo.setOperatorType(SystemPara.getUserTypeByUserid(userid));
-            requestInfo.setOperatorComments(SystemPara.getUserType(requestInfo.getOperatorType())
-                + " canceled the request");
+            if (StringUtils.isEmpty(comments))
+                comments = SystemPara.getUserType(requestInfo.getOperatorType()) + " canceled the request";
+            requestInfo.setOperatorComments(comments);
             requestInfo.setOperatorTime(new Date());                   
             getCallTaxiDao().doUpdateRequestInfoByOperator(requestInfo);
         } catch (Exception e) {
             logger.error("Cancel request[" + requestNo + "] error: ", e);
         }
     }
-    
+
     /**
-     * T004 confirm a request
+     * T004 confirm a request,这个接口封装已经比较全了，包含了errorCode的信息，errorCode==ErrorCode.SUCCESS，返回Passenger的具体信息
      * 
      * @param userid
      * @param requestNo
@@ -159,7 +163,7 @@ public class CallTaxiServie extends BaseService {
     }
 
     /**
-     * T012 Get valid passenger’s request
+     * T012 Get valid passenger’s request，返回有效地用车请求：status=0 &&时常在５分中内
      * 
      * @return
      */
@@ -171,7 +175,8 @@ public class CallTaxiServie extends BaseService {
             Calendar cal = Calendar.getInstance();
             Date startDate = new Date(cal.getTimeInMillis() - timeDiff);
             Date endDate = new Date(cal.getTimeInMillis() + timeDiff);
-            validCalls = getCallTaxiDao().getRequestInfoBy(0, DateUtil.convertDateTimeToString(startDate),
+            validCalls = getCallTaxiDao().getRequestInfoBy(SystemPara.REQUESTINFO_STATUS_ISVALID,
+                DateUtil.convertDateTimeToString(startDate),
                 DateUtil.convertDateTimeToString(endDate));
         } catch (Exception ex) {
             logger.error("Query valid(status=0) request error: ", ex);
