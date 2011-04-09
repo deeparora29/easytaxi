@@ -16,6 +16,7 @@ import com.easytaxi.common.dao.BaseJdbcDao;
 public class TaxiDao extends BaseJdbcDao {
     final static String QUERY_TAXI_EMAIL = "select * from taxi where email=?";
     final static String QUERY_TAXI_PLATENUMBER = "select * from taxi where plate_number=?";
+    final static String QUERY_TAXI_USERID = "select * from taxi where userid=?";
     final static String INSERT_TAXI = "insert into taxi (userid, plate_number, password, license, company,"
         + " car_model, charge_model, email, contact_person0, contact_phone0, contact_person1, contact_phone1,"
         + " status, descr, credit, register_time, modified_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),now())";
@@ -68,6 +69,17 @@ public class TaxiDao extends BaseJdbcDao {
     public Taxi getTaxiByPlateNumber(String plateNumber) {
         List<Taxi> list = getJdbcTemplate().query(QUERY_TAXI_PLATENUMBER, new Object[] { plateNumber },
             new TaxiRowMapper());
+        return (Taxi) getObjectFromList(list);
+    }
+
+    /**
+     * according to userid get detail taxi info
+     * 
+     * @param userid
+     * @return
+     */
+    public Taxi getTaxiByUserid(String userid) {
+        List<Taxi> list = getJdbcTemplate().query(QUERY_TAXI_USERID, new Object[] { userid }, new TaxiRowMapper());
         return (Taxi) getObjectFromList(list);
     }
 

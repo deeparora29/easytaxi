@@ -54,6 +54,10 @@ public class SystemPara {
 	
 	
     // taxi status
+    public final static int TAXI_STATUS_EMPTY = 0;
+    public final static int TAXI_STATUS_HIRED = 1;
+    public final static int TAXI_STATUS_SHARING = 2;
+
     private final static String[] TAXI_STATUS = { "Empty", "Hired", "Sharing" };
 
     public static String getTaxiStatus(int status) {
@@ -66,7 +70,18 @@ public class SystemPara {
     public static String getUserType(int type) {
         return (type >= 0 && type < 2) ? USER_TYPE[type] : "Unknown";
     }
+
+    public static int getUserTypeByUserid(String userid) {
+        int type = userid.indexOf("T");
+        if (type < 0)
+            type = 1;
+        return type;
+    }
 	
     public static final String GOOLGE_MAP_GECODE_JSON = "http://maps.google.com/maps/api/geocode/json";
-    
+    // requestinfo status
+    public final static int REQUESTINFO_STATUS_ISVALID = 0;
+    public final static int REQUESTINFO_STATUS_CONFIRMED = 1;
+    public final static int REQUESTINFO_STATUS_CANCELED = 2;
+
 }

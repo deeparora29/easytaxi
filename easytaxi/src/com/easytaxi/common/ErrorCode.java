@@ -32,11 +32,19 @@ public class ErrorCode {
 	public static final String PASSWORD_NOT_ACCURATE = "2003";
 	
 	//操作错误（如乘客发布用车消息后司机确定后取消用车等）
-	public static final String OPERATE_ERROR ="3000";
+    // 服务器端异常
+    public final static String OPERATE_SERVERERROR = "3000";
+
+    // 用车请求尚未响应
+    public final static String REQUEST_ISVALID = "4000";
+    // 用车请求已经被响应
+    public final static String REQUEST_CONFIRMED = "4001";
+    // 用车请求已经被取消
+    public final static String REQUEST_CONCELED = "4002";
     // 用车请求过期
-    public static final String REQEST_OUTOFDATE = "4001";
+    public final static String REQEST_OUTOFDATE = "4003";
     // 用车请求不存在
-    public static final String REQUEST_NOTEXIST = "4002";
+    public final static String REQUEST_NOTEXIST = "4004";
 	
 	
 }
