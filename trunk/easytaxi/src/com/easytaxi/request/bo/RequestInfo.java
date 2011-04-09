@@ -2,6 +2,7 @@
 package com.easytaxi.request.bo;
 
 import java.util.Date;
+import com.easytaxi.bo.GPSData;
 
 /**
  * @table "requestinfo"
@@ -10,7 +11,10 @@ import java.util.Date;
 public class RequestInfo {
     private String requestNo;
     private String userid;
-    // ---location
+    private String phone ;
+    
+
+	// ---location
     private double startLong = 0;
     private double startLat = 0;
     private String startText = "";
@@ -47,6 +51,24 @@ public class RequestInfo {
         return requestNo;
     }
 
+    
+    /*** 发布用车请求*/
+	public RequestInfo(String userid,String phone,double start_long,double start_lat,String start_text,double end_long,
+			double end_lat,String end_text,int number,int luggage,String comments,String share) {
+		this.userid = userid;
+		this.phone = phone;
+		this.startLong = start_long ;
+		this.startLat = start_lat;
+		this.startText = start_text;
+		this.endLong = end_long ;
+		this.endLat = end_lat;
+		this.endText = end_text;
+		this.number = number ;
+		this.luggage = luggage;
+		this.comments = comments;
+		this.share = share ;
+	}
+    
     public void setRequestNo(String requestNo) {
         this.requestNo = requestNo;
     }
@@ -187,4 +209,11 @@ public class RequestInfo {
         return userid;
     }
 
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

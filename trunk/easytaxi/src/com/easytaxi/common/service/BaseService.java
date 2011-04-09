@@ -13,8 +13,10 @@ import org.springframework.jdbc.core.CallableStatementCallback;
 import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
+import com.easytaxi.request.bo.RequestResult;
 
 public class BaseService {
 
@@ -118,20 +120,29 @@ public class BaseService {
 		return jsonString;
 	}
 
-	public String getReturnMessage( String ... args ) {
-		String transCode = args[0];
+	public String getReturnMessage( Object ... args ) {
+		String transCode = (String)args[0];
 		StringBuffer jsonString = new StringBuffer("{");
 		if( transCode.equals(SystemPara.P_REGISTER) ){//乘车注册
-			String userId = args[1];
+			String userId = (String)args[1];
 			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"");
 		}else if( transCode.equals(SystemPara.P_LOGIN) ){//乘客登录
-			String userId = args[1];
-			String phone = args[2];
+			String userId = (String)args[1];
+			String phone = (String)args[2];
 			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"").append(",phone:"+phone+"");
 		}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
-			
+			//requestNo:’201104062201’
+			String requestNo = (String)args[1];
+			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",requestNo:"+requestNo+"");
 		}else if( transCode.equals(SystemPara.P_GETCONFIRM) ){//获取出租车响应
-			
+			String requestNo = (String)args[1];
+			RequestResult resulst = (RequestResult)args[2];
+			String cab = resulst.getTaxi().getCab();
+			float credit = resulst.getTaxi().getCredit();
+			UploadGPSData taxiGPSData = (UploadGPSData)args[3];
+			String cabGPS = "{lat:"+taxiGPSData.getDestLocation().getLat()+",lng:"+taxiGPSData.getDestLocation().getLng()+"}";
+			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",requestNo:"+requestNo+"")
+			.append(",cab:"+cab+"").append(",credit:"+credit+"").append(",cabGPS:"+cabGPS+"");
         }else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
 			
 		}else if( transCode.equals(SystemPara.P_CREDITRATING) ){//信用评价

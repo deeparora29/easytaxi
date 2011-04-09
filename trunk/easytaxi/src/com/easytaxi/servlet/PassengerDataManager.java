@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.easytaxi.common.utils.BeanFactoryUtil;
 import com.easytaxi.location.service.PassengerDataService;
 
 /**
@@ -37,7 +38,7 @@ public class PassengerDataManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String data = request.getParameter("data");
-		PassengerDataService instance = PassengerDataService.getInstance();
+		PassengerDataService instance = (PassengerDataService)BeanFactoryUtil.getBean("callTaxiServie");
 		String returnMessage = instance.offer( data );
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");

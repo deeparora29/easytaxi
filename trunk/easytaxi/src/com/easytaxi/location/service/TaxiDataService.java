@@ -5,8 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import net.sf.json.JSONObject;
-import com.easytaxi.bo.DestLocation;
 import com.easytaxi.bo.GPSData;
+import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
@@ -21,7 +21,7 @@ public class TaxiDataService extends BaseService{
 	private static BlockingQueue<Taxi> taxiWorkQueue = new LinkedBlockingQueue<Taxi>();
 	
 	//存放出租车信息
-	private static ConcurrentMap<String , GPSData> taxiInfoMap = new ConcurrentHashMap<String, GPSData>();
+	private static ConcurrentMap<String , UploadGPSData> taxiInfoMap = new ConcurrentHashMap<String, UploadGPSData>();
 	
 	
 	public TaxiDataService(){
@@ -46,8 +46,8 @@ public class TaxiDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.T_UPLOADGPS)){//上传出租车GPS数据
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
-				DestLocation destLocation = (DestLocation)JsonUtil.getObjectByJsonString(userGPS, DestLocation.class);
-				GPSData data = new GPSData();
+				GPSData destLocation = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+				UploadGPSData data = new UploadGPSData();
 				data.setUserId(userid);
 				data.setDestLocation(destLocation);
 				taxiInfoMap.put(userid, data);
@@ -61,7 +61,7 @@ public class TaxiDataService extends BaseService{
 	}
 	
 	
-	public ConcurrentMap<String , GPSData> getTaxiInfoMap(){
+	public ConcurrentMap<String , UploadGPSData> getTaxiInfoMap(){
 		return taxiInfoMap ;
 	}
 	

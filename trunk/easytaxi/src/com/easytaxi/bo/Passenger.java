@@ -26,9 +26,7 @@ public class Passenger {
 
 	private String descr;
 
-	private StartLocation startLocation;
-
-	private DestLocation destLocation;
+	private GPSData destLocation;
 
 	private int number;
 
@@ -69,18 +67,7 @@ public class Passenger {
 		this.descr = descr;
 	}
 
-	/*** 发布用车请求*/
-	public Passenger(String transCode, String phone, StartLocation startLocation, DestLocation destLocation,
-			int number, int luggage, String otherInfos,String share) {
-		this.transCode =  transCode;
-		this.phone = phone;
-		this.startLocation = startLocation;
-		this.destLocation = destLocation;
-		this.number = number;
-		this.luggage = luggage;
-		this.otherInfos = otherInfos;
-		this.share = share ;
-	}
+	
 	
 	/*** 信用评价*/
 	public Passenger(String transCode, String phone,String plateNumber){
@@ -163,19 +150,11 @@ public class Passenger {
 	}
 
 
-	public StartLocation getStartLocation() {
-		return startLocation;
-	}
-
-	public void setStartLocation(StartLocation startLocation) {
-		this.startLocation = startLocation;
-	}
-
-	public DestLocation getDestLocation() {
+	public GPSData getDestLocation() {
 		return destLocation;
 	}
 
-	public void setDestLocation(DestLocation destLocation) {
+	public void setDestLocation(GPSData destLocation) {
 		this.destLocation = destLocation;
 	}
 
