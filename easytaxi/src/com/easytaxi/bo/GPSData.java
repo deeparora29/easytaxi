@@ -1,34 +1,36 @@
 package com.easytaxi.bo;
 
 public class GPSData {
+
+	private double lat;
+
+	private double lng;
 	
-	private String userId;
-	
-	private int status ;
+	private String text ;
 
-	public int getStatus() {
-		return status;
+	public double getLat() {
+		return lat;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setLat(double lat) {
+		this.lat = lat;
 	}
 
-	private DestLocation DestLocation;
-
-	public String getUserId() {
-		return userId;
+	public double getLng() {
+		return lng;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setLng(double lng) {
+		this.lng = lng;
 	}
 
-	public DestLocation getDestLocation() {
-		return DestLocation;
+	public String getText() {
+		return text;
 	}
 
-	public void setDestLocation(DestLocation destLocation) {
-		DestLocation = destLocation;
+	public void setText(String text) {
+		this.text = text;
 	}
+
+
 }

@@ -8,7 +8,7 @@ import java.sql.Types;
 import java.util.concurrent.ConcurrentMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.easytaxi.bo.GPSData;
+import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.google.map.parser.GoogleMapGeocode;
@@ -25,11 +25,11 @@ public class LocationService extends BaseService{
 	
 	
 	public String initLocationData(){
-		ConcurrentMap<String , GPSData> taxiMap = taxiDataService.getTaxiInfoMap();
+		ConcurrentMap<String , UploadGPSData> taxiMap = taxiDataService.getTaxiInfoMap();
 		StringBuffer data = new StringBuffer("[\n");
 		int i = 0 ;
 		for (String userId : taxiMap.keySet()) {
-			GPSData taxi = taxiMap.get(userId);
+			UploadGPSData taxi = taxiMap.get(userId);
 			String status = SystemPara.getTaxiStatus(taxi.getStatus()) ;
 			/*String taxiLocation = taxi.getTaxiLocation();
 			if(taxiLocation==null||taxiLocation.trim().length()==0){

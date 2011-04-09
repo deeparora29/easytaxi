@@ -6,21 +6,27 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.easytaxi.bo.DestLocation;
+
 import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Passenger;
-import com.easytaxi.bo.StartLocation;
+import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.JsonUtil;
+import com.easytaxi.request.bo.RequestInfo;
+import com.easytaxi.request.bo.RequestResult;
+import com.easytaxi.request.service.CallTaxiServie;
 import com.easytaxi.usermgr.dao.PassengerDao;
 
 public class PassengerDataService extends BaseService{
 	
+
 	Log log = LogFactory.getLog(PassengerDataService.class);
 	
 	private static PassengerDataService instance = new PassengerDataService ();
@@ -35,11 +41,12 @@ public class PassengerDataService extends BaseService{
 	private static ConcurrentMap<String , Passenger> broadcastCallTaxiMap = new ConcurrentHashMap<String, Passenger>();
 	
 	//保存乘客上传GPS数据或经过路线
-	private static ConcurrentMap<String , List<GPSData>> passengerTrackingMap = new ConcurrentHashMap<String, List<GPSData> >();
+	private static ConcurrentMap<String , List<UploadGPSData>> passengerTrackingMap = new ConcurrentHashMap<String, List<UploadGPSData> >();
 	
 	private PassengerDao passengerDao ;
 	
-
+	private CallTaxiServie callTaxiServie ;
+	
 	private PassengerDataService(){
 		
 	}
@@ -78,7 +85,6 @@ public class PassengerDataService extends BaseService{
 				if( !passengerInfoMap.containsKey(phone) && !passengerInfoMap.containsKey(email) ){
 					Passenger p = new Passenger(transCode ,firstname, lastname, password, phone, email, nickName, gender, descr);
 					//由于需要立即返回userid，则不能异步处理
-					//passengerWorkQueue.offer( p );
 					String userId = updateData( p );
 					return getReturnMessage( transCode , userId );
 				}else{
@@ -108,39 +114,77 @@ public class PassengerDataService extends BaseService{
 					jsonString = getReturnErrorMessage(ErrorCode.USER_NOT_FOUND);
 				}
 				return jsonString ;
-			}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
-				String Id = jsonObject.getString("Id");
+			}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求 P0003
+				String userid = jsonObject.getString("userid");
 				String phone = jsonObject.getString("phone");
 				String userGPS = jsonObject.getString("userGPS");
+				GPSData startLocation = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+				double start_long =  startLocation.getLng();
+				double start_lat = startLocation.getLat();
+				String start_text = startLocation.getText();
 				String dstGPS = jsonObject.getString("dstGPS");
+				GPSData destLocation = (GPSData)JsonUtil.getObjectByJsonString(dstGPS, GPSData.class);
+				double end_long =  destLocation.getLng();
+				double end_lat = destLocation.getLat();
+				String end_text = destLocation.getText();
 				int number = jsonObject.getInt("number");
 				int luggage = jsonObject.getInt("luggage");
-				String otherinfos = jsonObject.getString("otherinfo");
+				String comments = jsonObject.getString("comments");
 				String share = jsonObject.getString("share");
-				StartLocation startLocation = (StartLocation)JsonUtil.getObjectByJsonString(userGPS, StartLocation.class);
-				DestLocation destLocation = (DestLocation)JsonUtil.getObjectByJsonString(dstGPS, DestLocation.class);
-				Passenger p = new Passenger(transCode ,phone, startLocation, destLocation, number, luggage, otherinfos , share);
-				passengerWorkQueue.offer( p );
-			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价
+				
+				RequestInfo requestInfo = new RequestInfo(userid,phone,start_long,start_lat,start_text,end_long,
+						end_lat,end_text,number,luggage,comments,share);
+				String res = callTaxiServie.requestTaxi(requestInfo);
+				if("".equals(res)){
+					jsonString = getReturnErrorMessage(ErrorCode.REQUEST_ISVALID);
+				}else{
+					jsonString = getReturnMessage(transCode,res);
+				}
+			}else if(transCode.equals(SystemPara.P_GETCONFIRM)){//获取出租车响应 P004
+				String userid = jsonObject.getString("userid");
+				String requestNo = jsonObject.getString("requestNo");
+				//从内存中获取出租车实时GPS数据
+				UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiInfoMap().get( userid );
+				RequestResult resulst = callTaxiServie.getConfirmedTaxiInfo(userid, requestNo);
+				if(resulst.getErrorCode().equals(ErrorCode.SUCCESS)){
+					jsonString = getReturnMessage(transCode,requestNo,resulst,taxiGPSData);
+				}else{
+					jsonString = getReturnErrorMessage(resulst.getErrorCode());
+				}
+			}else if(transCode.equals(SystemPara.P_CANCELREQUEST)){//取消用车请求 P005
+				
+				//TODO 
+				
+			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价P006
+				
+				//TODO 
+				
+			}else if(transCode.equals(SystemPara.P_QUERYCREDIT)){//查询Taxi信誉度P007
+				
+				//TODO 
+				
+			}else if(transCode.equals(SystemPara.P_QUERYTAXIGPS)){//查询Taxi GPSP008
 				
 				//TODO 
 				
 			}else if(transCode.equals(SystemPara.P_UPLOADGPS_TRACK)){//上传GPS数据或经过路线
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
-				DestLocation destLocation = (DestLocation)JsonUtil.getObjectByJsonString(userGPS, DestLocation.class);
-				List<GPSData>passengerTrackingList = null;
-				GPSData data = new GPSData();
+				GPSData destLocation = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+				List<UploadGPSData>passengerTrackingList = null;
+				UploadGPSData data = new UploadGPSData();
 				data.setUserId(userid);
 				data.setDestLocation(destLocation);
 				if( passengerTrackingMap.containsKey(userid) ){
 					passengerTrackingList = passengerTrackingMap.get(userid);
 					passengerTrackingList.add( data );
 				}else{
-					passengerTrackingList = new ArrayList<GPSData>();
+					passengerTrackingList = new ArrayList<UploadGPSData>();
 					passengerTrackingList.add( data );
 					passengerTrackingMap.put(userid , passengerTrackingList);
 				}
+			}else if(transCode.equals(SystemPara.P_QUERYTAXIDETAILINFO)){//查询出租车详细信息 GPSP010
+				//TODO 
 			}
 			
 			
@@ -165,10 +209,12 @@ public class PassengerDataService extends BaseService{
 	public String updateData( Passenger passenger ){
 		String TransCode = passenger.getTransCode() ;
 		String res = null ;
-		if( TransCode.equals(SystemPara.P_REGISTER) ){
+		if( TransCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求 P003
 			res = getSerialNum("p_user_id", 5, "false");
 			passenger.setUserid(res);
             passengerDao.doSavePassenger(passenger);
+		}else if( TransCode.equals(SystemPara.P_REGISTER) ){
+			
 		}
 		return res ;
 	}
@@ -180,5 +226,13 @@ public class PassengerDataService extends BaseService{
 
 	public void setPassengerDao(PassengerDao passengerDao) {
 		this.passengerDao = passengerDao;
+	}
+	
+	public CallTaxiServie getCallTaxiServie() {
+		return callTaxiServie;
+	}
+
+	public void setCallTaxiServie(CallTaxiServie callTaxiServie) {
+		this.callTaxiServie = callTaxiServie;
 	}
 }
