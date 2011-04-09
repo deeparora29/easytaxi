@@ -8,6 +8,7 @@ import java.util.List;
 import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.ErrorCode;
+import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.DateUtil;
 import com.easytaxi.request.bo.RequestInfo;
@@ -42,7 +43,7 @@ public class CallTaxiServie extends BaseService {
     public String requestTaxi(RequestInfo requestInfo) {
         String requestNo = "";
         try {
-            requestNo = getSerialNum("p_user_id", 5 , "false");
+            requestNo = getSerialNum("request_no", 12, "true");
             requestInfo.setRequestNo(requestNo);
             getCallTaxiDao().doDeleteRequestInfo(requestNo);
             getCallTaxiDao().doSaveRequestInfo(requestInfo);
@@ -53,15 +54,45 @@ public class CallTaxiServie extends BaseService {
     }
 
     /**
-     * P004 get confirm info
+     * P004 get confirm info if return null, it means no taxi to confirm if the taxi is not null, shows detail info
+     * 
      * @param userid
      * @param requestNo
      * @return
      */
-    public Taxi getConfirmedTaxiInfo(String userid, String requestNo) {
-        Taxi taxi = null;
-        // TODO: query db to get confirm info
-        return taxi;
+    public RequestResult getConfirmedTaxiInfo(String userid, String requestNo) {
+        RequestResult result = new RequestResult();
+        try {
+            RequestInfo info = getCallTaxiDao().queryRequestInfo(requestNo);
+            if (info == null) {
+                result.setErrorCode(ErrorCode.REQUEST_NOTEXIST);
+                result.setComments("Request[" + requestNo + "] does not exist.");
+            } else {
+                switch (info.getStatus()) {
+                    case SystemPara.REQUESTINFO_STATUS_ISVALID:
+                        result.setErrorCode(ErrorCode.REQUEST_ISVALID);
+                        result.setComments("Request[" + requestNo + "] is not confirmed.");
+                        break;
+                    case SystemPara.REQUESTINFO_STATUS_CONFIRMED:
+                        result.setErrorCode(ErrorCode.SUCCESS);
+                        Taxi taxi = getTaxiDao().getTaxiByUserid(info.getOperatorid());
+                        result.setTaxi(taxi);
+                        break;
+                    case SystemPara.REQUESTINFO_STATUS_CANCELED:
+                        result.setErrorCode(ErrorCode.REQUEST_CONCELED);
+                        result.setComments("Request[" + requestNo + "] is canceled.");
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("Get confirmed taxi info error: ", ex);
+            result.setErrorCode(ErrorCode.OPERATE_SERVERERROR);
+            result.setComments("Error:" + ex.toString());
+        }
+        return result;
     }
 
     /**
@@ -71,7 +102,18 @@ public class CallTaxiServie extends BaseService {
      * @param comments
      */
     public void cancelRequest(String userid, String requestNo, String comments) {
-        // TODO: update requestinfo table
+        try {
+            RequestInfo requestInfo = new RequestInfo(requestNo);
+            requestInfo.setStatus(SystemPara.REQUESTINFO_STATUS_CANCELED);
+            requestInfo.setOperatorid(userid);
+            requestInfo.setOperatorType(SystemPara.getUserTypeByUserid(userid));
+            requestInfo.setOperatorComments(SystemPara.getUserType(requestInfo.getOperatorType())
+                + " canceled the request");
+            requestInfo.setOperatorTime(new Date());                   
+            getCallTaxiDao().doUpdateRequestInfoByOperator(requestInfo);
+        } catch (Exception e) {
+            logger.error("Cancel request[" + requestNo + "] error: ", e);
+        }
     }
     
     /**
@@ -86,9 +128,9 @@ public class CallTaxiServie extends BaseService {
             
             RequestInfo requestInfo = getCallTaxiDao().queryRequestInfo(requestNo);
             if(requestInfo != null){
-                if(requestInfo.getStatus() == 0){ //valid
+                if (requestInfo.getStatus() == SystemPara.REQUESTINFO_STATUS_ISVALID) { // valid
                     // update requestinfo
-                    requestInfo.setStatus(1);
+                    requestInfo.setStatus(SystemPara.REQUESTINFO_STATUS_CONFIRMED);
                     requestInfo.setOperatorid(userid);
                     requestInfo.setOperatorType(0);
                     requestInfo.setOperatorComments("Taxi confirmed");
@@ -110,6 +152,8 @@ public class CallTaxiServie extends BaseService {
 
         } catch (Exception ex) {
             logger.error("Taxi confirm request error: ", ex);
+            result.setErrorCode(ErrorCode.OPERATE_SERVERERROR);
+            result.setComments("Error:" + ex.toString());
         }
         return result;
     }
