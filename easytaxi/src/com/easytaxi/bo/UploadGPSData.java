@@ -5,6 +5,16 @@ public class UploadGPSData {
 	private String userId;
 	
 	private int status ;
+	
+	private String cab ;
+	
+	public String getCab() {
+		return cab;
+	}
+
+	public void setCab(String cab) {
+		this.cab = cab;
+	}
 
 	public int getStatus() {
 		return status;
@@ -14,7 +24,7 @@ public class UploadGPSData {
 		this.status = status;
 	}
 
-	private GPSData DestLocation;
+	private GPSData gpsdata;
 
 	public String getUserId() {
 		return userId;
@@ -25,10 +35,10 @@ public class UploadGPSData {
 	}
 
 	public GPSData getDestLocation() {
-		return DestLocation;
+		return gpsdata;
 	}
 
-	public void setDestLocation(GPSData destLocation) {
-		DestLocation = destLocation;
+	public void setGpsdata(GPSData gpsdata) {
+		gpsdata = gpsdata;
 	}
 }

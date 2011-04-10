@@ -1,6 +1,8 @@
 package com.easytaxi.bo;
 
 public class GPSData {
+	
+	
 
 	private double lat;
 

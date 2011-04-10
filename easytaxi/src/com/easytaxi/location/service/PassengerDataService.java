@@ -178,7 +178,7 @@ public class PassengerDataService extends BaseService{
 				List<UploadGPSData>passengerTrackingList = null;
 				UploadGPSData data = new UploadGPSData();
 				data.setUserId(userid);
-				data.setDestLocation(destLocation);
+				data.setGpsdata(destLocation);
 				if( passengerTrackingMap.containsKey(userid) ){
 					passengerTrackingList = passengerTrackingMap.get(userid);
 					passengerTrackingList.add( data );

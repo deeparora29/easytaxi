@@ -1,13 +1,15 @@
 package com.easytaxi.location.service;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import net.sf.json.JSONObject;
+import com.easytaxi.bo.Driver;
 import com.easytaxi.bo.GPSData;
-import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.bo.Taxi;
+import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
@@ -43,15 +45,76 @@ public class TaxiDataService extends BaseService{
 			if(transCode==null||transCode.length()<4){
 				jsonString = getReturnErrorMessage(ErrorCode.TRANS_CODE_ERROR);
 				return jsonString ;
-			}else if(transCode.equals(SystemPara.T_UPLOADGPS)){//上传出租车GPS数据
+			}else if(transCode.equals(SystemPara.T_REGISTER)){//Taxi Register T001
+				String cab = jsonObject.getString("cab");
+				String password = jsonObject.getString("password");
+				String license = jsonObject.getString("license");
+				String company = jsonObject.getString("company");
+				String email = jsonObject.getString("email");
+				String carModel = jsonObject.getString("carModel");
+				String chargeModel = jsonObject.getString("chargeModel");
+				String drivers = jsonObject.getString("drivers");
+				List <Driver> list = JsonUtil.getListByJsonString(drivers, Driver.class);
+				String descr  = jsonObject.getString("descr");
+				
+				
+			}else if(transCode.equals(SystemPara.T_LOGIN)){//Taxi Login T002
+				String cab = jsonObject.getString("cab");
+				String password = jsonObject.getString("password");
+				
+			}else if(transCode.equals(SystemPara.T_UPLOADGPS)){//上传出租车GPS数据 T003
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
-				GPSData destLocation = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+				String cab = jsonObject.getString("cab");
+				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
 				UploadGPSData data = new UploadGPSData();
+				data.setCab(cab);
 				data.setUserId(userid);
-				data.setDestLocation(destLocation);
+				data.setGpsdata(gpsdata);
 				taxiInfoMap.put(userid, data);
+			}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call T004
+				String userid = jsonObject.getString("userid");
+				String userGPS = jsonObject.getString("userGPS");
+				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+				String requestNo = jsonObject.getString("requestNo");
+				
+			}else if(transCode.equals(SystemPara.T_CANCEL_CALL)){//Cancel Call T005
+				String userid = jsonObject.getString("userid");
+				String requestNo = jsonObject.getString("requestNo");
+				String comments = jsonObject.getString("comments");
+				
+			}else if(transCode.equals(SystemPara.T_CREDIT_RATING)){//Credit Rating T006
+				String userid = jsonObject.getString("userid");
+				String requestNo = jsonObject.getString("requestNo");
+				float credit = Float.valueOf(jsonObject.getString("credit"));
+				String comments = jsonObject.getString("comments");
+				
+			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_CREDIT)){//Query Passenger’s Credit  T007
+				String userid = jsonObject.getString("userid");
+				String passengerid = jsonObject.getString("passengerid");
+				int number = Integer.valueOf(jsonObject.getString("number"));
+				
+			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_LOCATION)){//Query Passenger’s Credit  T008
+				String userid = jsonObject.getString("userid");
+				String passengerid = jsonObject.getString("passengerid");
+				
+			}else if(transCode.equals(SystemPara.T_QUERY_CALL_INFO)){//Query Detail Taxi Call Info  T009
+				String userid = jsonObject.getString("userid");
+				String requestNo = jsonObject.getString("requestNo");
+				
+			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_INFO)){//Query Detail Passenger Info  T010
+				String userid = jsonObject.getString("userid");
+				String passengerid = jsonObject.getString("passengerid");
+				
+			}else if(transCode.equals(SystemPara.T_UPDATE_TAXI_PHONE)){//Update Taxi phone  T011
+				String userid = jsonObject.getString("userid");
+				String phone = jsonObject.getString("phone");
+				
+			}else if(transCode.equals(SystemPara.T_VALID_PASSENGER_CALL)){//Get valid passenger’s call  T012
+				String userid = jsonObject.getString("userid");
+				int status = Integer.valueOf(jsonObject.getString("status"));
 			}
+			
 		}
 		return jsonString ;
 	}

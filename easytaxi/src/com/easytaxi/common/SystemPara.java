@@ -49,13 +49,50 @@ public class SystemPara {
 	//查询出租车详细信息
 	public static final String P_QUERYTAXIDETAILINFO = "P010";
 	
+	
+	
+	
+	//Taxi Register
+	public static final String T_REGISTER = "T001";
+	
+	//Taxi Login
+	public static final String T_LOGIN = "T002";
+	
 	//上传出租车GPS数据
 	public static final String T_UPLOADGPS = "T003";
 	
+	//Confirm Call
+	public static final String T_CONFIRM_CALL = "T004";
+	
+	//Cancel Call
+	public static final String T_CANCEL_CALL = "T005";
+	
+	//Credit Rating
+	public static final String T_CREDIT_RATING = "T006";
+	
+	//Query Passenger’s Credit 
+	public static final String T_QUERY_PASSENGER_CREDIT = "T007";
+	
+	//Query Passenger Real-time location
+	public static final String T_QUERY_PASSENGER_LOCATION = "T008";
+	
+	//Query Detail Taxi Call Info
+	public static final String T_QUERY_CALL_INFO = "T009";
+	
+	//Query Detail Passenger Info
+	public static final String T_QUERY_PASSENGER_INFO = "T010";
+	
+	//Update Taxi phone
+	public static final String T_UPDATE_TAXI_PHONE = "T011";
+	
+	// Get valid passenger’s call
+	public static final String T_VALID_PASSENGER_CALL = "T012";
 	
     // taxi status
     public final static int TAXI_STATUS_EMPTY = 0;
+    
     public final static int TAXI_STATUS_HIRED = 1;
+    
     public final static int TAXI_STATUS_SHARING = 2;
 
     private final static String[] TAXI_STATUS = { "Empty", "Hired", "Sharing" };
