@@ -152,17 +152,21 @@ public class PassengerDataService extends BaseService{
 					jsonString = getReturnErrorMessage(resulst.getErrorCode());
 				}
 			}else if(transCode.equals(SystemPara.P_CANCELREQUEST)){//取消用车请求 P005
-				
-				//TODO 
-				
+				String userid = jsonObject.getString("userid");
+				String requestNo = jsonObject.getString("requestNo");
+				String comments = jsonObject.getString("comments");
+				callTaxiServie.cancelRequest(userid, requestNo, comments);
 			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价P006
-				
-				//TODO 
-				
+				String userid = jsonObject.getString("userid");
+				String requestNo = jsonObject.getString("requestNo");
+				float credit = Float.valueOf(jsonObject.getString("credit"));
+				String comments = jsonObject.getString("comments");
+				//TODO callTaxiServie.
 			}else if(transCode.equals(SystemPara.P_QUERYCREDIT)){//查询Taxi信誉度P007
-				
-				//TODO 
-				
+				String userid = jsonObject.getString("userid");
+				String cab = jsonObject.getString("cab");
+				String number = jsonObject.getString("number");
+				//TODO callTaxiServie.
 			}else if(transCode.equals(SystemPara.P_QUERYTAXIGPS)){//查询Taxi GPSP008
 				
 				//TODO 
