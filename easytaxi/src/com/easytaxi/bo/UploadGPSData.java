@@ -8,6 +8,8 @@ public class UploadGPSData {
 	
 	private String cab ;
 
+	private GPSData gpsdata;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -30,6 +32,14 @@ public class UploadGPSData {
 
 	public void setCab(String cab) {
 		this.cab = cab;
+	}
+
+	public GPSData getGpsdata() {
+		return gpsdata;
+	}
+
+	public void setGpsdata(GPSData gpsdata) {
+		this.gpsdata = gpsdata;
 	}
 	
 	
