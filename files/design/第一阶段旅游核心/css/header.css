@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+#header{ width:100%; height:22px; background:url(../images/top_bg.gif) repeat-x; border-bottom:1px solid #e4e3f3;}
+.headText{ width:950px; height:22px; margin:0 auto; color:#8d8d8d;}
+
+#headTop{width:100%; height:50px;}
+.headcon{width:970px;height:50px; margin:0 auto;}
+.headcon h1{width:130px; height:50px;}
+.headcon .topMenue{width:820px; height:50px;display:inline;}
+.headcon .topMenue div.right{height:50px;line-height:50px;}
+
+.xialacd li{ float:left; height:50px; line-height:50px;position:relative;}
+.layer{width:60px;position:absolute;line-height:25px;padding:1px; background-color:#fff; border:1px solid #ccc; z-index:8; top:35px; text-align:center; display:none;}
+.lay1 a{width:60px; height:25px; line-height:25px;display:block;}
+.lay1{left:0px;}
+.lay2{left:16px;}
+.lay3{left:0px;}
+.layer a{width:60px;height:25px;line-height:25px;display:block;}
+.layer a:hover{background-color:#006600; color:#FFF;}
+
+.mail{width:20px;height:50px; display:block; background:url(../images/home/email.gif) left center no-repeat; padding-left:20px; float:left; margin-left:15px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

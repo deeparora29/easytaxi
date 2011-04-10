@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+.login_in{width:970px;margin:50px auto 0;}
+.login_l{width:449px; float:left; border-right:1px solid #ccc;}/*449*/
+.login_l .login_title{width:309px;margin-left:105px;height:74px; background:url(../images/logintt.gif) left center no-repeat; border-bottom:1px dashed #ccc; margin-right:36px;}
+.input_bg{width:204px; height:14px; background:url(../images/input_bg.gif) no-repeat; margin-top:5px; padding:5px 10px;}
+
+.login_l .login_content{width:449px; height:80px; margin:30px auto 0;}
+.login_content label{width:105px; height:36px; line-height:36px;text-align:right; display:block; float:left;}
+.login_content .inputWidth{width:344px; height:36px; float:left;}
+
+.login_l .login_con{width:309px; height:100px;margin-left:105px;height:110px;margin-right:36px;}
+.login_con .autolog{ width:100%; height:40px;}
+.login_l .login_zhuce{width:309px;margin-left:105px;height:140px;margin-right:36px;}
+.login_btn{width:105px;height:35px;display:block; background:url(../images/login_btn.gif) no-repeat;}
+.zhuce{width:168px;height:42px;display:block; background:url(../images/regetes.gif) no-repeat;}
+.login_zhuce p{ width:100%;height:50px; line-height:50px;}
+.login_nljs p{width:100%;color:#898989;}
+
+
+.login_r{width:519px; float:left;}/*520*/
+.login_gn{width:519px; height:296px; background:url(../images/log_gn.jpg) center center no-repeat;}
+.login_nljs ul{width:519px; height:50px; display:block; background:url(../images/js.gif) center center no-repeat;}
+.login_nljs p{width:519px; height:22px; line-height:22px; text-align:center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

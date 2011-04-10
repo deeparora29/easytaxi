@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+.footer{width:680px; height:170px; background:url(../images/bot_bg.jpg) left top no-repeat; margin:0 auto; padding-left:290px;}
+.footer dt{width:95px;height:50px; line-height:50px; font-size:12px; font-weight:bold; color:#000;}
+.footer dl{width:95px; float:left; display:block;}
+.footer dd{width:85px;height:25px; line-height:25px; padding-left:10px; background:url(../images/spot03.gif) left center no-repeat;}
+.banquan{ width:970px; height:50px; line-height:50px; display:block; background-color:#dfdfdf; margin:0 auto; text-align:center;}
+.banquan a{ color:#777;}
+
+
+
