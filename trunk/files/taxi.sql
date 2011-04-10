@@ -25,4 +25,4 @@ create table `taxi` (
 	`modified_time` datetime 
 ); 
 */
-insert into `taxi` (`userid`, `plate_number`, `password`, `license`, `company`, `car_model`, `charge_model`, `email`, `contact_person0`, `contact_phone0`, `contact_person1`, `contact_phone1`, `status`, `descr`, `credit`, `register_time`, `modified_time`) values('T00001','川A123456','123','12345678','万达','速腾','现金支付','test@taxi.com','刘师傅','13912345678','张师傅','13812345678','0','test','3',now(),now());
+INSERT INTO `taxi` (`userid`, `plate_number`, `password`, `license`, `company`, `car_model`, `charge_model`, `email`, `contact_person0`, `contact_phone0`, `contact_person1`, `contact_phone1`, `status`, `descr`, `credit`, `register_time`, `modified_time`) VALUES('T00001','川A123456','123','12345678','万达','速腾','现金支付','test@taxi.com','刘师傅','13912345678','张师傅','13812345678','0','test','3',NOW(),NOW());
