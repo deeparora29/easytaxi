@@ -21,11 +21,11 @@ DROP TABLE IF EXISTS `creditrecord`;
 
 CREATE TABLE `creditrecord` (
   `requestNo` varchar(12) NOT NULL,
-  `userid` varchar(6) DEFAULT NULL COMMENT 'user id',
+  `userid` varchar(6) DEFAULT NULL COMMENT 'userid被评价者',
   `type` int(2) DEFAULT '0' COMMENT '0:taxi;1:passenger',
   `comments` varchar(256) DEFAULT NULL,
   `credit` float DEFAULT '3',
-  `creditee` varchar(12) DEFAULT NULL COMMENT '被评价者',
+  `credit_userid` varchar(6) DEFAULT NULL COMMENT '评价者',
   `credit_time` datetime DEFAULT NULL,
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
@@ -33,7 +33,7 @@ CREATE TABLE `creditrecord` (
 
 /*Data for the table `creditrecord` */
 
-insert  into `creditrecord`(`requestNo`,`userid`,`type`,`comments`,`credit`,`creditee`,`credit_time`,`id`) values ('201104081501','P00001',1,'test comments',4.5,NULL,'2011-04-10 20:24:12',1),('201104081501','T00001',0,'taxi comments',3,NULL,'2011-04-10 20:25:10',2);
+insert  into `creditrecord`(`requestNo`,`userid`,`type`,`comments`,`credit`,`credit_userid`,`credit_time`,`id`) values ('201104081501','P00001',1,'test comments',4.5,NULL,'2011-04-10 20:24:12',1),('201104081501','T00001',0,'taxi comments',3,NULL,'2011-04-10 20:25:10',2);
 
 /*Table structure for table `et_sys_var` */
 
