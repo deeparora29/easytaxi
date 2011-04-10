@@ -9,13 +9,13 @@ import java.util.Date;
 public class CreditRecord {
 
     private String requestNo;
+    // 被评价者
     private String userid;
-    private int type;
     private float credit;
     private String comments;
     private Date creditTime;
-    // 被评价人：passenger被评价是userid；taxi被评价是cab(plate number)车牌号
-    private String creditee;
+    // 评价者
+    private String creditUserid;
 
     public String getRequestNo() {
         return requestNo;
@@ -31,14 +31,6 @@ public class CreditRecord {
 
     public void setUserid(String userid) {
         this.userid = userid;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public float getCredit() {
@@ -65,12 +57,12 @@ public class CreditRecord {
         this.creditTime = creditTime;
     }
 
-    public void setCreditee(String creditee) {
-        this.creditee = creditee;
+    public void setCreditUserid(String creditUserid) {
+        this.creditUserid = creditUserid;
     }
 
-    public String getCreditee() {
-        return creditee;
+    public String getCreditUserid() {
+        return creditUserid;
     }
 
 }

@@ -17,6 +17,7 @@ public class PassengerDao extends BaseJdbcDao {
     final static String INSERT_PASSENGER = "insert into passenger (userid, firstname, lastname,"
         + " nickname, phone, email, password, gender, picid, credit, agreement, descr, province, city,"
         + " register_time, modified_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),now());";
+    final static String UPDATE_PASSENGER_CREDIT = "update passenger set credit=? where userid=?";
 
     class PassengerRowMapper
         implements RowMapper {
@@ -93,4 +94,8 @@ public class PassengerDao extends BaseJdbcDao {
                 passenger.getDescr(), passenger.getProvince(), passenger.getCity() });
     }
     
+    public void doUpdatePassengerCredit(String userid, float credit) {
+        getJdbcTemplate().update(UPDATE_PASSENGER_CREDIT, new Object[] { new Float(credit), userid });
+    }
+
 }
