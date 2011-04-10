@@ -25,12 +25,15 @@ CREATE TABLE `creditrecord` (
   `type` int(2) DEFAULT '0' COMMENT '0:taxi;1:passenger',
   `comments` varchar(256) DEFAULT NULL,
   `credit` float DEFAULT '3',
+  `creditee` varchar(12) DEFAULT NULL COMMENT '被评价者',
   `credit_time` datetime DEFAULT NULL,
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `creditrecord` */
+
+insert  into `creditrecord`(`requestNo`,`userid`,`type`,`comments`,`credit`,`creditee`,`credit_time`,`id`) values ('201104081501','P00001',1,'test comments',4.5,NULL,'2011-04-10 20:24:12',1),('201104081501','T00001',0,'taxi comments',3,NULL,'2011-04-10 20:25:10',2);
 
 /*Table structure for table `et_sys_var` */
 
@@ -108,6 +111,8 @@ CREATE TABLE `passenger` (
 
 /*Data for the table `passenger` */
 
+insert  into `passenger`(`userid`,`firstname`,`lastname`,`nickname`,`phone`,`email`,`password`,`gender`,`picid`,`credit`,`agreement`,`register_time`,`modified_time`,`descr`,`province`,`city`) values ('P00001','Ren','Mian','Anne','13088063731','anne.mian.ren@gmail.com','123456','female',0,3,'yes','2011-04-10 21:09:52','2011-04-10 21:09:52','test','Sichuan','Chengdu');
+
 /*Table structure for table `pictures` */
 
 DROP TABLE IF EXISTS `pictures`;
@@ -148,6 +153,8 @@ CREATE TABLE `requestinfo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `requestinfo` */
+
+insert  into `requestinfo`(`requestNo`,`userid`,`request_time`,`start_long`,`start_lat`,`start_text`,`end_long`,`end_lat`,`end_text`,`number`,`luggage`,`comments`,`share`,`status`,`operator_time`,`operatorid`,`operator_type`,`operator_comments`) values ('201104081501','P00001',NULL,0,0,NULL,0,0,NULL,1,0,'test request','yes',0,NULL,NULL,0,NULL);
 
 /*Table structure for table `routes` */
 
@@ -197,6 +204,8 @@ CREATE TABLE `taxi` (
 
 /*Data for the table `taxi` */
 
+insert  into `taxi`(`userid`,`plate_number`,`password`,`license`,`company`,`car_model`,`charge_model`,`email`,`contact_person0`,`contact_phone0`,`contact_person1`,`contact_phone1`,`status`,`descr`,`credit`,`register_time`,`modified_time`) values ('T00001','川A12345','123','12345678','万达','速腾','现金支付','test@taxi.com','刘师傅','13912345678','张师傅','13812345678',0,'test',3,'2011-04-10 21:10:07','2011-04-10 21:10:07');
+
 /*Table structure for table `trackhistory` */
 
 DROP TABLE IF EXISTS `trackhistory`;
@@ -212,6 +221,163 @@ CREATE TABLE `trackhistory` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `trackhistory` */
+
+/* Procedure structure for procedure `get_serial_num` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `get_serial_num` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_serial_num`(
+        IN s_type VARCHAR(40),
+        IN s_length INTEGER,
+        IN s_date VARCHAR(8),
+        OUT s_value VARCHAR(40)
+    )
+BEGIN
+    DECLARE stmt VARCHAR(2000);
+    DECLARE sqlstr VARCHAR(2000);  
+    DECLARE v_recnum INT;   
+    DECLARE v_today VARCHAR(10); 
+    DECLARE v_today_h VARCHAR(10);    
+    DECLARE v_oldday VARCHAR(8);      
+    DECLARE field_value VARCHAR(40);
+    DECLARE v_length INT;      
+    DECLARE temp_num INT;  
+    DECLARE temp_value VARCHAR(1000);   
+    DECLARE s_where VARCHAR(100);
+	SELECT COUNT(1) INTO v_recnum FROM et_sys_var WHERE field_name=s_type ;
+     
+    IF v_recnum = 0 THEN  
+        BEGIN
+    		SET s_value = '-1';
+  		END;   
+    ELSE    
+    	begin      
+        	select date_format( now(),'%Y%m%d') into v_today ; 
+        	if s_type = 'request_no' then 
+        		select date_format( now(),'%Y%m%d%H') into v_today_h; 
+            end if ;
+            
+    		select field_date into v_oldday from et_sys_var where field_name=s_type ; 
+            set @v_today = v_today ;     
+            set @s_type = s_type ;
+            #跨天修改当天的流水号为1 ，若为当天则将流水号加1
+    	    if v_oldday <> v_today then    
+            	begin            
+                	select date_format( now(),'%Y%m%d%H') into v_today;
+                	set @sqlstr = 'update et_sys_var set field_date = ? ,seri_num = 1 where field_name=?';
+					prepare stmt from @sqlstr;
+                    execute stmt USING  @v_today , @s_type ; 
+                    deallocate prepare stmt; 
+                    commit;  
+            	end;
+            else
+                begin         
+					set @sqlstr = 'update et_sys_var set seri_num = seri_num+1  where field_name=? ';
+                    prepare stmt from @sqlstr;
+                    execute stmt USING  @s_type ; 
+                    deallocate prepare stmt;  
+                    commit;
+                    
+                end;
+            end if;
+    	end; 
+        
+        #根据s_type生成流水号
+        select CONCAT(seri_num,'') into temp_value from et_sys_var where field_name=s_type ;
+   
+        if s_type = 't_user_id' then
+        	begin
+            	select length(temp_value) into temp_num;
+    			set v_length = temp_num;
+    			while (v_length<s_length) do 
+        			set temp_value = CONCAT('0', temp_value);
+        			set v_length = v_length + 1;
+    			end WHILE;
+                #set s_value = concat('T',temp_value) ;
+        	end;  
+        end if;
+       
+        
+        #乘客id
+        if s_type = 'p_user_id' then 
+        	begin
+            	select length(temp_value) into temp_num;
+    			set v_length = temp_num;
+    			while (v_length<s_length) do 
+        			set temp_value = CONCAT('0', temp_value);
+        			set v_length = v_length + 1;
+    			end WHILE;
+                set s_value = concat('P',temp_value) ;
+        	end;         
+        #出租车id
+        elseif s_type = 't_user_id' then
+        	begin
+            	select length(temp_value) into temp_num;
+    			set v_length = temp_num;
+    			while (v_length<s_length) do 
+        			set temp_value = CONCAT('0', temp_value);
+        			set v_length = v_length + 1;
+    			end WHILE;
+                set s_value = concat('T',temp_value) ;
+        	end;  
+        #请求编号
+        elseif s_type = 'request_no' then
+            begin  	
+                if s_date = 'true' then 
+    				begin
+        				select length(temp_value)+10 into temp_num;
+        			end ;
+                else 
+                	select length(temp_value) into temp_num;
+    			end if ;   
+                
+    			set v_length = temp_num;
+    			while (v_length<s_length) do 
+        			set temp_value = CONCAT('0', temp_value);
+        			set v_length = v_length + 1;
+    			end WHILE;
+                
+                if s_date = 'true' then
+    				begin
+        				set s_value = concat(v_today_h,temp_value) ;
+        			end ;
+                else 
+                	set s_value = temp_value ; 
+    			end if ; 
+            end ;
+        elseif s_type = 'track_id' then
+            begin  	
+                if s_date = 'true' then 
+    				begin
+        				select length(temp_value)+8 into temp_num;
+        			end ;
+                else 
+                	select length(temp_value) into temp_num;
+    			end if ;   
+                
+    			set v_length = temp_num;
+    			while (v_length<s_length) do 
+        			set temp_value = CONCAT('0', temp_value);
+        			set v_length = v_length + 1;
+    			end WHILE;
+                if s_date = 'true' then
+    				begin
+        				set s_value = concat(v_today,temp_value) ;
+        			end ;
+                else 
+                	set s_value = temp_value ; 
+    			end if ; 
+            end ;
+        else
+            begin
+            	set s_value = templue ; 	
+        	end;  
+        end if ;      
+    end if; 
+END */$$
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
