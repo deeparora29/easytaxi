@@ -34,7 +34,7 @@ public class PassengerDataService extends BaseService{
 	//存放乘车信息队列
 	private static BlockingQueue<Passenger> passengerWorkQueue = new LinkedBlockingQueue<Passenger>();
 	
-	//存放乘客信息
+	//存放乘客信息[登录]
 	private static ConcurrentMap<String , Passenger> passengerInfoMap = new ConcurrentHashMap<String, Passenger>();
 	
 	//存放乘客广播打车消息
@@ -144,7 +144,7 @@ public class PassengerDataService extends BaseService{
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
 				//从内存中获取出租车实时GPS数据
-				UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiInfoMap().get( userid );
+				UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiGPSMap().get( userid );
 				RequestResult resulst = callTaxiServie.getConfirmedTaxiInfo(userid, requestNo);
 				if(resulst.getErrorCode().equals(ErrorCode.SUCCESS)){
 					jsonString = getReturnMessage(transCode,requestNo,resulst,taxiGPSData);

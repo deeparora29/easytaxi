@@ -1,6 +1,7 @@
 package com.easytaxi.bo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @table "taxi"
@@ -63,6 +64,15 @@ public class Taxi {
     
     private String taxiLocation ;
     
+    public Taxi(){
+    	
+    }
+    
+    //出租车注册
+    public Taxi(String cab,String password,String license,String company,String email,
+    		String carModel,String chargeModel,List <Driver> list,String descr){
+    	
+    }
 	
 	public void setUserid(String userid) {
         this.userid = userid;

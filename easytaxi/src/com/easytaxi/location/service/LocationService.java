@@ -25,7 +25,7 @@ public class LocationService extends BaseService{
 	
 	
 	public String initLocationData(){
-		ConcurrentMap<String , UploadGPSData> taxiMap = taxiDataService.getTaxiInfoMap();
+		ConcurrentMap<String , UploadGPSData> taxiMap = taxiDataService.getTaxiGPSMap();
 		StringBuffer data = new StringBuffer("[\n");
 		int i = 0 ;
 		for (String userId : taxiMap.keySet()) {
