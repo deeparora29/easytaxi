@@ -20,6 +20,7 @@ public class TaxiDao extends BaseJdbcDao {
     final static String INSERT_TAXI = "insert into taxi (userid, plate_number, password, license, company,"
         + " car_model, charge_model, email, contact_person0, contact_phone0, contact_person1, contact_phone1,"
         + " status, descr, credit, register_time, modified_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),now())";
+    final static String UPDATE_TAXI_CREDIT = "update taxi set credit=? where userid=?";
 
     class TaxiRowMapper
         implements RowMapper {
@@ -94,6 +95,10 @@ public class TaxiDao extends BaseJdbcDao {
             new Object[] { taxi.getUserid(), taxi.getCab(), taxi.getPassword(), taxi.getLicense(), taxi.getCompany(),
                 taxi.getCarModel(), taxi.getChargeModel(), taxi.getEmail(), taxi.getDriver0(), taxi.getPhone0(),
                 taxi.getDriver1(), taxi.getPhone1(), taxi.getStatus(), taxi.getDescr(), taxi.getCredit() });
+    }
+
+    public void doUpdateTaxiCredit(String userid, float credit) {
+        getJdbcTemplate().update(UPDATE_TAXI_CREDIT, new Object[] { new Float(credit), userid });
     }
 
 }

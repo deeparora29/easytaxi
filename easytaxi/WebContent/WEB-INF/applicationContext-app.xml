@@ -51,6 +51,8 @@
 		class="com.easytaxi.request.service.CreditRateService">
 		<property name="callTaxiDao" ref="callTaxiDao"/>	
 		<property name="creditRecordDao" ref="creditRecordDao"/>
+		<property name="taxiDao" ref="taxiDao"/>
+		<property name="passengerDao" ref="passengerDao"/>
 	</bean>
 	<!-- end -->
 	
