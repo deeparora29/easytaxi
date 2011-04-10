@@ -42,5 +42,17 @@
 	</bean>
 	<!-- end -->
 	
+	<!-- credit rating service -->
+	<bean id="creditRecordDao" class="com.easytaxi.request.dao.CreditRecordDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="creditRateService" 
+		class="com.easytaxi.request.service.CreditRateService">
+		<property name="callTaxiDao" ref="callTaxiDao"/>	
+		<property name="creditRecordDao" ref="creditRecordDao"/>
+	</bean>
+	<!-- end -->
+	
 
 </beans>

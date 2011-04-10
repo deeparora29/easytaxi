@@ -42,8 +42,8 @@ public class TaxiDao extends BaseJdbcDao {
             taxi.setCab(rs.getString("plate_number"));
             taxi.setStatus(rs.getInt("status"));
             taxi.setUserid(rs.getString("userid"));
-            taxi.setModifiedTime(rs.getDate("modified_time"));
-            taxi.setRegisterTime(rs.getDate("register_time"));
+            taxi.setModifiedTime(rs.getTimestamp("modified_time"));
+            taxi.setRegisterTime(rs.getTimestamp("register_time"));
             return taxi;
         }
 
