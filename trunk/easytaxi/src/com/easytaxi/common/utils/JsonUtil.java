@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+import com.easytaxi.bo.Driver;
 
 /**
  * @Copyright (C) 2005-2008 亚信科技有限公司
@@ -175,8 +178,19 @@ public class JsonUtil {
 	}
 
 	public static void main(String[] args) {
-		JSONObject jsonObject = JSONObject.fromObject("{TransCode:'0001'}");  
-		System.out.println(jsonObject.getString("TransCode"));
+		/*JSONObject jsonObject = JSONObject.fromObject("{TransCode:'0001'}");  
+		System.out.println(jsonObject.getString("TransCode"));*/
+		String jsonString ="[{name:'A司机', phone:'13912345678'},{name:'B司机', phone:'13912345611'}]";
+		/*String [] array = getStringArrayByJsonString(jsonString);
+		for (int i = 0; i < array.length; i++) {
+			System.out.println(array[i]);
+		}*/
+		
+		List <Driver> list = getListByJsonString(jsonString, Driver.class);
+		for (int i = 0; i < list.size(); i++) {
+			Driver driver = list.get(i);
+			System.out.println(driver.getName() + " : " + driver.getPhone());
+		}
 	}
 
 }
