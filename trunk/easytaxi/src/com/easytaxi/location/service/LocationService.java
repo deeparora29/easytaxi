@@ -37,7 +37,7 @@ public class LocationService extends BaseService{
 				taxiLocation = googleMapGeocode.getAddressByLatLng(latLng);
 			}*/
 			data.append("{")
-			.append("latLng : {lat : "+taxi.getDestLocation().getLat()+", lng : "+taxi.getDestLocation().getLng()+"},")
+			.append("latLng : {lat : "+taxi.getGpsdata().getLat()+", lng : "+taxi.getGpsdata().getLng()+"},")
 			.append("taxiStatus : '"+status+"'");
 			//.append("taxiNo : '"+taxi.getPlateNumber()+"',")
 			//.append("driverNo : '"+taxi.getDriverNo()+"',")
