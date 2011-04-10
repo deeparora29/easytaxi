@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+.searchAll{width:970px; margin:0 auto;}
+.searchAll h1{width:140px; margin:50px auto 10px;}
+.searchAll form p{width:400px;height:33px;margin:20px auto 10px;}
+.searchAll form p a{width:50px;height:33px;display:block; float:left; text-align:center;font-size:14px; padding-top:3px;}
+.searchAll form p a.currentSearchBg{background:url(../images/search/ssbtbg.gif) center top no-repeat;}
+.searchCon{width:500px;height:26px;margin:0 auto; background-color:#e2e2e2; border:1px solid #ccc; padding:5px;}
+.searchCon input{width:405px;height:14px;border:1px inset #ccc; float:left; font-size:14px; padding:5px;}
+.searchAll_btn{width:81px;height:26px; display:block;background:url(../images/search/ss_btn.gif) no-repeat; float:left; margin-left:-1px;}
+.searchLink{width:320px;height:25px;margin:40px auto;text-align:center;}
+.searchLink a{margin:5px; font-size:14px;}
+.searchfoot{width:320px;height:25px;margin:100px auto 10px;text-align:center;}
+.searchfoot a{margin:5px;}
+
+
+

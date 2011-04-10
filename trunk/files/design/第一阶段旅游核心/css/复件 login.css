@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+.login{margin:0 auto;width:976px;}
+.login_ll{width:300px;float:left;margin-top:8px;}
+.login_ll ul{width:300px; height:14px; background:url(../images/shadow_bg.gif) left top no-repeat;}
+.login_ll ol{width:300px; height:14px; background:url(../images/shadow_bg.gif) left bottom no-repeat;}
+.login_ll dl{width:300px; height:600px; background:url(../images/shadow_bg_mid.gif) repeat-y;}
+.login_ll dl h1{width:220px;margin:0 auto;}
+.login_ll dl h1 a{width:140px;height:90px; display:block;margin:0 auto;}
+.login_ll dl h2{width:220px; height:50px; line-height:50px; border-bottom:1px dashed #ccc;margin:0 auto;}
+.login_ll dl form{width:220px;height:240px; padding:10px 0;border-bottom:1px dashed #ccc;margin:0 auto;}
+.login_ll dl form label{height:36px; line-height:36px;}
+.input{width:200px;height:20px;border:1px solid #ccc; background:url(../images/login_bg.gif) no-repeat; font-size:14px; padding:5px;}
+.denglu{width:105px;height:35px;display:block; background:url(../images/login_btn.gif) no-repeat;float:left;}
+.zhuce{width:180px;height:52px;display:block; background:url(../images/regetes_btn.gif) no-repeat;}
+.login_ll dl dd{width:220px; font-size:14px; font-weight:bold; padding-top:25px;margin:0 auto;}
+
+.login_rr{width:664px;float: left; margin-left:12px; margin-top:15px;}
+.login_rr ul{float:left;width:180px; margin:15px; display: inline;}
+.login_rr li{float:left;}
+.login_rr li h2,.login_rr li p{width:110px; padding:0 10px;}
+.login_rr li p{line-height:18px; color:#999;}
+
+.jianshe p{width:500px; padding-left:164px;background:url(../images/js.gif) no-repeat; float:left;clear:both;}
+
+
+
+
+
+
