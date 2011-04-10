@@ -65,7 +65,7 @@ public class CallTaxiServie extends BaseService {
     public RequestResult getConfirmedTaxiInfo(String userid, String requestNo) {
         RequestResult result = new RequestResult();
         try {
-            RequestInfo info = getCallTaxiDao().queryRequestInfo(requestNo);
+            RequestInfo info = getCallTaxiDao().getRequestInfo(requestNo);
             if (info == null) {
                 result.setErrorCode(ErrorCode.REQUEST_NOTEXIST);
                 result.setComments("Request[" + requestNo + "] does not exist.");
@@ -130,7 +130,7 @@ public class CallTaxiServie extends BaseService {
         RequestResult result = new RequestResult();
         try {
             
-            RequestInfo requestInfo = getCallTaxiDao().queryRequestInfo(requestNo);
+            RequestInfo requestInfo = getCallTaxiDao().getRequestInfo(requestNo);
             if(requestInfo != null){
                 if (requestInfo.getStatus() == SystemPara.REQUESTINFO_STATUS_ISVALID) { // valid
                     // update requestinfo

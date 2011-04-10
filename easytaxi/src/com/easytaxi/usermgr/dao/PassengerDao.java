@@ -35,8 +35,8 @@ public class PassengerDao extends BaseJdbcDao {
             passenger.setPhone(rs.getString("phone"));
             passenger.setShare(rs.getString("share"));
             passenger.setUserid(rs.getString("userid"));
-            passenger.setRegisterTime(rs.getDate("register_time"));
-            passenger.setModifiedTime(rs.getDate("modified_time"));
+            passenger.setRegisterTime(rs.getTimestamp("register_time"));
+            passenger.setModifiedTime(rs.getTimestamp("modified_time"));
             passenger.setCity(rs.getString("city"));
             passenger.setProvince(rs.getString("province"));
             return passenger;

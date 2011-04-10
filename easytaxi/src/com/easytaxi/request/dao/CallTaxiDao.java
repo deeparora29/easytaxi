@@ -99,7 +99,7 @@ public class CallTaxiDao extends BaseJdbcDao {
      * @param requestNo
      * @return
      */
-    public RequestInfo queryRequestInfo(String requestNo) {
+    public RequestInfo getRequestInfo(String requestNo) {
         List<RequestInfo> list = getJdbcTemplate().query(SELETE_REQUESTINFO_REQUESTNO, new Object[] { requestNo },
             new RequestInfoRowMapper());
         return (RequestInfo) getObjectFromList(list);
