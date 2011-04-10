@@ -140,7 +140,7 @@ public class BaseService {
 			String cab = resulst.getTaxi().getCab();
 			float credit = resulst.getTaxi().getCredit();
 			UploadGPSData taxiGPSData = (UploadGPSData)args[3];
-			String cabGPS = "{lat:"+taxiGPSData.getDestLocation().getLat()+",lng:"+taxiGPSData.getDestLocation().getLng()+"}";
+			String cabGPS = "{lat:"+taxiGPSData.getGpsdata().getLat()+",lng:"+taxiGPSData.getGpsdata().getLng()+"}";
 			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",requestNo:"+requestNo+"")
 			.append(",cab:"+cab+"").append(",credit:"+credit+"").append(",cabGPS:"+cabGPS+"");
         }else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
