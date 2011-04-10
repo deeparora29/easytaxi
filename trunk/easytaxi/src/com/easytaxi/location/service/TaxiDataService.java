@@ -8,12 +8,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 import net.sf.json.JSONObject;
 import com.easytaxi.bo.Driver;
 import com.easytaxi.bo.GPSData;
+import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.Taxi;
 import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.JsonUtil;
+import com.easytaxi.usermgr.dao.TaxiDao;
 
 public class TaxiDataService extends BaseService{
 	
@@ -22,9 +24,13 @@ public class TaxiDataService extends BaseService{
 	//用于接受出租车提供的相关数据，共后续处理
 	private static BlockingQueue<Taxi> taxiWorkQueue = new LinkedBlockingQueue<Taxi>();
 	
-	//存放出租车信息
-	private static ConcurrentMap<String , UploadGPSData> taxiInfoMap = new ConcurrentHashMap<String, UploadGPSData>();
+	//出租车登录信息
+	private static ConcurrentMap<String , Passenger> taxiLoginInfoMap = new ConcurrentHashMap<String, Passenger>();
 	
+	//存放出租车GPS数据
+	private static ConcurrentMap<String , UploadGPSData> taxiGPSMap = new ConcurrentHashMap<String, UploadGPSData>();
+	
+	private TaxiDao taxiDao ;
 	
 	public TaxiDataService(){
 		
@@ -56,12 +62,34 @@ public class TaxiDataService extends BaseService{
 				String drivers = jsonObject.getString("drivers");
 				List <Driver> list = JsonUtil.getListByJsonString(drivers, Driver.class);
 				String descr  = jsonObject.getString("descr");
-				
-				
+				//没有重复的用户，email和phone都可以作为账号
+				if( !taxiLoginInfoMap.containsKey(cab)){
+					Taxi taxi = new Taxi( cab, password, license, company, email,carModel, chargeModel,list, descr);
+					//由于需要立即返回userid，则不能异步处理
+					String userId = updateTaxiInfo( taxi );
+					return getReturnMessage( transCode , userId );
+				}else{
+					//账号重复
+					jsonString = getReturnErrorMessage(ErrorCode.REGISTER_ERROR);
+					return jsonString ;
+				}
 			}else if(transCode.equals(SystemPara.T_LOGIN)){//Taxi Login T002
 				String cab = jsonObject.getString("cab");
 				String password = jsonObject.getString("password");
-				
+				Taxi taxi = taxiDao.getTaxiByPlateNumber(cab);
+				if(taxi==null){
+					jsonString = getReturnErrorMessage(ErrorCode.USER_NOT_FOUND);
+				}else{
+					String userid = taxi.getUserid();
+					String phone = taxi.getPhone0()+","+ taxi.getPhone0();
+					String _password = taxi.getPassword() ;
+					if(_password.equals(password)){
+						jsonString = getReturnMessage( transCode , userid , phone ); 
+					}else{
+						//密码不正确
+						jsonString = getReturnErrorMessage(ErrorCode.PASSWORD_NOT_ACCURATE);
+					}
+				}
 			}else if(transCode.equals(SystemPara.T_UPLOADGPS)){//上传出租车GPS数据 T003
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
@@ -71,7 +99,7 @@ public class TaxiDataService extends BaseService{
 				data.setCab(cab);
 				data.setUserId(userid);
 				data.setGpsdata(gpsdata);
-				taxiInfoMap.put(userid, data);
+				taxiGPSMap.put(userid, data);
 			}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call T004
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
@@ -124,15 +152,25 @@ public class TaxiDataService extends BaseService{
 	}
 	
 	
-	public ConcurrentMap<String , UploadGPSData> getTaxiInfoMap(){
-		return taxiInfoMap ;
+	public ConcurrentMap<String , UploadGPSData> getTaxiGPSMap(){
+		return taxiGPSMap ;
 	}
 	
-	public void updateTaxiInfo(Taxi taxi){
-		//taxiInfoMap.put(taxi.getPlateNumber(), taxi);
+	public static String updateTaxiInfo(Taxi taxi){
+		return null;
 	}
 	
 	public static void main(String[] args) {
 		System.out.println(taxiWorkQueue.isEmpty());
 	}
+
+	public TaxiDao getTaxiDao() {
+		return taxiDao;
+	}
+
+	public void setTaxiDao(TaxiDao taxiDao) {
+		this.taxiDao = taxiDao;
+	}
+	
+	
 }

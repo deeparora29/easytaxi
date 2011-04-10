@@ -155,6 +155,17 @@ public class BaseService {
 			
 		}else if( transCode.equals(SystemPara.P_QUERYTAXIDETAILINFO) ){//查询出租车详细信息
 			
+		}else if( transCode.equals(SystemPara.T_REGISTER) ){//出租车注册
+			String userId = (String)args[1];
+			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"");
+		}else if( transCode.equals(SystemPara.T_LOGIN) ){//出租车登录
+			String userId = (String)args[1];
+			String phone = (String)args[2];
+			String [] phoneArray = phone.split(",");
+			if(phoneArray.length>1){
+				phone = "['"+phoneArray[0]+"','"+phoneArray[1]+"']";
+			}
+			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"").append(",phone:"+phone+"");
 		}
 		
 		jsonString.append("}");
