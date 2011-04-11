@@ -156,6 +156,7 @@ public class PassengerDataService extends BaseService{
 				String requestNo = jsonObject.getString("requestNo");
 				String comments = jsonObject.getString("comments");
 				callTaxiServie.cancelRequest(userid, requestNo, comments);
+				jsonString = getReturnMessage(transCode);
 			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价P006
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
