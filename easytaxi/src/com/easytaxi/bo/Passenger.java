@@ -26,7 +26,7 @@ public class Passenger {
 
 	private String descr;
 
-	private GPSData destLocation;
+	private GPSData gpsdata;
 
 	private int number;
 
@@ -150,13 +150,18 @@ public class Passenger {
 	}
 
 
-	public GPSData getDestLocation() {
-		return destLocation;
+
+	public GPSData getGpsdata() {
+		return gpsdata;
 	}
 
-	public void setDestLocation(GPSData destLocation) {
-		this.destLocation = destLocation;
+
+
+	public void setGpsdata(GPSData gpsdata) {
+		this.gpsdata = gpsdata;
 	}
+
+
 
 	public int getNumber() {
 		return number;
