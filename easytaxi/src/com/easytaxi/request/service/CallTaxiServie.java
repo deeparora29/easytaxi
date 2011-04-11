@@ -142,6 +142,10 @@ public class CallTaxiServie extends BaseService {
                     getCallTaxiDao().doUpdateRequestInfoByOperator(requestInfo);
                     // get passenger info
                     Passenger passenger = getPassengerDao().getPassengerByUserid(requestInfo.getUserid());
+                    double startLong = requestInfo.getStartLong();
+                    double startLat = requestInfo.getStartLat();
+                    passenger.getGpsdata().setLng(startLong);
+                    passenger.getGpsdata().setLng(startLat);
                     result.setPassenger(passenger);
                     result.setErrorCode(ErrorCode.SUCCESS);
                 } else if (requestInfo.getStatus() != 0) {
