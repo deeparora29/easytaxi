@@ -23,11 +23,13 @@
 	<bean id="taxiDataService" 
 		class="com.easytaxi.location.service.TaxiDataService">
 			<property name="taxiDao" ref="taxiDao"/>
+			<property name="callTaxiServie" ref="callTaxiServie"/>
 	</bean>
 	
 	<bean id="passengerDataService" 
 		class="com.easytaxi.location.service.PassengerDataService">
 		<property name="passengerDao" ref="passengerDao"/>	
+		<property name="callTaxiServie" ref="callTaxiServie"/>
 	</bean>
 	
 	<!-- location service -->
