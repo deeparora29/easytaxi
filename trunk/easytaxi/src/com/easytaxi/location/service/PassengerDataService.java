@@ -12,6 +12,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.easytaxi.bo.CreditRecord;
 import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Passenger;
 import com.easytaxi.bo.UploadGPSData;
@@ -22,6 +23,7 @@ import com.easytaxi.common.utils.JsonUtil;
 import com.easytaxi.request.bo.RequestInfo;
 import com.easytaxi.request.bo.RequestResult;
 import com.easytaxi.request.service.CallTaxiServie;
+import com.easytaxi.request.service.CreditRateService;
 import com.easytaxi.usermgr.dao.PassengerDao;
 
 public class PassengerDataService extends BaseService{
@@ -46,6 +48,8 @@ public class PassengerDataService extends BaseService{
 	private PassengerDao passengerDao ;
 	
 	private CallTaxiServie callTaxiServie ;
+	
+	private CreditRateService creditRateService ;
 	
 	private PassengerDataService(){
 		
@@ -166,8 +170,9 @@ public class PassengerDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.P_QUERYCREDIT)){//查询Taxi信誉度P007
 				String userid = jsonObject.getString("userid");
 				String cab = jsonObject.getString("cab");
-				String number = jsonObject.getString("number");
-				//TODO callTaxiServie.
+				int number = Integer.valueOf(jsonObject.getString("number"));
+				List<CreditRecord> list = creditRateService.getCreditDetail(userid, cab, number );
+				jsonString = getReturnMessage(transCode,list);
 			}else if(transCode.equals(SystemPara.P_QUERYTAXIGPS)){//查询Taxi GPSP008
 				
 				//TODO 
@@ -240,4 +245,14 @@ public class PassengerDataService extends BaseService{
 	public void setCallTaxiServie(CallTaxiServie callTaxiServie) {
 		this.callTaxiServie = callTaxiServie;
 	}
+
+	public CreditRateService getCreditRateService() {
+		return creditRateService;
+	}
+
+	public void setCreditRateService(CreditRateService creditRateService) {
+		this.creditRateService = creditRateService;
+	}
+	
+	
 }

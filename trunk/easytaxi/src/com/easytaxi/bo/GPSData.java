@@ -10,6 +10,15 @@ public class GPSData {
 	
 	private String text ;
 
+	public GPSData(){
+		
+	}
+	
+	public GPSData(double lat , double lng){
+		this.lat = lat;
+		this.lat = lng;
+	}
+	
 	public double getLat() {
 		return lat;
 	}

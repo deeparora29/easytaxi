@@ -8,6 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import net.sf.json.JSONObject;
 
+import com.easytaxi.bo.CreditRecord;
 import com.easytaxi.bo.Driver;
 import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Passenger;
@@ -17,9 +18,12 @@ import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.JsonUtil;
+import com.easytaxi.request.bo.RequestInfo;
 import com.easytaxi.request.bo.RequestResult;
+import com.easytaxi.request.dao.CallTaxiDao;
 import com.easytaxi.request.service.CallTaxiServie;
 import com.easytaxi.request.service.CreditRateService;
+import com.easytaxi.usermgr.dao.PassengerDao;
 import com.easytaxi.usermgr.dao.TaxiDao;
 
 public class TaxiDataService extends BaseService{
@@ -36,6 +40,10 @@ public class TaxiDataService extends BaseService{
 	private static ConcurrentMap<String , UploadGPSData> taxiGPSMap = new ConcurrentHashMap<String, UploadGPSData>();
 	
 	private TaxiDao taxiDao ;
+	
+	private CallTaxiDao callTaxiDao;
+	
+	private PassengerDao passengerDao;
 	
 	private CallTaxiServie callTaxiServie ;
 	
@@ -132,27 +140,33 @@ public class TaxiDataService extends BaseService{
 				float credit = Float.valueOf(jsonObject.getString("credit"));
 				String comments = jsonObject.getString("comments");
 				creditRateService.doCreditRating(userid, requestNo, credit, comments);
+				jsonString = getReturnMessage(transCode);
 			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_CREDIT)){//Query Passenger’s Credit  T007
 				String userid = jsonObject.getString("userid");
 				String passengerid = jsonObject.getString("passengerid");
 				int number = Integer.valueOf(jsonObject.getString("number"));
-				
+				List<CreditRecord> list = creditRateService.getCreditDetail(userid, passengerid, number );
+				jsonString = getReturnMessage(transCode,list);
 			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_LOCATION)){//Query Passenger’s Credit  T008
 				String userid = jsonObject.getString("userid");
 				String passengerid = jsonObject.getString("passengerid");
-				
+				RequestInfo info = getCallTaxiDao().getRequestInfo(passengerid);
+				GPSData data= new GPSData(info.getStartLat(),info.getStartLong());
+				jsonString = getReturnMessage(transCode,data);
 			}else if(transCode.equals(SystemPara.T_QUERY_CALL_INFO)){//Query Detail Taxi Call Info  T009
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
-				
+				RequestInfo info = getCallTaxiDao().getRequestInfo(requestNo);
+				jsonString = getReturnMessage(transCode, info);
 			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_INFO)){//Query Detail Passenger Info  T010
 				String userid = jsonObject.getString("userid");
 				String passengerid = jsonObject.getString("passengerid");
-				
+				Passenger passenger = passengerDao.getPassengerByUserid(userid);
+				RequestInfo info = getCallTaxiDao().getRequestInfo(passengerid);
+				jsonString = getReturnMessage(transCode, passenger,info);
 			}else if(transCode.equals(SystemPara.T_UPDATE_TAXI_PHONE)){//Update Taxi phone  T011
 				String userid = jsonObject.getString("userid");
 				String phone = jsonObject.getString("phone");
-				
 			}else if(transCode.equals(SystemPara.T_VALID_PASSENGER_CALL)){//Get valid passenger’s call  T012
 				String userid = jsonObject.getString("userid");
 				int status = Integer.valueOf(jsonObject.getString("status"));
@@ -201,6 +215,22 @@ public class TaxiDataService extends BaseService{
 
 	public void setCreditRateService(CreditRateService creditRateService) {
 		this.creditRateService = creditRateService;
+	}
+
+	public CallTaxiDao getCallTaxiDao() {
+		return callTaxiDao;
+	}
+
+	public void setCallTaxiDao(CallTaxiDao callTaxiDao) {
+		this.callTaxiDao = callTaxiDao;
+	}
+
+	public PassengerDao getPassengerDao() {
+		return passengerDao;
+	}
+
+	public void setPassengerDao(PassengerDao passengerDao) {
+		this.passengerDao = passengerDao;
 	}
 	
 	
