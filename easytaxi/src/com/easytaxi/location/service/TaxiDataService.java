@@ -5,7 +5,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import net.sf.json.JSONObject;
+
 import com.easytaxi.bo.Driver;
 import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Passenger;
@@ -15,6 +17,9 @@ import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
 import com.easytaxi.common.utils.JsonUtil;
+import com.easytaxi.request.bo.RequestResult;
+import com.easytaxi.request.service.CallTaxiServie;
+import com.easytaxi.request.service.CreditRateService;
 import com.easytaxi.usermgr.dao.TaxiDao;
 
 public class TaxiDataService extends BaseService{
@@ -31,6 +36,10 @@ public class TaxiDataService extends BaseService{
 	private static ConcurrentMap<String , UploadGPSData> taxiGPSMap = new ConcurrentHashMap<String, UploadGPSData>();
 	
 	private TaxiDao taxiDao ;
+	
+	private CallTaxiServie callTaxiServie ;
+	
+	private CreditRateService creditRateService ;
 	
 	public TaxiDataService(){
 		
@@ -105,18 +114,24 @@ public class TaxiDataService extends BaseService{
 				String userGPS = jsonObject.getString("userGPS");
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
 				String requestNo = jsonObject.getString("requestNo");
-				
+				RequestResult resulst =callTaxiServie.confirmRequest(userid, requestNo);
+				if(resulst.getErrorCode().equals(ErrorCode.SUCCESS)){
+					jsonString = getReturnMessage(transCode,requestNo,userid,resulst);
+				}else{
+					jsonString = getReturnErrorMessage(resulst.getErrorCode());
+				}
 			}else if(transCode.equals(SystemPara.T_CANCEL_CALL)){//Cancel Call T005
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
 				String comments = jsonObject.getString("comments");
-				
+				callTaxiServie.cancelRequest(userid, requestNo, comments);
+				jsonString = getReturnMessage(transCode);
 			}else if(transCode.equals(SystemPara.T_CREDIT_RATING)){//Credit Rating T006
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
 				float credit = Float.valueOf(jsonObject.getString("credit"));
 				String comments = jsonObject.getString("comments");
-				
+				creditRateService.doCreditRating(userid, requestNo, credit, comments);
 			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_CREDIT)){//Query Passenger’s Credit  T007
 				String userid = jsonObject.getString("userid");
 				String passengerid = jsonObject.getString("passengerid");
@@ -170,6 +185,22 @@ public class TaxiDataService extends BaseService{
 
 	public void setTaxiDao(TaxiDao taxiDao) {
 		this.taxiDao = taxiDao;
+	}
+
+	public CallTaxiServie getCallTaxiServie() {
+		return callTaxiServie;
+	}
+
+	public void setCallTaxiServie(CallTaxiServie callTaxiServie) {
+		this.callTaxiServie = callTaxiServie;
+	}
+
+	public CreditRateService getCreditRateService() {
+		return creditRateService;
+	}
+
+	public void setCreditRateService(CreditRateService creditRateService) {
+		this.creditRateService = creditRateService;
 	}
 	
 	
