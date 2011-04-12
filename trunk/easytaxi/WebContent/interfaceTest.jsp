@@ -20,16 +20,6 @@
 			}
 		});
 
-		/*$.ajax( {
-			type :"POST",
-			url :"/realtimeMonitor/KpiReportServlet",
-			data :data,
-			cache :false,
-			success : function(msg) {
-				//alert(msg);
-				getLastKpiReport();
-			}
-		});*/
 	}
 </script>
 </head>
@@ -45,9 +35,9 @@
 	</table>
 		<ul>
 			<li>
-				P001    {TransCode:'P001',phone:'13012345678',email:'anne.mian.ren@gmail.com',password:'123',
-						nickname:'anne',firstname:'Ren',lastname:'Mian',gender:'female',province:'四川',	city:'成都',
-						agreement:'yes',descr:'for test passenger'}
+			P001<p>{TransCode:'P001',phone:'13012345678',email:'anne.mian.ren@gmail.com',password:'123',
+					nickname:'anne',firstname:'Ren',lastname:'Mian',gender:'female',province:'四川',	city:'成都',
+					agreement:'yes',descr:'for test passenger'}</p>
 			</li>
 		</ul>
 </body>
