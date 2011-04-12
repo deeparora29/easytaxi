@@ -38,7 +38,10 @@ public class PassengerDataManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String data = request.getParameter("data");
-		PassengerDataService instance = (PassengerDataService)BeanFactoryUtil.getBean("callTaxiServie");
+		if(data!=null){
+			data = new String(data.getBytes("ISO-8859-1"), "UTF-8");
+		}
+		PassengerDataService instance = (PassengerDataService)BeanFactoryUtil.getBean("passengerDataService");
 		String returnMessage = instance.offer( data );
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
