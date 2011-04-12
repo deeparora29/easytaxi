@@ -75,7 +75,7 @@ public class PassengerDataService extends BaseService{
 			if(transCode==null||transCode.length()<4){
 				jsonString = getReturnErrorMessage(ErrorCode.TRANS_CODE_ERROR);
 				return jsonString ;
-			}else if(transCode.equals(SystemPara.P_REGISTER)){//乘车注册
+			}else if(transCode.equals(SystemPara.P_REGISTER)){//乘客注册
 				//获取用户信息
 				String firstname = jsonObject.getString("firstname");
 				String lastname = jsonObject.getString("lastname");
