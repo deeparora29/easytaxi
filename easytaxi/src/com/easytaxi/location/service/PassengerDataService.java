@@ -82,7 +82,7 @@ public class PassengerDataService extends BaseService{
 				String password = jsonObject.getString("password");
 				String phone = jsonObject.getString("phone");
 				String email = jsonObject.getString("email");
-				String nickName = jsonObject.getString("nickName");
+				String nickName = jsonObject.getString("nickname");
 				String gender = jsonObject.getString("gender");
 				String descr = jsonObject.getString("descr");
 				//没有重复的用户，email和phone都可以作为账号
