@@ -13,11 +13,19 @@ public class LoginRecord {
     private String userid;
     // user type
     // 0:taxi, 1:passenger
-    private int type;
+    // private int type;
     private Date loginTime;
-    private String phone;
-    private double latitude;
-    private double longtitude;
+    private String account;
+    private double latitude = 0;
+    private double longtitude = 0;
+
+    public LoginRecord() {
+    }
+
+    public LoginRecord(String userid, String account) {
+        this.userid = userid;
+        this.account = account;
+    }
 
     public String getUserid() {
         return userid;
@@ -27,28 +35,12 @@ public class LoginRecord {
         this.userid = userid;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public Date getLoginTime() {
         return loginTime;
     }
 
     public void setLoginTime(Date loginTime) {
         this.loginTime = loginTime;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public double getLatitude() {
@@ -65,6 +57,14 @@ public class LoginRecord {
 
     public void setLongtitude(double longtitude) {
         this.longtitude = longtitude;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getAccount() {
+        return account;
     }
 
 }

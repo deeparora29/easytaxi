@@ -4,7 +4,7 @@ import com.easytaxi.common.dao.BaseJdbcDao;
 import com.easytaxi.usermgr.bo.LoginRecord;
 
 public class LoginRecordDao extends BaseJdbcDao {
-    private final static String INSERT_LOGINRECORD = "insert into (userid, type, phone, latitude, longtitude, login_time) values(?,?,?,?,?,now())";
+    private final static String INSERT_LOGINRECORD = "insert into (userid, account, latitude, longtitude, login_time) values(?,?,?,?,now())";
 
     /**
      * @method: save the login record
@@ -13,7 +13,7 @@ public class LoginRecordDao extends BaseJdbcDao {
     public void doSaveLoginRecord(LoginRecord loginRecord) {
         getJdbcTemplate().update(
             INSERT_LOGINRECORD,
-            new Object[] { loginRecord.getUserid(), loginRecord.getType(), loginRecord.getPhone(),
+            new Object[] { loginRecord.getUserid(), loginRecord.getAccount(),
                 loginRecord.getLatitude(), loginRecord.getLongtitude() });
     }
 
