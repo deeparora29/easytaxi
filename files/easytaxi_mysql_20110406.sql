@@ -75,9 +75,8 @@ DROP TABLE IF EXISTS `loginrecord`;
 CREATE TABLE `loginrecord` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `userid` varchar(6) NOT NULL COMMENT 'user id',
-  `type` int(1) DEFAULT '0' COMMENT '0:taxi;1:passenger',
   `login_time` datetime DEFAULT NULL,
-  `phone` varchar(14) DEFAULT NULL,
+  `account` varchar(32) DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   `longtitude` double DEFAULT NULL,
   PRIMARY KEY (`id`)
