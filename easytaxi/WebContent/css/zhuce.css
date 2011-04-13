@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+.zhuce{margin:0 auto;width:700px;}
+.zhuce ul{width:700px;height:14px;background:url(../images/shadow_bg2.gif) left top no-repeat;float:left;}
+.zhuce dl{width:700px;background:url(../images/shadow_bg_mid2.gif) repeat-y;float:left;}
+.zhuce dl P{width:650px;height:45px;margin:0 auto; padding-top:65px;background:url(../images/jrsbs.gif) left 25px no-repeat;}
+.zhuce dl form{width:650px;margin:0 auto; position:relative;}
+.zhuce dl form label{width:120px;height:50px;line-height:50px;text-align:right; display:block; float:left; clear:both;font-size:14px;}
+.zhuce dl form input,.zhuce dl form select,.zhuce dl form span{float:left;}
+.zhuce dl dd{width:650px;height:50px;line-height:50px;}
+.zhuce dl dd span{margin-right:5px; float:left;}
+.input1{width:210px;height:17px;background: url(../images/login_bg2.gif) no-repeat; border:1px solid #8f8f8f; padding:8px; font-size:14px; margin-top:7px;}
+.input2{width:198px;height:16px;border:1px solid #7e9db9;padding:3px;font-size:14px;margin-top:12px;}
+.input3{width:66px;height:35px;border:1px solid #8f8f8f;font-size:14px;}
+.zhuce_btn{width:180px;height:52px; background:url(../images/jiaru_btn.gif) no-repeat;}
+.qxsz{width:125px;height:70px; position:absolute; top:414px; right:55px; background: url(../images/hkfh.gif) left center no-repeat; padding-left:25px; padding-top:50px;}
+.zhuce ol{width:700px;height:14px;background:url(../images/shadow_bg2.gif) left bottom no-repeat;float:left;}
+
+
+
+
+

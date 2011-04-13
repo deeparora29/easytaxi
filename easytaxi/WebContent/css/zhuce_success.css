@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+#zhuce{margin:0 auto;width:700px;}
+#zhuce ul{width:700px;height:14px;background:url(../images/shadow_bg2.gif) left top no-repeat;float:left;}
+#zhuce dl{width:700px;background:url(../images/shadow_bg_mid2.gif) repeat-y;float:left;}
+#zhuce dl h2{width:650px;height:25px;margin:0 auto;padding-top:125px;background: url(../images/zccg.gif) center 10px no-repeat;}
+#zhuce dl p{width:650px;height:45px;margin:0 auto;}
+#zhuce dl p a{ color:#268131;}
+#zhuce dl dd{width:650px;margin:10px auto;}
+.qqyq{width:190px;background:url(../images/lxr.gif) 0 top no-repeat; border-right:1px dashed #ccc; float:left; display:block; padding-top:30px;padding-left:5px;}
+.msnyq{width:190px;background:url(../images/lxr.gif) -190px top no-repeat; border-right:1px dashed #ccc; float:left; display:block; padding-top:30px; padding-left:5px;}
+.emailyq{width:253px;background:url(../images/lxr.gif) -380px top no-repeat;float:left; display:block; padding-top:30px;padding-left:5px;}
+#zhuce dl dd form label,.zhuce dl dd form select{ float:left;}
+#zhuce dl dd form label{width:85px; height:25px; line-height:25px; clear:both;}
+.input4{width:95px;height:20px; border:1px solid #7e9eb7; float:left; margin-top:3px;}
+.input5{width:60px;height:20px; border:1px solid #7e9eb7; float:left;margin-top:3px;}
+.input6{width:160px;height:20px; border:1px solid #7e9eb7; float:left;margin-top:3px;}
+#zhuce dl dt{width:650px;height:50px; line-height:50px;margin:0 auto;clear:both;}
+.xunzhao{width:46px;height:21px; background:url(../images/xzqx.gif) left center no-repeat; display:block;float:left; margin-right:3px;margin-top:5px;}
+.quxiao{width:46px;height:21px; background:url(../images/xzqx.gif) right center no-repeat; display:block;float:left;margin-top:5px;}
+.chazhao{width:700px;margin:0 auto;background:url(../images/shadow_bg_mid2.gif) repeat-y;float:left;}
+.chazhao h2{width:330px;height:50px;line-height:50px;margin:0 auto;}
+.chazhao h2 img{margin-top:18px;*margin-top:15px;}
+.chazhao h2 span{font-size:14px;font-weight:normal;}
+
+
+.lianxiren{width:650px;margin:0 auto;}
+.lianxiren h3{width:648px;height:50px;line-height:50px;background-color:#f4f4f4; border:1px solid #ccc; text-align:center; font-size:14px; font-weight:normal;}
+.lianxiren h4{width:628px;height:50px;line-height:50px;background-color:#f4f4f4; border:1px solid #ccc; text-align:center; font-size:14px; font-weight:normal; padding: 0 10px;}
+.conlist{width:648px;height:110px;margin:0 auto;border-left:1px solid #ccc;border-right:1px solid #ccc;border-bottom:1px solid #ccc;}
+#zhuce .lianxiren .czUserList {width:301px; height:44px; float:left;background:none; margin:10px 10px 0 10px;_display:inline;}
+.czUserList a{width:44px; height:44px;}
+.czUserList p{width:247px; height:44px;padding-left:10px; background-color:#f4f4f4;}
+.addtj{width:128px; height:31px; display:block; background:url(../images/tjjh2.gif) left center no-repeat; clear:both;}
+.addnext{width:83px; height:31px; display:block; background:url(../images/tjjh2.gif) right center no-repeat;}
+.tjhy_btn1{ clear:both; width:210px; margin:0 auto; height:50px; line-height:50px;}
+.tjhy_btn2{ clear:both; width:210px; margin:0 auto; line-height:50px;}
+
+
+
+.lianxiren2{width:650px;margin:0 auto;}
+.lianxiren2 h3{width:648px;height:50px;line-height:50px;background-color:#f4f4f4; border:1px solid #ccc; text-align:center; font-size:14px; font-weight:normal;}
+.lianxiren2 .lxr_ll{width:229px;height:290px; float:left; overflow:scroll;overflow-x:hidden; border-style:solid; border-color:#ccc; border-width:0 0 1px 1px;}
+.lianxiren2 .lxr_ll h4{width:199px;height:43px; line-height:43px; padding:0 20px 0 10px;background:url(../images/lxr_bg.gif) repeat-x;}
+.lianxiren2 .lxr_ll h4 span{_margin-top:10px;}
+#zhuce .lianxiren2 .lxr_ll ul{background:none;}
+.lianxiren2 .lxr_ll ul li{width:219px; height:40px; background-color:#f4f4f4;border-style:solid; border-color:#fff #f4f4f4 #ebebeb #f4f4f4; border-width:1px 0 1px 0; padding-left:10px;}
+.lianxiren2 .lxr_ll ul li b{ font-size:14px;}
+.lianxiren2 .lxr_rr{width:389px;height:260px; float:left;border-style:solid; border-color:#ccc; border-width:0 1px 1px 0; padding:15px;}
+#zhuce .lianxiren2 .lxr_rr h2{width:389px; height:25px; line-height:25px;font-size:12px; font-weight:bold; color:#3f6846;}
+#zhuce .lianxiren2 .lxr_rr p{width:389px; height:25px; line-height:25px;font-size:12px;color:#3f6846;}
+.lxr_rr textarea{width:380px;height:80px;color:#666;font-size:12px;}
+.yaoqing2{width:112px;height:36px; display:block; background:url(../images/fsyq.gif) no-repeat; margin-top:10px;}
+#zhuce .lianxiren2 .lxr_rr p.yqjs{width:389px; line-height:20px;color:#666;font-size:12px; clear:both; margin-top:10px; float:left;}
+#zhuce .lianxiren2 .lxr_rr a.left{ color:#2c933a;}
+
+.tjcyjh{width:650px;margin:0 auto;clear:both;}
+.tjcyjh h2{width:650px; height:50px; line-height:50px; text-align:center; font-weight:normal; font-size:14px;}
+.chushiss{width:650px; height:25px; line-height:25px;}
+.rili{width:34px; height:21px; display:block; background:url(../images/rl.gif) no-repeat;}
+.input7{width:74px; height:14px; border:1px inset #7f9ebd; padding:3px;}
+.input8{width:124px; height:14px; border:1px inset #7f9ebd;padding:3px;}
+.ssjd_btn{width:53px; height:22px; display:block; background:url(../images/sousuo.gif) no-repeat; margin-left:-1px;}
+.tjjh{width:128px; height:31px; display:block; background:url(../images/tjjh.gif) left center no-repeat;}
+.qxtj{width:83px; height:31px; display:block; background:url(../images/tjjh.gif) right center no-repeat;}
+.chushiss,.chaojiss,.xiugaiss{ clear: both; height:25px;}
+#zhuce a.mL5{ color:#268036; font-size:14px;}
+.tjcyjh p{clear:both; height:70px; line-height:35px; padding-left:50px;}
+.chaojiss div.left{position:relative;} 
+.sslist{width:182px; height:auto!important; min-height:50px; height:50px;border:1px solid #ccc; background-color:#FFF; position:absolute; top:22px; left:52px;}
+.sslist .wsd{width:162px;padding:10px;line-height:22px; margin:0; }
+#zhuce .chaojiss .sslist .ssd{width:100%;height:auto!important; min-height:50px; height:50px;}
+.sslist ol li a{width:172px; height:25px; line-height:25px;background-color:#fff; color:#000; display:block;padding-left:10px; cursor:pointer;}
+.sslist ol li a:hover{background-color:#006600; color:#FFF;}
+
+
+
+
+
+
+
+
+
+#zhuce ol{width:700px;height:14px;background:url(../images/shadow_bg2.gif) right bottom no-repeat;float:left;}
+
+
+
+
+
