@@ -128,6 +128,16 @@ comments
 
 
 
+2011.4.13
+1.Query user detail info---service ren mian提供；
+2.验证接口有效性，验证userid---再看他是否登录---hashmap/loginrecord表-----登录会话有效性（24h）；
+3.GPS---实时（hashMap）/历史数据（DB---增加一张表记录GPS数据表）---客户端可能进行处理；
+4.放到内存中的数据要定期存储到DB中（新增表）:有效用户，GPS数据----已经分别在2,3点已经完成；
+5.后台测试接口以及测试程序---Fukui
+6.前台页面改造---renmian
+
+
+
 
 
 
