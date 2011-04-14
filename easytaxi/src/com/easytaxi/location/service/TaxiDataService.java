@@ -116,7 +116,7 @@ public class TaxiDataService extends BaseService{
 				data.setCab(cab);
 				data.setUserId(userid);
 				data.setGpsdata(gpsdata);
-				taxiGPSMap.put(userid, data);
+				taxiGPSMap.put(cab, data);
 			}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call T004
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");

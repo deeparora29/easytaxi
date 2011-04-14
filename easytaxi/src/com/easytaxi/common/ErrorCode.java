@@ -46,5 +46,6 @@ public class ErrorCode {
     // 用车请求不存在
     public final static String REQUEST_NOTEXIST = "4004";
 	
-	
+	//查询时没有找到相关数据
+    public final static String NOT_FOUND_DATA = "5000";
 }
