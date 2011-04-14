@@ -160,6 +160,8 @@ public class BaseService {
 			.append(",status:'"+status+"'").append(",credit:'"+credit+"'").append(",cabGPS:'"+cabGPS+"'")
 			.append(",company:'"+company+"'").append(",email:'"+email+"'").append(",carModel:'"+carModel+"'")
 			.append(",chargeModel:'"+chargeModel+"'").append(",drivers:'"+drivers+"'").append(",descr:'"+descr+"'");
+		}else if( transCode.equals(SystemPara.P_UPDATE_PHONE_NUMBER) ){//更新乘客手机号码
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if( transCode.equals(SystemPara.T_REGISTER) ){//出租车注册
 			String userId = (String)args[1];
 			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'");
