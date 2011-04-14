@@ -45,7 +45,7 @@ public class CallTaxiServie extends BaseService {
     public String requestTaxi(RequestInfo requestInfo) {
         String requestNo = "";
         try {
-            requestNo = getSerialNum("request_no", 12, "true");
+            requestNo = taxiDao.getSerialNum("request_no", 12, "true");
             requestInfo.setRequestNo(requestNo);
             getCallTaxiDao().doDeleteRequestInfo(requestNo);
             getCallTaxiDao().doSaveRequestInfo(requestInfo);
