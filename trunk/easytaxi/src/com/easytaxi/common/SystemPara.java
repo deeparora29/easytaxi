@@ -49,7 +49,8 @@ public class SystemPara {
 	//查询出租车详细信息
 	public static final String P_QUERYTAXIDETAILINFO = "P010";
 	
-	
+	//更新手机号码
+	public static final String P_UPDATE_PHONE_NUMBER = "P011";
 	
 	
 	//Taxi Register

@@ -236,9 +236,12 @@ public class PassengerDataService extends BaseService{
 					jsonString = getReturnMessage(transCode,taxi);
 				}
 				return jsonString ;
+			}else if(transCode.equals(SystemPara.P_UPDATE_PHONE_NUMBER)){
+				String userid = jsonObject.getString("userid");
+				String phone = jsonObject.getString("phone");
+				passengerDao.doUpdatePassengerPhone(userid, phone);
+				jsonString = getReturnMessage(transCode);
 			}
-			
-			
 			
 			//根据交易编号获取返回信息
 			jsonString = getReturnMessage(transCode);
