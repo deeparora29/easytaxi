@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.easytaxi.bo.CreditRecord;
 import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Passenger;
+import com.easytaxi.bo.Taxi;
 import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
@@ -111,11 +112,11 @@ public class BaseService {
         }else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
         	jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if( transCode.equals(SystemPara.P_CREDITRATING) ){//信用评价
-			
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if( transCode.equals(SystemPara.P_QUERYCREDIT) ){//查询Taxi信誉度
 			List<CreditRecord> list = (List<CreditRecord>)args[1];
 			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
-			if(list!=null){
+			if(list!=null&&list.size()>0){
 				jsonString.append(",credits:[");
 				for (int i = 0; i < list.size(); i++) {
 					CreditRecord creditRecord = list.get(i);
@@ -129,13 +130,36 @@ public class BaseService {
 						jsonString.append("{credit:'"+credit+"',comments:'"+comments+"',cab:'"+cab+"',creditTime:'"+creditTime+"'}");
 					}
 				}
+			}else{
+				jsonString.append("credits:[]");
 			}
 		}else if( transCode.equals(SystemPara.P_QUERYTAXIGPS) ){//查询Taxi GPS
-			
+			GPSData passengerGPSData = (GPSData)args[1];
+			String cabGPS = "{lat:"+passengerGPSData.getLat()+",lng:"+passengerGPSData.getLng()+"}";
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",cabGPS:'"+cabGPS+"'");
 		}else if( transCode.equals(SystemPara.P_UPLOADGPS_TRACK) ){//上传GPS数据或经过路线
-			
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if( transCode.equals(SystemPara.P_QUERYTAXIDETAILINFO) ){//查询出租车详细信息
-			
+			Taxi taxi = (Taxi)args[1];
+			String cab = taxi.getCab();
+			String license = taxi.getLicense();
+			String status = SystemPara.getTaxiStatus(taxi.getStatus());
+			float credit = taxi.getCredit();
+			String cabGPS = "{lat:"+taxi.getLat()+",lng:"+taxi.getLng()+"}";
+			String company = convertNullToEmpty(taxi.getCompany());
+			String email = convertNullToEmpty(taxi.getEmail());
+			String carModel = convertNullToEmpty(taxi.getCarModel());
+			String chargeModel = convertNullToEmpty(taxi.getChargeModel());
+			String driver0 = convertNullToEmpty(taxi.getDriver0());
+			String driver1 = convertNullToEmpty(taxi.getDriver1());
+			String phone0 = convertNullToEmpty(taxi.getPhone0());
+			String phone1 = convertNullToEmpty(taxi.getPhone1());
+			String drivers = "[{name:'"+driver0+"', phone:'"+phone0+"'}, {name:'"+driver1+"', phone:'"+phone1+"'}]" ;
+			String descr = taxi.getDescr();
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",cab:'"+cab+"'").append(",license:'"+license+"'")
+			.append(",status:'"+status+"'").append(",credit:'"+credit+"'").append(",cabGPS:'"+cabGPS+"'")
+			.append(",company:'"+company+"'").append(",email:'"+email+"'").append(",carModel:'"+carModel+"'")
+			.append(",chargeModel:'"+chargeModel+"'").append(",drivers:'"+drivers+"'").append(",descr:'"+descr+"'");
 		}else if( transCode.equals(SystemPara.T_REGISTER) ){//出租车注册
 			String userId = (String)args[1];
 			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'");

@@ -70,7 +70,8 @@ public class CreditRateService extends BaseService {
             if (SystemPara.getUserTypeByUserid(userid) == 0) {// 出租车
                 record.setUserid(requestInfo.getUserid());
             } else {// 乘客
-                record.setUserid(requestInfo.getOperatorid());
+                //record.setUserid(requestInfo.getOperatorid());
+                record.setUserid(requestInfo.getUserid());
             }
             record.setRequestNo(requestNo);
             record.setCredit(credit);

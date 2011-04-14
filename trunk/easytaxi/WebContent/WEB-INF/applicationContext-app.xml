@@ -32,6 +32,7 @@
 	<bean id="passengerDataService" 
 		class="com.easytaxi.location.service.PassengerDataService">
 		<property name="passengerDao" ref="passengerDao"/>	
+		<property name="taxiDao" ref="taxiDao"/>
 		<property name="callTaxiServie" ref="callTaxiServie"/>
 		<property name="creditRateService" ref="creditRateService"/>
 	</bean>

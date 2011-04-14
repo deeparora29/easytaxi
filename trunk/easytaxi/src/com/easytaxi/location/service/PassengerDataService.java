@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import com.easytaxi.bo.CreditRecord;
 import com.easytaxi.bo.GPSData;
 import com.easytaxi.bo.Passenger;
+import com.easytaxi.bo.Taxi;
 import com.easytaxi.bo.UploadGPSData;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
@@ -25,6 +26,7 @@ import com.easytaxi.request.bo.RequestResult;
 import com.easytaxi.request.service.CallTaxiServie;
 import com.easytaxi.request.service.CreditRateService;
 import com.easytaxi.usermgr.dao.PassengerDao;
+import com.easytaxi.usermgr.dao.TaxiDao;
 
 public class PassengerDataService extends BaseService{
 	
@@ -45,7 +47,12 @@ public class PassengerDataService extends BaseService{
 	//保存乘客上传GPS数据或经过路线
 	private static ConcurrentMap<String , List<UploadGPSData>> passengerTrackingMap = new ConcurrentHashMap<String, List<UploadGPSData> >();
 	
+	//乘客实时位置信息
+	private static ConcurrentMap<String , GPSData> realtimeLocationMap = new ConcurrentHashMap<String, GPSData>();
+	
 	private PassengerDao passengerDao ;
+	
+	private TaxiDao taxiDao ;
 	
 	private CallTaxiServie callTaxiServie ;
 	
@@ -156,46 +163,79 @@ public class PassengerDataService extends BaseService{
 				}else{
 					jsonString = getReturnErrorMessage(resulst.getErrorCode());
 				}
+				return jsonString;
 			}else if(transCode.equals(SystemPara.P_CANCELREQUEST)){//取消用车请求 P005
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
 				String comments = jsonObject.getString("comments");
 				callTaxiServie.cancelRequest(userid, requestNo, comments);
 				jsonString = getReturnMessage(transCode);
+				return jsonString;
 			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价P006
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
 				float credit = Float.valueOf(jsonObject.getString("credit"));
 				String comments = jsonObject.getString("comments");
-				//TODO callTaxiServie.
+				creditRateService.doCreditRating(userid, requestNo, credit, comments);
+				jsonString = getReturnMessage(transCode);
+				return jsonString;
 			}else if(transCode.equals(SystemPara.P_QUERYCREDIT)){//查询Taxi信誉度P007
 				String userid = jsonObject.getString("userid");
 				String cab = jsonObject.getString("cab");
 				int number = Integer.valueOf(jsonObject.getString("number"));
 				List<CreditRecord> list = creditRateService.getCreditDetail(userid, cab, number );
 				jsonString = getReturnMessage(transCode,list);
+				return jsonString;
 			}else if(transCode.equals(SystemPara.P_QUERYTAXIGPS)){//查询Taxi GPSP008
-				
-				//TODO 
-				
+				String userid = jsonObject.getString("userid");
+				String cab = jsonObject.getString("cab");
+				GPSData passengerGPSData = realtimeLocationMap.get(userid);
+				if(passengerGPSData!=null){
+					jsonString = getReturnMessage(transCode,passengerGPSData);
+				}else{
+					jsonString = getReturnErrorMessage(ErrorCode.NOT_FOUND_DATA);
+				}
+				return jsonString;
 			}else if(transCode.equals(SystemPara.P_UPLOADGPS_TRACK)){//上传GPS数据或经过路线
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
-				GPSData destLocation = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+				realtimeLocationMap.put(userid, gpsdata);
 				List<UploadGPSData>passengerTrackingList = null;
-				UploadGPSData data = new UploadGPSData();
-				data.setUserId(userid);
-				data.setGpsdata(destLocation);
+				UploadGPSData uploadGPSData = new UploadGPSData();
+				uploadGPSData.setUserId(userid);
 				if( passengerTrackingMap.containsKey(userid) ){
 					passengerTrackingList = passengerTrackingMap.get(userid);
-					passengerTrackingList.add( data );
+					uploadGPSData.setGpsdata(gpsdata);
+					passengerTrackingList.add( uploadGPSData );
 				}else{
 					passengerTrackingList = new ArrayList<UploadGPSData>();
-					passengerTrackingList.add( data );
-					passengerTrackingMap.put(userid , passengerTrackingList);
+					passengerTrackingList.add(uploadGPSData);
 				}
+				passengerTrackingMap.put(userid , passengerTrackingList);
+				jsonString = getReturnMessage(transCode);
+				return jsonString ;
 			}else if(transCode.equals(SystemPara.P_QUERYTAXIDETAILINFO)){//查询出租车详细信息 GPSP010
-				//TODO 
+				String cab = jsonObject.getString("cab");
+				String userid = jsonObject.getString("userid");
+				Taxi taxi = taxiDao.getTaxiByPlateNumber(cab);
+				if(taxi==null){
+					jsonString = getReturnErrorMessage(ErrorCode.NOT_FOUND_DATA);
+				}else{
+					//获取出租车实时位置信息
+					UploadGPSData taxiGPSMap = TaxiDataService.getInstance().getTaxiGPSMap().get(cab);
+					if(taxiGPSMap!=null){
+						double lat = taxiGPSMap.getGpsdata().getLat();
+						double lng = taxiGPSMap.getGpsdata().getLng();
+						taxi.setLat(lat);
+						taxi.setLng(lng);
+						int status = taxiGPSMap.getStatus();
+						// 出租车状态，空车，负载，未知
+						taxi.setStatus(status);
+					}
+					jsonString = getReturnMessage(transCode,taxi);
+				}
+				return jsonString ;
 			}
 			
 			
@@ -203,7 +243,6 @@ public class PassengerDataService extends BaseService{
 			//根据交易编号获取返回信息
 			jsonString = getReturnMessage(transCode);
 		}
-		
 		
 		return jsonString ;
 	}
@@ -253,6 +292,14 @@ public class PassengerDataService extends BaseService{
 
 	public void setCreditRateService(CreditRateService creditRateService) {
 		this.creditRateService = creditRateService;
+	}
+
+	public TaxiDao getTaxiDao() {
+		return taxiDao;
+	}
+
+	public void setTaxiDao(TaxiDao taxiDao) {
+		this.taxiDao = taxiDao;
 	}
 	
 	

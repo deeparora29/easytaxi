@@ -26,7 +26,7 @@ public class CallTaxiDao extends BaseJdbcDao {
 
     private final static String DELETE_REQUESTINFO = "delete from requestinfo where requestNo=?";
 
-    private final static String SELETE_REQUESTINFO_REQUESTNO = "select * from requestinfo where where requestNo=?";
+    private final static String SELETE_REQUESTINFO_REQUESTNO = "select * from requestinfo where requestNo=?";
 
     private final static String SELECT_REQUESTINFO_STATUS = "select * from requestinfo where status=?";
 
@@ -81,7 +81,7 @@ public class CallTaxiDao extends BaseJdbcDao {
         getJdbcTemplate().update(
             UPDATE_REQUESTINFO,
             new Object[] { requestInfo.getStatus(), requestInfo.getOperatorid(), requestInfo.getOperatorType(),
-                requestInfo.getOperatorComments() });
+                requestInfo.getOperatorComments() ,requestInfo.getRequestNo() });
     }
 
     /**

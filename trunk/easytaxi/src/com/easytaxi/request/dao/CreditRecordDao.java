@@ -11,7 +11,7 @@ import com.easytaxi.common.dao.BaseJdbcDao;
 
 public class CreditRecordDao extends BaseJdbcDao {
 
-    private final static String INSERT_CREDITRECORD = "insert into creditrecord (requstNo, userid, comments, credit, credit_userid, credit_time) values(?,?,?,?,?,now())";
+    private final static String INSERT_CREDITRECORD = "insert into creditrecord (requestNo, userid, comments, credit, credit_userid, credit_time) values(?,?,?,?,?,now())";
     private final static String SELECT_CREDITRECORD_USERID = "select * from creditrecord where userid=? order by id desc";
     private final static String SELECT_CREDITRECORD_CREDIT_USERID = "select * from creditrecord where credit_userid=? order by id desc";
     private final static String SELECT_CREDITRECORD_CAB = "SELECT a.*, b.plate_number FROM creditrecord a, taxi b WHERE a.credit_userid=b.userid AND b.plate_number=? ORDER BY id desc";
