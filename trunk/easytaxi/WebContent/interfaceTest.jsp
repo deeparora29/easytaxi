@@ -35,9 +35,24 @@
 	</table>
 		<ul>
 			<li>
-			P001<p>{TransCode:'P001',phone:'13012345678',email:'anne.mian.ren@gmail.com',password:'123',
+				<b>P001</b>
+				<p>{TransCode:'P001',phone:'13012345678',email:'anne.mian.ren@gmail.com',password:'123',
 					nickname:'anne',firstname:'Ren',lastname:'Mian',gender:'female',province:'四川',	city:'成都',
-					agreement:'yes',descr:'for test passenger'}</p>
+					agreement:'yes',descr:'for test passenger'}
+				</p>
+			</li>
+			<li>
+				<b>P002</b>
+				<p>{TransCode:'P002',account:'anne.mian.ren@gmail.com',password:'123'}</p>
+			</li>
+			<li>
+				<b>P003</b>
+				<p>{TransCode:'P003',userid:'P00001',phone:'13012345678',userGPS:{lat:46.66765, lng: 124.74645, text:'成都市高新区管委会'},
+					dstGPS:{lat:45.3553, lng:138.44563, text:'ABC'},number:2,luggage:1,comments:'sponse a call taxi',share:'yes'}
+				</p>
+			</li>
+			<li>
+				<b>P011</b><p>{TransCode:'P003',userid:'P00001',phone:'13909876543'}</p>
 			</li>
 		</ul>
 </body>

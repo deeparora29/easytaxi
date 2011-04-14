@@ -1,19 +1,13 @@
 package com.easytaxi.common.service;
 
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
 import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.CallableStatementCallback;
-import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.easytaxi.bo.CreditRecord;
@@ -39,43 +33,7 @@ public class BaseService {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	/**
-	* @Description: 获取流水号
-	* @param serialType 流水号类型 t_user_id:出租车id , p_user_id:乘客id ,request_no : 请求编号 ,track_id:行迹编号  
-	* @param len  流水号长度
-	* @param showDate 流水号是否带日期
-	* @return SerialNum ， 流水号生成失败返回 -1
-	* <p><blockquote>
-	*  e.g.  getSerialNum( "t_user_id" , 13 , "true");
-	*  		 其中：t_user_id与et_sys_var表中field_name对应，若无此记录则不能获取正确的流水号
-	*       13 为流水号长度
-	*       true表示需要添加日期
-	*       return 2011040401056     
-	* </blockquote>
-	* <p>	
-	*/
-	public  String getSerialNum(final String serialType , final int len , final String showDate ) {
-		String serialNum = (String) jdbcTemplate.execute(
-			new CallableStatementCreator() {
-				public CallableStatement createCallableStatement(Connection con) throws SQLException {
-					String storedProc = "{call get_serial_num(?,?,?,?)}";
-					CallableStatement cs = con.prepareCall(storedProc);
-					cs.setString(1, serialType );
-					cs.setInt(2, len);
-					cs.setString(3, showDate );
-					//cs.setInt(4, 15);
-					cs.registerOutParameter(4, Types.VARCHAR);
-					return cs;
-				}
-			}, new CallableStatementCallback() {
-				public Object doInCallableStatement(CallableStatement cs)throws SQLException, DataAccessException {
-					cs.execute();
-					return cs.getString("s_value");
-				}
-		});
-
-		return serialNum;
-	}
+	
 	
 	/**
 	 * 生成异常描述信息
@@ -132,15 +90,15 @@ public class BaseService {
 		StringBuffer jsonString = new StringBuffer("{");
 		if( transCode.equals(SystemPara.P_REGISTER) ){//乘车注册
 			String userId = (String)args[1];
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'");
 		}else if( transCode.equals(SystemPara.P_LOGIN) ){//乘客登录
 			String userId = (String)args[1];
 			String phone = (String)args[2];
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"").append(",phone:"+phone+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'").append(",phone:'"+phone+"'");
 		}else if( transCode.equals(SystemPara.P_REQUESTTAXI) ){//发布用车请求
 			//requestNo:’201104062201’
 			String requestNo = (String)args[1];
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",requestNo:"+requestNo+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",requestNo:'"+requestNo+"'");
 		}else if( transCode.equals(SystemPara.P_GETCONFIRM) ){//获取出租车响应
 			String requestNo = (String)args[1];
 			RequestResult resulst = (RequestResult)args[2];
@@ -148,15 +106,15 @@ public class BaseService {
 			float credit = resulst.getTaxi().getCredit();
 			UploadGPSData taxiGPSData = (UploadGPSData)args[3];
 			String cabGPS = "{lat:"+taxiGPSData.getGpsdata().getLat()+",lng:"+taxiGPSData.getGpsdata().getLng()+"}";
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",requestNo:"+requestNo+"")
-			.append(",cab:"+cab+"").append(",credit:"+credit+"").append(",cabGPS:"+cabGPS+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",requestNo:'"+requestNo+"'")
+			.append(",cab:'"+cab+"'").append(",credit:'"+credit+"'").append(",cabGPS:'"+cabGPS+"'");
         }else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
-        	jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"");
+        	jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if( transCode.equals(SystemPara.P_CREDITRATING) ){//信用评价
 			
 		}else if( transCode.equals(SystemPara.P_QUERYCREDIT) ){//查询Taxi信誉度
 			List<CreditRecord> list = (List<CreditRecord>)args[1];
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 			if(list!=null){
 				jsonString.append(",credits:[");
 				for (int i = 0; i < list.size(); i++) {
@@ -166,9 +124,9 @@ public class BaseService {
 					String cab = creditRecord.getCreditUserid();
 					Date creditTime = creditRecord.getCreditTime();
 					if(i!=list.size()-1){
-						jsonString.append("{credit:"+credit+",comments:"+comments+",cab:"+cab+",creditTime:"+creditTime+"},");
+						jsonString.append("{credit:'"+credit+"',comments:'"+comments+"',cab:'"+cab+"',creditTime:'"+creditTime+"'},");
 					}else{
-						jsonString.append("{credit:"+credit+",comments:"+comments+",cab:"+cab+",creditTime:"+creditTime+"}");
+						jsonString.append("{credit:'"+credit+"',comments:'"+comments+"',cab:'"+cab+"',creditTime:'"+creditTime+"'}");
 					}
 				}
 			}
@@ -180,7 +138,7 @@ public class BaseService {
 			
 		}else if( transCode.equals(SystemPara.T_REGISTER) ){//出租车注册
 			String userId = (String)args[1];
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'");
 		}else if( transCode.equals(SystemPara.T_LOGIN) ){//出租车登录
 			String userId = (String)args[1];
 			String phone = (String)args[2];
@@ -188,7 +146,7 @@ public class BaseService {
 			if(phoneArray.length>1){
 				phone = "['"+phoneArray[0]+"','"+phoneArray[1]+"']";
 			}
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userId+"").append(",phone:"+phone+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'").append(",phone:'"+phone+"'");
 		}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call
 			String requestNo = (String)args[1];
 			String userId = (String)args[2];
@@ -198,17 +156,17 @@ public class BaseService {
 			float credit = resulst.getPassenger().getCredit();
 			double lat = resulst.getPassenger().getGpsdata().getLat();
 			double lng = resulst.getPassenger().getGpsdata().getLng();
-			String cabGPS = "{lat:"+lat+",lng:"+lng+"}";
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",requestNo:"+requestNo+"")
-			.append(",userId:"+userId+"").append(",nickname:"+nickname+"").append(",phone:"+phone+"")
-			.append("credit:"+credit+"").append(",cabGPS:"+cabGPS+"");
+			String cabGPS = "{lat:'"+lat+"',lng:'"+lng+"'}";
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",requestNo:'"+requestNo+"'")
+			.append(",userId:'"+userId+"'").append(",nickname:'"+nickname+"'").append(",phone:'"+phone+"'")
+			.append("credit:'"+credit+"'").append(",cabGPS:'"+cabGPS+"'");
 		}else if(transCode.equals(SystemPara.T_CANCEL_CALL)){//Cancel Call T005
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if(transCode.equals(SystemPara.T_CREDIT_RATING)){//Credit Rating T006
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_CREDIT)){//Query Passenger’s Credit  T007
 			List<CreditRecord> list = (List<CreditRecord>)args[1];
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 			if(list!=null){
 				jsonString.append(",credits:[");
 				for (int i = 0; i < list.size(); i++) {
@@ -218,29 +176,29 @@ public class BaseService {
 					String cab = creditRecord.getCreditUserid();
 					Date creditTime = creditRecord.getCreditTime();
 					if(i!=list.size()-1){
-						jsonString.append("{credit:"+credit+",comments:"+comments+",cab:"+cab+",creditTime:"+creditTime+"},");
+						jsonString.append("{credit:'"+credit+"',comments:'"+comments+"',cab:'"+cab+"',creditTime:'"+creditTime+"'},");
 					}else{
-						jsonString.append("{credit:"+credit+",comments:"+comments+",cab:"+cab+",creditTime:"+creditTime+"}");
+						jsonString.append("{credit:'"+credit+"',comments:'"+comments+"',cab:'"+cab+"',creditTime:'"+creditTime+"'}");
 					}
 				}
 				jsonString.append("]");
 			}
 		}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_LOCATION)){//T008---Query Passenger Real-time location
 			GPSData data = (GPSData)args[1];
-			String userGPS = "{lat:"+data.getLat()+",lng:"+data.getLng()+"}";
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userGPS:"+userGPS+"");
+			String userGPS = "{lat:'"+data.getLat()+"',lng:'"+data.getLng()+"'}";
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userGPS:'"+userGPS+"'");
 		}else if(transCode.equals(SystemPara.T_QUERY_CALL_INFO)){//Query Detail Taxi Call Info
 			RequestInfo info = (RequestInfo)args[1];
 			String requestNo = info.getRequestNo();
 			String userid = info.getUserid();
 			String phone = info.getPhone();
-			String userGPS = "{lat:"+info.getStartLat()+",lng:"+info.getStartLong()+"}";
+			String userGPS = "{lat:'"+info.getStartLat()+"',lng:'"+info.getStartLong()+"'}";
 			int number = info.getNumber();
 			int luggage = info.getLuggage();
 			String comments = info.getComments();
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",requestNo:"+requestNo+"")
-			.append(",userid:"+userid+"").append(",phone:"+phone+"").append(",userGPS:"+userGPS+"")
-			.append(",number:"+number+"").append(",luggage:"+luggage+"").append(",comments:"+comments+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",requestNo:'"+requestNo+"'")
+			.append(",userid:'"+userid+"'").append(",phone:'"+phone+"'").append(",userGPS:'"+userGPS+"'")
+			.append(",number:'"+number+"'").append(",luggage:'"+luggage+"'").append(",comments:'"+comments+"'");
 		}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_INFO)){//Query Detail Passenger Info T010
 			Passenger p = (Passenger)args[1];
 			RequestInfo info = (RequestInfo)args[2];
@@ -248,16 +206,16 @@ public class BaseService {
 			String firstname = p.getFirstname();
 			String lastname = p.getLastname();
 			float credit = p.getCredit();
-			String userGPS = "{lat:"+info.getStartLat()+",lng:"+info.getStartLong()+"}";
+			String userGPS = "{lat:'"+info.getStartLat()+"',lng:'"+info.getStartLong()+"'}";
 			String nickname = p.getNickname();
 			String gender = p.getGender();
 			String province = p.getProvince();
 			String city = p.getCity();
 			String descr = p.getDescr();
-			jsonString.append("ErrorCode:"+ErrorCode.SUCCESS+"").append(",userid:"+userid+"")
-			.append(",firstname:"+firstname+"").append(",lastname:"+lastname+"").append(",credit:"+credit+"")
-			.append(",userGPS:"+userGPS+"").append(",nickname:"+nickname+"").append(",gender:"+gender+"")
-			.append(",province:"+province+"").append(",city:"+city+"").append(",descr:"+descr+"");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userid+"'")
+			.append(",firstname:'"+firstname+"'").append(",lastname:'"+lastname+"'").append(",credit:'"+credit+"'")
+			.append(",userGPS:'"+userGPS+"'").append(",nickname:'"+nickname+"'").append(",gender:'"+gender+"'")
+			.append(",province:'"+province+"'").append(",city:'"+city+"'").append(",descr:'"+descr+"'");
 		}
 		
 		

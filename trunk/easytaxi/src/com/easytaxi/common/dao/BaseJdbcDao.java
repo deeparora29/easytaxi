@@ -1,6 +1,10 @@
 package com.easytaxi.common.dao;
 
 import java.beans.PropertyDescriptor;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +15,9 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.CallableStatementCallback;
+import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -130,4 +137,44 @@ public class BaseJdbcDao extends JdbcDaoSupport {
     protected Object getObjectFromList(List list) {
         return (list == null || list.size() == 0) ? null : list.get(0);
     }
+    
+    
+    /**
+	* @Description: 获取流水号
+	* @param serialType 流水号类型 t_user_id:出租车id , p_user_id:乘客id ,request_no : 请求编号 ,track_id:行迹编号  
+	* @param len  流水号长度
+	* @param showDate 流水号是否带日期
+	* @return SerialNum ， 流水号生成失败返回 -1
+	* <p><blockquote>
+	*  e.g.  getSerialNum( "t_user_id" , 13 , "true");
+	*  		 其中：t_user_id与et_sys_var表中field_name对应，若无此记录则不能获取正确的流水号
+	*       13 为流水号长度
+	*       true表示需要添加日期
+	*       return 2011040401056     
+	* </blockquote>
+	* <p>	
+	*/
+	public  String getSerialNum(final String serialType , final int len , final String showDate ) {
+		String serialNum = (String) getJdbcTemplate().execute(
+			new CallableStatementCreator() {
+				public CallableStatement createCallableStatement(Connection con) throws SQLException {
+					String storedProc = "{call get_serial_num(?,?,?,?)}";
+					CallableStatement cs = con.prepareCall(storedProc);
+					cs.setString(1, serialType );
+					cs.setInt(2, len);
+					cs.setString(3, showDate );
+					//cs.setInt(4, 15);
+					cs.registerOutParameter(4, Types.VARCHAR);
+					return cs;
+				}
+			}, new CallableStatementCallback() {
+				public Object doInCallableStatement(CallableStatement cs)throws SQLException, DataAccessException {
+					cs.execute();
+					return cs.getString("s_value");
+				}
+		});
+
+		return serialNum;
+	}
+    
 }
