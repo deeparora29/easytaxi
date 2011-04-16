@@ -5,31 +5,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome!</title>
-<%@ include file="/include.jsp" %>
-<link rel="stylesheet" href="<%=rootCtx %>/css/index.css" type="text/css" media="screen" />
-<script type="text/javascript" src="<%=rootCtx %>/js/ui/ui.core.js"></script>
-<script type="text/javascript" src="<%=rootCtx %>/js/ui/ui.tabs.js"></script>
-<script type="text/javascript" src="<%=rootCtx %>/js/show.js"></script>
+<link href="css/share.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="js/ui/ui.core.js"></script>
+<script type="text/javascript" src="js/ui/ui.tabs.js"></script>
+<script type="text/javascript" src="js/show.js"></script>
 </head>
 <body>
-        <div id="wrapper">  
-            <div id="header" class="page5" >
-                <h1 id="logo"><a title="Easy Taxi" href="#">Easy Taxi</a></h1>
-            </div>
+        <div id="center">  
+           
 
-            <div id="content" >
-                <div id="show" class="box">
-                    <ul id="ccwTabList">
-                    	<li><a href="demo_v3.html"><span>Location</span></a></li>
-                    	<li><a href="test.jsp"><span>Track History</span></a></li>
-                    	<li><a href="index.jsp"><span>Account</span></a></li>
+             <div id="content" >
+                <div id="show" class="menue">
+                    <ul id="ccwTabList" class="navlist">
+                    	<li><a href="demo_v3.html" class="currentBg"><span>位置服务</span></a></li>
+                    	<li><a href="test.jsp"><span>历史足迹</span></a></li>
+                    	<li><a href="test.jsp"><span>设置</span></a></li>
                     </ul>
                 </div>
                  
-            </div>
-            
-            <div id="footer">
-              Account：12345&nbsp;&nbsp;Nick Name：XXXX&nbsp;&nbsp;Type:Taxi
             </div>
             
         </div>

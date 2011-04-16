@@ -3,12 +3,13 @@ $(".input_ss").focusin(function(){
 $(".input_ss").val("");					  
 });
 $(".input_ss").focusout(function(){
-	if($(".input_ss").attr("value")==''){
-	$(".input_ss").val("ÇëÊäÈë¹Ø¼ü×Ö");					  
+	if($("").attr("value")==''){
+	$(".input_ss").val("è¯·è¾“å…¥å…³é”®å­—");					  
 	}
 });
 
-/*µ¼º½ËÑË÷ÏÂÀ­²Ëµ¥*/		   
+
+/*å¯¼èˆªæœç´¢ä¸‹æ‹‰èœå•*/		   
 $(".down").click(function(){
 $(".selectcon ul").slideToggle(100)
 },function(){
@@ -24,30 +25,30 @@ $(".down").focusout(function(){
 $(".selectcon ul").slideUp("fast");
 });
 
-/*µÇÂ¼Ä¬ÈÏ*/		   
+/*ç™»å½•é»˜è®¤*/		   
 $(".df0").focusin(function(){
 $(".df0").val("");					  
 });
 $(".df0").focusout(function(){
 	if($(".df0").attr("value")==''){
-	$(".df0").val("ÄúµÄÓÊÏä/ÓÃ»§Ãû");					  
+	$(".df0").val("æ‚¨çš„é‚®ç®±/ç”¨æˆ·å");					  
 	}
 });
 
-/*¾°µãÆÀÂÛÄ¬ÈÏÖµ*/
-$(".fbpinglun textarea").val("ÎÄÃ÷ÉÏÍø£¬¶Å¾øÃ¡Âî£¡")
+/*æ™¯ç‚¹è¯„è®ºé»˜è®¤å€¼*/
+$(".fbpinglun textarea").val("æ–‡æ˜ä¸Šç½‘ï¼Œæœç»è°©éª‚ï¼")
 $(".fbpinglun textarea").focusin(function(){
 $(".fbpinglun textarea").val('');	   
 })
 
 $(".fbpinglun textarea").focusout(function(){
 	if($(".fbpinglun textarea").val()==''){
-	$(".fbpinglun textarea").val("ÎÄÃ÷ÉÏÍø£¬¶Å¾øÃ¡Âî£¡");		   
+	$(".fbpinglun textarea").val("æ–‡æ˜ä¸Šç½‘ï¼Œæœç»è°©éª‚ï¼");		   
 	}										   
 })
 
 
-/*ÎÒµÄË£ÎÑtopÏÂÀ­²Ëµ¥*/
+/*æˆ‘çš„è€çªtopä¸‹æ‹‰èœå•*/
 $(".xialacd li").hover(function(){
    $(this).find(".layer").slideToggle(500)
 },function(){
