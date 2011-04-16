@@ -1,36 +1,7 @@
-/*******Tab Component***************/
-    
-#show{
-    width:99%;
-	display: inline;
-	float: left;
-	margin: 7px 0px 5px 5px;
-	border: 1px solid #458ac4;
-}
+@charset "utf-8";
+/* CSS Document */
+/* welcome.jsp */
 
-/**class definition**/
-#ccwTabList {
-    background:url(../image/tab-bg.jpg) repeat-x 0 1px;
-    width: 100%;
-    height: 26px;
-    list-style: none;
-    padding: 0;
-    margin: 0;	    
-}
-
-#ccwTabList li {
-    float: left;
-}
-
-#ccwTabList li a {
-    display:block; float:left;width:78px; height:30px; text-align:center; font-size:14px; font-weight:bold; color:#FFFFFF; padding-top:6px; margin-top:7px; text-decoration:none;
-}
-
-#ccwTabList li a:hover{
-    text-decoration: none;
-	color:#FFFF00;
-}
-
-#ccwTabList li.ccwtab_active a {
-    color:#17a51d; background-position:-776px -16px;
-}
+.content{ width:970px; height:720px; clear:both;_margin-bottom:-14px;}/* 970px */
+.lineGreen{ width:970px; height:4px; background-position:0 -62px; _font-size:1px;}
+.contentframe{ width:970px;height:700px;margin-top: 4px;}
