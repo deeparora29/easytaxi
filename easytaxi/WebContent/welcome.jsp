@@ -35,7 +35,7 @@ function setFrameSrc(src, index){
     	<div class="navlist">
             <a id="tab0" class="currentBg" href="#" onclick="setFrameSrc('demo_v3.html', 0);">实时位置</a>
             <a id="tab1" href="#" onclick="setFrameSrc('track.jsp', 1);">线路</a>
-            <a id="tab2" ="#" onclick="setFrameSrc('test.jsp', 2);">设置</a>
+            <a id="tab2" href="#" onclick="setFrameSrc('usermgr.jsp', 2);">设置</a>
             <a id="tab3" href="#">商家</a>
         </div>
         
