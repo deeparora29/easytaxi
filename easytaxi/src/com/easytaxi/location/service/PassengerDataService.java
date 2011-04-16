@@ -273,6 +273,10 @@ public class PassengerDataService extends BaseService{
 	}
 	
 	
+	public ConcurrentMap<String , GPSData> getRealtimeLocationMap(){
+		return realtimeLocationMap;
+	}
+	
 	public PassengerDao getPassengerDao() {
 		return passengerDao;
 	}
