@@ -1,10 +1,14 @@
 package com.easytaxi.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.easytaxi.common.utils.BeanFactoryUtil;
+import com.easytaxi.location.service.TaxiDataService;
 
 /**
  * Servlet implementation class TaxiDataManager
@@ -32,7 +36,11 @@ public class TaxiDataManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String data = request.getParameter("data");
-		String returnMessage = "";
+		if(data!=null){
+			data = new String(data.getBytes("ISO-8859-1"), "UTF-8");
+		}
+		TaxiDataService instance = (TaxiDataService)BeanFactoryUtil.getBean("taxiDataService");
+		String returnMessage = instance.offer( data );
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		response.getWriter().print( returnMessage );

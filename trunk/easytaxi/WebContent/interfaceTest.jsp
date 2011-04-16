@@ -11,7 +11,8 @@
 		$.ajax( {
 			type :"GET",
 			contentType :"application/json;utf-8",
-			url :"passenger",
+			//url :"passenger",
+			url :"taxi",
 			cache : false,
 			//dataType :"json",
 			data : { data : data },
@@ -87,6 +88,14 @@
 			<li>
 				<b>P011</b><p>{TransCode:'P011',userid:'P00001',phone:'13909876543'}</p>
 			</li>
+			
+			<li>
+				<b>T001</b>
+				<p>{TransCode:'T001',cab:'川A123456',password:'123456',license:'0123444',company:'Taxi Co.',email:'test@taxi.com',carModel:'Auto Das.',
+				chargeModel:'pay cash',drivers:[{name:'A司机', phone:'13912345678'}, {name:'B司机', phone:'13912345611'}],descr:'test taxi'}
+				</p>
+			</li>
+			
 		</ul>
 </body>
 </html>
