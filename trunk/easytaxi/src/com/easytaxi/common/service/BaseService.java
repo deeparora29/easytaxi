@@ -172,7 +172,9 @@ public class BaseService {
 			if(phoneArray.length>1){
 				phone = "['"+phoneArray[0]+"','"+phoneArray[1]+"']";
 			}
-			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'").append(",phone:'"+phone+"'");
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'").append(",userid:'"+userId+"'").append(",phone:"+phone+"");
+		}else if(transCode.equals(SystemPara.T_UPLOADGPS)){
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
 		}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call
 			String requestNo = (String)args[1];
 			String userId = (String)args[2];
@@ -228,6 +230,9 @@ public class BaseService {
 		}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_INFO)){//Query Detail Passenger Info T010
 			Passenger p = (Passenger)args[1];
 			RequestInfo info = (RequestInfo)args[2];
+			if(info==null){
+				info = new RequestInfo();
+			}
 			String userid = p.getUserid();
 			String firstname = p.getFirstname();
 			String lastname = p.getLastname();
@@ -242,6 +247,10 @@ public class BaseService {
 			.append(",firstname:'"+firstname+"'").append(",lastname:'"+lastname+"'").append(",credit:'"+credit+"'")
 			.append(",userGPS:'"+userGPS+"'").append(",nickname:'"+nickname+"'").append(",gender:'"+gender+"'")
 			.append(",province:'"+province+"'").append(",city:'"+city+"'").append(",descr:'"+descr+"'");
+		}else if(transCode.equals(SystemPara.T_UPDATE_TAXI_PHONE)){
+			jsonString.append("ErrorCode:'"+ErrorCode.SUCCESS+"'");
+		}else if(transCode.equals(SystemPara.T_VALID_PASSENGER_CALL)){
+			
 		}
 		
 		

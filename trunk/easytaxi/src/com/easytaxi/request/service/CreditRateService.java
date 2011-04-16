@@ -67,11 +67,15 @@ public class CreditRateService extends BaseService {
             RequestInfo requestInfo = getCallTaxiDao().getRequestInfo(requestNo);
             CreditRecord record = new CreditRecord();
             record.setCreditUserid(userid);
-            if (SystemPara.getUserTypeByUserid(userid) == 0) {// 出租车
-                record.setUserid(requestInfo.getUserid());
-            } else {// 乘客
-                //record.setUserid(requestInfo.getOperatorid());
-                record.setUserid(requestInfo.getUserid());
+            if(requestInfo!=null){
+	            if (SystemPara.getUserTypeByUserid(userid) == 0) {// 出租车
+	                record.setUserid(requestInfo.getUserid());
+	            } else {// 乘客
+	                //record.setUserid(requestInfo.getOperatorid());
+	                record.setUserid(requestInfo.getUserid());
+	            }
+            }else{
+            	logger.info(userid + "对" + requestNo + "信用评价失败................");
             }
             record.setRequestNo(requestNo);
             record.setCredit(credit);

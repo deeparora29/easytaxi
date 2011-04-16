@@ -103,12 +103,15 @@ public class TaxiDataService extends BaseService{
 					return jsonString ;
 				}
 			}else if(transCode.equals(SystemPara.T_LOGIN)){//Taxi Login T002
-				String cab = jsonObject.getString("cab");
+				String cab = jsonObject.getString("account");
 				String password = jsonObject.getString("password");
 				Taxi taxi = taxiDao.getTaxiByPlateNumber(cab);
 				if(taxi==null){
-					jsonString = getReturnErrorMessage(ErrorCode.USER_NOT_FOUND);
-				}else{
+					taxi = taxiDao.getTaxiByEmail( cab );
+					if(taxi==null)
+						jsonString = getReturnErrorMessage(ErrorCode.USER_NOT_FOUND);
+				}
+				if(taxi!=null){
 					String userid = taxi.getUserid();
 					String phone = taxi.getPhone0()+","+ taxi.getPhone0();
 					String _password = taxi.getPassword() ;
@@ -119,9 +122,10 @@ public class TaxiDataService extends BaseService{
 						jsonString = getReturnErrorMessage(ErrorCode.PASSWORD_NOT_ACCURATE);
 					}
 				}
+				return jsonString ;
 			}else if(transCode.equals(SystemPara.T_UPLOADGPS)){//上传出租车GPS数据 T003
 				String userid = jsonObject.getString("userid");
-				String userGPS = jsonObject.getString("userGPS");
+				String userGPS = jsonObject.getString("cabGPS");
 				String cab = jsonObject.getString("cab");
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
 				UploadGPSData data = new UploadGPSData();
@@ -129,9 +133,11 @@ public class TaxiDataService extends BaseService{
 				data.setUserId(userid);
 				data.setGpsdata(gpsdata);
 				taxiGPSMap.put(cab, data);
+				jsonString = getReturnMessage( transCode  );
+				return jsonString ;
 			}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call T004
 				String userid = jsonObject.getString("userid");
-				String userGPS = jsonObject.getString("userGPS");
+				String userGPS = jsonObject.getString("cabGPS");
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
 				String requestNo = jsonObject.getString("requestNo");
 				RequestResult resulst =callTaxiServie.confirmRequest(userid, requestNo);
@@ -159,29 +165,46 @@ public class TaxiDataService extends BaseService{
 				int number = Integer.valueOf(jsonObject.getString("number"));
 				List<CreditRecord> list = creditRateService.getCreditDetail(userid, passengerid, number );
 				jsonString = getReturnMessage(transCode,list);
-			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_LOCATION)){//Query Passenger’s Credit  T008
+			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_LOCATION)){//Query Passenger Real-time location  T008
 				String userid = jsonObject.getString("userid");
 				String passengerid = jsonObject.getString("passengerid");
-				RequestInfo info = getCallTaxiDao().getRequestInfo(passengerid);
-				GPSData data= new GPSData(info.getStartLat(),info.getStartLong());
-				jsonString = getReturnMessage(transCode,data);
+				//RequestInfo info = getCallTaxiDao().getRequestInfo(passengerid);
+				//GPSData data= new GPSData(info.getStartLat(),info.getStartLong());
+				ConcurrentMap<String , GPSData> passengerRealtimeLocation = PassengerDataService.getInstance().getRealtimeLocationMap();
+				GPSData data = passengerRealtimeLocation.get(passengerid);
+				if(data!=null){
+					jsonString = getReturnMessage(transCode,data);
+				}else{
+					jsonString = getReturnErrorMessage(ErrorCode.NOT_FOUND_DATA);
+				}
 			}else if(transCode.equals(SystemPara.T_QUERY_CALL_INFO)){//Query Detail Taxi Call Info  T009
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
 				RequestInfo info = getCallTaxiDao().getRequestInfo(requestNo);
-				jsonString = getReturnMessage(transCode, info);
+				if(info!=null){
+					jsonString = getReturnMessage(transCode, info);
+				}else{
+					jsonString = getReturnErrorMessage(ErrorCode.NOT_FOUND_DATA);
+				}
 			}else if(transCode.equals(SystemPara.T_QUERY_PASSENGER_INFO)){//Query Detail Passenger Info  T010
 				String userid = jsonObject.getString("userid");
 				String passengerid = jsonObject.getString("passengerid");
-				Passenger passenger = passengerDao.getPassengerByUserid(userid);
-				RequestInfo info = getCallTaxiDao().getRequestInfo(passengerid);
-				jsonString = getReturnMessage(transCode, passenger,info);
+				Passenger passenger = passengerDao.getPassengerByUserid(passengerid);
+				if(passenger==null){
+					jsonString = getReturnErrorMessage(ErrorCode.NOT_FOUND_DATA);
+				}else{
+					RequestInfo info = getCallTaxiDao().getRequestInfo(passengerid);
+					jsonString = getReturnMessage(transCode, passenger,info);
+				}
 			}else if(transCode.equals(SystemPara.T_UPDATE_TAXI_PHONE)){//Update Taxi phone  T011
 				String userid = jsonObject.getString("userid");
 				String phone = jsonObject.getString("phone");
+				taxiDao.updateTaxiPhone(userid, phone);
+				jsonString = getReturnMessage(transCode);
 			}else if(transCode.equals(SystemPara.T_VALID_PASSENGER_CALL)){//Get valid passenger’s call  T012
 				String userid = jsonObject.getString("userid");
 				int status = Integer.valueOf(jsonObject.getString("status"));
+				//TODO 
 			}
 			
 		}
