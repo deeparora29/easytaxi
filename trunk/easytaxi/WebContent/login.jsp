@@ -6,26 +6,32 @@
 <link href="css/share.css" rel="stylesheet" type="text/css" />
 <link href="css/login.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript" src="js/jquery.1.4.2.min.js"></script>
-<script language="javascript" type="text/javascript" src="js/myjs.js"></script>
+<script language="javascript" type="text/javascript" src="js/login.js"></script>
 </head>
 
 <body>
 <div class="login_in">
 	<div class="login_l">
     	<div class="login_title"></div>
-        <form>
+        <form action="/LoginServlet" method="post">
             <div class="login_content">
-                <label>登录账号：</label><div class="inputWidth"><input type="account" class="input_bg df0" value="您的账号"/></div>
-                <label>登录密码：</label><div class="inputWidth"><input type="password" class="input_bg"/> <a href="#">忘记密码？</a></div>
+            	<label>用户类型：</label><div class="inputWidth">
+            	<select id="type"><option value="passenger" selected="selected">乘客</option>
+            	<option value="taxi">出租车</option></select>
+            	</div>
+                <label>登录账号：</label><div class="inputWidth"><input type="text" class="input_bg df0" value="您的账号" id="account" name="account"/></div>
+                <label>登录密码：</label><div class="inputWidth"><input type="password" class="input_bg" id="password", name="password"/> <a href="#">忘记密码？</a></div>
             </div>
+            <br />
             <div class="login_con">
                 <div class="autolog"><input type="checkbox" class="mR5"/>下次自动登录</div>
-                <a class="login_btn hand"></a>
+                <input type="button" class="login_btn hand" id="submit" />
             </div>
         </form>
+        <br />
         <div class="login_zhuce">
         	<p>还没使用过EasyTaxi</p>
-            <a class="zhuce hand"></a>
+            <a class="zhuce hand" href="register.jsp"></a>
         </div>
     </div>
 	<div class="login_r">
