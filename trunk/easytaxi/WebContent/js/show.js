@@ -13,7 +13,7 @@
         
         
         $( "#ccwTabList" ).tabs({
-        	selectedClass: "ccwtab_active"
+        	selectedClass: "currentBg"
     	});
 
     });

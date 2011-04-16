@@ -7,26 +7,60 @@
 <title>Welcome!</title>
 <link href="css/share.css" rel="stylesheet" type="text/css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.js"></script>
-<script type="text/javascript" src="js/ui/ui.core.js"></script>
-<script type="text/javascript" src="js/ui/ui.tabs.js"></script>
-<script type="text/javascript" src="js/show.js"></script>
+<link href="css/welcome.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="js/jquery.1.4.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.reflect.js"></script>
+<script language="javascript" type="text/javascript" src="js/travel.js"></script>
+<script language="javascript" type="text/javascript" src="js/myjs.js"></script>
+<script>
+function setFrameSrc(src, index){
+	document.getElementById("mainFrame").src = src;
+	for(var i = 0; i < 4; i++){
+		var aId = "tab" + i;
+		document.getElementById(aId).setAttribute("class", "");
+	}
+	var aId = "tab" + index;
+	document.getElementById(aId).setAttribute("class", "currentBg");
+	
+}
+</script>
 </head>
 <body>
-        <div id="center">  
+<div id="center">  
            
 
-             <div id="content" >
-                <div id="show" class="menue">
-                    <ul id="ccwTabList" class="navlist">
-                    	<li><a href="demo_v3.html" class="currentBg"><span>位置服务</span></a></li>
-                    	<li><a href="test.jsp"><span>历史足迹</span></a></li>
-                    	<li><a href="test.jsp"><span>设置</span></a></li>
-                    </ul>
-                </div>
-                 
-            </div>
-            
+             <!--导航开始-->
+    <h1 class="logo"><a href="http://www.shua84.com"><img src="images/logo.gif" alt="耍巴适网logo" width="140" height="90" title="耍巴适网logo" /></a></h1>
+    <div class="menue">
+    	<div class="navlist">
+            <a id="tab0" class="currentBg" href="#" onclick="setFrameSrc('demo_v3.html', 0);">位置服务</a>
+            <a id="tab1" href="#" onclick="setFrameSrc('test.jsp', 1);">历史足迹</a>
+            <a id="tab2" ="#" onclick="setFrameSrc('test.jsp', 2);">设置</a>
+            <a id="tab3" href="#">商家</a>
         </div>
+        
+        <form>
+            <input type="text" value="请输入关键词" class="input_ss"/>
+            <div class="selectcon">
+                <ul class="hidden">
+                    <li><a href="#">文章</a></li>
+                    <li><a href="#">景点</a></li>
+                    <li><a href="#">活动</a></li>
+                    <li><a href="#">耍友</a></li>
+                </ul>
+                <a href="#" class="down">文章</a>
+            </div>
+            <a href="#" class="search"></a>
+        </form>
+        
+    </div>
+<!--导航结束-->  
+<!--top-->
+<div class="content">
+<div class="lineGreen">
+<iframe src="demo_v3.html" class="contentframe" id="mainFrame" scrolling="no" frameborder="0"></iframe>
+</div>
+</div>
+</div>
 </body>
 </html>
