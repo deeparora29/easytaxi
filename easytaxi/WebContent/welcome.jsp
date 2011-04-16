@@ -33,8 +33,8 @@ function setFrameSrc(src, index){
     <h1 class="logo"><a href="http://www.shua84.com"><img src="images/logo.gif" alt="耍巴适网logo" width="140" height="90" title="耍巴适网logo" /></a></h1>
     <div class="menue">
     	<div class="navlist">
-            <a id="tab0" class="currentBg" href="#" onclick="setFrameSrc('demo_v3.html', 0);">位置服务</a>
-            <a id="tab1" href="#" onclick="setFrameSrc('test.jsp', 1);">历史足迹</a>
+            <a id="tab0" class="currentBg" href="#" onclick="setFrameSrc('demo_v3.html', 0);">实时位置</a>
+            <a id="tab1" href="#" onclick="setFrameSrc('track.jsp', 1);">线路</a>
             <a id="tab2" ="#" onclick="setFrameSrc('test.jsp', 2);">设置</a>
             <a id="tab3" href="#">商家</a>
         </div>
