@@ -2,3 +2,26 @@
 /* CSS Document */
 .menue,.currentBg,.lineGreen,.topleft h2,.libg,.libg2,.shadow,.shadow2,.topleft p a,.topleft p a.currentBg2,.topleft p a.prevBg,.topleft p a.nextBg,.topmid ul li,.topmid .currentBg3,.focusTitle p,.login form .inputText,.login dl span a,.trave_pk ul li a,.trave_pk .pk,.line_s,.tab_aticle a,.tab_aticle dd span,.topmid p a.currentBg4,.search_jd dd a,.top_jd p a,.top_jd p a.currentBg5,.fhd_btn,.hot,.tab_menue a,.tab_menue a.currentBg6,.spot3,.canjia,.guanzhu,.tuijian,.prev_btn,.next_btn{background-image:url(../images/bg.png);
 }
+
+.travel_index{width:970px;clear:both;}/* 970px */
+.travel_index_con{width:938px;height:auto!important;min-height:500px;height:500px;border-width:0 1px 1px 1px; border-color:#ccc; border-style:solid; padding:0 15px 15px 15px; float:left;}
+.travel_index_con h2{width:100%; height:50px; line-height:50px; font-size:12px; font-weight:normal;}
+.travel_menue_ll{width:120px;float:left; margin-top:15px;}
+.travel_menue_ll p a{width:100px;height:30px; line-height:30px;display:block;background:url(../images/travel/travel_menue_bg.gif) left bottom no-repeat; font-size:14px; padding-left:20px; margin-top:-1px;}
+.travel_menue_ll p{border-top:1px solid #ccc; float:left;}
+.travel_menue_ll p a.currentBg8{background:url(../images/travel/travel_menue_bg.gif) left top no-repeat; font-weight:bold;}
+
+.travel_menue_mid{width:600px;height:auto!important;min-height:450px;height:450px;float:left; margin-left:20px; margin-right:15px; _margin-left:15px;}/*553px*/
+.travel_menue_mid h1{ width:100%; padding-top:15px;font-size:12px; font-weight:normal; float:left;}
+.travel_menue_mid h2{width:100%;font-weight:bold; font-size:14px; float:left;}
+.travel_menue_mid h2 a{font-size:12px;font-weight:normal;}
+.travel_menue_mid h2 span{font-weight:bold; font-size:14px;}
+.travel_menue_mid .jianjie{width:100%; float:left; text-indent:24px;}
+
+
+.title{width:100%;float:left;}/* 970px */
+.title h2{width:100%;height:40px;line-height:40px;float:left; border-bottom:1px solid #ccc;}
+.title h2 span.left{ font-size:14px; font-weight:bold;}
+.title h2 span.right a{color:#416644;}
+.title ul{width:100%;float:left;}
+.title ul li{height:34px;line-height:34px;float:left; border-bottom:1px dashed #ccc;}

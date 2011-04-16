@@ -13,10 +13,9 @@
 <script language="javascript" type="text/javascript" src="js/myjs.js"></script>
 </head>
 <body>
-<div class="travel_index">
-        <div class="travel_index_con">
+<div class="travel_index_con">
             <div class="travel_menue_mid">
-                <div class="tiwen">
+                <div class="title">
                 	<h2><span class=" left">您的足迹</span><span class="right"><a href="#">>>分享</a></span></h2>
                     <ul>
                     	<li class="d6">记录时间</li>
@@ -96,7 +95,7 @@
             	<h2>景点热门标签</h2>
                 <p class="jd_biaoqian"><a href="#">成都</a><a href="#">四姑娘山</a><a href="#">九寨沟</a><a href="#">成都</a><a href="#">四姑娘山</a><a href="#">九寨沟</a><a href="#">成都</a><a href="#">四姑娘山</a><a href="#">九寨沟</a><a href="#">成都</a><a href="#">四姑娘山</a><a href="#">九寨沟</a></p>
           </div>
-        </div>
-    </div>
+</div>
+
 </body>
 </html>

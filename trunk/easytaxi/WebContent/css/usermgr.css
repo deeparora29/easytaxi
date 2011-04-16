@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+/* usermgr.jsp */
+
+form{width:100%;float:left; margin:10px 0;}
+form label{width:95px; height:36px; line-height:36px; text-align:right; display:block; float:left;}
+form span{width:415px;height:36px; line-height:36px;display:block; float:left;}
+.input_bg{width:204px; height:14px; background:url(../images/input_bg.gif) no-repeat; margin-top:5px; padding:5px 10px;}
+.mimagf{width:415px;padding-left:95px;clear:both;height:30px;color:#898989;}
+
+.pictures{width:280px;float:right;_margin-right:-5px;}/* 225px */
+.sc_phto_btn{width:124px;height:28px;float:left; display:block; background:url(../images/travel/sc_phto_btn.gif) no-repeat; margin-top:10px; margin-right:38px;_display:inline;}
+.zc_tijiao{width:137px; height:42px; display:block;background:url(../images/tj_btn.gif) no-repeat; margin-left:95px;}
