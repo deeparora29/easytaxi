@@ -1,9 +1,8 @@
-/*
+﻿/*
 SQLyog Community Edition- MySQL GUI v8.04 
 MySQL - 5.1.48-community : Database - easytaxi
 *********************************************************************
-*/
-
+*/
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -182,7 +181,7 @@ DROP TABLE IF EXISTS `taxi`;
 
 CREATE TABLE `taxi` (
   `userid` varchar(6) NOT NULL,
-  `plate_number` varchar(7) NOT NULL,
+  `plate_number` varchar(10) NOT NULL,
   `password` varchar(32) NOT NULL,
   `license` varchar(12) DEFAULT NULL,
   `company` varchar(256) DEFAULT NULL,
