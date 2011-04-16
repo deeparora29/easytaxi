@@ -82,8 +82,20 @@ public class TaxiDataService extends BaseService{
 				//没有重复的用户，email和phone都可以作为账号
 				if( !taxiLoginInfoMap.containsKey(cab)){
 					Taxi taxi = new Taxi( cab, password, license, company, email,carModel, chargeModel,list, descr);
+					if( list != null && list.size()>0 ){
+						Driver temp = list.get(0);
+						taxi.setDriver0(temp.getName());
+						taxi.setPhone0(temp.getPhone());
+					}
+					if( list != null && list.size()>1 ){
+						Driver temp = list.get(1);
+						taxi.setDriver1(temp.getName());
+						taxi.setPhone1(temp.getPhone());
+					}
 					//由于需要立即返回userid，则不能异步处理
-					String userId = updateTaxiInfo( taxi );
+					String userId = taxiDao.getSerialNum("t_user_id", 5, "true");
+					taxi.setUserid(userId);
+					updateTaxiInfo( taxi );
 					return getReturnMessage( transCode , userId );
 				}else{
 					//账号重复
@@ -185,8 +197,9 @@ public class TaxiDataService extends BaseService{
 		return taxiGPSMap ;
 	}
 	
-	public static String updateTaxiInfo(Taxi taxi){
-		return null;
+	public  void updateTaxiInfo(Taxi taxi){
+		
+		taxiDao.doSaveTaxi(taxi);
 	}
 	
 	public static void main(String[] args) {
