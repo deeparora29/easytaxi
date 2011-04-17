@@ -92,17 +92,24 @@ public class PassengerDataService extends BaseService{
 				String nickName = jsonObject.getString("nickname");
 				String gender = jsonObject.getString("gender");
 				String descr = jsonObject.getString("descr");
+				String province = jsonObject.getString("province");
+				String agreement = jsonObject.getString("agreement");
 				//没有重复的用户，email和phone都可以作为账号
-				if( !passengerInfoMap.containsKey(phone) && !passengerInfoMap.containsKey(email) ){
-					Passenger p = new Passenger(transCode ,firstname, lastname, password, phone, email, nickName, gender, descr);
-					//由于需要立即返回userid，则不能异步处理
-					String userId = updateData( p );
+				Passenger p = passengerDao.getPassengerByPhone(phone);
+				if( p == null ){
+					p = passengerDao.getPassengerByEmail(email);
+				}
+				if(p == null ){
+					Passenger temp = new Passenger(transCode ,firstname, lastname, password, phone, email, 
+							nickName, gender, descr , province , agreement);
+					String userId = updateData( temp );
 					return getReturnMessage( transCode , userId );
 				}else{
 					//账号重复
 					jsonString = getReturnErrorMessage(ErrorCode.REGISTER_ERROR);
 					return jsonString ;
 				}
+				
 			}else if(transCode.equals(SystemPara.P_LOGIN)){//Login
 				String account = jsonObject.getString("account");
 				String password = jsonObject.getString("password");
@@ -119,7 +126,9 @@ public class PassengerDataService extends BaseService{
 					}else{
 						jsonString = getReturnErrorMessage(ErrorCode.PASSWORD_NOT_ACCURATE);
 					}
-					//TODO 更新内存中乘客信息
+					passengerInfoMap.put(userid, p);
+					//修改登录时间
+					passengerDao.doUpdatePassengerLoginTime();
 					
 				}else{
 					jsonString = getReturnErrorMessage(ErrorCode.USER_NOT_FOUND);
@@ -142,7 +151,10 @@ public class PassengerDataService extends BaseService{
 				int luggage = jsonObject.getInt("luggage");
 				String comments = jsonObject.getString("comments");
 				String share = jsonObject.getString("share");
-				
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
 				RequestInfo requestInfo = new RequestInfo(userid,phone,start_long,start_lat,start_text,end_long,
 						end_lat,end_text,number,luggage,comments,share);
 				String res = callTaxiServie.requestTaxi(requestInfo);
@@ -155,6 +167,11 @@ public class PassengerDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.P_GETCONFIRM)){//获取出租车响应 P004
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
+				
 				//从内存中获取出租车实时GPS数据
 				UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiGPSMap().get( userid );
 				RequestResult resulst = callTaxiServie.getConfirmedTaxiInfo(userid, requestNo);
@@ -168,12 +185,22 @@ public class PassengerDataService extends BaseService{
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
 				String comments = jsonObject.getString("comments");
+				
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
 				callTaxiServie.cancelRequest(userid, requestNo, comments);
 				jsonString = getReturnMessage(transCode);
 				return jsonString;
 			}else if(transCode.equals(SystemPara.P_CREDITRATING)){//信用评价P006
 				String userid = jsonObject.getString("userid");
 				String requestNo = jsonObject.getString("requestNo");
+				
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
 				float credit = Float.valueOf(jsonObject.getString("credit"));
 				String comments = jsonObject.getString("comments");
 				creditRateService.doCreditRating(userid, requestNo, credit, comments);
@@ -189,6 +216,10 @@ public class PassengerDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.P_QUERYTAXIGPS)){//查询Taxi GPSP008
 				String userid = jsonObject.getString("userid");
 				String cab = jsonObject.getString("cab");
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
 				GPSData passengerGPSData = realtimeLocationMap.get(userid);
 				if(passengerGPSData!=null){
 					jsonString = getReturnMessage(transCode,passengerGPSData);
@@ -199,6 +230,10 @@ public class PassengerDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.P_UPLOADGPS_TRACK)){//上传GPS数据或经过路线
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
 				realtimeLocationMap.put(userid, gpsdata);
 				List<UploadGPSData>passengerTrackingList = null;
@@ -218,6 +253,10 @@ public class PassengerDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.P_QUERYTAXIDETAILINFO)){//查询出租车详细信息 GPSP010
 				String cab = jsonObject.getString("cab");
 				String userid = jsonObject.getString("userid");
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
 				Taxi taxi = taxiDao.getTaxiByPlateNumber(cab);
 				if(taxi==null){
 					jsonString = getReturnErrorMessage(ErrorCode.NOT_FOUND_DATA);
@@ -238,6 +277,10 @@ public class PassengerDataService extends BaseService{
 				return jsonString ;
 			}else if(transCode.equals(SystemPara.P_UPDATE_PHONE_NUMBER)){
 				String userid = jsonObject.getString("userid");
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
 				String phone = jsonObject.getString("phone");
 				passengerDao.doUpdatePassengerPhone(userid, phone);
 				jsonString = getReturnMessage(transCode);
@@ -272,6 +315,21 @@ public class PassengerDataService extends BaseService{
 		return res ;
 	}
 	
+	private boolean checkPassengerIsLogin(String account) {
+		boolean bool = false ;
+		if (!passengerInfoMap.containsKey(account)) {
+			bool = true ;
+		} 
+		return bool ;
+	}
+	
+	public List<Passenger> getModifiedInner24HoursData() {
+		return this.passengerDao.getModifiedInner24HoursData();
+	}
+	
+	public ConcurrentMap<String , Passenger> getPassengerLoginInfoMap(){
+		return passengerInfoMap ;
+	}
 	
 	public ConcurrentMap<String , GPSData> getRealtimeLocationMap(){
 		return realtimeLocationMap;

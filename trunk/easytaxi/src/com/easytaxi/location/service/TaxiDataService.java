@@ -34,7 +34,7 @@ public class TaxiDataService extends BaseService{
 	private static BlockingQueue<Taxi> taxiWorkQueue = new LinkedBlockingQueue<Taxi>();
 	
 	//出租车登录信息
-	private static ConcurrentMap<String , Passenger> taxiLoginInfoMap = new ConcurrentHashMap<String, Passenger>();
+	private static ConcurrentMap<String , Taxi> taxiLoginInfoMap = new ConcurrentHashMap<String, Taxi>();
 	
 	//存放出租车GPS数据
 	private static ConcurrentMap<String , UploadGPSData> taxiGPSMap = new ConcurrentHashMap<String, UploadGPSData>();
@@ -58,6 +58,7 @@ public class TaxiDataService extends BaseService{
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public String offer( String requestString ){
 		JSONObject jsonObject = parserRequest( requestString );
 		String jsonString = "{}";
@@ -79,8 +80,13 @@ public class TaxiDataService extends BaseService{
 				String drivers = jsonObject.getString("drivers");
 				List <Driver> list = JsonUtil.getListByJsonString(drivers, Driver.class);
 				String descr  = jsonObject.getString("descr");
+				
 				//没有重复的用户，email和phone都可以作为账号
-				if( !taxiLoginInfoMap.containsKey(cab)){
+				Taxi t = taxiDao.getTaxiByPlateNumber(cab);
+				if(t==null){
+					t = taxiDao.getTaxiByEmail( email );
+				}
+				if(t==null){
 					Taxi taxi = new Taxi( cab, password, license, company, email,carModel, chargeModel,list, descr);
 					if( list != null && list.size()>0 ){
 						Driver temp = list.get(0);
@@ -98,7 +104,6 @@ public class TaxiDataService extends BaseService{
 					updateTaxiInfo( taxi );
 					return getReturnMessage( transCode , userId );
 				}else{
-					//账号重复
 					jsonString = getReturnErrorMessage(ErrorCode.REGISTER_ERROR);
 					return jsonString ;
 				}
@@ -121,10 +126,19 @@ public class TaxiDataService extends BaseService{
 						//密码不正确
 						jsonString = getReturnErrorMessage(ErrorCode.PASSWORD_NOT_ACCURATE);
 					}
+					//保存用户登录信息
+					taxiLoginInfoMap.put(userid, taxi);
+					//更新登录时间
+					taxiDao.updateTaxiLoginTime();
 				}
 				return jsonString ;
 			}else if(transCode.equals(SystemPara.T_UPLOADGPS)){//上传出租车GPS数据 T003
 				String userid = jsonObject.getString("userid");
+				if(!checkPassengerIsLogin(userid)){//验证是否登录
+					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
+					return jsonString;
+				}
+				
 				String userGPS = jsonObject.getString("cabGPS");
 				String cab = jsonObject.getString("cab");
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
@@ -211,10 +225,26 @@ public class TaxiDataService extends BaseService{
 		return jsonString ;
 	}
 	
+	private boolean checkPassengerIsLogin(String account) {
+		boolean bool = false ;
+		if (!taxiLoginInfoMap.containsKey(account)) {
+			bool = true ;
+		} 
+		return bool ;
+	}
+	
+	
+	public List<Taxi> getModifiedInner24HoursData() {
+		return this.taxiDao.getModifiedInner24HoursData();
+	}
+	
 	public BlockingQueue<Taxi> getTaxiWorkQueue(){
 		return taxiWorkQueue ;
 	}
 	
+	public ConcurrentMap<String , Taxi> getTaxiLoginInfoMap(){
+		return taxiLoginInfoMap ;
+	}
 	
 	public ConcurrentMap<String , UploadGPSData> getTaxiGPSMap(){
 		return taxiGPSMap ;
