@@ -1,6 +1,7 @@
 package com.easytaxi.common.thread;
 
-import java.util.concurrent.BlockingQueue;
+import java.util.List;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,13 +34,18 @@ public class TaxiDataManageThread implements Runnable{
 		try {
 			while( true ){
 				TaxiDataService service = TaxiDataService.getInstance();
-				BlockingQueue<Taxi> queue = service.getTaxiWorkQueue() ;
-				if( !queue.isEmpty() ){
-					//取出一个taxi信息进行处理
-					Taxi taxi = queue.poll();
-					//TODO 处理相关业务
+				List<Taxi> taxiList = service.getModifiedInner24HoursData();
+				if(taxiList!=null && taxiList.size()>0){
+					log.info("系统中会话存在超过24小时的出租车数量为：" + taxiList.size());
+					for (Taxi taxi : taxiList) {
+						ConcurrentMap<String, Taxi> temp = service.getTaxiLoginInfoMap();
+						if(taxi!=null){
+							temp.remove(taxi.getUserid());
+							log.info("系统检测到用户： " + taxi.getUserid() +"登录时间超过24小时，需要重新登录" );
+						}
+					}
 				}else{
-					Thread.sleep( 1000 );
+					Thread.sleep( 60 * 1000 );
 				}
 			}
 		} catch (Exception e) {
