@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<%@page import="com.easytaxi.common.SystemPara"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome!</title>
@@ -26,7 +27,7 @@ function setFrameSrc(src, index){
 </script>
 </head>
 <%
-	String userId = request.getParameter("userId");
+	String userId = (String)session.getAttribute(SystemPara.SESSION_USERID);
 	if(userId == null || userId.equals(""))
 	    throw new Exception("用户未登录！");
 %>

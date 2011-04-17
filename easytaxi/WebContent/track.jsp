@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<%@page import="com.easytaxi.location.service.TrackService"%>
+<%@page import="com.easytaxi.common.utils.BeanFactoryUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="com.easytaxi.bo.TrackHistory"%>
+<%@page import="com.easytaxi.common.SystemPara"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Track History</title>
@@ -12,6 +17,14 @@
 <script language="javascript" type="text/javascript" src="js/travel.js"></script>
 <script language="javascript" type="text/javascript" src="js/myjs.js"></script>
 </head>
+<%
+String userId = (String)session.getAttribute(SystemPara.SESSION_USERID);
+if(userId == null || userId.equals(""))
+    throw new Exception("用户未登录！");
+TrackService service = (TrackService)BeanFactoryUtil.getBean("trackService");
+List<TrackHistory> list = service.getTrackHistories(userId, -1);//all
+	
+%>
 <body>
 <div class="travel_index_con">
             <div class="travel_menue_mid">
@@ -23,66 +36,24 @@
                     	<li class="d4">用车请求</li>
                     	<li class="d5">线路回放</li>
                     </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
+                    <%
+                    if(list != null && list.size() > 0){
+                        for(int i = 0; i < list.size(); i++){
+                            TrackHistory track = list.get(i);
+                     %>
+                     <ul>
+                    	<li class="e6"><%=track.getBegintime() %></li>
+                    	<li class="e2"><a href="#"><%=track.getTrackfile() %></a></li>
+                    	<li class="e4"><%=track.getUserid() %></li>
+                    	<li class="e5"><a href="#"><%=track.getTrackid() %></a></li>
                     </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
-                    <ul>
-                    	<li class="e6">2010-05-10</li>
-                    	<li class="e2"><a href="#">大家帮忙介绍一个成都物美价廉的宾馆吧</a></li>
-                    	<li class="e4">journey</li>
-                    	<li class="e5"><a href="#">20</a></li>
-                    </ul>
+                     <%
+                        }
+                    }else{
+                        out.println("当前没有线路记录！");
+                    }
+                    %>
+                    
                     <div class="fenye"><a href="#"><<</a><a href="#" class="currentPage">1</a><a href="#">2</a>…<a href="#">9</a><a href="#">10</a><a href="#">>></a></div>
                 </div>
             </div>
