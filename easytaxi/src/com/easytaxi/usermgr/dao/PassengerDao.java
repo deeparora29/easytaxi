@@ -19,6 +19,8 @@ public class PassengerDao extends BaseJdbcDao {
         + " register_time, modified_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),now());";
     final static String UPDATE_PASSENGER_CREDIT = "update passenger set credit=? where userid=?";
     final static String UPDATE_PASSENGER_PHONE = "update passenger set phone=? where userid=?";
+    final static String UPDATE_PASSENGER_LOGIN_TIME = "update passenger set modified_time=now() where userid=?";
+    final static String Query_MODIFIED_INNER24_HOURS = "select * from taxi where modified_time < now()-86400";
 
     class PassengerRowMapper
         implements RowMapper {
@@ -104,4 +106,13 @@ public class PassengerDao extends BaseJdbcDao {
         getJdbcTemplate().update(UPDATE_PASSENGER_PHONE, new Object[] { new String(phone), userid });
     }
     
+    
+    public void doUpdatePassengerLoginTime() {
+        getJdbcTemplate().update(UPDATE_PASSENGER_LOGIN_TIME);
+    }
+    
+    public List<Passenger> getModifiedInner24HoursData() {
+        List<Passenger> list = getJdbcTemplate().query(Query_MODIFIED_INNER24_HOURS , new PassengerRowMapper());
+        return list;
+    }
 }
