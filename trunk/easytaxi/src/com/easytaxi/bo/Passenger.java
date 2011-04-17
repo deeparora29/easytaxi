@@ -55,7 +55,7 @@ public class Passenger {
 	/*** 乘客注册*/
 	public Passenger(String transCode, String firstname, String lastname,
 			String password, String phone, String email, String nickName,
-			String gender, String descr) {
+			String gender, String descr,String province ,String agreement) {
 		this.transCode =  transCode;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -65,6 +65,8 @@ public class Passenger {
         this.nickname = nickName;
 		this.gender = gender;
 		this.descr = descr;
+		this.province= province;
+		this.share = agreement ;
 	}
 	
 	/*** 信用评价*/
