@@ -80,6 +80,19 @@ public class Taxi {
     	this.chargeModel = chargeModel ;
     	this.descr = descr ;
     }
+
+    // 出租车注册
+    public Taxi(String cab, String password, String license, String company, String email, String carModel,
+        String chargeModel, String descr) {
+        this.cab = cab;
+        this.password = password;
+        this.license = license;
+        this.company = company;
+        this.email = email;
+        this.carModel = carModel;
+        this.chargeModel = chargeModel;
+        this.descr = descr;
+    }
 	
 	public void setUserid(String userid) {
         this.userid = userid;

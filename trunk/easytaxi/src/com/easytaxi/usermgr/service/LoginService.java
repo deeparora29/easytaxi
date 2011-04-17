@@ -30,11 +30,41 @@ public class LoginService extends BaseService {
         return this.taxiDao;
     }
 
-    private Taxi getValidTaxi(String account, String password) {
+    /**
+     * 检查账号是否存在
+     * 
+     * @param cab
+     * @return
+     */
+    public Taxi getTaxiBy(String account) {
         boolean isEmailCheck = account.contains("@");
+        try {
+            return isEmailCheck ? taxiDao.getTaxiByEmail(account) : taxiDao.getTaxiByPlateNumber(account);
+        } catch (Exception e) {
+            logger.error("Taxi check: account[" + account + "] error: ", e);
+        }
+        return null;
+
+    }
+
+    /**
+     * @param account
+     * @return
+     */
+    public Passenger getPassengerBy(String account) {
+        boolean isEmailCheck = account.contains("@");
+        try {
+            return isEmailCheck ? passengerDao.getPassengerByEmail(account) : passengerDao.getPassengerByPhone(account);
+        } catch (Exception e) {
+            logger.error("Passenger check: account[" + account + "] error: ", e);
+        }
+        return null;
+    }
+
+    public Taxi getValidTaxi(String account, String password) {
         Taxi taxi = null;
         try {
-            taxi = isEmailCheck ? taxiDao.getTaxiByEmail(account) : taxiDao.getTaxiByPlateNumber(account);
+            taxi = getTaxiBy(account);
             if (taxi != null && taxi.getPassword().equals(password)) {
                 return taxi;
             } else
@@ -45,13 +75,11 @@ public class LoginService extends BaseService {
         return taxi;
     }
 
-    private Passenger getValidPassenger(String account, String password) {
-        boolean isEmailCheck = account.contains("@");
+    public Passenger getValidPassenger(String account, String password) {
         Passenger passenger = null;
         try {
 
-            passenger = isEmailCheck ? passengerDao.getPassengerByEmail(account) : passengerDao
-                .getPassengerByPhone(account);
+            passenger = getPassengerBy(account);
             if (passenger != null && passenger.getPassword().equals(password)) {
                 return passenger;
             } else
@@ -108,6 +136,42 @@ public class LoginService extends BaseService {
      */
     public Passenger getPassengerDetailInfo(String userid){
         return getPassengerDao().getPassengerByUserid(userid);
+    }
+
+    public boolean registerPassenger(Passenger passenger) {
+        try {
+            Passenger dbPassenger = getPassengerBy(passenger.getEmail());
+            if (dbPassenger == null)
+                dbPassenger = getPassengerBy(passenger.getPhone());
+            if (dbPassenger != null) {
+                logger.info("Passenger has registered!Userid=[" + dbPassenger.getUserid() + "]");
+                return false;
+            }
+            String userid = passengerDao.getSerialNum("p_user_id", 5, "false");
+            passenger.setUserid(userid);
+            passengerDao.doSavePassenger(passenger);
+            return true;
+        } catch (Exception e) {
+            logger.error("Register Passenger error: ", e);
+        }
+        return false;
+    }
+
+    public boolean registerTaxi(Taxi taxi) {
+        try {
+            Taxi dbTaxi = getTaxiBy(taxi.getCab());
+            if (dbTaxi != null) {
+                logger.info("Passenger has registered!Userid=[" + dbTaxi.getUserid() + "]");
+                return false;
+            }
+            String userid = taxiDao.getSerialNum("t_user_id", 5, "false");
+            taxi.setUserid(userid);
+            taxiDao.doSaveTaxi(taxi);
+            return true;
+        } catch (Exception e) {
+            logger.error("Register Passenger error: ", e);
+        }
+        return false;
     }
 
     public void setLoginRecordDao(LoginRecordDao loginRecordDao) {
