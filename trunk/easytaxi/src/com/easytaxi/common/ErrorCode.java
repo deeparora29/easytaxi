@@ -30,6 +30,9 @@ public class ErrorCode {
 	
 	//登录失败，用户密码不正确
 	public static final String PASSWORD_NOT_ACCURATE = "2003";
+
+	//用户没有登录
+	public static final String ACCOUNT_NOT_LOGIN = "2004";
 	
 	//操作错误（如乘客发布用车消息后司机确定后取消用车等）
     // 服务器端异常
