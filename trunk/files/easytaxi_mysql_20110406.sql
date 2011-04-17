@@ -215,6 +215,8 @@ CREATE TABLE `trackhistory` (
   `begintime` datetime DEFAULT NULL,
   `endtime` datetime DEFAULT NULL,
   `trackfile` varchar(32) DEFAULT NULL,
+  `lat` double DEFAULT '0',
+  `lng` double DEFAULT '0',
   PRIMARY KEY (`trackid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -379,3 +381,9 @@ DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+
+
+
+
+
+
