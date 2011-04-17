@@ -25,6 +25,8 @@ import com.easytaxi.request.bo.RequestInfo;
 import com.easytaxi.request.bo.RequestResult;
 import com.easytaxi.request.service.CallTaxiServie;
 import com.easytaxi.request.service.CreditRateService;
+import com.easytaxi.usermgr.bo.LoginRecord;
+import com.easytaxi.usermgr.dao.LoginRecordDao;
 import com.easytaxi.usermgr.dao.PassengerDao;
 import com.easytaxi.usermgr.dao.TaxiDao;
 
@@ -53,6 +55,8 @@ public class PassengerDataService extends BaseService{
 	private PassengerDao passengerDao ;
 	
 	private TaxiDao taxiDao ;
+	
+	private LoginRecordDao loginRecordDao ;
 	
 	private CallTaxiServie callTaxiServie ;
 	
@@ -121,6 +125,10 @@ public class PassengerDataService extends BaseService{
 					String userid = p.getUserid();
 					String phone = p.getPhone();
 					String db_password = p.getPassword();
+					if(passengerInfoMap.containsKey(userid)){//账号已登录
+						jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
+						return jsonString;
+					}
 					if(password!=null&&password.equals(db_password)){
 						jsonString = getReturnMessage( transCode , userid , phone ); 
 					}else{
@@ -128,7 +136,11 @@ public class PassengerDataService extends BaseService{
 					}
 					passengerInfoMap.put(userid, p);
 					//修改登录时间
-					passengerDao.doUpdatePassengerLoginTime();
+					//passengerDao.doUpdatePassengerLoginTime();
+					
+					//保存登录信息
+					LoginRecord loginRecord = new LoginRecord(userid, account);
+					loginRecordDao.doSaveLoginRecord(loginRecord);
 					
 				}else{
 					jsonString = getReturnErrorMessage(ErrorCode.USER_NOT_FOUND);
@@ -335,6 +347,10 @@ public class PassengerDataService extends BaseService{
 		return realtimeLocationMap;
 	}
 	
+	
+	public ConcurrentMap<String , List<UploadGPSData>> getPassengerTrackingMap(){
+		return passengerTrackingMap ;
+	}
 	public PassengerDao getPassengerDao() {
 		return passengerDao;
 	}
@@ -365,6 +381,14 @@ public class PassengerDataService extends BaseService{
 
 	public void setTaxiDao(TaxiDao taxiDao) {
 		this.taxiDao = taxiDao;
+	}
+
+	public LoginRecordDao getLoginRecordDao() {
+		return loginRecordDao;
+	}
+
+	public void setLoginRecordDao(LoginRecordDao loginRecordDao) {
+		this.loginRecordDao = loginRecordDao;
 	}
 	
 	

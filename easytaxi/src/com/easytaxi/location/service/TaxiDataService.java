@@ -23,6 +23,8 @@ import com.easytaxi.request.bo.RequestResult;
 import com.easytaxi.request.dao.CallTaxiDao;
 import com.easytaxi.request.service.CallTaxiServie;
 import com.easytaxi.request.service.CreditRateService;
+import com.easytaxi.usermgr.bo.LoginRecord;
+import com.easytaxi.usermgr.dao.LoginRecordDao;
 import com.easytaxi.usermgr.dao.PassengerDao;
 import com.easytaxi.usermgr.dao.TaxiDao;
 
@@ -44,6 +46,8 @@ public class TaxiDataService extends BaseService{
 	private CallTaxiDao callTaxiDao;
 	
 	private PassengerDao passengerDao;
+	
+	private LoginRecordDao loginRecordDao ;
 	
 	private CallTaxiServie callTaxiServie ;
 	
@@ -120,6 +124,10 @@ public class TaxiDataService extends BaseService{
 					String userid = taxi.getUserid();
 					String phone = taxi.getPhone0()+","+ taxi.getPhone0();
 					String _password = taxi.getPassword() ;
+					if(taxiLoginInfoMap.containsKey(userid)){//账号已登录
+						jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
+						return jsonString;
+					}
 					if(_password.equals(password)){
 						jsonString = getReturnMessage( transCode , userid , phone ); 
 					}else{
@@ -128,8 +136,13 @@ public class TaxiDataService extends BaseService{
 					}
 					//保存用户登录信息
 					taxiLoginInfoMap.put(userid, taxi);
+					
 					//更新登录时间
-					taxiDao.updateTaxiLoginTime();
+					//taxiDao.updateTaxiLoginTime();
+					
+					//保存登录信息
+					LoginRecord loginRecord = new LoginRecord(userid, cab);
+					loginRecordDao.doSaveLoginRecord(loginRecord);
 				}
 				return jsonString ;
 			}else if(transCode.equals(SystemPara.T_UPLOADGPS)){//上传出租车GPS数据 T003
@@ -297,6 +310,14 @@ public class TaxiDataService extends BaseService{
 
 	public void setPassengerDao(PassengerDao passengerDao) {
 		this.passengerDao = passengerDao;
+	}
+
+	public LoginRecordDao getLoginRecordDao() {
+		return loginRecordDao;
+	}
+
+	public void setLoginRecordDao(LoginRecordDao loginRecordDao) {
+		this.loginRecordDao = loginRecordDao;
 	}
 	
 	

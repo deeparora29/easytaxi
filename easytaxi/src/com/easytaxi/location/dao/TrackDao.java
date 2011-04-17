@@ -13,6 +13,9 @@ public class TrackDao extends BaseJdbcDao {
 
     private final static String SELECT_TRACK_USERID = "select * from trackhistory where userid=? ORDER BY trackid desc";
 
+    private final static String SAVE_TRACK_HISTORIES = "insert into trackhistory(trackid,userid,type,begintime,endtime,trackfile,lat,lng) values(?,?,?,now(),now(),?,?,?)";
+
+    
     class TrackHistoryRowMapper
         implements RowMapper {
 
@@ -35,6 +38,12 @@ public class TrackDao extends BaseJdbcDao {
         if (limits > 0)
             sql += " limit " + limits;
         return getJdbcTemplate().query(sql, new Object[] { userid }, new TrackHistoryRowMapper());
+    }
+    
+    public void saveTrackHistories(TrackHistory trackHistory){
+    	String trackid = getSerialNum("track_id", 12, "true");
+    	getJdbcTemplate().update(SAVE_TRACK_HISTORIES, new Object[] { trackid,trackHistory.getUserid() ,
+    			trackHistory.getType(),trackHistory.getTrackfile(),trackHistory.getLat(),trackHistory.getLng()});
     }
 
 }
