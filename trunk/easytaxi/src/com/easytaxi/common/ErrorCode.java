@@ -34,6 +34,9 @@ public class ErrorCode {
 	//用户没有登录
 	public static final String ACCOUNT_NOT_LOGIN = "2004";
 	
+	//用户已登录
+	public static final String ACCOUNT_HAS_LOGIN = "2005";
+	
 	//操作错误（如乘客发布用车消息后司机确定后取消用车等）
     // 服务器端异常
     public final static String OPERATE_SERVERERROR = "3000";
