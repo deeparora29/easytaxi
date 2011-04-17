@@ -42,8 +42,8 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String userid = loginService.getValidUserid(type, account, password);
 
-        if (!userid.equals("") || true) {
-            response.sendRedirect("welcome.jsp");
+        if (!userid.equals("")) {
+            response.sendRedirect("welcome.jsp?userId=" + userid);
         } else {
             response.sendRedirect("login.jsp");
         }

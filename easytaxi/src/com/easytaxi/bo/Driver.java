@@ -6,6 +6,14 @@ public class Driver {
 	
 	private String phone ;
 
+    public Driver() {
+    }
+
+    public Driver(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
+
 	public String getName() {
 		return name;
 	}

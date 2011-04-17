@@ -66,8 +66,6 @@ public class Passenger {
 		this.gender = gender;
 		this.descr = descr;
 	}
-
-	
 	
 	/*** 信用评价*/
 	public Passenger(String transCode, String phone,String plateNumber){

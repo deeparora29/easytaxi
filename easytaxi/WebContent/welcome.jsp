@@ -25,7 +25,13 @@ function setFrameSrc(src, index){
 }
 </script>
 </head>
+<%
+	String userId = request.getParameter("userId");
+	if(userId == null || userId.equals(""))
+	    throw new Exception("用户未登录！");
+%>
 <body>
+<input type="hidden" id="userId" value="<%=userId %>"/>
 <div id="center">  
            
 

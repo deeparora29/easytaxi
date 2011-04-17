@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -5,13 +7,14 @@
 <title>出错了！</title>
 <link href="css/share.css" rel="stylesheet" type="text/css" />
 <link href="css/footer.css" rel="stylesheet" type="text/css" />
+<link href="css/registe.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 <div class="footer">
 
 <h2/>出错了</h2>
-<p/>
+<p>
 
 <% 
 try {
@@ -26,7 +29,7 @@ try {
 			if (rootCause == null)
 				rootCause = sex;
 			out.println("** Root cause is: "+ rootCause.getMessage());
-			rootCause.printStackTrace(new java.io.PrintWriter(out)); 
+			//rootCause.printStackTrace(new java.io.PrintWriter(out)); 
 		}
 		else {
 			// It's not a ServletException, so we'll just show it
@@ -53,7 +56,10 @@ try {
 
 </p>
 <br/>
+<div class="zc_hyc">加入耍巴适，找到喜欢的活动、玩转很多有趣的游戏、遇见趣味相投的好友。<a href="register.jsp" style="font-weight: bold; color:#167b1b;">免费注册</a></div>
+<div class="zc_dl">如果你已经是注册会员,请点击 <a href="login.jsp" style="font-weight: bold">登录</a></div>
 </div>
+
 </body></html>
 
 
