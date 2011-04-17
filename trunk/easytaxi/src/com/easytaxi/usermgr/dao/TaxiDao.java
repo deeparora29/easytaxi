@@ -22,7 +22,9 @@ public class TaxiDao extends BaseJdbcDao {
         + " status, descr, credit, register_time, modified_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),now())";
     final static String UPDATE_TAXI_CREDIT = "update taxi set credit=? where userid=?";
     final static String UPDATE_TAXI_PHONE = "update taxi set contact_phone0=? where userid=?";
-
+    final static String UPDATE_LOGIN_TIME = "update taxi set modified_time=? where userid=?";
+    final static String Query_MODIFIED_INNER24_HOURS = "select * from taxi where modified_time < now()-86400";
+    
     class TaxiRowMapper
         implements RowMapper {
 
@@ -103,6 +105,16 @@ public class TaxiDao extends BaseJdbcDao {
     }
 
     public void updateTaxiPhone(String userid , String phone){
-    	getJdbcTemplate().update(UPDATE_TAXI_CREDIT, new Object[] { phone, userid });
+    	getJdbcTemplate().update(UPDATE_TAXI_PHONE, new Object[] { phone, userid });
     }
+    
+    public void updateTaxiLoginTime(){
+    	getJdbcTemplate().update(UPDATE_LOGIN_TIME);
+    }
+    
+    public List<Taxi> getModifiedInner24HoursData() {
+        List<Taxi> list = getJdbcTemplate().query(Query_MODIFIED_INNER24_HOURS , new TaxiRowMapper());
+        return list;
+    }
+    
 }
