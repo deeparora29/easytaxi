@@ -29,4 +29,8 @@ public class TrackService extends BaseService {
         return list;
     }
 
+    
+    public void saveTrackHistories(TrackHistory trackHistory){
+    	trackDao.saveTrackHistories(trackHistory);
+    }
 }

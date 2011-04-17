@@ -48,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
             String nickName = request.getParameter("nickName");
             String gender = request.getParameter("gender");
             Passenger passenger = new Passenger("", "", "", password, phone, email, nickName, gender,
-                "Passenger Web Register");
+                "Passenger Web Register","","");
             passenger.setAgreement("yes");
             userid = doRegisterPassenger(passenger);
         } else {
