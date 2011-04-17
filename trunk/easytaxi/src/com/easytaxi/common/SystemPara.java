@@ -122,4 +122,7 @@ public class SystemPara {
     public final static int REQUESTINFO_STATUS_CONFIRMED = 1;
     public final static int REQUESTINFO_STATUS_CANCELED = 2;
 
+    // Session Parameter
+    public final static String SESSION_USERID = "userid";
+
 }
