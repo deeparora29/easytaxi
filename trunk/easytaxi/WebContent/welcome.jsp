@@ -57,7 +57,7 @@ function setFrameSrc(src, index){
                 </ul>
                 <a href="#" class="down">文章</a>
             </div>
-            <a href="#" class="search"></a>
+            <a href="LogoutServlet" class="search">退出</a>
         </form>
         
     </div>
