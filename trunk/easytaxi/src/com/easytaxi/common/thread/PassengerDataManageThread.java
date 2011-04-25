@@ -46,6 +46,10 @@ public class PassengerDataManageThread implements Runnable{
 			}
 		} catch (Exception e) {
 			log.error("乘客数据后台处理线程运行失败：", e);
+			try {
+				Thread.sleep( 3*60*1000 );
+			} catch (InterruptedException e1) {
+			}
 		}
 	}
 	

@@ -12,7 +12,7 @@ import com.easytaxi.usermgr.bo.LoginRecord;
 import com.easytaxi.usermgr.dao.PassengerDao.PassengerRowMapper;
 
 public class LoginRecordDao extends BaseJdbcDao {
-    private final static String INSERT_LOGINRECORD = "insert into (userid, account, latitude, longtitude, login_time) values(?,?,?,?,now())";
+    private final static String INSERT_LOGINRECORD = "insert into loginrecord(userid, account, latitude, longtitude, login_time) values(?,?,?,?,now())";
 
     private final static String Query_MODIFIED_INNER24_HOURS = "select * from loginrecord where login_time < now()- 86400";
     

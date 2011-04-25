@@ -6,9 +6,9 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.easytaxi.common.thread.PassengerDataManageThread;
-import com.easytaxi.common.thread.TaxiDataManageThread;
+import com.easytaxi.common.thread.RecordTrackingThread;
 import com.easytaxi.common.thread.ThreadPoolManager;
+import com.easytaxi.common.thread.UserSessionCheckThread;
 
 /**
  * 
@@ -45,13 +45,21 @@ public class SystemListener implements ServletContextListener {
 		ThreadPoolManager.getInstance().initThreadPool( poolSize );
 		
 		//启动出租车数据后台线程
-		new Thread( new TaxiDataManageThread() ).start();
-		log.info("出租车数据后台处理线程启动  ** OK...................");
+		//new Thread( new TaxiDataManageThread() ).start();
+		//log.info("出租车数据后台处理线程启动  ** OK...................");
 		
 		
 		//加载乘客数据后台处理线程
-		new Thread( new PassengerDataManageThread() ).start();
-		log.info("乘客数据后台处理线程启动 ** OK...................");
+		//new Thread( new PassengerDataManageThread() ).start();
+		//log.info("乘客数据后台处理线程启动 ** OK...................");
+		
+		//加载检查账号登录是否过期线程
+		new Thread(new UserSessionCheckThread()).start();
+		log.info("启动检查账号登录是否过期线程 ** OK...................");
+		
+		
+		new Thread(new RecordTrackingThread()).start();
+		log.info("启动记录行驶线路线程 ** OK...................");
 		
 	}
 

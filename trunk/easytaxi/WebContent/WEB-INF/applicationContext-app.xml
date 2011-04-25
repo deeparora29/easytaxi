@@ -75,5 +75,17 @@
 		<property name="trackDao" ref="trackDao"/>	
 	</bean>
 	
+	<bean id="trackLogDao" class="com.easytaxi.location.dao.TrackLogDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="trackLogService" 
+		class="com.easytaxi.location.service.TrackLogService">
+		<property name="trackLogDao" ref="trackLogDao"/>	
+	</bean>
+
+
+	
+	
 
 </beans>
