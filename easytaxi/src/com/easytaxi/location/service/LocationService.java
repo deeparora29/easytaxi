@@ -26,7 +26,7 @@ public class LocationService extends BaseService{
 	
 	public String initLocationData(){
 		ConcurrentMap<String , UploadGPSData> taxiMap = taxiDataService.getTaxiGPSMap();
-		StringBuffer data = new StringBuffer("[\n");
+		StringBuffer data = new StringBuffer("[");
 		int i = 0 ;
 		for (String userId : taxiMap.keySet()) {
 			UploadGPSData taxi = taxiMap.get(userId);
@@ -38,18 +38,18 @@ public class LocationService extends BaseService{
 			}*/
 			data.append("{")
 			.append("latLng : {lat : "+taxi.getGpsdata().getLat()+", lng : "+taxi.getGpsdata().getLng()+"},")
-			.append("taxiStatus : '"+status+"'");
-			//.append("taxiNo : '"+taxi.getPlateNumber()+"',")
+			.append("taxiStatus : '"+status+"',")
+			.append("taxiNo : '"+taxi.getCab()+"'");
 			//.append("driverNo : '"+taxi.getDriverNo()+"',")
 			//.append("taxiStatus : '"+status+"',")
 			//.append("taxiAddress : '"+taxiLocation+"' ");
 			
-			i++ ;
 			if(i != taxiMap.size()-1){
 				data.append(",\n");
 			}else{
-				data.append("}\n");
+				data.append("}");
 			}
+			i++ ;
 		}
 		data.append("]"); 
 		/*
