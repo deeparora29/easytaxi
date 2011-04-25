@@ -242,6 +242,7 @@ public class PassengerDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.P_UPLOADGPS_TRACK)){//上传GPS数据或经过路线
 				String userid = jsonObject.getString("userid");
 				String userGPS = jsonObject.getString("userGPS");
+				String track = jsonObject.getString("track");
 				if(!checkPassengerIsLogin(userid)){//验证是否登录
 					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
 					return jsonString;
