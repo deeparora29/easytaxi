@@ -10,6 +10,8 @@ public class UploadGPSData {
 
 	private GPSData gpsdata;
 	
+	private String track ;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -40,6 +42,14 @@ public class UploadGPSData {
 
 	public void setGpsdata(GPSData gpsdata) {
 		this.gpsdata = gpsdata;
+	}
+
+	public String getTrack() {
+		return track;
+	}
+
+	public void setTrack(String track) {
+		this.track = track;
 	}
 	
 	
