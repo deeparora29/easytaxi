@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.easytaxi.bo.Taxi;
+import com.easytaxi.common.utils.BeanFactoryUtil;
 import com.easytaxi.location.service.TaxiDataService;
 
 /**
@@ -31,26 +32,38 @@ public class TaxiDataManageThread implements Runnable{
 	
 	@Override
 	public void run() {
-		try {
-			while( true ){
-				TaxiDataService service = TaxiDataService.getInstance();
-				List<Taxi> taxiList = service.getModifiedInner24HoursData();
-				if(taxiList!=null && taxiList.size()>0){
-					log.info("系统中会话存在超过24小时的出租车数量为：" + taxiList.size());
-					for (Taxi taxi : taxiList) {
-						ConcurrentMap<String, Taxi> temp = service.getTaxiLoginInfoMap();
-						if(taxi!=null){
-							temp.remove(taxi.getUserid());
-							log.info("系统检测到用户： " + taxi.getUserid() +"登录时间超过24小时，需要重新登录" );
+		while (true) {
+			try {
+				TaxiDataService service = null;
+				try {
+					service = (TaxiDataService) BeanFactoryUtil.getBean("taxiDataService");
+				} catch (Exception e) {
+					Thread.sleep(30 * 1000);
+				}
+				if (service != null) {
+					List<Taxi> taxiList = service.getModifiedInner24HoursData();
+					if (taxiList != null && taxiList.size() > 0) {
+						log.info("系统中会话存在超过24小时的出租车数量为：" + taxiList.size());
+						for (Taxi taxi : taxiList) {
+							ConcurrentMap<String, Taxi> temp = service.getTaxiLoginInfoMap();
+							if (taxi != null) {
+								temp.remove(taxi.getUserid());
+								log.info("系统检测到用户： " + taxi.getUserid()+ "登录时间超过24小时，需要重新登录");
+							}
 						}
+					} else {
+						Thread.sleep(60 * 1000);
 					}
-				}else{
-					Thread.sleep( 60 * 1000 );
+				}
+			} catch (Exception e) {
+				log.error("出租车数据后台处理线程运行失败：", e);
+				try {
+					Thread.sleep(60 * 1000);
+				} catch (InterruptedException e1) {
 				}
 			}
-		} catch (Exception e) {
-			log.error("出租车数据后台处理线程运行失败：", e);
 		}
+		
 		
 	}
 

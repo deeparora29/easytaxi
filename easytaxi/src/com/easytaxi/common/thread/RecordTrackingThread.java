@@ -23,40 +23,53 @@ public class RecordTrackingThread implements Runnable{
 	public void run() {
 		try {
 			while( true ){
-				if(BeanFactoryUtil.getBean("passengerDataService")==null){
+				PassengerDataService p_service = null;
+				TrackLogService logservice = null;
+				try {
+					p_service = (PassengerDataService)BeanFactoryUtil.getBean("passengerDataService");
+					logservice = (TrackLogService)BeanFactoryUtil.getBean("trackLogService");
+				} catch (Exception e) {
 					Thread.sleep( 60 * 1000 );
 				}
-				Thread.sleep( 60 * 1000 );
-				
-				PassengerDataService p_service = (PassengerDataService)BeanFactoryUtil.getBean("passengerDataService");
-				TrackLogService logservice = (TrackLogService)BeanFactoryUtil.getBean("trackLogService");
-				ConcurrentMap<String , List<UploadGPSData>> p_GPSData = p_service.getPassengerTrackingMap();
-				if(p_GPSData!=null&&p_GPSData.size()>0){
-					for (ConcurrentMap.Entry<String, List<UploadGPSData>> entry : p_GPSData.entrySet()) {
-						//userid
-						String key = entry.getKey();
-						List<UploadGPSData> gpsList = entry.getValue();
-						for (UploadGPSData uploadGPSData : gpsList) {
-							String userid = uploadGPSData.getUserId();
-							String trackid = trackingIdMap.get(userid);
-							double lat = uploadGPSData.getGpsdata().getLat();
-							double lng = uploadGPSData.getGpsdata().getLng();
-							String track = uploadGPSData.getTrack();
-							if("start".equals(track)){
-								trackid = logservice.getTrackId();
-								trackingIdMap.put(userid, trackid);
+				if(p_service!=null&&logservice!=null){
+					ConcurrentMap<String , List<UploadGPSData>> p_GPSData = p_service.getPassengerTrackingMap();
+					if(p_GPSData!=null&&p_GPSData.size()>0){
+						for (ConcurrentMap.Entry<String, List<UploadGPSData>> entry : p_GPSData.entrySet()) {
+							//userid
+							String key = entry.getKey();
+							List<UploadGPSData> gpsList = entry.getValue();
+							for (UploadGPSData uploadGPSData : gpsList) {
+								String userid = uploadGPSData.getUserId();
+								String trackid = trackingIdMap.get(userid);
+								double lat = uploadGPSData.getGpsdata().getLat();
+								double lng = uploadGPSData.getGpsdata().getLng();
+								String track = uploadGPSData.getTrack();
+								if("start".equals(track)){
+									trackid = logservice.getTrackId();
+									trackingIdMap.put(userid, trackid);
+								}
+								TrackLog log  = new TrackLog(trackid,userid,1,lat,lng);
+								
+								logservice.saveTrackLog(log);
 							}
-							TrackLog log  = new TrackLog(trackid,userid,1,lat,lng);
-							
-							logservice.saveTrackLog(log);
+							//重map中删除相关user gps数据
+							p_GPSData.remove(key);
 						}
-						//重map中删除相关user gps数据
-						p_GPSData.remove(key);
+					}else{
+						Thread.sleep( 60 * 1000 );
 					}
+				}else{
+					Thread.sleep( 60 * 1000 );
 				}
+				
+				
 			}
 		} catch (Exception e) {
 			log.error("检查账号会话线程运行失败：", e);
+			try {
+				Thread.sleep( 3 * 60 * 1000 );
+			} catch (InterruptedException e1) {
+			}
 		}
 		
 	}
