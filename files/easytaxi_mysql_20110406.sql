@@ -208,19 +208,36 @@ insert  into `taxi`(`userid`,`plate_number`,`password`,`license`,`company`,`car_
 
 DROP TABLE IF EXISTS `trackhistory`;
 
-CREATE TABLE `trackhistory` (
+CREATE TABLE `trackhistory` (	
   `trackid` varchar(12) NOT NULL COMMENT 'yyyymmdd0000',
   `userid` varchar(6) NOT NULL,
   `type` int(1) DEFAULT '0' COMMENT '0:taxi;1:passenger',
   `begintime` datetime DEFAULT NULL,
   `endtime` datetime DEFAULT NULL,
   `trackfile` varchar(32) DEFAULT NULL,
-  `lat` double DEFAULT '0',
-  `lng` double DEFAULT '0',
   PRIMARY KEY (`trackid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `trackhistory` */
+
+
+
+DROP TABLE IF EXISTS `tracklog`;
+
+CREATE TABLE `tracklog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,	
+  `trackid` varchar(12) NOT NULL COMMENT 'yyyymmdd0000',
+  `userid` varchar(6) NOT NULL,
+  `type` int(1) DEFAULT '0' COMMENT '0:taxi;1:passenger',
+  `createtime` datetime DEFAULT NULL,
+  `lat` double DEFAULT NULL,
+  `lng` double  DEFAULT NULL,
+  PRIMARY KEY (`trackid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `tracklog` */
+
+
 
 /* Procedure structure for procedure `get_serial_num` */
 
