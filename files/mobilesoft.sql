@@ -1,6 +1,6 @@
 ﻿/*
 SQLyog Community Edition- MySQL GUI v8.04 
-MySQL - 5.1.48-community : Database - easytaxi
+MySQL - 5.1.48-community : Database - mobilesoft
 *********************************************************************
 */
 /*!40101 SET NAMES utf8 */;
@@ -10,9 +10,9 @@ MySQL - 5.1.48-community : Database - easytaxi
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`easytaxi` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`mobilesoft` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `easytaxi`;
+USE `mobilesoft`;
 
 /*Table structure for table `creditrecord` */
 
@@ -245,7 +245,7 @@ CREATE TABLE `tracklog` (
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_serial_num`(
+/*!50003 CREATE DEFINER=CURRENT_USER PROCEDURE `get_serial_num`(
         IN s_type VARCHAR(40),
         IN s_length INTEGER,
         IN s_date VARCHAR(8),
