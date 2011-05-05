@@ -77,11 +77,13 @@ public class PassengerDataService extends BaseService{
 	
 	
 	public String offer( String requestString ){
+        log.info("Request:::" + requestString);
 		JSONObject jsonObject = parserRequest( requestString );
 		String jsonString = "{}";
 		if(jsonObject == null){
 			jsonString = getReturnErrorMessage(ErrorCode.PARA_ERROR_CODE);
 		}else{
+            log.info("Passenger:::" + jsonObject.toString());
 			String transCode = jsonObject.getString("TransCode");
 			if(transCode==null||transCode.length()<4){
 				jsonString = getReturnErrorMessage(ErrorCode.TRANS_CODE_ERROR);
@@ -125,15 +127,18 @@ public class PassengerDataService extends BaseService{
 					String userid = p.getUserid();
 					String phone = p.getPhone();
 					String db_password = p.getPassword();
-					if(passengerInfoMap.containsKey(userid)){//账号已登录
-						jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
-						return jsonString;
-					}
 					if(password!=null&&password.equals(db_password)){
 						jsonString = getReturnMessage( transCode , userid , phone ); 
 					}else{
 						jsonString = getReturnErrorMessage(ErrorCode.PASSWORD_NOT_ACCURATE);
 					}
+
+                    if (passengerInfoMap.containsKey(userid)) {// 账号已登录
+                        // jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
+                        // return jsonString;
+                        // cancel the relogin check
+                        passengerInfoMap.remove(userid);
+                    }
 					passengerInfoMap.put(userid, p);
 					//修改登录时间
 					//passengerDao.doUpdatePassengerLoginTime();
