@@ -124,16 +124,19 @@ public class TaxiDataService extends BaseService{
 					String userid = taxi.getUserid();
 					String phone = taxi.getPhone0()+","+ taxi.getPhone0();
 					String _password = taxi.getPassword() ;
-					if(taxiLoginInfoMap.containsKey(userid)){//账号已登录
-						jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
-						return jsonString;
-					}
 					if(_password.equals(password)){
 						jsonString = getReturnMessage( transCode , userid , phone ); 
 					}else{
 						//密码不正确
 						jsonString = getReturnErrorMessage(ErrorCode.PASSWORD_NOT_ACCURATE);
 					}
+
+                    if (taxiLoginInfoMap.containsKey(userid)) {// 账号已登录
+                        // jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
+                        // return jsonString;
+                        // cancel the relogin check
+                        taxiLoginInfoMap.remove(userid);
+                    }
 					//保存用户登录信息
 					taxiLoginInfoMap.put(userid, taxi);
 					
