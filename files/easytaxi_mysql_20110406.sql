@@ -32,7 +32,7 @@ CREATE TABLE `creditrecord` (
 
 /*Data for the table `creditrecord` */
 
-insert  into `creditrecord`(`requestNo`,`userid`,`type`,`comments`,`credit`,`credit_userid`,`credit_time`,`id`) values ('201104081501','P00001',1,'test comments',4.5,NULL,'2011-04-10 20:24:12',1),('201104081501','T00001',0,'taxi comments',3,NULL,'2011-04-10 20:25:10',2);
+#insert  into `creditrecord`(`requestNo`,`userid`,`type`,`comments`,`credit`,`credit_userid`,`credit_time`,`id`) values ('201104081501','P00001',1,'test comments',4.5,NULL,'2011-04-10 20:24:12',1),('201104081501','T00001',0,'taxi comments',3,NULL,'2011-04-10 20:25:10',2);
 
 /*Table structure for table `et_sys_var` */
 
@@ -50,7 +50,7 @@ CREATE TABLE `et_sys_var` (
 
 /*Data for the table `et_sys_var` */
 
-insert  into `et_sys_var`(`id`,`field_name`,`field_value`,`field_date`,`comments`,`seri_num`) values (1,'taxi_no','1','20110404','test',1059),(2,'t_user_id','1','20110404','taxi no',26),(3,'request_no','1','20110404','request no',3),(4,'p_user_id','1','20110404','passenger no',2),(5,'track_id','1','2011040','track id',14);
+#insert  into `et_sys_var`(`id`,`field_name`,`field_value`,`field_date`,`comments`,`seri_num`) values (1,'taxi_no','1','20110404','test',1059),(2,'t_user_id','1','20110404','taxi no',26),(3,'request_no','1','20110404','request no',3),(4,'p_user_id','1','20110404','passenger no',2),(5,'track_id','1','2011040','track id',14);
 
 /*Table structure for table `locationinfo` */
 
@@ -109,7 +109,7 @@ CREATE TABLE `passenger` (
 
 /*Data for the table `passenger` */
 
-insert  into `passenger`(`userid`,`firstname`,`lastname`,`nickname`,`phone`,`email`,`password`,`gender`,`picid`,`credit`,`agreement`,`register_time`,`modified_time`,`descr`,`province`,`city`) values ('P00001','Ren','Mian','Anne','13088063731','anne.mian.ren@gmail.com','123456','female',0,3,'yes','2011-04-10 21:09:52','2011-04-10 21:09:52','test','Sichuan','Chengdu');
+#insert  into `passenger`(`userid`,`firstname`,`lastname`,`nickname`,`phone`,`email`,`password`,`gender`,`picid`,`credit`,`agreement`,`register_time`,`modified_time`,`descr`,`province`,`city`) values ('P00001','Ren','Mian','Anne','13088063731','anne.mian.ren@gmail.com','123456','female',0,3,'yes','2011-04-10 21:09:52','2011-04-10 21:09:52','test','Sichuan','Chengdu');
 
 /*Table structure for table `pictures` */
 
@@ -152,7 +152,7 @@ CREATE TABLE `requestinfo` (
 
 /*Data for the table `requestinfo` */
 
-insert  into `requestinfo`(`requestNo`,`userid`,`request_time`,`start_long`,`start_lat`,`start_text`,`end_long`,`end_lat`,`end_text`,`number`,`luggage`,`comments`,`share`,`status`,`operator_time`,`operatorid`,`operator_type`,`operator_comments`) values ('201104081501','P00001',NULL,0,0,NULL,0,0,NULL,1,0,'test request','yes',0,NULL,NULL,0,NULL);
+#insert  into `requestinfo`(`requestNo`,`userid`,`request_time`,`start_long`,`start_lat`,`start_text`,`end_long`,`end_lat`,`end_text`,`number`,`luggage`,`comments`,`share`,`status`,`operator_time`,`operatorid`,`operator_type`,`operator_comments`) values ('201104081501','P00001',NULL,0,0,NULL,0,0,NULL,1,0,'test request','yes',0,NULL,NULL,0,NULL);
 
 /*Table structure for table `routes` */
 
@@ -202,7 +202,7 @@ CREATE TABLE `taxi` (
 
 /*Data for the table `taxi` */
 
-insert  into `taxi`(`userid`,`plate_number`,`password`,`license`,`company`,`car_model`,`charge_model`,`email`,`contact_person0`,`contact_phone0`,`contact_person1`,`contact_phone1`,`status`,`descr`,`credit`,`register_time`,`modified_time`) values ('T00001','川A12345','123','12345678','万达','速腾','现金支付','test@taxi.com','刘师傅','13912345678','张师傅','13812345678',0,'test',3,'2011-04-10 21:10:07','2011-04-10 21:10:07');
+#insert  into `taxi`(`userid`,`plate_number`,`password`,`license`,`company`,`car_model`,`charge_model`,`email`,`contact_person0`,`contact_phone0`,`contact_person1`,`contact_phone1`,`status`,`descr`,`credit`,`register_time`,`modified_time`) values ('T00001','川A12345','123','12345678','万达','速腾','现金支付','test@taxi.com','刘师傅','13912345678','张师傅','13812345678',0,'test',3,'2011-04-10 21:10:07','2011-04-10 21:10:07');
 
 /*Table structure for table `trackhistory` */
 
