@@ -1,8 +1,6 @@
 package com.easytaxi.servlet;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,9 +36,9 @@ public class PassengerDataManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String data = request.getParameter("data");
-		if(data!=null){
-			data = new String(data.getBytes("ISO-8859-1"), "UTF-8");
-		}
+        // if(data!=null){
+        // data = new String(data.getBytes("ISO-8859-1"), "UTF-8");
+        // }
 		PassengerDataService instance = (PassengerDataService)BeanFactoryUtil.getBean("passengerDataService");
 		String returnMessage = instance.offer( data );
 		response.setCharacterEncoding("UTF-8");
