@@ -36,9 +36,9 @@ public class TaxiDataManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String data = request.getParameter("data");
-		if(data!=null){
-			data = new String(data.getBytes("ISO-8859-1"), "UTF-8");
-		}
+        // if(data!=null){
+        // data = new String(data.getBytes("ISO-8859-1"), "UTF-8");
+        // }
 		TaxiDataService instance = (TaxiDataService)BeanFactoryUtil.getBean("taxiDataService");
 		String returnMessage = instance.offer( data );
 		response.setCharacterEncoding("UTF-8");
