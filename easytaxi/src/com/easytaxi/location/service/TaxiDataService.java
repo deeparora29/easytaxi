@@ -135,10 +135,10 @@ public class TaxiDataService extends BaseService{
                         // jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
                         // return jsonString;
                         // cancel the relogin check
-                        taxiLoginInfoMap.remove(userid);
-                    }
+                        // taxiLoginInfoMap.remove(userid);
+                    } else
 					//保存用户登录信息
-					taxiLoginInfoMap.put(userid, taxi);
+                        taxiLoginInfoMap.put(userid, taxi);
 					
 					//更新登录时间
 					//taxiDao.updateTaxiLoginTime();
@@ -242,11 +242,7 @@ public class TaxiDataService extends BaseService{
 	}
 	
 	private boolean checkPassengerIsLogin(String account) {
-		boolean bool = false ;
-		if (!taxiLoginInfoMap.containsKey(account)) {
-			bool = true ;
-		} 
-		return bool ;
+        return taxiLoginInfoMap.containsKey(account);
 	}
 	
 	
