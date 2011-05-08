@@ -12,8 +12,8 @@
 		$.ajax( {
 			type :"GET",
 			contentType :"application/json;utf-8",
-			//url :"passenger",
-			url :"taxi",
+			url :"passenger",
+			//url :"taxi",
 			cache : false,
 			//dataType :"json",
 			data : { data : data },

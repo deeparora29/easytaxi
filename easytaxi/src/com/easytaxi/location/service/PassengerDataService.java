@@ -137,9 +137,10 @@ public class PassengerDataService extends BaseService{
                         // jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_HAS_LOGIN);
                         // return jsonString;
                         // cancel the relogin check
-                        passengerInfoMap.remove(userid);
-                    }
-					passengerInfoMap.put(userid, p);
+                        // passengerInfoMap.remove(userid);
+                        log.info("User=" + userid + "login again");
+                    } else
+                        passengerInfoMap.put(userid, p);
 					//修改登录时间
 					//passengerDao.doUpdatePassengerLoginTime();
 					
@@ -334,11 +335,7 @@ public class PassengerDataService extends BaseService{
 	}
 	
 	private boolean checkPassengerIsLogin(String account) {
-		boolean bool = false ;
-		if (!passengerInfoMap.containsKey(account)) {
-			bool = true ;
-		} 
-		return bool ;
+        return passengerInfoMap.containsKey(account);
 	}
 	
 	public List<Passenger> getModifiedInner24HoursData() {
