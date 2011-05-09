@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.easytaxi.common.Messages;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.utils.BeanFactoryUtil;
 import com.easytaxi.usermgr.service.LoginService;
@@ -46,9 +47,11 @@ public class LoginServlet extends HttpServlet {
         if (!userid.equals("")) {
             // 成功登陆后，userid放到session中
             request.getSession().setAttribute(SystemPara.SESSION_USERID, userid);
+            request.getSession().removeAttribute(SystemPara.SESSION_ERRORINFO);
             response.sendRedirect("welcome.jsp");
         } else {
             response.sendRedirect("login.jsp");
+            request.getSession().setAttribute(SystemPara.SESSION_ERRORINFO, Messages.LOGIN_ERROR);
         }
 
 	}

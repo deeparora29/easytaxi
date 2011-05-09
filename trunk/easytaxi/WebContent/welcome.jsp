@@ -45,6 +45,7 @@ function setFrameSrc(src, index){
             <a id="tab1" href="#" onclick="setFrameSrc('track.jsp', 1);">线路</a>
             <a id="tab2" href="#" onclick="setFrameSrc('usermgr.jsp', 2);">设置</a>
             <a id="tab3" href="#">商家</a>
+            <a href="LogoutServlet" class="search">退出</a>
         </div>
         
         <form>
@@ -58,8 +59,9 @@ function setFrameSrc(src, index){
                 </ul>
                 <a href="#" class="down">文章</a>
             </div>
-            <a href="LogoutServlet" class="search">退出</a>
+            
         </form>
+        
         
     </div>
 <!--导航结束-->  

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<%@page import="com.easytaxi.common.SystemPara"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录</title>
@@ -11,7 +12,11 @@
 <script language="javascript" type="text/javascript" src="js/jquery.1.4.2.min.js"></script>
 <script language="javascript" type="text/javascript" src="js/login.js"></script>
 </head>
-
+<%
+	String errorInfo = (String)session.getAttribute(SystemPara.SESSION_ERRORINFO);
+	if(errorInfo == null)
+	    errorInfo = "";
+%>
 <body>
 
 <div class="login_in">
@@ -30,7 +35,7 @@
             <br />
             <div class="login_con">
                 <div class="autolog"><input type="checkbox" class="mR5"/>下次自动登录</div>
-                <div class="hidden" id="errorInfo" style="color: red"></div>
+                <div id="errorInfo" style="color: red"><%=errorInfo %></div>
                 <input type="button" class="login_btn hand" id="submitBtn" />
             </div>
         </form>
