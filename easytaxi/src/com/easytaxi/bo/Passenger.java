@@ -26,7 +26,7 @@ public class Passenger {
 
 	private String descr;
 
-	private GPSData gpsdata;
+    private GPSData gpsdata = new GPSData();
 
 	private int number;
 

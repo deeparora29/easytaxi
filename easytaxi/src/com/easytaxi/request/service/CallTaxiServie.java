@@ -12,7 +12,6 @@ import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
-import com.easytaxi.common.utils.DateUtil;
 import com.easytaxi.request.bo.RequestInfo;
 import com.easytaxi.request.bo.RequestResult;
 import com.easytaxi.request.dao.CallTaxiDao;
@@ -180,8 +179,10 @@ public class CallTaxiServie extends BaseService {
             Date startDate = new Date(cal.getTimeInMillis() - timeDiff);
             Date endDate = new Date(cal.getTimeInMillis() + timeDiff);
             validCalls = getCallTaxiDao().getRequestInfoBy(SystemPara.REQUESTINFO_STATUS_ISVALID,
-                DateUtil.convertDateTimeToString(startDate),
-                DateUtil.convertDateTimeToString(endDate));
+            // DateUtil.convertDateTimeToString(startDate),
+                // DateUtil.convertDateTimeToString(endDate));
+                null, null);
+
         } catch (Exception ex) {
             logger.error("Query valid(status=0) request error: ", ex);
         }

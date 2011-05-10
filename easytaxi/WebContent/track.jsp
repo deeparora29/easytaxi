@@ -4,7 +4,9 @@
 <%@page import="com.easytaxi.common.utils.BeanFactoryUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.easytaxi.bo.TrackHistory"%>
-<%@page import="com.easytaxi.common.SystemPara"%>
+
+<%@ include file="include.jsp" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,11 +20,9 @@
 <script language="javascript" type="text/javascript" src="js/myjs.js"></script>
 </head>
 <%
-String userId = (String)session.getAttribute(SystemPara.SESSION_USERID);
-if(userId == null || userId.equals(""))
-    throw new Exception("用户未登录！");
+
 TrackService service = (TrackService)BeanFactoryUtil.getBean("trackService");
-List<TrackHistory> list = service.getTrackHistories(userId, -1);//all
+List<TrackHistory> list = service.getTrackHistories(userid, -1);//all
 	
 %>
 <body>
