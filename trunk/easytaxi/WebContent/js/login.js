@@ -20,13 +20,15 @@ $(".jd_gonglve h2 span > a:first").addClass("currentBg10");
 		$("#account").val(ShowMsg[tabIndex]);	
 	});
 	
-$("#account").focusin(function(){
+$("#account").focus(function(){
 	$("#account").val("");					  
 });
 
-$("#account").focusout(function(){
+$("#account").blur(function(){
 		if($("#account").attr("value")==''){
 			$("#account").val(ShowMsg[tabIndex]);					  
+		} else {
+			checkOnServer($("#type").val(), "#account", ShowMsg[tabIndex]);
 		}
 });
 
@@ -47,5 +49,35 @@ $("#submitBtn").click(function(){
 	$("#loginForm").attr("action", "LoginServlet?type=" + $("#type").val());
 	$("#loginForm").submit();
 });
+
+function showErrorInfo(formId, msg){
+	//alert(msg);
+	var errorid = "#errorInfo";
+	$(errorid).html(msg);
+//	$(errorid).addClass("visible");
+}
+
+function checkOnServer(formId, id, descr){
+	var objectid = id;
+	var value = $.trim($(objectid).val());
+	var url = "LoginServlet?type=check&formId=" + formId + "&objectValue=" + value;
+	//alert(url);
+	$.ajax({
+		type: "get",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		url: url,
+		cache: false,
+		success: function(data){
+			var dataObj = eval("(" + data + ")");
+			if (dataObj.result == "ok") {
+				showErrorInfo(formId, "");
+			}
+			else {
+				showErrorInfo(formId, descr + "不存在！请先免费注册。");
+				$(objectid).select();
+			}
+		}
+	});
+}
 
 });

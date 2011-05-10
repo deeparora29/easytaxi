@@ -9,7 +9,7 @@
 <link href="css/share.css" rel="stylesheet" type="text/css" />
 <link href="css/login.css" rel="stylesheet" type="text/css" />
 <link href="css/usertab.css" rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript" src="js/jquery.1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.js"></script>
 <script language="javascript" type="text/javascript" src="js/login.js"></script>
 </head>
 <%
