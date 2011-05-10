@@ -1,7 +1,9 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="com.easytaxi.common.SystemPara"%>
 <%
 	String rootCtx = request.getContextPath();
+	String userid = (String)session.getAttribute(SystemPara.SESSION_USERID);
+	if(userid == null || userid.equals(""))
+	    throw new Exception("用户尚未登录！");
 %>
-<link rel="stylesheet" href="<%=rootCtx %>/css/main.css" type="text/css" media="screen" />
-<script type="text/javascript" language="javascript" src="<%=rootCtx %>/js/jquery-1.3.2.js"></script>

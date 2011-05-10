@@ -125,5 +125,6 @@ public class SystemPara {
     // Session Parameter
     public final static String SESSION_USERID = "userid";
     public final static String SESSION_ERRORINFO = "errorInfo";
+    public final static String SESSION_USER = "user";
 
 }

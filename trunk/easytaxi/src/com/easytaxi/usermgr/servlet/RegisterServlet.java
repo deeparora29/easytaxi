@@ -61,7 +61,7 @@ public class RegisterServlet extends HttpServlet {
                 if (formId.contains("passenger")) {// passenger
                     object = loginService.getPassengerBy(value);
                 } else {
-                    value = new String(value.getBytes("ISO8859-1"), "UTF-8");
+                    // value = new String(value.getBytes("ISO8859-1"), "UTF-8");
                     object = loginService.getTaxiBy(value);
                 }
                 if (object != null) {
@@ -97,6 +97,14 @@ public class RegisterServlet extends HttpServlet {
             }
             if (!userid.equals("")) {
                 request.getSession().setAttribute(SystemPara.SESSION_USERID, userid);
+                request.getSession().removeAttribute(SystemPara.SESSION_ERRORINFO);
+                Object object = null;
+                if (type.equals("taxi")) {
+                    object = loginService.getTaxiDetailInfo(userid);
+                } else {
+                    object = loginService.getPassengerDetailInfo(userid);
+                }
+                request.getSession().setAttribute(SystemPara.SESSION_USER, object);
                 response.sendRedirect("welcome.jsp");
             } else {
                 response.sendRedirect("register.jsp");

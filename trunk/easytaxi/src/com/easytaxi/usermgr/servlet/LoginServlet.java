@@ -48,6 +48,13 @@ public class LoginServlet extends HttpServlet {
             // 成功登陆后，userid放到session中
             request.getSession().setAttribute(SystemPara.SESSION_USERID, userid);
             request.getSession().removeAttribute(SystemPara.SESSION_ERRORINFO);
+            Object object = null;
+            if (type.equals("taxi")) {
+                object = loginService.getTaxiDetailInfo(userid);
+            } else {
+                object = loginService.getPassengerDetailInfo(userid);
+            }
+            request.getSession().setAttribute(SystemPara.SESSION_USER, object);
             response.sendRedirect("welcome.jsp");
         } else {
             response.sendRedirect("login.jsp");

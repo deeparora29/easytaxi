@@ -2,7 +2,6 @@
 package com.easytaxi.request.bo;
 
 import java.util.Date;
-import com.easytaxi.bo.GPSData;
 
 /**
  * @table "requestinfo"
@@ -49,6 +48,18 @@ public class RequestInfo {
 
     public String getRequestNo() {
         return requestNo;
+    }
+
+    public String getRequestInfo() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("{TransCode:'P003',userid:'" + userid + "',");
+        buffer.append("phone:'" + phone + "',");
+        buffer.append("userGPS:{lat:" + startLat + ",lng:" + startLong + ",text:'" + startText + "'},");
+        buffer.append("dstGPS:{lat:" + endLat + ",lng:" + endLong + ",text:'" + endText + "'},");
+        buffer.append("number:" + number + ",");
+        buffer.append("luggage:" + luggage + ",");
+        buffer.append("comments:'" + comments + "'}");
+        return buffer.toString();
     }
 
     
