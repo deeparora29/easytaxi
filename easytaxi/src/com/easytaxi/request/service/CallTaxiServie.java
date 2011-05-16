@@ -12,6 +12,7 @@ import com.easytaxi.bo.Taxi;
 import com.easytaxi.common.ErrorCode;
 import com.easytaxi.common.SystemPara;
 import com.easytaxi.common.service.BaseService;
+import com.easytaxi.common.utils.DateUtil;
 import com.easytaxi.request.bo.RequestInfo;
 import com.easytaxi.request.bo.RequestResult;
 import com.easytaxi.request.dao.CallTaxiDao;
@@ -173,15 +174,14 @@ public class CallTaxiServie extends BaseService {
     public List<RequestInfo> getValidRequest() {
         List<RequestInfo> validCalls = new ArrayList<RequestInfo>();
         // default query valid request in 5mins
-        long timeDiff = 5 * 60 * 1000;
+        long timeDiff = 5 * 60 * 1000 * 24 * 12;
         try {
             Calendar cal = Calendar.getInstance();
             Date startDate = new Date(cal.getTimeInMillis() - timeDiff);
             Date endDate = new Date(cal.getTimeInMillis() + timeDiff);
             validCalls = getCallTaxiDao().getRequestInfoBy(SystemPara.REQUESTINFO_STATUS_ISVALID,
-            // DateUtil.convertDateTimeToString(startDate),
-                // DateUtil.convertDateTimeToString(endDate));
-                null, null);
+             DateUtil.convertDateTimeToString(startDate),
+                 DateUtil.convertDateTimeToString(endDate));
 
         } catch (Exception ex) {
             logger.error("Query valid(status=0) request error: ", ex);

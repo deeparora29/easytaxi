@@ -5,6 +5,7 @@
 $(function(){
 	var TYPE = new Array("passenger", "taxi");
 	var tabIndex = 0;
+	var isSubmit = true;
 	
 	$(".jd_gonglve h2 span > a:first").addClass("currentBg10");
 	$(".jd_gonglve .glpx:first").addClass("visible");
@@ -25,6 +26,13 @@ $(function(){
 				return;
 			if(isEmpty("#passengerForm", "#password", "密码"))
 				return;
+			if($("#passengerForm #agreement").attr("checked") == false){
+				showErrorInfo("#passengerForm", "您需要遵守同意耍巴适用户发布信息协议");
+				return;
+			}
+		if(!isSubmit){
+			return;
+		}
 			$("#passengerForm").submit();
 	});
 	
@@ -37,19 +45,49 @@ $(function(){
 			}
 			if(isEmpty("#taxiForm", "#password", "密码"))
 				return;
+			var email = $.trim($("#taxiForm #email").val());
+			if (!isEmail(email)) {
+				showErrorInfo("#taxiForm", "Email格式错误");
+				$("#taxiForm #email").select();
+				return;
+			}
+			
+			var phone0 = $.trim($("#taxiForm #phone0").val());
+			if(!ismobile(phone0)){
+				showErrorInfo("#taxiForm", "手机号码格式错误");
+				$("#taxiForm #phone0").select();
+				return;
+			}
+		if(!isSubmit){
+			return;
+		}
 			$("#taxiForm").submit();
 	});
 	
 	$("#passengerForm #email").blur(function(){
 		if(!isEmpty("#passengerForm", "#email", "邮箱")){
-			checkOnServer("#passengerForm", "#email", "邮箱");
+			var email = $.trim($("#passengerForm #email").val());
+			if (!isEmail(email)) {
+				showErrorInfo("#passengerForm", "Email格式错误");
+				$("#passengerForm #email").select();
+			} else {
+				isSubmit = true;
+				checkOnServer("#passengerForm", "#email", "邮箱");
+			}
 		}
 		
 	});
 	
 	$("#passengerForm #phone").blur(function(){
 		if(!isEmpty("#passengerForm", "#phone", "电话号码")){
-			checkOnServer("#passengerForm", "#phone", "电话号码");
+			var phone = $.trim($("#passengerForm #phone").val());
+			if(!ismobile(phone)){
+				showErrorInfo("#passengerForm", "手机号码格式错误");
+				$("#passengerForm #phone").select();
+			} else {
+				isSubmit = true;
+				checkOnServer("#passengerForm", "#phone", "电话号码");				
+			}
 		}
 	});
 	
@@ -59,8 +97,27 @@ $(function(){
 		}
 	});
 	
+	$("#taxiForm #email").blur(function(){
+		var email = $.trim($("#taxiForm #email").val());
+			if (!isEmail(email)) {
+				showErrorInfo("#taxiForm", "Email格式错误");
+				$("#taxiForm #email").select();
+			} else {
+				isSubmit = true;
+			}
+	});
 	
+	$("#taxiForm #phone0").blur(function(){
+		var phone0 = $.trim($("#taxiForm #phone0").val());
+			if(!ismobile(phone0)){
+				showErrorInfo("#taxiForm", "手机号码格式错误");
+				$("#taxiForm #phone0").select();
+			} else {
+				isSubmit = true;
+			}
+	});
 	
+		
 });
 
 function isEmpty(formId, id, zhDesc){
@@ -79,6 +136,7 @@ function showErrorInfo(formId, msg){
 	var errorid = formId + " #errorInfo";
 	$(errorid).html(msg);
 	$(errorid).addClass("visible");
+	isSubmit = (msg == "");
 }
 
 function checkOnServer(formId, id, descr){
@@ -101,6 +159,7 @@ function checkOnServer(formId, id, descr){
 				var dataObj=eval("("+data+")");
 				if(dataObj.result == "ok"){
 					showErrorInfo(formId, "");
+					isSubmit = true;
 				} else {
 					showErrorInfo(formId, descr + "已经存在！");
 					$(objectid).select();

@@ -106,7 +106,7 @@
 			</li>
 			<li>
 				<b>T004</b>
-				<p>{TransCode:'T004',userid='T00005',cabGPS:{lat:32.5767, lng:54.3432},requestNo:'2011040522202'}}</p>
+				<p>{TransCode:'T004',userid:'T00005',cabGPS:{lat:32.5767, lng:54.3432},requestNo:'2011040522202'}}</p>
 			</li>
 			<li>
 				<b>T005</b>
