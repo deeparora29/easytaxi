@@ -121,6 +121,7 @@ public class CallTaxiDao extends BaseJdbcDao {
             if (StringUtils.isNotEmpty(endTime))
                 sql += " and DATE_FORMAT(request_time, '%Y-%m-%d %H:%i:%s')<='" + endTime + "'";
         }
+        sql += " order by request_time desc";
         list = getJdbcTemplate().query(sql, new Object[] { new Integer(status) }, new RequestInfoRowMapper());
         return list;
     }

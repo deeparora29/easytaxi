@@ -9,6 +9,7 @@
 <link href="css/registe.css" rel="stylesheet" type="text/css" />
 <link href="css/usertab.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
 <script language="javascript" type="text/javascript" src="js/register.js"></script>
 </head>
 
