@@ -173,6 +173,10 @@ public class PassengerDataService extends BaseService{
 					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
 					return jsonString;
 				}
+                // save passenger's location
+                if (realtimeLocationMap.get(userid) != null)
+                    realtimeLocationMap.remove(userid);
+                realtimeLocationMap.put(userid, new GPSData(start_lat, start_long));
 				RequestInfo requestInfo = new RequestInfo(userid,phone,start_long,start_lat,start_text,end_long,
 						end_lat,end_text,number,luggage,comments,share);
 				String res = callTaxiServie.requestTaxi(requestInfo);
@@ -190,10 +194,21 @@ public class PassengerDataService extends BaseService{
 					return jsonString;
 				}
 				
-				//从内存中获取出租车实时GPS数据
-				UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiGPSMap().get( userid );
 				RequestResult resulst = callTaxiServie.getConfirmedTaxiInfo(userid, requestNo);
 				if(resulst.getErrorCode().equals(ErrorCode.SUCCESS)){
+
+                    // 从内存中获取出租车实时GPS数据
+                    String taxiid = resulst.getTaxi().getUserid();
+                    UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiGPSMap().get(taxiid);
+                    // hardcode taxi gps data
+                    if (taxiGPSData == null) {
+                        taxiGPSData = new UploadGPSData();
+                        taxiGPSData.setUserId(taxiid);
+                        taxiGPSData.setStatus(0);
+                        RequestInfo requestInfo = callTaxiServie.getRequestInfoByRequestId(requestNo);
+                        taxiGPSData.setGpsdata(new GPSData(requestInfo.getStartLat() + 0.5,
+                            requestInfo.getStartLong() + 0.5));
+                    }
 					jsonString = getReturnMessage(transCode,requestNo,resulst,taxiGPSData);
 				}else{
 					jsonString = getReturnErrorMessage(resulst.getErrorCode());
