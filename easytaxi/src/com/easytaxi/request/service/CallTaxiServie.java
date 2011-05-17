@@ -189,6 +189,10 @@ public class CallTaxiServie extends BaseService {
         return validCalls;
     }
 
+    public RequestInfo getRequestInfoByRequestId(String requestId) {
+        return getCallTaxiDao().getRequestInfo(requestId);
+    }
+
     public PassengerDao getPassengerDao() {
         return passengerDao;
     }
