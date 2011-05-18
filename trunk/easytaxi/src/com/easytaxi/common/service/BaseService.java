@@ -112,7 +112,7 @@ public class BaseService {
                 + taxiGPSData.getGpsdata().getLng() + "\"}";
             jsonString.append("\"ErrorCode:\"" + ErrorCode.SUCCESS + "\"").append(
                 ",\"requestNo\":\"" + requestNo + "\"").append(",\"cab\":\"" + cab + "\"").append(
-                ",\"credit\":\"" + credit + "\"").append(",\"cabGPS\":\"" + cabGPS + "\"");
+                ",\"credit\":\"" + credit + "\"").append(",\"cabGPS\":" + cabGPS + "");
         }else if (transCode.equals(SystemPara.P_CANCELREQUEST)) {// 取消用车请求
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
 		}else if( transCode.equals(SystemPara.P_CREDITRATING) ){//信用评价
@@ -143,7 +143,7 @@ public class BaseService {
 			GPSData passengerGPSData = (GPSData)args[1];
             String cabGPS = "{\"lat\":\"" + passengerGPSData.getLat() + "\",\"lng\":\"" + passengerGPSData.getLng()
                 + "\"}";
-            jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"").append(",\"cabGPS\":\"" + cabGPS + "\"");
+            jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"").append(",\"cabGPS\":" + cabGPS + "");
 		}else if( transCode.equals(SystemPara.P_UPLOADGPS_TRACK) ){//上传GPS数据或经过路线
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
 		}else if( transCode.equals(SystemPara.P_QUERYTAXIDETAILINFO) ){//查询出租车详细信息
@@ -166,10 +166,10 @@ public class BaseService {
 			String descr = taxi.getDescr();
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"").append(",\"cab\":\"" + cab + "\"").append(
                 ",\"license\":\"" + license + "\"").append(",\"status\":\"" + status + "\"").append(
-                ",\"credit\":\"" + credit + "\"").append(",\"cabGPS\":\"" + cabGPS + "\"").append(
+                ",\"credit\":\"" + credit + "\"").append(",\"cabGPS\":" + cabGPS + "").append(
                 ",\"company\":\"" + company + "\"").append(",\"email\":\"" + email + "\"").append(
                 ",\"carModel\":\"" + carModel + "\"").append(",\"chargeModel\":\"" + chargeModel + "\"").append(
-                ",\"drivers\":\"" + drivers + "\"").append(",\"descr\":\"" + descr + "\"");
+                ",\"drivers\":" + drivers + "").append(",\"descr\":\"" + descr + "\"");
 		}else if( transCode.equals(SystemPara.P_UPDATE_PHONE_NUMBER) ){//更新乘客手机号码
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
 		}else if( transCode.equals(SystemPara.T_REGISTER) ){//出租车注册
@@ -199,7 +199,7 @@ public class BaseService {
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"").append(
                 ",\"requestNo\":\"" + requestNo + "\"").append(",\"userId\":\"" + userId + "\"").append(
                 ",\"nickname\":\"" + nickname + "\"").append(",\"phone\":\"" + phone + "\"").append(
-                "\"credit\":\"" + credit + "\"").append(",\"cabGPS\":\"" + cabGPS + "\"");
+                "\"credit\":\"" + credit + "\"").append(",\"cabGPS\":" + cabGPS + "");
 		}else if(transCode.equals(SystemPara.T_CANCEL_CALL)){//Cancel Call T005
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
 		}else if(transCode.equals(SystemPara.T_CREDIT_RATING)){//Credit Rating T006
