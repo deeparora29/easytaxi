@@ -268,7 +268,22 @@ public class BaseService {
 		}else if(transCode.equals(SystemPara.T_UPDATE_TAXI_PHONE)){
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
 		}else if(transCode.equals(SystemPara.T_VALID_PASSENGER_CALL)){
-			
+			jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
+			StringBuffer calls = new StringBuffer();
+			List<RequestInfo> requestList = (List<RequestInfo>)args[1];
+			for(int i = 0; i < requestList.size(); i++){
+				RequestInfo info = requestList.get(i);
+				calls.append("{\"requestNo\":\"" + info.getRequestNo() + "\",");
+				String userGPS = "{\"lat\":\"" + info.getStartLat() + "\",\"lng\":\"" + info.getStartLong() + "\"}";
+				calls.append("\"userGPS\":" + userGPS + ",");
+				String dstGPS = "{\"lat\":\"" + info.getStartLat() + "\",\"lng\":\"" + info.getStartLong() + "\", \"text\":\"" + info.getEndText() + "\"}";
+				calls.append("\"dstGPS\":" + dstGPS + ",");
+				//TODO: need to get the passger's credit
+				calls.append("\"credit\":\"4\"}");  
+				if(i < requestList.size() - 1)
+					calls.append(",");
+			}
+			jsonString.append(",\"Calls\":[" + calls.toString() + "]");
 		}
 		
 		
