@@ -183,7 +183,7 @@ public class BaseService {
                 phone = "[\"" + phoneArray[0] + "\",\"" + phoneArray[1] + "\"]";
 			}
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"").append(",\"userid\":\"" + userId + "\"")
-                .append(",\"phone\":\"" + phone + "\"");
+                .append(",\"phone\":" + phone + "");
 		}else if(transCode.equals(SystemPara.T_UPLOADGPS)){
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
 		}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call
