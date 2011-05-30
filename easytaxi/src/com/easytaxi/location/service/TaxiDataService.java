@@ -234,7 +234,8 @@ public class TaxiDataService extends BaseService{
 			}else if(transCode.equals(SystemPara.T_VALID_PASSENGER_CALL)){//Get valid passenger’s call  T012
 				String userid = jsonObject.getString("userid");
 				int status = Integer.valueOf(jsonObject.getString("status"));
-				//TODO 
+				List<RequestInfo> list = getCallTaxiServie().getValidRequest();
+				jsonString = getReturnMessage(transCode, list);
 			}
 			
 		}
