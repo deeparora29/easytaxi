@@ -199,7 +199,7 @@ public class BaseService {
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"").append(
                 ",\"requestNo\":\"" + requestNo + "\"").append(",\"userId\":\"" + userId + "\"").append(
                 ",\"nickname\":\"" + nickname + "\"").append(",\"phone\":\"" + phone + "\"").append(
-                "\"credit\":\"" + credit + "\"").append(",\"cabGPS\":" + cabGPS + "");
+                ",\"credit\":\"" + credit + "\"").append(",\"cabGPS\":" + cabGPS + "");
 		}else if(transCode.equals(SystemPara.T_CANCEL_CALL)){//Cancel Call T005
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"");
 		}else if(transCode.equals(SystemPara.T_CREDIT_RATING)){//Credit Rating T006
