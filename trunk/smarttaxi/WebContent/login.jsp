@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SmartTaxi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="SmartTaxi,LBS" />
+<meta name="keywords" content="SmartTaxi,LBS" />
+<meta content="Copyright (c) 2010 - 2011 SmartTaxi,LBS" name="Copyright"/>
+
+<link href="images/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript" src="js/jquery.1.6.1.js"></script>
+<script language="javascript" type="text/javascript" src="js/main.js"></script>
+
+<style type="text/css">
+</style>
+</head>
+
+<body>
+<!--header-->
+<div id="header">
+    <div class="head_content">
+    	<h3><a href="#">SmartTaxi 首页</a> | <a href="#">官方微博</a></h3>
+        <!--<p><a href="#">登录</a> 或者 <a href="#">免费注册</a> | <a href="#">FAQ</a></p>-->
+        <p>欢迎您： <a href="#">joney51</a> 乘客  | <a href="setting.html">设置</a> | <a href="#">退出</a> | <a href="#">FAQ</a></p>
+    </div>
+</div>
+<!--navigation-->
+<div id="navigation">
+    <div class="navigation_content">
+        <h1 class="logo"><a href="#"><img src="images/logo.gif" width="255" height="100" /></a></h1>
+        <div class="menu">
+            <a href="index.html" class="home_selected"><span>首页</span></a>
+            <a href="line.html" class="line"><span>我的线路</span></a>
+            <a href="operation.html" class="operation"><span>操作记录</span></a>
+            <a href="about.html" class="about"><span>关于</span></a>
+            <a href="help.html" class="help"><span>帮助</span></a>
+        </div>
+    </div>
+</div>
+<!--container-->
+<div id="container">
+<div class="login">
+    <h3><img src="images/login_title.gif" width="196" height="21" /></h3>
+    <form action="LoginServlet">
+        <label>邮箱地址：</label><span class="fRed">*</span><div class="login_r"><input type="text" class="input_text" name="account"/></div><br />
+        <label>登录密码：</label><span class="fRed">*</span><div class="login_r"><input type="password" class="input_text" name="password"/></div><br />
+        <label>我　　是：</label><span class="fRed">*</span><div class="login_r"><input name="type" type="radio" value="passenger"  class="mR5"/>乘客<input name="type" type="radio" value="taxi"   class="mR5"/>司机</div><br />
+        <label></label><span></span><div class="login_r"><input name="" type="checkbox" value="" />下次自动登录</div><br />
+        <label></label><span></span><input name="" type="button" value=""  class="login_submit"/>
+    </form>
+    <p>还没有账号？<a href="register.jsp">>>点击这里注册</a></p>
+  </div>
+</div>
+<!--footer-->
+<div id="footer">SmartTaxi 官方网站 中国领先LBS解决方案及供应商<br />
+Copyright © SmartTaxi. All rights reserved. 蜀ICP备00000000号</div>
+</body>
+</html>
