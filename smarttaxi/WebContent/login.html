@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,14 +44,14 @@
 <div id="container">
 <div class="login">
     <h3><img src="images/login_title.gif" width="196" height="21" /></h3>
-    <form action="LoginServlet">
-        <label>邮箱地址：</label><span class="fRed">*</span><div class="login_r"><input type="text" class="input_text" name="account"/></div><br />
-        <label>登录密码：</label><span class="fRed">*</span><div class="login_r"><input type="password" class="input_text" name="password"/></div><br />
-        <label>我　　是：</label><span class="fRed">*</span><div class="login_r"><input name="type" type="radio" value="passenger"  class="mR5"/>乘客<input name="type" type="radio" value="taxi"   class="mR5"/>司机</div><br />
+    <form>
+        <label>邮箱地址：</label><span class="fRed">*</span><div class="login_r"><input type="text" class="input_text"/></div><br />
+        <label>登录密码：</label><span class="fRed">*</span><div class="login_r"><input type="password" class="input_text"/></div><br />
+        <label>我　　是：</label><span class="fRed">*</span><div class="login_r"><input name="" type="radio" value=""  class="mR5"/>乘客<input name="" type="radio" value=""   class="mR5"/>司机</div><br />
         <label></label><span></span><div class="login_r"><input name="" type="checkbox" value="" />下次自动登录</div><br />
         <label></label><span></span><input name="" type="button" value=""  class="login_submit"/>
     </form>
-    <p>还没有账号？<a href="register.jsp">>>点击这里注册</a></p>
+    <p>还没有账号？<a href="register.html">>>点击这里注册</a></p>
   </div>
 </div>
 <!--footer-->

@@ -5,6 +5,21 @@
 	.head_content h3{width:200px;float:left; text-align:left; font-weight:normal;}
 	.head_content p{width:720px;float:right; text-align:right;}
 #header .head_content a{color:#ccc;}
+	.login_window{width:920px;margin:0 auto;position:relative; z-index:99;}
+	.login_window_con{width:285px;height:180px;
+						background:url(../images/loginBg.png) no-repeat!important;/* FF IE7 */
+						_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/loginBg.png'); /* IE6 */
+						_background-image:none; /* IE6 */
+
+	position:absolute;left:730px;top:0px;z-index:100;}
+	.login_window_con form{width:230px; margin:25px auto;}
+	.login_window_con label{width:60px; display:block;float:left; clear:both; height:36px;}
+	.login_window_con span{width:15px;display: block;float:left;height:36px;}
+	.login_window_con .login_r{width:155px; float:left;height:36px;}
+	.login_window_con .input_text{width:148px; height:19px; background:#fff;padding-left:5px; padding-top:3px; border:1px solid #777;}
+	.login_window_con .submit_btn{width:75px;height:23px;display:block;background:url(../images/loginBtn.gif) 0 0 no-repeat; float:left;}
+	.login_window_con .close_btn{width:75px;height:23px;display:block;background:url(../images/loginBtn.gif) -81px 0 no-repeat; float:left; margin-left:5px;}
+	
 
 /* navigation */
 #navigation{width:100%; height:100px; background: url(../images/navigationBg.gif) repeat-x;}
@@ -33,9 +48,9 @@ a.help{width:88px;background:url(../images/navigationMenuBg.gif) no-repeat -422p
 #container{width:100%;}
 
 /* focus picture */
-.focus{width:100%; height:470px; background: url(../images/focus_bg.gif) repeat-x; position:relative;}
+.focus{width:100%; height:470px; background: url(../images/focus_bg.gif) repeat-x;position:relative;}
 	.focus_content{width:920px;height:470px; margin:0 auto;}
-	.focus_switch{width:980px;height:30px;position:absolute;top:50%;left:50%;margin-left:-490px;margin-top:-15px;z-index:1;}
+	.focus_switch{width:980px;height:30px;position:absolute;top:50%;left:50%;margin-left:-490px;margin-top:-15px;}
 	.focus_switch a{width:30px;height:30px;display:block;}
 	.focus_switch a.prev{float:left;background:url(../images/arrows.gif) no-repeat 0 0;}
 	.focus_switch a.next{float:right;background:url(../images/arrows.gif) no-repeat -30px 0;}
