@@ -280,11 +280,13 @@ public class BaseService {
 				String dstGPS = "{\"lat\":\"" + info.getStartLat() + "\",\"lng\":\"" + info.getStartLong() + "\", \"text\":\"" + info.getEndText() + "\"}";
 				calls.append("\"dstGPS\":" + dstGPS + ",");
 				//TODO: need to get the passger's credit
-				calls.append("\"credit\":\"4\"}");  
-                if (i < requestList.size() - 1 || i >= 9) { // hard code. Just return 10
-                    calls.append(",");
+                calls.append("\"credit\":\"4\"}");
+                if (i >= 9)
                     break;
+                if (i < requestList.size() - 1) {
+                    calls.append(",");
                 }
+
 			}
 			jsonString.append(",\"Calls\":[" + calls.toString() + "]");
 		}
