@@ -16,7 +16,7 @@ public class GPSData {
 	
 	public GPSData(double lat , double lng){
 		this.lat = lat;
-		this.lat = lng;
+        this.lng = lng;
 	}
 	
 	public double getLat() {

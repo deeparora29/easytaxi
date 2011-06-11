@@ -197,7 +197,8 @@ public class BaseService {
 			double lng = resulst.getPassenger().getGpsdata().getLng();
             String cabGPS = "{\"lat\":\"" + lat + "\",\"lng\":\"" + lng + "\"}";
             jsonString.append("\"ErrorCode\":\"" + ErrorCode.SUCCESS + "\"").append(
-                ",\"requestNo\":\"" + requestNo + "\"").append(",\"userId\":\"" + userId + "\"").append(
+                ",\"requestNo\":\"" + requestNo + "\"").append(
+                ",\"userId\":\"" + resulst.getPassenger().getUserid() + "\"").append(
                 ",\"nickname\":\"" + nickname + "\"").append(",\"phone\":\"" + phone + "\"").append(
                 ",\"credit\":\"" + credit + "\"").append(",\"cabGPS\":" + cabGPS + "");
 		}else if(transCode.equals(SystemPara.T_CANCEL_CALL)){//Cancel Call T005
@@ -280,8 +281,10 @@ public class BaseService {
 				calls.append("\"dstGPS\":" + dstGPS + ",");
 				//TODO: need to get the passger's credit
 				calls.append("\"credit\":\"4\"}");  
-				if(i < requestList.size() - 1)
-					calls.append(",");
+                if (i < requestList.size() - 1 || i >= 9) { // hard code. Just return 10
+                    calls.append(",");
+                    break;
+                }
 			}
 			jsonString.append(",\"Calls\":[" + calls.toString() + "]");
 		}
