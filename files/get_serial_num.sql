@@ -1,15 +1,13 @@
 DELIMITER $$
 
-CREATE DEFINER = 'root'@'localhost' PROCEDURE `easytaxi`.`get_serial_num`(
+DROP PROCEDURE IF EXISTS `mobilesoft`.`get_serial_num`$$
+
+CREATE DEFINER=`mobilesoft`@`%` PROCEDURE `get_serial_num`(
         IN s_type VARCHAR(40),
         IN s_length INTEGER,
         IN s_date VARCHAR(8),
         OUT s_value VARCHAR(40)
     )
-    NOT DETERMINISTIC
-    CONTAINS SQL
-    SQL SECURITY DEFINER
-    COMMENT ''
 BEGIN
     DECLARE stmt VARCHAR(2000);
     DECLARE sqlstr VARCHAR(2000);  
@@ -35,11 +33,26 @@ BEGIN
         		SELECT DATE_FORMAT( NOW(),'%Y%m%d%H') INTO v_today_h; 
             END IF ;
             
-    		SELECT field_date INTO v_oldday FROM et_sys_var WHERE field_name=s_type ; 
+    		
             SET @v_today = v_today ;     
             SET @s_type = s_type ;
+            
+            #update t_user_id & p_user_id
+            IF (s_type = 't_user_id') OR (s_type = 'p_user_id') THEN
+		 BEGIN         
+		    SET @sqlstr = 'update et_sys_var set field_date = ?  where field_name=? ';
+		    PREPARE stmt FROM @sqlstr;
+                    EXECUTE stmt USING  @v_today , @s_type ;
+                    DEALLOCATE PREPARE stmt;  
+                    COMMIT;
+                    
+                END;
+            END IF;
+            
+            SELECT field_date INTO v_oldday FROM et_sys_var WHERE field_name=s_type ; 
+            
             #跨天修改当天的流水号为1 ，若为当天则将流水号加1
-    	    IF v_oldday <> v_today THEN    
+    	    IF v_oldday <> v_today THEN
             	BEGIN            
                 	SELECT DATE_FORMAT( NOW(),'%Y%m%d%H') INTO v_today;
                 	SET @sqlstr = 'update et_sys_var set field_date = ? ,seri_num = 1 where field_name=?';
@@ -103,7 +116,7 @@ BEGIN
             BEGIN  	
                 IF s_date = 'true' THEN 
     				BEGIN
-        				SELECT LENGTH(temp_value)+10 INTO temp_num;
+        				SELECT LENGTH(temp_value)+8 INTO temp_num;
         			END ;
                 ELSE 
                 	SELECT LENGTH(temp_value) INTO temp_num;
@@ -117,7 +130,7 @@ BEGIN
                 
                 IF s_date = 'true' THEN
     				BEGIN
-        				SET s_value = CONCAT(v_today_h,temp_value) ;
+        				SET s_value = CONCAT(v_today,temp_value) ;
         			END ;
                 ELSE 
                 	SET s_value = temp_value ; 
@@ -138,7 +151,6 @@ BEGIN
         			SET temp_value = CONCAT('0', temp_value);
         			SET v_length = v_length + 1;
     			END WHILE;
-
                 IF s_date = 'true' THEN
     				BEGIN
         				SET s_value = CONCAT(v_today,temp_value) ;
@@ -153,7 +165,6 @@ BEGIN
         	END;  
         END IF ;      
     END IF; 
-
 END$$
 
 DELIMITER ;
