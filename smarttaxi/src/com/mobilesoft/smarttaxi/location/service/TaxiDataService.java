@@ -39,6 +39,7 @@ public class TaxiDataService extends BaseService{
 	private static ConcurrentMap<String , Taxi> taxiLoginInfoMap = new ConcurrentHashMap<String, Taxi>();
 	
 	//存放出租车GPS数据
+    // cab, gpsdata
 	private static ConcurrentMap<String , UploadGPSData> taxiGPSMap = new ConcurrentHashMap<String, UploadGPSData>();
 	
 	private TaxiDao taxiDao ;
@@ -167,8 +168,20 @@ public class TaxiDataService extends BaseService{
 				return jsonString ;
 			}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call T004
 				String userid = jsonObject.getString("userid");
+                Taxi taxi = taxiDao.getTaxiByUserid(userid);
 				String userGPS = jsonObject.getString("cabGPS");
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
+                UploadGPSData data = TaxiDataService.getInstance().getTaxiGPSMap().get(taxi.getCab());
+                if (data != null)
+                    data.setGpsdata(gpsdata);
+                else {
+                    data = new UploadGPSData();
+                    data.setCab(taxi.getCab());
+                    data.setUserId(userid);
+                    data.setGpsdata(gpsdata);
+                    taxiGPSMap.put(taxi.getCab(), data);
+                }
+
 				String requestNo = jsonObject.getString("requestNo");
 				RequestResult resulst =callTaxiServie.confirmRequest(userid, requestNo);
 				if(resulst.getErrorCode().equals(ErrorCode.SUCCESS)){

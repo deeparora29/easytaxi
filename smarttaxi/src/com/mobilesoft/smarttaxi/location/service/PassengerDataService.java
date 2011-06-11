@@ -199,7 +199,8 @@ public class PassengerDataService extends BaseService{
 
                     // 从内存中获取出租车实时GPS数据
                     String taxiid = resulst.getTaxi().getUserid();
-                    UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiGPSMap().get(taxiid);
+                    UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiGPSMap().get(
+                        resulst.getTaxi().getCab());
                     // hardcode taxi gps data
                     if (taxiGPSData == null) {
                         taxiGPSData = new UploadGPSData();
