@@ -20,11 +20,14 @@ import com.mobilesoft.smarttaxi.bo.UploadGPSData;
 import com.mobilesoft.smarttaxi.common.ErrorCode;
 import com.mobilesoft.smarttaxi.common.SystemPara;
 import com.mobilesoft.smarttaxi.common.service.BaseService;
+import com.mobilesoft.smarttaxi.common.utils.BeanFactoryUtil;
 import com.mobilesoft.smarttaxi.common.utils.JsonUtil;
 import com.mobilesoft.smarttaxi.request.bo.RequestInfo;
 import com.mobilesoft.smarttaxi.request.bo.RequestResult;
 import com.mobilesoft.smarttaxi.request.service.CallTaxiServie;
 import com.mobilesoft.smarttaxi.request.service.CreditRateService;
+import com.mobilesoft.smarttaxi.track.bo.GPSTrack;
+import com.mobilesoft.smarttaxi.track.service.GPSTrackService;
 import com.mobilesoft.smarttaxi.usermgr.bo.LoginRecord;
 import com.mobilesoft.smarttaxi.usermgr.dao.LoginRecordDao;
 import com.mobilesoft.smarttaxi.usermgr.dao.PassengerDao;
@@ -34,11 +37,6 @@ public class PassengerDataService extends BaseService{
 	
 
 	Log log = LogFactory.getLog(PassengerDataService.class);
-	
-	private static PassengerDataService instance = new PassengerDataService ();
-	
-	//存放乘车信息队列
-	private static BlockingQueue<Passenger> passengerWorkQueue = new LinkedBlockingQueue<Passenger>();
 	
 	//存放乘客信息[登录]
 	private static ConcurrentMap<String , Passenger> passengerInfoMap = new ConcurrentHashMap<String, Passenger>();
@@ -50,6 +48,7 @@ public class PassengerDataService extends BaseService{
 	private static ConcurrentMap<String , List<UploadGPSData>> passengerTrackingMap = new ConcurrentHashMap<String, List<UploadGPSData> >();
 	
 	//乘客实时位置信息
+	//userid, GPSData
 	private static ConcurrentMap<String , GPSData> realtimeLocationMap = new ConcurrentHashMap<String, GPSData>();
 	
 	private PassengerDao passengerDao ;
@@ -62,17 +61,28 @@ public class PassengerDataService extends BaseService{
 	
 	private CreditRateService creditRateService ;
 	
-	private PassengerDataService(){
-		
+	private GPSTrackService gpsTrackService;
+	
+	private TaxiDataService getTaxiDataService(){
+		return (TaxiDataService)BeanFactoryUtil.getBean("taxiDataService");
 	}
 	
-	public static PassengerDataService getInstance(){
-		synchronized(instance){
-			if( instance == null ){
-				instance = new PassengerDataService ();
+	private void updateRealtimeGPSData(GPSData gps){
+		if (realtimeLocationMap.get(gps.getUserid()) != null)
+            realtimeLocationMap.remove(gps.getUserid());
+        realtimeLocationMap.put(gps.getUserid(), gps);
+        getGpsTrackService().updateRealtimeGPSData(gps);
+	}
+	
+	public GPSData getRealTimeGPSData(String userid){
+		GPSData gps = realtimeLocationMap.get(userid);
+		if(gps == null){
+			gps = getGpsTrackService().getRealtimeGPSData(userid);
+			if(gps != null){
+				realtimeLocationMap.put(userid, gps);
 			}
 		}
-		return instance ;
+		return gps;
 	}
 	
 	
@@ -174,9 +184,8 @@ public class PassengerDataService extends BaseService{
 					return jsonString;
 				}
                 // save passenger's location
-                if (realtimeLocationMap.get(userid) != null)
-                    realtimeLocationMap.remove(userid);
-                realtimeLocationMap.put(userid, new GPSData(start_lat, start_long));
+                updateRealtimeGPSData(new GPSData(userid, start_lat, start_long));
+                
 				RequestInfo requestInfo = new RequestInfo(userid,phone,start_long,start_lat,start_text,end_long,
 						end_lat,end_text,number,luggage,comments,share);
 				String res = callTaxiServie.requestTaxi(requestInfo);
@@ -199,16 +208,13 @@ public class PassengerDataService extends BaseService{
 
                     // 从内存中获取出租车实时GPS数据
                     String taxiid = resulst.getTaxi().getUserid();
-                    UploadGPSData taxiGPSData = TaxiDataService.getInstance().getTaxiGPSMap().get(
-                        resulst.getTaxi().getCab());
+                    GPSData taxiGPSData = getTaxiDataService().getRealTimeGPSData(taxiid);
                     // hardcode taxi gps data
                     if (taxiGPSData == null) {
-                        taxiGPSData = new UploadGPSData();
-                        taxiGPSData.setUserId(taxiid);
-                        taxiGPSData.setStatus(0);
+                        taxiGPSData = new GPSData();
                         RequestInfo requestInfo = callTaxiServie.getRequestInfoByRequestId(requestNo);
-                        taxiGPSData.setGpsdata(new GPSData(requestInfo.getStartLat() + 0.5,
-                            requestInfo.getStartLong() + 0.5));
+                        taxiGPSData.setLat(requestInfo.getStartLat() + 0.5);
+                        taxiGPSData.setLng(requestInfo.getStartLong() + 0.5);
                     }
 					jsonString = getReturnMessage(transCode,requestNo,resulst,taxiGPSData);
 				}else{
@@ -254,7 +260,7 @@ public class PassengerDataService extends BaseService{
 					jsonString = getReturnErrorMessage(ErrorCode.ACCOUNT_NOT_LOGIN);
 					return jsonString;
 				}
-				GPSData passengerGPSData = realtimeLocationMap.get(userid);
+				GPSData passengerGPSData = getRealTimeGPSData(userid);
 				if(passengerGPSData!=null){
 					jsonString = getReturnMessage(transCode,passengerGPSData);
 				}else{
@@ -270,7 +276,8 @@ public class PassengerDataService extends BaseService{
 					return jsonString;
 				}
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
-				realtimeLocationMap.put(userid, gpsdata);
+				gpsdata.setUserid(userid);
+				updateRealtimeGPSData(gpsdata);
 				List<UploadGPSData>passengerTrackingList = null;
 				UploadGPSData uploadGPSData = new UploadGPSData();
 				uploadGPSData.setUserId(userid);
@@ -297,15 +304,14 @@ public class PassengerDataService extends BaseService{
 					jsonString = getReturnErrorMessage(ErrorCode.NOT_FOUND_DATA);
 				}else{
 					//获取出租车实时位置信息
-					UploadGPSData taxiGPSMap = TaxiDataService.getInstance().getTaxiGPSMap().get(cab);
+					GPSData taxiGPSMap = getTaxiDataService().getRealTimeGPSData(taxi.getUserid());
 					if(taxiGPSMap!=null){
-						double lat = taxiGPSMap.getGpsdata().getLat();
-						double lng = taxiGPSMap.getGpsdata().getLng();
+						double lat = taxiGPSMap.getLat();
+						double lng = taxiGPSMap.getLng();
 						taxi.setLat(lat);
 						taxi.setLng(lng);
-						int status = taxiGPSMap.getStatus();
 						// 出租车状态，空车，负载，未知
-						taxi.setStatus(status);
+						taxi.setStatus(0);
 					}
 					jsonString = getReturnMessage(transCode,taxi);
 				}
@@ -326,11 +332,6 @@ public class PassengerDataService extends BaseService{
 		}
 		
 		return jsonString ;
-	}
-	
-	
-	public BlockingQueue<Passenger> getPassengerWorkQueue(){
-		return passengerWorkQueue ;
 	}
 	
 	/**
@@ -408,6 +409,16 @@ public class PassengerDataService extends BaseService{
 
 	public void setLoginRecordDao(LoginRecordDao loginRecordDao) {
 		this.loginRecordDao = loginRecordDao;
+	}
+
+
+	public GPSTrackService getGpsTrackService() {
+		return gpsTrackService;
+	}
+
+
+	public void setGpsTrackService(GPSTrackService gpsTrackService) {
+		this.gpsTrackService = gpsTrackService;
 	}
 	
 	

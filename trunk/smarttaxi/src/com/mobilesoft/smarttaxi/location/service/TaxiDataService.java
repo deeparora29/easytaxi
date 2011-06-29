@@ -17,12 +17,15 @@ import com.mobilesoft.smarttaxi.bo.UploadGPSData;
 import com.mobilesoft.smarttaxi.common.ErrorCode;
 import com.mobilesoft.smarttaxi.common.SystemPara;
 import com.mobilesoft.smarttaxi.common.service.BaseService;
+import com.mobilesoft.smarttaxi.common.utils.BeanFactoryUtil;
 import com.mobilesoft.smarttaxi.common.utils.JsonUtil;
 import com.mobilesoft.smarttaxi.request.bo.RequestInfo;
 import com.mobilesoft.smarttaxi.request.bo.RequestResult;
 import com.mobilesoft.smarttaxi.request.dao.CallTaxiDao;
 import com.mobilesoft.smarttaxi.request.service.CallTaxiServie;
 import com.mobilesoft.smarttaxi.request.service.CreditRateService;
+import com.mobilesoft.smarttaxi.track.bo.GPSTrack;
+import com.mobilesoft.smarttaxi.track.service.GPSTrackService;
 import com.mobilesoft.smarttaxi.usermgr.bo.LoginRecord;
 import com.mobilesoft.smarttaxi.usermgr.dao.LoginRecordDao;
 import com.mobilesoft.smarttaxi.usermgr.dao.PassengerDao;
@@ -30,17 +33,12 @@ import com.mobilesoft.smarttaxi.usermgr.dao.TaxiDao;
 
 public class TaxiDataService extends BaseService{
 	
-	private static TaxiDataService instance = new TaxiDataService();
-	
-	//用于接受出租车提供的相关数据，共后续处理
-	private static BlockingQueue<Taxi> taxiWorkQueue = new LinkedBlockingQueue<Taxi>();
-	
 	//出租车登录信息
 	private static ConcurrentMap<String , Taxi> taxiLoginInfoMap = new ConcurrentHashMap<String, Taxi>();
 	
 	//存放出租车GPS数据
-    // cab, gpsdata
-	private static ConcurrentMap<String , UploadGPSData> taxiGPSMap = new ConcurrentHashMap<String, UploadGPSData>();
+    // userid, gpsdata
+	private static ConcurrentMap<String , GPSData> taxiGPSMap = new ConcurrentHashMap<String, GPSData>();
 	
 	private TaxiDao taxiDao ;
 	
@@ -54,14 +52,29 @@ public class TaxiDataService extends BaseService{
 	
 	private CreditRateService creditRateService ;
 	
-	public TaxiDataService(){
-		
+	private GPSTrackService gpsTrackService;
+	
+	private PassengerDataService getPassengerDataService() {
+		return (PassengerDataService) BeanFactoryUtil.getBean("passengerDataService");
 	}
 	
-	public static TaxiDataService getInstance(){
-		return instance == null ? new TaxiDataService():instance ;
+	private void updateRealtimeGPSData(GPSData gps){
+		if (taxiGPSMap.get(gps.getUserid()) != null)
+			taxiGPSMap.remove(gps.getUserid());
+		taxiGPSMap.put(gps.getUserid(), gps);
+        getGpsTrackService().updateRealtimeGPSData(gps);
 	}
 	
+	public GPSData getRealTimeGPSData(String userid){
+		GPSData gps = taxiGPSMap.get(userid);
+		if(gps == null){
+			gps = getGpsTrackService().getRealtimeGPSData(userid);
+			if(gps != null){
+				taxiGPSMap.put(userid, gps);
+			}
+		}
+		return gps;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public String offer( String requestString ){
@@ -159,28 +172,16 @@ public class TaxiDataService extends BaseService{
 				String userGPS = jsonObject.getString("cabGPS");
 				String cab = jsonObject.getString("cab");
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
-				UploadGPSData data = new UploadGPSData();
-				data.setCab(cab);
-				data.setUserId(userid);
-				data.setGpsdata(gpsdata);
-				taxiGPSMap.put(cab, data);
+				gpsdata.setUserid(userid);
+				updateRealtimeGPSData(gpsdata);
 				jsonString = getReturnMessage( transCode  );
 				return jsonString ;
 			}else if(transCode.equals(SystemPara.T_CONFIRM_CALL)){//Confirm Call T004
 				String userid = jsonObject.getString("userid");
-                Taxi taxi = taxiDao.getTaxiByUserid(userid);
 				String userGPS = jsonObject.getString("cabGPS");
 				GPSData gpsdata = (GPSData)JsonUtil.getObjectByJsonString(userGPS, GPSData.class);
-                UploadGPSData data = TaxiDataService.getInstance().getTaxiGPSMap().get(taxi.getCab());
-                if (data != null)
-                    data.setGpsdata(gpsdata);
-                else {
-                    data = new UploadGPSData();
-                    data.setCab(taxi.getCab());
-                    data.setUserId(userid);
-                    data.setGpsdata(gpsdata);
-                    taxiGPSMap.put(taxi.getCab(), data);
-                }
+                gpsdata.setUserid(userid);
+                updateRealtimeGPSData(gpsdata);
 
 				String requestNo = jsonObject.getString("requestNo");
 				RequestResult resulst =callTaxiServie.confirmRequest(userid, requestNo);
@@ -213,8 +214,8 @@ public class TaxiDataService extends BaseService{
 				String passengerid = jsonObject.getString("passengerid");
 				//RequestInfo info = getCallTaxiDao().getRequestInfo(passengerid);
 				//GPSData data= new GPSData(info.getStartLat(),info.getStartLong());
-				ConcurrentMap<String , GPSData> passengerRealtimeLocation = PassengerDataService.getInstance().getRealtimeLocationMap();
-				GPSData data = passengerRealtimeLocation.get(passengerid);
+				
+				GPSData data = getPassengerDataService().getRealTimeGPSData(passengerid);
 				if(data!=null){
 					jsonString = getReturnMessage(transCode,data);
 				}else{
@@ -264,25 +265,17 @@ public class TaxiDataService extends BaseService{
 		return this.taxiDao.getModifiedInner24HoursData();
 	}
 	
-	public BlockingQueue<Taxi> getTaxiWorkQueue(){
-		return taxiWorkQueue ;
-	}
-	
 	public ConcurrentMap<String , Taxi> getTaxiLoginInfoMap(){
 		return taxiLoginInfoMap ;
 	}
 	
-	public ConcurrentMap<String , UploadGPSData> getTaxiGPSMap(){
+	public ConcurrentMap<String , GPSData> getTaxiGPSMap(){
 		return taxiGPSMap ;
 	}
 	
 	public  void updateTaxiInfo(Taxi taxi){
 		
 		taxiDao.doSaveTaxi(taxi);
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(taxiWorkQueue.isEmpty());
 	}
 
 	public TaxiDao getTaxiDao() {
@@ -332,6 +325,13 @@ public class TaxiDataService extends BaseService{
 	public void setLoginRecordDao(LoginRecordDao loginRecordDao) {
 		this.loginRecordDao = loginRecordDao;
 	}
-	
+
+	public void setGpsTrackService(GPSTrackService gpsTrackService) {
+		this.gpsTrackService = gpsTrackService;
+	}
+
+	public GPSTrackService getGpsTrackService() {
+		return gpsTrackService;
+	}
 	
 }

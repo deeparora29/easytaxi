@@ -28,6 +28,7 @@
 			<property name="loginRecordDao" ref="loginRecordDao"/>
 			<property name="callTaxiServie" ref="callTaxiServie"/>
 			<property name="creditRateService" ref="creditRateService"/>
+			<property name="gpsTrackService" ref="gpsTrackService"/>
 	</bean>
 	
 	<bean id="passengerDataService" 
@@ -37,6 +38,7 @@
 		<property name="loginRecordDao" ref="loginRecordDao"/>
 		<property name="callTaxiServie" ref="callTaxiServie"/>
 		<property name="creditRateService" ref="creditRateService"/>
+		<property name="gpsTrackService" ref="gpsTrackService"/>
 	</bean>
 	
 	<!-- location service -->
@@ -82,6 +84,15 @@
 	<bean id="trackLogService" 
 		class="com.mobilesoft.smarttaxi.location.service.TrackLogService">
 		<property name="trackLogDao" ref="trackLogDao"/>	
+	</bean>
+	
+	<bean id="gpsTrackDao" class="com.mobilesoft.smarttaxi.track.dao.GPSTrackDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="gpsTrackService" 
+		class="com.mobilesoft.smarttaxi.track.service.GPSTrackService">
+		<property name="gpsTrackDao" ref="gpsTrackDao"/>	
 	</bean>
 
 

@@ -8,6 +8,8 @@ import java.sql.Types;
 import java.util.concurrent.ConcurrentMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.mobilesoft.smarttaxi.bo.GPSData;
 import com.mobilesoft.smarttaxi.bo.UploadGPSData;
 import com.mobilesoft.smarttaxi.common.SystemPara;
 import com.mobilesoft.smarttaxi.common.service.BaseService;
@@ -25,21 +27,21 @@ public class LocationService extends BaseService{
 	
 	
 	public String initLocationData(){
-		ConcurrentMap<String , UploadGPSData> taxiMap = taxiDataService.getTaxiGPSMap();
+		ConcurrentMap<String , GPSData> taxiMap = taxiDataService.getTaxiGPSMap();
 		StringBuffer data = new StringBuffer("[");
 		int i = 0 ;
 		for (String userId : taxiMap.keySet()) {
-			UploadGPSData taxi = taxiMap.get(userId);
-			String status = SystemPara.getTaxiStatus(taxi.getStatus()) ;
+			GPSData taxi = taxiMap.get(userId);
+			String status = SystemPara.getTaxiStatus(0) ;
 			/*String taxiLocation = taxi.getTaxiLocation();
 			if(taxiLocation==null||taxiLocation.trim().length()==0){
 				String latLng = taxi.getLat() + "," +taxi.getLng();
 				taxiLocation = googleMapGeocode.getAddressByLatLng(latLng);
 			}*/
 			data.append("{")
-			.append("latLng : {lat : "+taxi.getGpsdata().getLat()+", lng : "+taxi.getGpsdata().getLng()+"},")
-			.append("taxiStatus : '"+status+"',")
-			.append("taxiNo : '"+taxi.getCab()+"'");
+			.append("latLng : {lat : "+taxi.getLat()+", lng : "+taxi.getLng()+"},")
+			.append("taxiStatus : '"+status+"',");
+			//.append("taxiNo : '"+taxi.getCab()+"'");
 			//.append("driverNo : '"+taxi.getDriverNo()+"',")
 			//.append("taxiStatus : '"+status+"',")
 			//.append("taxiAddress : '"+taxiLocation+"' ");
