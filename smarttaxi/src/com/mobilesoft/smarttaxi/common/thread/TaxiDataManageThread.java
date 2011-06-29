@@ -11,18 +11,9 @@ import com.mobilesoft.smarttaxi.common.utils.BeanFactoryUtil;
 import com.mobilesoft.smarttaxi.location.service.TaxiDataService;
 
 /**
+ * Backend to save taxi data to db
  * 
- * @Package com.easytaxi.common.thread
- *
- * @Title: TaxiDataManageThread.java 
- *	
- * @Description: 出租车数据后台处理线程
- *
- * @Copyright:   Copyright (c)2010
- *
- * @author:      付奎
- *
- * @date 2011-3-27 下午10:27:34
+ * @author renmian
  *
  */
 public class TaxiDataManageThread implements Runnable{
